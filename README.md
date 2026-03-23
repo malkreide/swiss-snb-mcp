@@ -7,6 +7,7 @@
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-purple)](https://modelcontextprotocol.io/)
 [![Data Source](https://img.shields.io/badge/Data-data.snb.ch-red)](https://data.snb.ch)
+![CI](https://github.com/malkreide/swiss-snb-mcp/actions/workflows/ci.yml/badge.svg)
 
 > MCP server for the Swiss National Bank (SNB) data portal — exchange rates, balance sheet, interest rates, SARON, and monetary aggregates.
 
