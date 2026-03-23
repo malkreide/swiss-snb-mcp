@@ -15,6 +15,11 @@ dependencies = [
     "pydantic>=2.0.0",
 ]
 
+[project.urls]
+Homepage = "https://github.com/malkreide/swiss-snb-mcp"
+Repository = "https://github.com/malkreide/swiss-snb-mcp"
+Changelog = "https://github.com/malkreide/swiss-snb-mcp/blob/main/CHANGELOG.md"
+
 [project.scripts]
 swiss-snb-mcp = "swiss_snb_mcp.server:main"
 
