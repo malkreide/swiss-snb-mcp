@@ -684,7 +684,7 @@ async def snb_get_balance_sheet(params: BalanceSheetInput) -> str:
 
         lines = [
             f"## SNB Bilanz — {len(filtered)} Position(en)\n",
-            f"**Einheit:** Millionen CHF | **Quelle:** data.snb.ch\n",
+           "**Einheit:** Millionen CHF | **Quelle:** data.snb.ch\n",
         ]
 
         for pos_id, ts in filtered:
@@ -775,8 +775,7 @@ async def snb_convert_currency(params: ConvertCurrencyInput) -> str:
                 break
 
         if not matching_ts:
-            available = [CURRENCIES.get(k, k) for k in list(CURRENCIES.keys())[:10]]
-            return (
+           return (
                 f"Error: Währung '{cid}' nicht gefunden. "
                 f"Verfügbare Währungs-IDs: {', '.join(list(CURRENCIES.keys())[:15])}. "
                 f"Vollständige Liste mit snb_list_currencies."
