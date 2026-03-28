@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Python ${{ matrix.python-version }} einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: uv installieren
+        run: pip install uv
+
+      - name: Abhängigkeiten installieren
+        run: uv pip install -e . --system
+
+      - name: Linting mit ruff
+        run: |
+          uv pip install ruff --system
+          ruff check src/
+
+      - name: Format-Prüfung mit ruff
+        run: ruff format --check src/
+
+      - name: Syntax-Prüfung
+        run: python -m py_compile src/swiss_snb_mcp/server.py
+
+      - name: Import-Test
+        run: python -c "from swiss_snb_mcp.server import mcp; print('Import OK')"
+        env:
+          PYTHONPATH: src
+
+      - name: Live-Tests gegen SNB API (nur Python 3.11)
+        if: matrix.python-version == '3.11'
+        run: python tests/test_scenarios.py
+        env:
+          PYTHONPATH: src
+        timeout-minutes: 5
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: pip install ruff
+
+      - run: ruff check src/
+
+      - run: ruff format --check src/
