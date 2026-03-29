@@ -20,83 +20,104 @@ SNB_BASE_URL = "https://data.snb.ch/api/cube"
 DEFAULT_TIMEOUT = 15.0
 
 # Known cube identifiers (verified against the live API)
-CUBE_EXCHANGE_RATES_MONTHLY = "devkum"   # Wechselkurse Monatsmittel/-ende
-CUBE_EXCHANGE_RATES_ANNUAL  = "devkua"   # Wechselkurse Jahresdurchschnitt
-CUBE_BALANCE_SHEET          = "snbbipo"  # SNB-Bilanzpositionen
+CUBE_EXCHANGE_RATES_MONTHLY = "devkum"  # Wechselkurse Monatsmittel/-ende
+CUBE_EXCHANGE_RATES_ANNUAL = "devkua"  # Wechselkurse Jahresdurchschnitt
+CUBE_BALANCE_SHEET = "snbbipo"  # SNB-Bilanzpositionen
 
 # Currency dimension item IDs → human-readable labels
 CURRENCIES = {
-    "EUR1":    "Euro (EUR)",
-    "USD1":    "US-Dollar (USD)",
-    "GBP1":    "Pfund Sterling (GBP)",
-    "JPY100":  "Japanischer Yen – 100 JPY",
-    "CNY100":  "Chinesischer Renminbi – 100 CNY",
-    "CAD1":    "Kanadischer Dollar (CAD)",
-    "AUD1":    "Australischer Dollar (AUD)",
-    "NZD1":    "Neuseeländischer Dollar (NZD)",
-    "SGD1":    "Singapur-Dollar (SGD)",
-    "HKD100":  "Hongkong-Dollar – 100 HKD",
-    "KRW100":  "Südkoreanischer Won – 100 KRW",
-    "MYR100":  "Malaysischer Ringgit – 100 MYR",
-    "THB100":  "Thailändischer Baht – 100 THB",
-    "NOK100":  "Norwegische Krone – 100 NOK",
-    "SEK100":  "Schwedische Krone – 100 SEK",
-    "DKK100":  "Dänische Krone – 100 DKK",
-    "CZK100":  "Tschechische Krone – 100 CZK",
-    "HUF100":  "Ungarischer Forint – 100 HUF",
-    "PLN100":  "Polnischer Zloty – 100 PLN",
-    "TRY100":  "Türkische Lira – 100 TRY",
-    "RUB1":    "Russischer Rubel (RUB)",
-    "ZAR1":    "Südafrikanischer Rand (ZAR)",
-    "BRL100":  "Brasilianischer Real – 100 BRL",
-    "MXN100":  "Mexikanischer Peso – 100 MXN",
-    "ARS1":    "Argentinischer Peso (ARS)",
-    "INR100":  "Indische Rupie – 100 INR",
-    "XDR1":    "Sonderziehungsrechte IWF (XDR)",
+    "EUR1": "Euro (EUR)",
+    "USD1": "US-Dollar (USD)",
+    "GBP1": "Pfund Sterling (GBP)",
+    "JPY100": "Japanischer Yen – 100 JPY",
+    "CNY100": "Chinesischer Renminbi – 100 CNY",
+    "CAD1": "Kanadischer Dollar (CAD)",
+    "AUD1": "Australischer Dollar (AUD)",
+    "NZD1": "Neuseeländischer Dollar (NZD)",
+    "SGD1": "Singapur-Dollar (SGD)",
+    "HKD100": "Hongkong-Dollar – 100 HKD",
+    "KRW100": "Südkoreanischer Won – 100 KRW",
+    "MYR100": "Malaysischer Ringgit – 100 MYR",
+    "THB100": "Thailändischer Baht – 100 THB",
+    "NOK100": "Norwegische Krone – 100 NOK",
+    "SEK100": "Schwedische Krone – 100 SEK",
+    "DKK100": "Dänische Krone – 100 DKK",
+    "CZK100": "Tschechische Krone – 100 CZK",
+    "HUF100": "Ungarischer Forint – 100 HUF",
+    "PLN100": "Polnischer Zloty – 100 PLN",
+    "TRY100": "Türkische Lira – 100 TRY",
+    "RUB1": "Russischer Rubel (RUB)",
+    "ZAR1": "Südafrikanischer Rand (ZAR)",
+    "BRL100": "Brasilianischer Real – 100 BRL",
+    "MXN100": "Mexikanischer Peso – 100 MXN",
+    "ARS1": "Argentinischer Peso (ARS)",
+    "INR100": "Indische Rupie – 100 INR",
+    "XDR1": "Sonderziehungsrechte IWF (XDR)",
 }
 
 # Unit multipliers — how many foreign units correspond to 1 rate value
 CURRENCY_UNITS = {
-    "EUR1": 1, "USD1": 1, "GBP1": 1, "CAD1": 1, "AUD1": 1,
-    "NZD1": 1, "SGD1": 1, "ZAR1": 1, "RUB1": 1, "ARS1": 1, "XDR1": 1,
-    "JPY100": 100, "CNY100": 100, "HKD100": 100, "KRW100": 100,
-    "MYR100": 100, "THB100": 100, "NOK100": 100, "SEK100": 100,
-    "DKK100": 100, "CZK100": 100, "HUF100": 100, "PLN100": 100,
-    "TRY100": 100, "BRL100": 100, "MXN100": 100, "INR100": 100,
+    "EUR1": 1,
+    "USD1": 1,
+    "GBP1": 1,
+    "CAD1": 1,
+    "AUD1": 1,
+    "NZD1": 1,
+    "SGD1": 1,
+    "ZAR1": 1,
+    "RUB1": 1,
+    "ARS1": 1,
+    "XDR1": 1,
+    "JPY100": 100,
+    "CNY100": 100,
+    "HKD100": 100,
+    "KRW100": 100,
+    "MYR100": 100,
+    "THB100": 100,
+    "NOK100": 100,
+    "SEK100": 100,
+    "DKK100": 100,
+    "CZK100": 100,
+    "HUF100": 100,
+    "PLN100": 100,
+    "TRY100": 100,
+    "BRL100": 100,
+    "MXN100": 100,
+    "INR100": 100,
 }
 
 # SNB balance sheet position IDs
 BALANCE_SHEET_POSITIONS = {
     # Aktiven
-    "GFG":   "Gold und Forderungen aus Goldgeschäften",
-    "D":     "Devisenanlagen",
-    "RIWF":  "Reserveposition beim IWF",
-    "IZ":    "Internationale Zahlungsmittel",
-    "W":     "Währungshilfekredite",
+    "GFG": "Gold und Forderungen aus Goldgeschäften",
+    "D": "Devisenanlagen",
+    "RIWF": "Reserveposition beim IWF",
+    "IZ": "Internationale Zahlungsmittel",
+    "W": "Währungshilfekredite",
     "FRGSF": "Forderungen aus Repo-Geschäften in CHF",
-    "FRGUSD":"Forderungen aus Repo-Geschäften in USD",
+    "FRGUSD": "Forderungen aus Repo-Geschäften in USD",
     "GSGSF": "Guthaben aus Swap-Geschäften gegen CHF",
-    "IG":    "Inländische Geldmarktforderungen",
-    "GD":    "Gedeckte Darlehen",
-    "FI":    "Forderungen gegenüber Inlandkorrespondenten",
-    "WSF":   "Wertschriften in CHF",
-    "DS":    "Darlehen an Stabilisierungsfonds",
-    "UA":    "Übrige Aktiven",
-    "T0":    "Total Aktiven",
+    "IG": "Inländische Geldmarktforderungen",
+    "GD": "Gedeckte Darlehen",
+    "FI": "Forderungen gegenüber Inlandkorrespondenten",
+    "WSF": "Wertschriften in CHF",
+    "DS": "Darlehen an Stabilisierungsfonds",
+    "UA": "Übrige Aktiven",
+    "T0": "Total Aktiven",
     # Passiven
-    "N":     "Notenumlauf",
-    "GB":    "Girokonten inländischer Banken",
-    "VB":    "Verbindlichkeiten gegenüber dem Bund",
-    "GBI":   "Girokonten ausländischer Banken und Institutionen",
-    "US":    "Übrige Sichtverbindlichkeiten",
+    "N": "Notenumlauf",
+    "GB": "Girokonten inländischer Banken",
+    "VB": "Verbindlichkeiten gegenüber dem Bund",
+    "GBI": "Girokonten ausländischer Banken und Institutionen",
+    "US": "Übrige Sichtverbindlichkeiten",
     "VRGSF": "Verbindlichkeiten aus Repo-Geschäften in CHF",
-    "ES":    "Eigene Schuldverschreibungen",
-    "UT":    "Übrige Terminverbindlichkeiten",
-    "VF":    "Verbindlichkeiten in Fremdwährungen",
+    "ES": "Eigene Schuldverschreibungen",
+    "UT": "Übrige Terminverbindlichkeiten",
+    "VF": "Verbindlichkeiten in Fremdwährungen",
     "AIWFS": "Ausgleichsposten für IWF-Sonderziehungsrechte",
-    "SP":    "Sonstige Passiven",
-    "RE":    "Rückstellungen und Eigenkapital",
-    "T1":    "Total Passiven",
+    "SP": "Sonstige Passiven",
+    "RE": "Rückstellungen und Eigenkapital",
+    "T1": "Total Passiven",
 }
 
 # ---------------------------------------------------------------------------
@@ -119,6 +140,7 @@ mcp = FastMCP(
 # ---------------------------------------------------------------------------
 # HTTP helper
 # ---------------------------------------------------------------------------
+
 
 async def _fetch_snb(path: str, params: dict | None = None) -> dict:
     """Fetch data from the SNB REST API and return parsed JSON."""
@@ -181,14 +203,18 @@ def _latest_value(timeseries: list[dict], dim_id: str) -> dict | None:
     """Return the most recent value entry for a timeseries matching dim_id."""
     for ts in timeseries:
         for h in ts.get("header", []):
-            if h.get("dimItem", "").startswith(dim_id) or dim_id in h.get("dimItem", ""):
+            if h.get("dimItem", "").startswith(dim_id) or dim_id in h.get(
+                "dimItem", ""
+            ):
                 values = ts.get("values", [])
                 return values[-1] if values else None
     return None
 
+
 # ---------------------------------------------------------------------------
 # Input models
 # ---------------------------------------------------------------------------
+
 
 class Language(str, Enum):
     DE = "de"
@@ -345,9 +371,11 @@ class CubeMetadataInput(BaseModel):
     )
     lang: Language = Field(default=Language.DE)
 
+
 # ---------------------------------------------------------------------------
 # Tools
 # ---------------------------------------------------------------------------
+
 
 @mcp.tool(
     name="snb_get_exchange_rates",
@@ -409,7 +437,8 @@ async def snb_get_exchange_rates(params: ExchangeRatesInput) -> str:
         if params.currencies:
             wanted = set(c.upper() for c in params.currencies)
             timeseries = [
-                ts for ts in timeseries
+                ts
+                for ts in timeseries
                 if any(
                     h.get("dimItem", "").split(" – ")[-1].split(" ")[0] in wanted
                     or any(w in h.get("dimItem", "") for w in wanted)
@@ -433,7 +462,8 @@ async def snb_get_exchange_rates(params: ExchangeRatesInput) -> str:
             # Filter out month-end rates unless requested
             if not params.include_month_end:
                 timeseries = [
-                    ts for ts in timeseries
+                    ts
+                    for ts in timeseries
                     if "M1" not in ts.get("metadata", {}).get("key", "")
                 ]
 
@@ -457,21 +487,27 @@ async def snb_get_exchange_rates(params: ExchangeRatesInput) -> str:
             meta = ts.get("metadata", {})
             values = ts.get("values", [])
             currency_label = next(
-                (h["dimItem"] for h in header if "Währung" in h.get("dim", "")
-                 or any(code in h.get("dimItem", "") for code in CURRENCIES)),
-                header[-1]["dimItem"] if header else "Unbekannt"
+                (
+                    h["dimItem"]
+                    for h in header
+                    if "Währung" in h.get("dim", "")
+                    or any(code in h.get("dimItem", "") for code in CURRENCIES)
+                ),
+                header[-1]["dimItem"] if header else "Unbekannt",
             )
             rate_type = next(
                 (h["dimItem"] for h in header if "Monat" in h.get("dimItem", "")),
-                "Monatsmittel"
+                "Monatsmittel",
             )
-            result["timeseries"].append({
-                "currency": currency_label,
-                "type": rate_type,
-                "unit": meta.get("unit", "CHF"),
-                "key": meta.get("key", ""),
-                "values": values,
-            })
+            result["timeseries"].append(
+                {
+                    "currency": currency_label,
+                    "type": rate_type,
+                    "unit": meta.get("unit", "CHF"),
+                    "key": meta.get("key", ""),
+                    "values": values,
+                }
+            )
 
         # Human-readable summary
         lines = [
@@ -569,7 +605,9 @@ async def snb_get_annual_exchange_rates(params: AnnualExchangeRatesInput) -> str
             "timeseries": [],
         }
 
-        lines = [f"## SNB Wechselkurse (Jahresdurchschnitte) — {len(timeseries)} Zeitreihe(n)\n"]
+        lines = [
+            f"## SNB Wechselkurse (Jahresdurchschnitte) — {len(timeseries)} Zeitreihe(n)\n"
+        ]
 
         for ts in timeseries:
             header = ts.get("header", [])
@@ -577,12 +615,14 @@ async def snb_get_annual_exchange_rates(params: AnnualExchangeRatesInput) -> str
             values = ts.get("values", [])
             currency_label = header[-1]["dimItem"] if header else "Unbekannt"
 
-            result["timeseries"].append({
-                "currency": currency_label,
-                "unit": meta.get("unit", "CHF"),
-                "key": meta.get("key", ""),
-                "values": values,
-            })
+            result["timeseries"].append(
+                {
+                    "currency": currency_label,
+                    "unit": meta.get("unit", "CHF"),
+                    "key": meta.get("key", ""),
+                    "values": values,
+                }
+            )
 
             if values:
                 last = values[-1]
@@ -684,22 +724,26 @@ async def snb_get_balance_sheet(params: BalanceSheetInput) -> str:
 
         lines = [
             f"## SNB Bilanz — {len(filtered)} Position(en)\n",
-           "**Einheit:** Millionen CHF | **Quelle:** data.snb.ch\n",
+            "**Einheit:** Millionen CHF | **Quelle:** data.snb.ch\n",
         ]
 
         for pos_id, ts in filtered:
             header = ts.get("header", [])
             meta = ts.get("metadata", {})
             values = ts.get("values", [])
-            label = BALANCE_SHEET_POSITIONS.get(pos_id, header[0]["dimItem"] if header else pos_id)
+            label = BALANCE_SHEET_POSITIONS.get(
+                pos_id, header[0]["dimItem"] if header else pos_id
+            )
 
-            result["timeseries"].append({
-                "position_id": pos_id,
-                "label": label,
-                "unit": meta.get("unit", "Millionen CHF"),
-                "key": meta.get("key", ""),
-                "values": values,
-            })
+            result["timeseries"].append(
+                {
+                    "position_id": pos_id,
+                    "label": label,
+                    "unit": meta.get("unit", "Millionen CHF"),
+                    "key": meta.get("key", ""),
+                    "values": values,
+                }
+            )
 
             if values:
                 last = values[-1]
@@ -765,7 +809,11 @@ async def snb_convert_currency(params: ConvertCurrencyInput) -> str:
         for ts in timeseries:
             meta_key = ts.get("metadata", {}).get("key", "")
             # Must contain the currency ID and M0 (monthly average), not M1 (month-end)
-            if f"{{{cid}}}" in meta_key or f",{cid}}}" in meta_key or f"{{{cid}," in meta_key:
+            if (
+                f"{{{cid}}}" in meta_key
+                or f",{cid}}}" in meta_key
+                or f"{{{cid}," in meta_key
+            ):
                 if "M0" in meta_key and "M1" not in meta_key:
                     matching_ts = ts
                     break
@@ -775,7 +823,7 @@ async def snb_convert_currency(params: ConvertCurrencyInput) -> str:
                 break
 
         if not matching_ts:
-           return (
+            return (
                 f"Error: Währung '{cid}' nicht gefunden. "
                 f"Verfügbare Währungs-IDs: {', '.join(list(CURRENCIES.keys())[:15])}. "
                 f"Vollständige Liste mit snb_list_currencies."
@@ -1013,11 +1061,29 @@ async def snb_list_balance_sheet_positions() -> str:
     Returns:
         str: Markdown table of position IDs and labels, grouped by Aktiven/Passiven.
     """
-    aktiven = {k: v for k, v in BALANCE_SHEET_POSITIONS.items()
-               if k in {"GFG","D","RIWF","IZ","W","FRGSF","FRGUSD","GSGSF",
-                        "IG","GD","FI","WSF","DS","UA","T0"}}
-    passiven = {k: v for k, v in BALANCE_SHEET_POSITIONS.items()
-                if k not in aktiven}
+    aktiven = {
+        k: v
+        for k, v in BALANCE_SHEET_POSITIONS.items()
+        if k
+        in {
+            "GFG",
+            "D",
+            "RIWF",
+            "IZ",
+            "W",
+            "FRGSF",
+            "FRGUSD",
+            "GSGSF",
+            "IG",
+            "GD",
+            "FI",
+            "WSF",
+            "DS",
+            "UA",
+            "T0",
+        }
+    }
+    passiven = {k: v for k, v in BALANCE_SHEET_POSITIONS.items() if k not in aktiven}
 
     lines = [
         "## SNB Bilanzpositionen (cube: `snbbipo`)\n",
@@ -1160,31 +1226,35 @@ async def snb_list_known_cubes() -> str:
             f"| `{c['id']}` | {c['description']} | `{c['tool']}` | {c['frequency']} | {c['from']} |"
         )
 
-    lines.extend([
-        "\n### Phase 2 — Via `snb_get_cube_data` + `snb_get_cube_metadata`",
-        "| Cube-ID | Beschreibung | Frequenz | Verfügbar seit |",
-        "|---------|-------------|----------|----------------|",
-    ])
+    lines.extend(
+        [
+            "\n### Phase 2 — Via `snb_get_cube_data` + `snb_get_cube_metadata`",
+            "| Cube-ID | Beschreibung | Frequenz | Verfügbar seit |",
+            "|---------|-------------|----------|----------------|",
+        ]
+    )
     for c in phase2:
         lines.append(
             f"| `{c['id']}` | {c['description']} | {c['frequency']} | {c['from']} |"
         )
 
-    lines.extend([
-        "\n### Weitere Cubes entdecken",
-        "Besuche https://data.snb.ch und navigiere zu einem Datensatz.",
-        "Die Cube-ID erscheint in der URL: `.../topics/{topic}/cube/**cubeId**`",
-        "\nNutzung: `snb_get_cube_metadata` (Dimensionen verstehen) → `snb_get_cube_data` (Daten abrufen).",
-        "\n**Bekannte Themen-Bereiche:**",
-        "- `snb` – SNB-Kennzahlen, Leitzins, Geldmengen, Bilanz",
-        "- `ziredev` – Devisen / Wechselkurse",
-        "- `uvo` – Übrige volkswirtschaftliche Daten",
-        "- `aube` – Aussenbeziehungen",
-        "\n**Phase 3 — Noch nicht unterstützt:**",
-        "Die detaillierte Bankenstatistik (Bilanzsumme, Kreditvolumen nach Bankengruppe)",
-        "liegt im Warehouse-API unter `/api/warehouse/cube/BSTA@SNB…` mit eigener Filtersprache.",
-        "Direkte Abfrage via `snb_get_cube_data` ist noch nicht möglich.",
-    ])
+    lines.extend(
+        [
+            "\n### Weitere Cubes entdecken",
+            "Besuche https://data.snb.ch und navigiere zu einem Datensatz.",
+            "Die Cube-ID erscheint in der URL: `.../topics/{topic}/cube/**cubeId**`",
+            "\nNutzung: `snb_get_cube_metadata` (Dimensionen verstehen) → `snb_get_cube_data` (Daten abrufen).",
+            "\n**Bekannte Themen-Bereiche:**",
+            "- `snb` – SNB-Kennzahlen, Leitzins, Geldmengen, Bilanz",
+            "- `ziredev` – Devisen / Wechselkurse",
+            "- `uvo` – Übrige volkswirtschaftliche Daten",
+            "- `aube` – Aussenbeziehungen",
+            "\n**Phase 3 — Noch nicht unterstützt:**",
+            "Die detaillierte Bankenstatistik (Bilanzsumme, Kreditvolumen nach Bankengruppe)",
+            "liegt im Warehouse-API unter `/api/warehouse/cube/BSTA@SNB…` mit eigener Filtersprache.",
+            "Direkte Abfrage via `snb_get_cube_data` ist noch nicht möglich.",
+        ]
+    )
 
     return "\n".join(lines)
 
@@ -1192,6 +1262,7 @@ async def snb_list_known_cubes() -> str:
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
+
 
 def main():
     mcp.run()
