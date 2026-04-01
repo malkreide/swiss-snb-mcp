@@ -24,6 +24,12 @@ CUBE_EXCHANGE_RATES_MONTHLY = "devkum"  # Wechselkurse Monatsmittel/-ende
 CUBE_EXCHANGE_RATES_ANNUAL = "devkua"  # Wechselkurse Jahresdurchschnitt
 CUBE_BALANCE_SHEET = "snbbipo"  # SNB-Bilanzpositionen
 
+# Balance of Payments cube IDs (Standard Cube API, not Warehouse)
+BOP_CUBES = {
+    "overview": ("bopoverq", "Zahlungsbilanz — Übersicht (Quartalsdaten)"),
+    "iip": ("auvekomq", "Auslandvermögen — Komponenten (Quartalsdaten)"),
+}
+
 # Currency dimension item IDs → human-readable labels
 CURRENCIES = {
     "EUR1": "Euro (EUR)",
@@ -385,7 +391,7 @@ class BalanceOfPaymentsInput(BaseModel):
     )
     from_date: Optional[str] = Field(
         default=None,
-        description="Start date, e.g. '2020-Q1' or '2020'. Default: 5 years ago.",
+        description="Start date, e.g. '2020-Q1' or '2020'. Default: API default range.",
     )
     to_date: Optional[str] = Field(
         default=None,
@@ -446,7 +452,7 @@ async def snb_get_exchange_rates(params: ExchangeRatesInput) -> str:
     """
     try:
         path = f"{CUBE_EXCHANGE_RATES_MONTHLY}/data/json/{params.lang.value}"
-        query: dict = {}
+        query: dict[str, str] = {}
         if params.from_date:
             query["fromDate"] = params.from_date
         if params.to_date:
@@ -594,7 +600,7 @@ async def snb_get_annual_exchange_rates(params: AnnualExchangeRatesInput) -> str
     """
     try:
         path = f"{CUBE_EXCHANGE_RATES_ANNUAL}/data/json/{params.lang.value}"
-        query: dict = {}
+        query: dict[str, str] = {}
         if params.from_year:
             query["fromDate"] = params.from_year
         if params.to_year:
@@ -705,7 +711,7 @@ async def snb_get_balance_sheet(params: BalanceSheetInput) -> str:
     """
     try:
         path = f"{CUBE_BALANCE_SHEET}/data/json/{params.lang.value}"
-        query: dict = {}
+        query: dict[str, str] = {}
         if params.from_date:
             query["fromDate"] = params.from_date
         if params.to_date:
@@ -818,7 +824,7 @@ async def snb_convert_currency(params: ConvertCurrencyInput) -> str:
     try:
         cid = params.currency_id.upper()
         path = f"{CUBE_EXCHANGE_RATES_MONTHLY}/data/json/de"
-        query: dict = {}
+        query: dict[str, str] = {}
         if params.reference_month:
             query["fromDate"] = params.reference_month
             query["toDate"] = params.reference_month
@@ -932,7 +938,7 @@ async def snb_get_cube_data(params: CubeDataInput) -> str:
     """
     try:
         path = f"{params.cube_id}/data/json/{params.lang.value}"
-        query: dict = {}
+        query: dict[str, str] = {}
         if params.from_date:
             query["fromDate"] = params.from_date
         if params.to_date:
@@ -1029,11 +1035,6 @@ async def snb_get_cube_metadata(params: CubeMetadataInput) -> str:
 # Balance of Payments
 # ---------------------------------------------------------------------------
 
-BOP_CUBES = {
-    "overview": ("bopoverq", "Zahlungsbilanz — Übersicht (Quartalsdaten)"),
-    "iip": ("auvekomq", "Auslandvermögen — Komponenten (Quartalsdaten)"),
-}
-
 
 @mcp.tool(
     name="snb_get_balance_of_payments",
@@ -1065,7 +1066,7 @@ async def snb_get_balance_of_payments(params: BalanceOfPaymentsInput) -> str:
     try:
         cube_id, title = BOP_CUBES[params.category]
         path = f"{cube_id}/data/json/{params.lang.value}"
-        query: dict = {}
+        query: dict[str, str] = {}
         if params.from_date:
             query["fromDate"] = params.from_date
         if params.to_date:
@@ -1093,8 +1094,9 @@ async def snb_get_balance_of_payments(params: BalanceOfPaymentsInput) -> str:
                 lines.append(f"- … und {len(timeseries) - 5} weitere Zeitreihen")
 
         lines.append("\n```json")
-        lines.append(json.dumps(data, ensure_ascii=False, indent=2)[:8000])
-        if len(json.dumps(data)) > 8000:
+        json_str = json.dumps(data, ensure_ascii=False, indent=2)
+        lines.append(json_str[:8000])
+        if len(json_str) > 8000:
             lines.append("... (truncated, use a narrower date range)")
         lines.append("```")
 
@@ -1381,7 +1383,7 @@ async def snb_list_known_cubes() -> str:
 # Phase 3: Warehouse API tools (side-effect import — registers tools on mcp)
 # ---------------------------------------------------------------------------
 
-import swiss_snb_mcp.warehouse  # noqa: F401
+import swiss_snb_mcp.warehouse  # noqa: F401, E402
 
 
 # ---------------------------------------------------------------------------
