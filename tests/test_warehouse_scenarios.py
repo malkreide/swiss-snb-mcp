@@ -23,8 +23,12 @@ from swiss_snb_mcp.warehouse import (
     snb_list_bank_groups,
     snb_get_warehouse_data,
     snb_get_warehouse_metadata,
+    snb_get_banking_balance_sheet,
+    snb_get_banking_income,
     WarehouseDataInput,
     WarehouseMetadataInput,
+    BankingBalanceSheetInput,
+    BankingIncomeInput,
     _fetch_warehouse,
 )
 
@@ -191,6 +195,108 @@ async def test_16_invalid_cube_id():
 
 
 # ─────────────────────────────────────────────────────
+# Banking Balance Sheet Tests (Task 6)
+# ─────────────────────────────────────────────────────
+
+async def test_05_banking_balance_sheet_default():
+    """Scenario 5: Banking balance sheet - annual, default (all banks, both sides)."""
+    await run_test(
+        "05 – Bankenbilanz: jährlich, alle Banken, beide Seiten",
+        snb_get_banking_balance_sheet(BankingBalanceSheetInput()),
+        checks=["__SUCCESS__", "Millionen CHF"],
+    )
+
+
+async def test_06_banking_balance_sheet_multi_groups():
+    """Scenario 6: Banking balance sheet - specific bank groups, assets only."""
+    await run_test(
+        "06 – Bankenbilanz: G10, G15, G25, nur Aktiven",
+        snb_get_banking_balance_sheet(BankingBalanceSheetInput(
+            bank_groups=["G10", "G15", "G25"], side="assets"
+        )),
+        checks=["__SUCCESS__", "Millionen CHF"],
+    )
+
+
+async def test_07_banking_balance_sheet_monthly():
+    """Scenario 7: Banking balance sheet - monthly, assets, date range."""
+    await run_test(
+        "07 – Bankenbilanz: monatlich, Aktiven, 2024-01 bis 2024-06",
+        snb_get_banking_balance_sheet(BankingBalanceSheetInput(
+            frequency="monthly", side="assets",
+            from_date="2024-01", to_date="2024-06"
+        )),
+        checks=["__SUCCESS__", "Millionen CHF"],
+    )
+
+
+async def test_08_banking_balance_sheet_liabilities_chf():
+    """Scenario 8: Banking balance sheet - liabilities, CHF currency."""
+    await run_test(
+        "08 – Bankenbilanz: Passiven, Währung CHF",
+        snb_get_banking_balance_sheet(BankingBalanceSheetInput(
+            side="liabilities", currency="CHF"
+        )),
+        checks=["__SUCCESS__", "Millionen CHF"],
+    )
+
+
+async def test_17_banking_balance_sheet_english():
+    """Scenario 17: Banking balance sheet - English language, assets."""
+    await run_test(
+        "17 – Bankenbilanz: Englisch, Aktiven",
+        snb_get_banking_balance_sheet(BankingBalanceSheetInput(
+            lang=Language.EN, side="assets"
+        )),
+        checks=["__SUCCESS__", "Millionen CHF"],
+    )
+
+
+async def test_19_banking_balance_sheet_plausibility():
+    """Scenario 19: Banking balance sheet - plausibility check for 2023."""
+    await run_test(
+        "19 – Bankenbilanz: Plausibilität 2023, Aktiven",
+        snb_get_banking_balance_sheet(BankingBalanceSheetInput(
+            side="assets", from_date="2023", to_date="2023"
+        )),
+        checks=["__SUCCESS__", "Millionen CHF"],
+    )
+
+
+# ─────────────────────────────────────────────────────
+# Banking Income Tests (Task 7)
+# ─────────────────────────────────────────────────────
+
+async def test_09_banking_income_default():
+    """Scenario 9: Banking income - default (all banks)."""
+    await run_test(
+        "09 – Erfolgsrechnung: alle Banken",
+        snb_get_banking_income(BankingIncomeInput()),
+        checks=["__SUCCESS__", "Millionen CHF", "Geschäftsertrag"],
+    )
+
+
+async def test_10_banking_income_multi_groups():
+    """Scenario 10: Banking income - G10, G15."""
+    await run_test(
+        "10 – Erfolgsrechnung: Kantonal- und Grossbanken",
+        snb_get_banking_income(BankingIncomeInput(
+            bank_groups=["G10", "G15"]
+        )),
+        checks=["__SUCCESS__", "Millionen CHF"],
+    )
+
+
+async def test_18_banking_income_french():
+    """Scenario 18: Banking income - French language."""
+    await run_test(
+        "18 – Erfolgsrechnung: Französisch",
+        snb_get_banking_income(BankingIncomeInput(lang=Language.FR)),
+        checks=["__SUCCESS__", "Millionen CHF"],
+    )
+
+
+# ─────────────────────────────────────────────────────
 # Main runner
 # ─────────────────────────────────────────────────────
 
@@ -204,9 +310,18 @@ async def main():
         test_02_warehouse_data_monthly,
         test_03_warehouse_metadata_bil,
         test_04_warehouse_metadata_efr,
+        test_05_banking_balance_sheet_default,
+        test_06_banking_balance_sheet_multi_groups,
+        test_07_banking_balance_sheet_monthly,
+        test_08_banking_balance_sheet_liabilities_chf,
+        test_09_banking_income_default,
+        test_10_banking_income_multi_groups,
         test_14_list_warehouse_cubes,
         test_15_list_bank_groups,
         test_16_invalid_cube_id,
+        test_17_banking_balance_sheet_english,
+        test_18_banking_income_french,
+        test_19_banking_balance_sheet_plausibility,
     ]
 
     for test_fn in tests:

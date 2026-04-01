@@ -140,7 +140,7 @@ def _scale_to_millions(value: float, scale: str) -> float:
 def _filter_timeseries(
     timeseries: list[dict],
     dim_order: list[str],
-    filters: dict[str, str],
+    filters: dict[str, str | set[str]],
 ) -> list[dict]:
     """Filter warehouse timeseries by dimension values in the metadata key.
 
@@ -154,7 +154,8 @@ def _filter_timeseries(
     Args:
         timeseries: List of timeseries dicts from the warehouse API.
         dim_order: Ordered list of dimension names matching brace positions.
-        filters: Dict mapping dimension name to required value.
+        filters: Dict mapping dimension name to required value (str) or
+            set of acceptable values (set[str]).
 
     Returns:
         Filtered list of timeseries dicts.
@@ -164,7 +165,8 @@ def _filter_timeseries(
 
     result = []
     for ts in timeseries:
-        key = ts.get("key", "")
+        meta = ts.get("metadata", {})
+        key = meta.get("key", "") if meta else ts.get("key", "")
         # Extract the part inside braces
         brace_start = key.find("{")
         brace_end = key.find("}")
@@ -181,9 +183,15 @@ def _filter_timeseries(
         # Check all filters match
         match = True
         for dim_name, required_value in filters.items():
-            if dim_map.get(dim_name) != required_value:
-                match = False
-                break
+            actual = dim_map.get(dim_name)
+            if isinstance(required_value, set):
+                if actual not in required_value:
+                    match = False
+                    break
+            else:
+                if actual != required_value:
+                    match = False
+                    break
 
         if match:
             result.append(ts)
@@ -495,3 +503,312 @@ async def snb_list_warehouse_cubes() -> str:
         "- Verwenden Sie `snb_list_bank_groups` für die vollständige Liste der Bankengruppen-IDs.",
     ]
     return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Input model: BankingBalanceSheetInput
+# ---------------------------------------------------------------------------
+
+
+class BankingBalanceSheetInput(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+
+    side: Literal["assets", "liabilities", "both"] = Field(
+        default="both",
+        description="Balance sheet side: 'assets', 'liabilities', or 'both'.",
+    )
+    bank_groups: Optional[list[str]] = Field(
+        default=None,
+        description=(
+            "Bank group IDs, e.g. ['A30', 'G10']. "
+            "Use snb_list_bank_groups for valid IDs. Default: ['A30'] (all banks)."
+        ),
+        max_length=15,
+    )
+    frequency: Literal["annual", "monthly"] = Field(
+        default="annual",
+        description="Data frequency: 'annual' (JAHR_K) or 'monthly' (MONA_US).",
+    )
+    currency: str = Field(
+        default="T",
+        description="Currency filter: 'T' (Total), 'CHF', 'USD', 'EUR', 'JPY', 'EM', 'U'.",
+    )
+    from_date: Optional[str] = Field(
+        default=None,
+        description="Start date. YYYY for annual, YYYY-MM for monthly.",
+    )
+    to_date: Optional[str] = Field(
+        default=None,
+        description="End date.",
+    )
+    lang: Language = Field(default=Language.DE)
+
+
+# ---------------------------------------------------------------------------
+# Tool: snb_get_banking_balance_sheet
+# ---------------------------------------------------------------------------
+
+
+@mcp.tool(
+    name="snb_get_banking_balance_sheet",
+    annotations={
+        "title": "SNB Banking Balance Sheet (BSTA)",
+        "readOnlyHint": True,
+        "destructiveHint": False,
+        "idempotentHint": True,
+        "openWorldHint": True,
+    },
+)
+async def snb_get_banking_balance_sheet(params: BankingBalanceSheetInput) -> str:
+    """Retrieve banking balance sheet data from SNB Warehouse (BSTA BIL cubes).
+
+    Returns total assets and/or liabilities for selected bank groups from the
+    Swiss banking statistics. Values are converted to millions of CHF.
+
+    Args:
+        params (BankingBalanceSheetInput):
+            - side: 'assets', 'liabilities', or 'both'.
+            - bank_groups: Bank group IDs (default: ['A30'] = all banks).
+            - frequency: 'annual' or 'monthly'.
+            - currency: Currency filter (default: 'T' = Total).
+            - from_date / to_date: Date range.
+            - lang: Response language.
+
+    Returns:
+        str: Markdown summary with values in Millionen CHF, plus JSON data.
+    """
+    try:
+        freq = "JAHR_K" if params.frequency == "annual" else "MONA_US"
+
+        # Determine which cube IDs to fetch based on side
+        cube_ids: list[tuple[str, str]] = []
+        if params.side in ("assets", "both"):
+            cube_ids.append((f"BSTA.SNB.{freq}.BIL.AKT.TOT", "Aktiven"))
+        if params.side in ("liabilities", "both"):
+            cube_ids.append((f"BSTA.SNB.{freq}.BIL.PAS.TOT", "Passiven"))
+
+        bank_groups_set = set(params.bank_groups or ["A30"])
+        filters: dict[str, str | set[str]] = {
+            "KONSOLIDIERUNGSSTUFE": "K",
+            "WAEHRUNG": params.currency.upper(),
+            "BANKENGRUPPE": bank_groups_set,
+        }
+
+        lines = [
+            "## Bankenstatistik — Bilanz\n",
+            "**Einheit:** Millionen CHF\n",
+            "| Position | Bankengruppe | Wert | Datum |",
+            "|----------|-------------|------|-------|",
+        ]
+
+        result_data: list[dict] = []
+
+        for cube_id, side_label in cube_ids:
+            data = await _fetch_warehouse(
+                cube_id, "data/json", params.lang.value,
+                params.from_date, params.to_date,
+            )
+            timeseries = data.get("timeseries", [])
+            matched = _filter_timeseries(timeseries, BIL_DIM_ORDER, filters)
+
+            for ts in matched:
+                meta = ts.get("metadata", {})
+                scale = meta.get("scale", "0")
+                values = ts.get("values", [])
+                key = meta.get("key", "")
+
+                # Extract bank group from key
+                brace_start = key.find("{")
+                brace_end = key.find("}")
+                bg_id = "A30"
+                if brace_start != -1 and brace_end != -1:
+                    dims = key[brace_start + 1 : brace_end].split(",")
+                    if len(dims) == len(BIL_DIM_ORDER):
+                        bg_idx = BIL_DIM_ORDER.index("BANKENGRUPPE")
+                        bg_id = dims[bg_idx]
+
+                bg_label = BANK_GROUPS.get(bg_id, bg_id)
+
+                for v in values:
+                    raw_val = v.get("value")
+                    if raw_val is None:
+                        continue
+                    mio = _scale_to_millions(float(raw_val), scale)
+                    v["value_mio"] = round(mio, 1)
+
+                if values:
+                    last = values[-1]
+                    mio_val = last.get("value_mio", 0)
+                    mrd_val = mio_val / 1000
+                    lines.append(
+                        f"| {side_label} | {bg_label} | "
+                        f"{mio_val:,.1f} Mio. CHF ({mrd_val:,.1f} Mrd. CHF) | "
+                        f"{last['date']} |"
+                    )
+
+                result_data.append({
+                    "cube_id": cube_id,
+                    "side": side_label,
+                    "bank_group": bg_id,
+                    "bank_group_label": bg_label,
+                    "scale": scale,
+                    "values": values,
+                })
+
+        lines.append("\n```json")
+        json_str = json.dumps(result_data, ensure_ascii=False, indent=2)
+        lines.append(json_str[:8000])
+        if len(json_str) > 8000:
+            lines.append("... (truncated, use a narrower date range)")
+        lines.append("```")
+
+        return "\n".join(lines)
+
+    except Exception as e:
+        return _handle_http_error(e)
+
+
+# ---------------------------------------------------------------------------
+# Input model: BankingIncomeInput
+# ---------------------------------------------------------------------------
+
+
+class BankingIncomeInput(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+
+    bank_groups: Optional[list[str]] = Field(
+        default=None,
+        description=(
+            "Bank group IDs. Default: ['A30']. "
+            "Use snb_list_bank_groups for valid IDs."
+        ),
+        max_length=15,
+    )
+    from_year: Optional[str] = Field(
+        default=None,
+        description="Start year (YYYY). Default: 5 years ago.",
+        pattern=r"^\d{4}$",
+    )
+    to_year: Optional[str] = Field(
+        default=None,
+        description="End year (YYYY). Default: current year.",
+        pattern=r"^\d{4}$",
+    )
+    lang: Language = Field(default=Language.DE)
+
+
+# ---------------------------------------------------------------------------
+# Tool: snb_get_banking_income
+# ---------------------------------------------------------------------------
+
+
+@mcp.tool(
+    name="snb_get_banking_income",
+    annotations={
+        "title": "SNB Banking Income Statement (BSTA EFR)",
+        "readOnlyHint": True,
+        "destructiveHint": False,
+        "idempotentHint": True,
+        "openWorldHint": True,
+    },
+)
+async def snb_get_banking_income(params: BankingIncomeInput) -> str:
+    """Retrieve banking income statement data from SNB Warehouse (BSTA EFR cubes).
+
+    Returns key income statement positions (Geschäftsertrag, Geschäftsaufwand,
+    etc.) for selected bank groups. Values are converted to millions of CHF.
+
+    Args:
+        params (BankingIncomeInput):
+            - bank_groups: Bank group IDs (default: ['A30'] = all banks).
+            - from_year / to_year: Year range (YYYY).
+            - lang: Response language.
+
+    Returns:
+        str: Markdown summary with values in Millionen CHF, plus JSON data.
+    """
+    try:
+        bank_groups_set = set(params.bank_groups or ["A30"])
+        filters: dict[str, str | set[str]] = {
+            "KONSOLIDIERUNGSSTUFE": "K",
+            "BANKENGRUPPE": bank_groups_set,
+        }
+
+        lines = [
+            "## Bankenstatistik — Erfolgsrechnung\n",
+            "**Einheit:** Millionen CHF\n",
+            "| Position | Bankengruppe | Wert | Datum |",
+            "|----------|-------------|------|-------|",
+        ]
+
+        result_data: list[dict] = []
+
+        for pos_id, pos_name in EFR_POSITIONS.items():
+            cube_id = f"BSTA.SNB.JAHR_K.EFR.{pos_id}"
+            try:
+                data = await _fetch_warehouse(
+                    cube_id, "data/json", params.lang.value,
+                    params.from_year, params.to_year,
+                )
+            except Exception:
+                lines.append(f"| \u26a0 BSTA.SNB.JAHR_K.EFR.{pos_id}: nicht verfügbar | | | |")
+                continue
+
+            timeseries = data.get("timeseries", [])
+            matched = _filter_timeseries(timeseries, EFR_DIM_ORDER, filters)
+
+            for ts in matched:
+                meta = ts.get("metadata", {})
+                scale = meta.get("scale", "0")
+                values = ts.get("values", [])
+                key = meta.get("key", "")
+
+                # Extract bank group from key
+                brace_start = key.find("{")
+                brace_end = key.find("}")
+                bg_id = "A30"
+                if brace_start != -1 and brace_end != -1:
+                    dims = key[brace_start + 1 : brace_end].split(",")
+                    if len(dims) == len(EFR_DIM_ORDER):
+                        bg_idx = EFR_DIM_ORDER.index("BANKENGRUPPE")
+                        bg_id = dims[bg_idx]
+
+                bg_label = BANK_GROUPS.get(bg_id, bg_id)
+
+                for v in values:
+                    raw_val = v.get("value")
+                    if raw_val is None:
+                        continue
+                    mio = _scale_to_millions(float(raw_val), scale)
+                    v["value_mio"] = round(mio, 1)
+
+                if values:
+                    last = values[-1]
+                    mio_val = last.get("value_mio", 0)
+                    lines.append(
+                        f"| {pos_name} | {bg_label} | "
+                        f"{mio_val:,.1f} Mio. CHF | "
+                        f"{last['date']} |"
+                    )
+
+                result_data.append({
+                    "cube_id": cube_id,
+                    "position": pos_id,
+                    "position_name": pos_name,
+                    "bank_group": bg_id,
+                    "bank_group_label": bg_label,
+                    "scale": scale,
+                    "values": values,
+                })
+
+        lines.append("\n```json")
+        json_str = json.dumps(result_data, ensure_ascii=False, indent=2)
+        lines.append(json_str[:8000])
+        if len(json_str) > 8000:
+            lines.append("... (truncated, use a narrower date range)")
+        lines.append("```")
+
+        return "\n".join(lines)
+
+    except Exception as e:
+        return _handle_http_error(e)
