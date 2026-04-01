@@ -21,6 +21,8 @@ from swiss_snb_mcp.server import Language, _handle_http_error
 from swiss_snb_mcp.warehouse import (
     snb_list_warehouse_cubes,
     snb_list_bank_groups,
+    snb_get_warehouse_data,
+    WarehouseDataInput,
     _fetch_warehouse,
 )
 
@@ -107,6 +109,24 @@ async def run_test(name: str, coro, checks: list[str] | None = None):
 # Test Scenarios
 # ─────────────────────────────────────────────────────
 
+async def test_01_warehouse_data_annual():
+    """Scenario 1: Generic warehouse data - BSTA annual total assets."""
+    await run_test(
+        "01 – Warehouse-Daten: BSTA jährlich Total Aktiven",
+        snb_get_warehouse_data(WarehouseDataInput(cube_id="BSTA.SNB.JAHR_K.BIL.AKT.TOT", from_date="2020", to_date="2024")),
+        checks=["__SUCCESS__", "BSTA.SNB.JAHR_K.BIL.AKT.TOT", "Zeitreihe"],
+    )
+
+
+async def test_02_warehouse_data_monthly():
+    """Scenario 2: Generic warehouse data - BSTA monthly total assets."""
+    await run_test(
+        "02 – Warehouse-Daten: BSTA monatlich Total Aktiven",
+        snb_get_warehouse_data(WarehouseDataInput(cube_id="BSTA.SNB.MONA_US.BIL.AKT.TOT", from_date="2024-01", to_date="2024-06")),
+        checks=["__SUCCESS__", "BSTA.SNB.MONA_US.BIL.AKT.TOT"],
+    )
+
+
 async def test_14_list_warehouse_cubes():
     """Scenario 14: List all available warehouse cubes."""
     await run_test(
@@ -160,6 +180,8 @@ async def main():
     print("=" * 70)
 
     tests = [
+        test_01_warehouse_data_annual,
+        test_02_warehouse_data_monthly,
         test_14_list_warehouse_cubes,
         test_15_list_bank_groups,
         test_16_invalid_cube_id,

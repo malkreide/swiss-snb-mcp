@@ -232,6 +232,119 @@ async def snb_list_bank_groups() -> str:
 
 
 # ---------------------------------------------------------------------------
+# Input models for generic warehouse tools
+# ---------------------------------------------------------------------------
+
+
+class WarehouseDataInput(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+
+    cube_id: str = Field(
+        ...,
+        description=(
+            "SNB Warehouse cube ID (uppercase, dot-separated), e.g. "
+            "'BSTA.SNB.JAHR_K.BIL.AKT.TOT'. Use snb_list_warehouse_cubes "
+            "to see confirmed working cube IDs."
+        ),
+        min_length=5,
+        max_length=60,
+        pattern=r"^[A-Z][A-Z0-9_.]+$",
+    )
+    from_date: Optional[str] = Field(
+        default=None,
+        description="Start date. Use YYYY for annual cubes, YYYY-MM for monthly.",
+    )
+    to_date: Optional[str] = Field(
+        default=None,
+        description="End date, same format as from_date.",
+    )
+    lang: Language = Field(default=Language.DE)
+
+
+# ---------------------------------------------------------------------------
+# Tool: snb_get_warehouse_data
+# ---------------------------------------------------------------------------
+
+
+@mcp.tool(
+    name="snb_get_warehouse_data",
+    annotations={
+        "title": "SNB Warehouse Cube Data",
+        "readOnlyHint": True,
+        "destructiveHint": False,
+        "idempotentHint": True,
+        "openWorldHint": True,
+    },
+)
+async def snb_get_warehouse_data(params: WarehouseDataInput) -> str:
+    """Retrieve raw data from any SNB Warehouse cube by ID.
+
+    Generic tool for accessing SNB Warehouse cubes (BSTA banking statistics).
+    Use snb_get_warehouse_metadata first to understand the cube structure.
+    Use snb_list_warehouse_cubes to discover available cube IDs.
+
+    Args:
+        params (WarehouseDataInput):
+            - cube_id: SNB Warehouse cube ID (uppercase, dot-separated).
+            - from_date: Start date (YYYY for annual, YYYY-MM for monthly).
+            - to_date: End date.
+            - lang: Response language (de/en/fr).
+
+    Returns:
+        str: Timeseries data from the warehouse cube as Markdown + JSON.
+    """
+    try:
+        data = await _fetch_warehouse(
+            params.cube_id,
+            "data/json",
+            params.lang.value,
+            params.from_date,
+            params.to_date,
+        )
+        timeseries = data.get("timeseries", [])
+
+        # Scale label from first timeseries metadata
+        scale_label = ""
+        if timeseries:
+            first_ts = timeseries[0]
+            scale = first_ts.get("scale", "0")
+            scale_label = SCALE_LABELS.get(scale, f"Skala {scale}")
+
+        lines = [
+            f"## SNB Warehouse Cube `{params.cube_id}` — {len(timeseries)} Zeitreihe(n)\n",
+            f"**Quelle:** data.snb.ch/api/warehouse/cube/{params.cube_id}",
+        ]
+        if scale_label:
+            lines.append(f"**Einheit:** {scale_label}\n")
+
+        if timeseries:
+            # Brief summary of first 5 timeseries
+            for ts in timeseries[:5]:
+                header = ts.get("header", [])
+                values = ts.get("values", [])
+                label = " | ".join(h.get("dimItem", "") for h in header)
+                last_val = values[-1] if values else None
+                val_str = f"{last_val['value']}" if last_val else "–"
+                date_str = last_val["date"] if last_val else "–"
+                lines.append(f"- **{label}**: {val_str} ({date_str})")
+
+            if len(timeseries) > 5:
+                lines.append(f"- … und {len(timeseries) - 5} weitere Zeitreihen")
+
+        lines.append("\n```json")
+        json_str = json.dumps(data, ensure_ascii=False, indent=2)
+        lines.append(json_str[:8000])
+        if len(json_str) > 8000:
+            lines.append("... (truncated, use a narrower date range)")
+        lines.append("```")
+
+        return "\n".join(lines)
+
+    except Exception as e:
+        return _handle_http_error(e)
+
+
+# ---------------------------------------------------------------------------
 # Tool: snb_list_warehouse_cubes
 # ---------------------------------------------------------------------------
 
