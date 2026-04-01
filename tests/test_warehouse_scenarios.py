@@ -17,7 +17,12 @@ sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='repla
 # Add source to path
 sys.path.insert(0, "src")
 
-from swiss_snb_mcp.server import Language, _handle_http_error
+from swiss_snb_mcp.server import (
+    Language,
+    _handle_http_error,
+    snb_get_balance_of_payments,
+    BalanceOfPaymentsInput,
+)
 from swiss_snb_mcp.warehouse import (
     snb_list_warehouse_cubes,
     snb_list_bank_groups,
@@ -148,6 +153,40 @@ async def test_04_warehouse_metadata_efr():
         "04 – Metadaten: BSTA EFR Dimensionen",
         snb_get_warehouse_metadata(WarehouseMetadataInput(cube_id="BSTA.SNB.JAHR_K.EFR.GER")),
         checks=["__SUCCESS__", "BANKENGRUPPE", "Dimension"],
+    )
+
+
+async def test_11_bop_overview():
+    """Scenario 11: Balance of payments - overview."""
+    await run_test(
+        "11 – Zahlungsbilanz: Uebersicht (bopoverq)",
+        snb_get_balance_of_payments(BalanceOfPaymentsInput(
+            category="overview",
+        )),
+        checks=["__SUCCESS__", "bopoverq"],
+    )
+
+
+async def test_12_bop_iip():
+    """Scenario 12: Balance of payments - IIP."""
+    await run_test(
+        "12 – Auslandvermoegen (auvekomq)",
+        snb_get_balance_of_payments(BalanceOfPaymentsInput(
+            category="iip",
+        )),
+        checks=["__SUCCESS__", "auvekomq"],
+    )
+
+
+async def test_13_bop_french():
+    """Scenario 13: Balance of payments - French language."""
+    await run_test(
+        "13 – Zahlungsbilanz auf Franzoesisch",
+        snb_get_balance_of_payments(BalanceOfPaymentsInput(
+            category="overview",
+            lang=Language.FR,
+        )),
+        checks=["__SUCCESS__"],
     )
 
 
@@ -297,6 +336,66 @@ async def test_18_banking_income_french():
 
 
 # ─────────────────────────────────────────────────────
+# Retry Logic Test (Task 10)
+# ─────────────────────────────────────────────────────
+
+async def test_20_retry_logic():
+    """Scenario 20: Verify _fetch_warehouse retries on HTTP 503."""
+    global PASSED, FAILED
+    from unittest.mock import AsyncMock, patch, MagicMock
+    import httpx as httpx_mod
+
+    print(f"\n{'='*70}")
+    print(f"TEST: 20 – Retry-Logik (503 → 503 → 200)")
+    print(f"{'='*70}")
+
+    try:
+        # Mock httpx to return 503 twice, then 200
+        mock_response_503 = MagicMock()
+        mock_response_503.status_code = 503
+        mock_response_503.raise_for_status.side_effect = httpx_mod.HTTPStatusError(
+            "503", request=MagicMock(), response=mock_response_503
+        )
+
+        mock_response_200 = MagicMock()
+        mock_response_200.status_code = 200
+        mock_response_200.raise_for_status.return_value = None
+        mock_response_200.json.return_value = {"timeseries": []}
+
+        call_count = 0
+        async def mock_get(*args, **kwargs):
+            nonlocal call_count
+            call_count += 1
+            if call_count <= 2:
+                return mock_response_503
+            return mock_response_200
+
+        with patch("swiss_snb_mcp.warehouse.httpx.AsyncClient") as mock_client_cls:
+            mock_client = AsyncMock()
+            mock_client.get = mock_get
+            mock_client.__aenter__ = AsyncMock(return_value=mock_client)
+            mock_client.__aexit__ = AsyncMock(return_value=False)
+            mock_client_cls.return_value = mock_client
+
+            # Patch asyncio.sleep to not actually wait
+            with patch("swiss_snb_mcp.warehouse.asyncio.sleep", new_callable=AsyncMock):
+                result = await _fetch_warehouse("BSTA.SNB.JAHR_K.BIL.AKT.TOT", "data/json", "de")
+
+        assert call_count == 3, f"Expected 3 calls (2 retries + 1 success), got {call_count}"
+        assert result == {"timeseries": []}
+        PASSED += 1
+        print(f"  OK: Retry logic works (503 -> 503 -> 200, {call_count} calls)")
+        print(f"\n→ PASSED ✓")
+        RESULTS.append(("20 – Retry-Logik (503 → 503 → 200)", "PASSED ✓", None))
+    except Exception as e:
+        FAILED += 1
+        import traceback as tb_mod
+        print(f"  FAIL: {e}\n{tb_mod.format_exc()}")
+        print(f"\n→ FAILED ✗")
+        RESULTS.append(("20 – Retry-Logik (503 → 503 → 200)", "FAILED ✗", str(e)))
+
+
+# ─────────────────────────────────────────────────────
 # Main runner
 # ─────────────────────────────────────────────────────
 
@@ -316,12 +415,16 @@ async def main():
         test_08_banking_balance_sheet_liabilities_chf,
         test_09_banking_income_default,
         test_10_banking_income_multi_groups,
+        test_11_bop_overview,
+        test_12_bop_iip,
+        test_13_bop_french,
         test_14_list_warehouse_cubes,
         test_15_list_bank_groups,
         test_16_invalid_cube_id,
         test_17_banking_balance_sheet_english,
         test_18_banking_income_french,
         test_19_banking_balance_sheet_plausibility,
+        test_20_retry_logic,
     ]
 
     for test_fn in tests:
