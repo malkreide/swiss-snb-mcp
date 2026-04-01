@@ -4,14 +4,14 @@
 
 # 🏦 swiss-snb-mcp
 
-![Version](https://img.shields.io/badge/version-0.2.0-blue)
+![Version](https://img.shields.io/badge/version-0.3.0-blue)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-purple)](https://modelcontextprotocol.io/)
 [![Datenquelle](https://img.shields.io/badge/Daten-data.snb.ch-red)](https://data.snb.ch)
 ![CI](https://github.com/malkreide/swiss-snb-mcp/actions/workflows/ci.yml/badge.svg)
 
-> MCP-Server für das Datenportal der Schweizerischen Nationalbank — Wechselkurse, Bilanz, Zinssätze, SARON und Geldmengen.
+> MCP-Server für das Datenportal der Schweizerischen Nationalbank — Wechselkurse, Bilanz, Zinssätze, SARON, Geldmengen, Bankenstatistik und Zahlungsbilanz.
 
 ---
 
@@ -19,7 +19,7 @@
 
 `swiss-snb-mcp` verbindet KI-Modelle mit dem offiziellen Datenportal der Schweizerischen Nationalbank unter [data.snb.ch](https://data.snb.ch) über das Model Context Protocol (MCP). Der Zugriff erfolgt über die öffentliche REST-API — keine Authentifizierung erforderlich.
 
-Der Server deckt zwei Stufen verifizierter Datensätze ab:
+Der Server deckt drei Stufen verifizierter Datensätze ab:
 
 **Phase 1 — Dedizierte Tools:**
 - **Wechselkurse** (Monatsmittel, Monatsende, Jahresdurchschnitte) für 27 Währungen in CHF
@@ -31,6 +31,13 @@ Der Server deckt zwei Stufen verifizierter Datensätze ab:
 - **Internationale Geldmarktsätze**: SARON (CH), SOFR (USA), TONA (JP), SONIA (UK), €STR/EURIBOR (EZ)
 - **Offizielle Leitzinssätze im Vergleich**: SNB, Fed, EZB, Bank of England, Bank of Japan
 - **Geldmengenaggregate M1, M2, M3**: Bestände und Vorjahresveränderungen
+
+**Phase 3 — Warehouse-API (Bankenstatistik) und Zahlungsbilanz:**
+- **Bankbilanzen** (BSTA BIL): Aktiven und Passiven nach Bankengruppe — monatlich und jährlich
+- **Erfolgsrechnung** (BSTA EFR): Geschäftsertrag, -aufwand, Steuern nach Bankengruppe — jährlich
+- **Zahlungsbilanz**: Leistungs-, Kapital- und Finanzkonto (quartalsweise)
+- **Auslandvermögen**: Komponenten nach Investitionsart (quartalsweise)
+- **Generischer Warehouse-Zugriff**: Rohdaten aus beliebigen SNB-Warehouse-Cubes
 
 Alle Daten stammen von der Schweizerischen Nationalbank und sind in CHF ausgewiesen.
 
@@ -47,7 +54,9 @@ Alle Daten stammen von der Schweizerischen Nationalbank und sind in CHF ausgewie
 - 📈 **Leitzins & SARON** — tägliches Fixing, Leitzins, Compound Rates (1M/3M/6M)
 - 🌍 **Internationaler Zinsvergleich** — SNB, Fed, EZB, Bank of England, Bank of Japan im direkten Vergleich
 - 💰 **Geldmengenaggregate** — M1, M2, M3 Bestände und Vorjahreswachstum
-- 🔍 **Generischer Cube-Zugriff** — beliebige SNB-Datenwürfel für erweiterte Anwendungsfälle
+- 🏦 **Bankenstatistik** — Bilanzen und Erfolgsrechnung nach Bankengruppe (12 Gruppen)
+- 📊 **Zahlungsbilanz** — Leistungskonto, Auslandvermögen und Komponenten
+- 🔍 **Generischer Cube-Zugriff** — beliebige SNB-Cubes und Warehouse-Cubes nach ID
 - 🔓 **Keine Authentifizierung erforderlich** — vollständig öffentliches SNB-Datenportal
 
 ---
@@ -141,7 +150,19 @@ Kein API-Schlüssel oder Authentifizierung erforderlich. Das SNB-Datenportal ist
 |---|---|
 | `snb_get_cube_data` | Generischer Zugriff auf beliebige SNB-Cubes nach ID |
 | `snb_get_cube_metadata` | Dimensionen und Filterwerte eines Cubes abfragen |
-| `snb_list_known_cubes` | Übersicht aller 8 verifizierten Cubes (Phase 1 + 2) und Entdeckungshinweise |
+| `snb_list_known_cubes` | Übersicht aller 10 verifizierten Cubes (Phase 1–3) und Entdeckungshinweise |
+
+### Phase 3 — Warehouse-API (Bankenstatistik) und Zahlungsbilanz
+
+| Tool | Beschreibung |
+|---|---|
+| `snb_get_banking_balance_sheet` | Bankbilanzen nach Bankengruppe (monatlich/jährlich, Aktiven/Passiven) |
+| `snb_get_banking_income` | Erfolgsrechnung nach Bankengruppe (jährlich) |
+| `snb_get_balance_of_payments` | Zahlungsbilanz und Auslandvermögen (quartalsweise) |
+| `snb_get_warehouse_data` | Generischer Zugriff auf beliebige SNB-Warehouse-Cubes nach ID |
+| `snb_get_warehouse_metadata` | Dimensionen und letzte Aktualisierung eines Warehouse-Cubes |
+| `snb_list_warehouse_cubes` | Übersicht der verfügbaren Warehouse-Cube-IDs (BSTA) |
+| `snb_list_bank_groups` | Liste aller 12 Bankengruppen-IDs mit Bezeichnungen |
 
 ### Beispiel-Abfragen
 
@@ -150,10 +171,13 @@ Kein API-Schlüssel oder Authentifizierung erforderlich. Das SNB-Datenportal ist
 | *«Was ist der aktuelle EUR/CHF-Kurs?»* | `snb_get_exchange_rates` |
 | *«Rechne CHF 10'000 in USD um»* | `snb_convert_currency` |
 | *«SNB-Goldreserven der letzten 12 Monate»* | `snb_get_balance_sheet` |
-| *«Wie hoch ist der aktuelle SNB-Leitzins?»* | `snb_get_cube_data` (Cube: `snb_leitzinsen`) |
-| *«SNB, Fed und EZB Zinsen im Vergleich»* | `snb_get_cube_data` (Cube: `zib_gab`) |
-| *«SARON 3M Compound Rate der letzten 6 Monate»* | `snb_get_cube_data` (Cube: `snb_saron_compound`) |
-| *«Wie schnell wächst die Geldmenge M3?»* | `snb_get_cube_data` (Cube: `snb_geldmengen`) |
+| *«Wie hoch ist der aktuelle SNB-Leitzins?»* | `snb_get_cube_data` (Cube: `snbgwdzid`) |
+| *«SNB, Fed und EZB Zinsen im Vergleich»* | `snb_get_cube_data` (Cube: `snboffzisa`) |
+| *«SARON 3M Compound Rate der letzten 6 Monate»* | `snb_get_cube_data` (Cube: `zirepo`) |
+| *«Wie schnell wächst die Geldmenge M3?»* | `snb_get_cube_data` (Cube: `snbmonagg`) |
+| *«Total Aktiven aller Schweizer Banken?»* | `snb_get_banking_balance_sheet` |
+| *«Erfolgsrechnung der Kantonalbanken?»* | `snb_get_banking_income` (bank_group: `G10`) |
+| *«Zahlungsbilanz der Schweiz?»* | `snb_get_balance_of_payments` |
 | *«Welche Cubes sind verfügbar?»* | `snb_list_known_cubes` |
 
 ---
@@ -164,20 +188,21 @@ Kein API-Schlüssel oder Authentifizierung erforderlich. Das SNB-Datenportal ist
 ┌─────────────────┐     ┌───────────────────────────┐     ┌──────────────────────┐
 │   Claude / KI   │────▶│     Swiss SNB MCP         │────▶│     data.snb.ch      │
 │   (MCP Host)    │◀────│     (MCP Server)          │◀────│                      │
-└─────────────────┘     │                           │     │  REST API (JSON)     │
-                        │  9 Tools                  │     │  Öffentlich · Kein   │
-                        │  Stdio | SSE              │     │  Login erforderlich  │
-                        │                           │     │                      │
-                        │  Phase 1: ded. Tools      │     │  Wechselkurse        │
-                        │  Phase 2: gen. Cubes      │     │  Bilanz              │
-                        └───────────────────────────┘     │  Zinssätze / SARON   │
-                                                          │  Geldmengen          │
+└─────────────────┘     │                           │     │  /api/cube/ (JSON)   │
+                        │  16 Tools                 │     │  /api/warehouse/     │
+                        │  Stdio | SSE              │     │  Öffentlich · Kein   │
+                        │                           │     │  Login erforderlich  │
+                        │  Phase 1: ded. Tools      │     │                      │
+                        │  Phase 2: gen. Cubes      │     │  Wechselkurse        │
+                        │  Phase 3: Warehouse +     │     │  Bilanz              │
+                        │           Bankenstatistik │     │  Bankenstatistik     │
+                        └───────────────────────────┘     │  Zahlungsbilanz      │
                                                           └──────────────────────┘
 ```
 
 ### Cube-Entdeckungsmuster
 
-Die SNB-API folgt einer einheitlichen Cube-Struktur. Mit `snb_list_known_cubes` lassen sich verifizierte Cube-IDs erkunden, dann mit `snb_get_cube_metadata` die Dimensionen prüfen, bevor `snb_get_cube_data` für die eigentliche Abfrage genutzt wird. Diese generische Schicht ermöglicht Zugriff auf den gesamten SNB-Datenkatalog ohne dedizierte Tools pro Datensatz.
+Die SNB-API folgt einer einheitlichen Cube-Struktur. Mit `snb_list_known_cubes` lassen sich verifizierte Cube-IDs erkunden, dann mit `snb_get_cube_metadata` die Dimensionen prüfen, bevor `snb_get_cube_data` für die eigentliche Abfrage genutzt wird. Phase 3 ergänzt die Warehouse-API (`/api/warehouse/cube/`) für detaillierte Bankenstatistik — `snb_list_warehouse_cubes` und `snb_list_bank_groups` als Einstieg verwenden.
 
 ---
 
@@ -188,8 +213,11 @@ swiss-snb-mcp/
 ├── src/
 │   └── swiss_snb_mcp/
 │       ├── __init__.py
-│       └── server.py       # Alle Tools und FastMCP-Server
-├── tests/                  # Testsammlung
+│       ├── server.py       # Kern-Tools und FastMCP-Server (Phase 1–2 + Zahlungsbilanz)
+│       └── warehouse.py    # Warehouse-API-Tools (Phase 3: Bankenstatistik)
+├── tests/
+│   ├── test_scenarios.py           # 20 Tests für Phase 1–2
+│   └── test_warehouse_scenarios.py # 20 Tests für Phase 3
 ├── pyproject.toml          # Build-Konfiguration (hatchling)
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
@@ -206,6 +234,7 @@ swiss-snb-mcp/
 - **Bilanz:** Monatsdaten; einzelne Positionen können mit 1–2 Monaten Publikationsverzug erscheinen
 - **Cube-Zugriff:** Cube-IDs sind von der SNB nicht offiziell dokumentiert — `snb_list_known_cubes` für verifizierte IDs verwenden
 - **Historische Tiefe:** Abdeckung je nach Zeitreihe unterschiedlich; Wechselkurse ab 1980, einige Zinssätze beginnen später
+- **Warehouse-API Rate-Limiting:** Die SNB-Warehouse-API hat einen WAF-Schutz, der bei vielen schnellen Anfragen HTTP 503 zurückgibt; der Server wiederholt automatisch mit exponentiellem Backoff
 - **Keine Prognosen:** Alle Daten sind historisch/realisiert — die SNB veröffentlicht keine Prognosen über diese API
 
 ---
