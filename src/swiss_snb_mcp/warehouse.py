@@ -669,7 +669,7 @@ async def snb_get_banking_balance_sheet(params: BankingBalanceSheetInput) -> str
 
 
 # ---------------------------------------------------------------------------
-# Input model: BankingIncomeInput
+# Input model: BankingIncomeInput (EFR — income statement / Erfolgsrechnung)
 # ---------------------------------------------------------------------------
 
 
