@@ -397,12 +397,16 @@ async def snb_get_warehouse_metadata(params: WarehouseMetadataInput) -> str:
     """
     try:
         # Fetch dimensions
-        dim_data = await _fetch_warehouse(params.cube_id, "dimensions", params.lang.value)
+        dim_data = await _fetch_warehouse(
+            params.cube_id, "dimensions", params.lang.value
+        )
 
         # Fetch last update (no language segment!)
         async with httpx.AsyncClient(timeout=DEFAULT_TIMEOUT) as client:
             try:
-                lu_resp = await client.get(f"{WAREHOUSE_BASE_URL}/{params.cube_id}/lastUpdate")
+                lu_resp = await client.get(
+                    f"{WAREHOUSE_BASE_URL}/{params.cube_id}/lastUpdate"
+                )
                 lu_resp.raise_for_status()
                 lu_data = lu_resp.json()
                 edition_date = lu_data.get("editionDate", "unbekannt")
@@ -605,8 +609,11 @@ async def snb_get_banking_balance_sheet(params: BankingBalanceSheetInput) -> str
 
         for cube_id, side_label in cube_ids:
             data = await _fetch_warehouse(
-                cube_id, "data/json", params.lang.value,
-                params.from_date, params.to_date,
+                cube_id,
+                "data/json",
+                params.lang.value,
+                params.from_date,
+                params.to_date,
             )
             timeseries = data.get("timeseries", [])
             matched = _filter_timeseries(timeseries, BIL_DIM_ORDER, filters)
@@ -646,14 +653,16 @@ async def snb_get_banking_balance_sheet(params: BankingBalanceSheetInput) -> str
                         f"{last['date']} |"
                     )
 
-                result_data.append({
-                    "cube_id": cube_id,
-                    "side": side_label,
-                    "bank_group": bg_id,
-                    "bank_group_label": bg_label,
-                    "scale": scale,
-                    "values": values,
-                })
+                result_data.append(
+                    {
+                        "cube_id": cube_id,
+                        "side": side_label,
+                        "bank_group": bg_id,
+                        "bank_group_label": bg_label,
+                        "scale": scale,
+                        "values": values,
+                    }
+                )
 
         lines.append("\n```json")
         json_str = json.dumps(result_data, ensure_ascii=False, indent=2)
@@ -679,8 +688,7 @@ class BankingIncomeInput(BaseModel):
     bank_groups: Optional[list[str]] = Field(
         default=None,
         description=(
-            "Bank group IDs. Default: ['A30']. "
-            "Use snb_list_bank_groups for valid IDs."
+            "Bank group IDs. Default: ['A30']. Use snb_list_bank_groups for valid IDs."
         ),
         max_length=15,
     )
@@ -747,11 +755,16 @@ async def snb_get_banking_income(params: BankingIncomeInput) -> str:
             cube_id = f"BSTA.SNB.JAHR_K.EFR.{pos_id}"
             try:
                 data = await _fetch_warehouse(
-                    cube_id, "data/json", params.lang.value,
-                    params.from_year, params.to_year,
+                    cube_id,
+                    "data/json",
+                    params.lang.value,
+                    params.from_year,
+                    params.to_year,
                 )
             except Exception:
-                lines.append(f"| \u26a0 BSTA.SNB.JAHR_K.EFR.{pos_id}: nicht verfügbar | | | |")
+                lines.append(
+                    f"| \u26a0 BSTA.SNB.JAHR_K.EFR.{pos_id}: nicht verfügbar | | | |"
+                )
                 continue
 
             timeseries = data.get("timeseries", [])
@@ -791,15 +804,17 @@ async def snb_get_banking_income(params: BankingIncomeInput) -> str:
                         f"{last['date']} |"
                     )
 
-                result_data.append({
-                    "cube_id": cube_id,
-                    "position": pos_id,
-                    "position_name": pos_name,
-                    "bank_group": bg_id,
-                    "bank_group_label": bg_label,
-                    "scale": scale,
-                    "values": values,
-                })
+                result_data.append(
+                    {
+                        "cube_id": cube_id,
+                        "position": pos_id,
+                        "position_name": pos_name,
+                        "bank_group": bg_id,
+                        "bank_group_label": bg_label,
+                        "scale": scale,
+                        "values": values,
+                    }
+                )
 
         lines.append("\n```json")
         json_str = json.dumps(result_data, ensure_ascii=False, indent=2)
