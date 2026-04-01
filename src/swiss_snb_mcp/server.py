@@ -5,7 +5,7 @@ and monetary statistics via the public REST API at data.snb.ch.
 """
 
 import json
-from typing import Optional
+from typing import Literal, Optional
 from enum import Enum
 
 import httpx
@@ -368,6 +368,28 @@ class CubeMetadataInput(BaseModel):
         min_length=3,
         max_length=20,
         pattern=r"^[a-z][a-z0-9]+$",
+    )
+    lang: Language = Field(default=Language.DE)
+
+
+class BalanceOfPaymentsInput(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+
+    category: Literal["overview", "iip"] = Field(
+        default="overview",
+        description=(
+            "Balance of payments category: "
+            "'overview' (Zahlungsbilanz, cube bopoverq) or "
+            "'iip' (Auslandvermögen, cube auvekomq)."
+        ),
+    )
+    from_date: Optional[str] = Field(
+        default=None,
+        description="Start date, e.g. '2020-Q1' or '2020'. Default: 5 years ago.",
+    )
+    to_date: Optional[str] = Field(
+        default=None,
+        description="End date, same format as from_date.",
     )
     lang: Language = Field(default=Language.DE)
 
@@ -1003,6 +1025,85 @@ async def snb_get_cube_metadata(params: CubeMetadataInput) -> str:
         return _handle_http_error(e)
 
 
+# ---------------------------------------------------------------------------
+# Balance of Payments
+# ---------------------------------------------------------------------------
+
+BOP_CUBES = {
+    "overview": ("bopoverq", "Zahlungsbilanz — Übersicht (Quartalsdaten)"),
+    "iip": ("auvekomq", "Auslandvermögen — Komponenten (Quartalsdaten)"),
+}
+
+
+@mcp.tool(
+    name="snb_get_balance_of_payments",
+    annotations={
+        "title": "SNB Balance of Payments",
+        "readOnlyHint": True,
+        "destructiveHint": False,
+        "idempotentHint": True,
+        "openWorldHint": True,
+    },
+)
+async def snb_get_balance_of_payments(params: BalanceOfPaymentsInput) -> str:
+    """Retrieve balance-of-payments or international investment position data.
+
+    Categories:
+      - overview: Zahlungsbilanz — Übersicht (cube bopoverq)
+      - iip: Auslandvermögen — Komponenten (cube auvekomq)
+
+    Args:
+        params (BalanceOfPaymentsInput):
+            - category: 'overview' or 'iip'.
+            - from_date: Start date, e.g. '2020-Q1' or '2020'.
+            - to_date: End date.
+            - lang: Response language (de/en/fr).
+
+    Returns:
+        str: Markdown summary with JSON data.
+    """
+    try:
+        cube_id, title = BOP_CUBES[params.category]
+        path = f"{cube_id}/data/json/{params.lang.value}"
+        query: dict = {}
+        if params.from_date:
+            query["fromDate"] = params.from_date
+        if params.to_date:
+            query["toDate"] = params.to_date
+
+        data = await _fetch_snb(path, query or None)
+        timeseries = data.get("timeseries", [])
+
+        lines = [
+            f"## {title} — {len(timeseries)} Zeitreihe(n)\n",
+            f"**Quelle:** data.snb.ch | **Cube:** `{cube_id}`\n",
+        ]
+
+        if timeseries:
+            for ts in timeseries[:5]:
+                header = ts.get("header", [])
+                values = ts.get("values", [])
+                label = " | ".join(h.get("dimItem", "") for h in header)
+                last_val = values[-1] if values else None
+                val_str = f"{last_val['value']}" if last_val else "–"
+                date_str = last_val["date"] if last_val else "–"
+                lines.append(f"- **{label}**: {val_str} ({date_str})")
+
+            if len(timeseries) > 5:
+                lines.append(f"- … und {len(timeseries) - 5} weitere Zeitreihen")
+
+        lines.append("\n```json")
+        lines.append(json.dumps(data, ensure_ascii=False, indent=2)[:8000])
+        if len(json.dumps(data)) > 8000:
+            lines.append("... (truncated, use a narrower date range)")
+        lines.append("```")
+
+        return "\n".join(lines)
+
+    except Exception as e:
+        return _handle_http_error(e)
+
+
 @mcp.tool(
     name="snb_list_currencies",
     annotations={
@@ -1210,6 +1311,21 @@ async def snb_list_known_cubes() -> str:
             "frequency": "monatlich",
             "from": "1995",
         },
+        # ── Phase 3: Zahlungsbilanz (Standard-Cube-API) ──────────────────────
+        {
+            "id": "bopoverq",
+            "description": "Zahlungsbilanz — Übersicht (Leistungs-, Kapital-, Finanzkonto)",
+            "tool": "snb_get_balance_of_payments",
+            "frequency": "quartalsweise",
+            "from": "2000",
+        },
+        {
+            "id": "auvekomq",
+            "description": "Auslandvermögen — Komponenten (Direktinvestitionen, Portfolio, Derivate)",
+            "tool": "snb_get_balance_of_payments",
+            "frequency": "quartalsweise",
+            "from": "2000",
+        },
     ]
 
     phase1 = [c for c in known_cubes if c["tool"] != "snb_get_cube_data"]
@@ -1249,14 +1365,23 @@ async def snb_list_known_cubes() -> str:
             "- `ziredev` – Devisen / Wechselkurse",
             "- `uvo` – Übrige volkswirtschaftliche Daten",
             "- `aube` – Aussenbeziehungen",
-            "\n**Phase 3 — Noch nicht unterstützt:**",
-            "Die detaillierte Bankenstatistik (Bilanzsumme, Kreditvolumen nach Bankengruppe)",
-            "liegt im Warehouse-API unter `/api/warehouse/cube/BSTA@SNB…` mit eigener Filtersprache.",
-            "Direkte Abfrage via `snb_get_cube_data` ist noch nicht möglich.",
+            "\n**Phase 3 — Warehouse-API (Bankenstatistik)**",
+            "Detaillierte Bankenstatistik nach Bankengruppe via Warehouse-API:",
+            "- `snb_get_banking_balance_sheet` — Bankbilanzen (Aktiven/Passiven, monatlich/jährlich)",
+            "- `snb_get_banking_income` — Erfolgsrechnung (Geschäftsertrag/-aufwand, jährlich)",
+            "- `snb_get_warehouse_data` / `snb_get_warehouse_metadata` — Generischer Zugang",
+            "- `snb_list_warehouse_cubes` / `snb_list_bank_groups` — Übersicht und Referenz",
         ]
     )
 
     return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Phase 3: Warehouse API tools (side-effect import — registers tools on mcp)
+# ---------------------------------------------------------------------------
+
+import swiss_snb_mcp.warehouse  # noqa: F401
 
 
 # ---------------------------------------------------------------------------
