@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "swiss-snb-mcp"
-version = "0.2.0"
+version = "0.3.0"
 description = "MCP server for Swiss National Bank (SNB) data portal — exchange rates, balance sheet, and monetary statistics"
 readme = "README.md"
 license = { text = "MIT" }

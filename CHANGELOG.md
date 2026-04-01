@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-04-01
+
+### Added
+- **Phase 3: Warehouse-API und Zahlungsbilanz**
+- `snb_get_warehouse_data` — generischer Zugang zu SNB Warehouse Cubes (BSTA, etc.)
+- `snb_get_warehouse_metadata` — Dimensionen und letzte Aktualisierung eines Warehouse Cubes
+- `snb_get_banking_balance_sheet` — Bankbilanzen nach Bankengruppe (monatlich/jährlich, Aktiven/Passiven)
+- `snb_get_banking_income` — Erfolgsrechnung nach Bankengruppe (Geschäftsertrag/-aufwand, jährlich)
+- `snb_get_balance_of_payments` — Zahlungsbilanz und Auslandvermögen (bopoverq, auvekomq)
+- `snb_list_warehouse_cubes` — Übersicht der wichtigsten Warehouse Cube-IDs
+- `snb_list_bank_groups` — Liste aller 12 Bankengruppen-IDs mit Bezeichnung
+- Neues Modul `warehouse.py` für Warehouse-API-Tools (modularer Split)
+- Client-seitiges Filtern (dimSel auf Warehouse-API fehlerhaft)
+- Retry mit Exponential Backoff bei HTTP 503 (WAF-Schutz)
+- 20 neue Integrations-Testszenarien für Warehouse-Tools
+
+### Changed
+- `snb_list_known_cubes` aktualisiert mit Phase-3-Tools und Zahlungsbilanz-Cubes
+- `bopoverq` und `auvekomq` als neue Phase-2-Cubes aufgenommen
+
+### Notes
+- Warehouse-API verwendet Punkte (`.`) als Separator in Cube-IDs (URLs),
+  `@` nur in internen Metadata-Keys
+- EFR-Cubes haben 5-Segment-IDs (nicht 6): `BSTA.SNB.JAHR_K.EFR.{Position}`
+- ZAST-Warehouse-Cubes existieren nicht als direkte IDs —
+  Zahlungsbilanz via Standard-Cube-API (bopoverq, auvekomq)
+
 ## [0.2.0] - 2026-03-16
 
 ### Added
