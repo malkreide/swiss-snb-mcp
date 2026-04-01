@@ -261,6 +261,19 @@ class WarehouseDataInput(BaseModel):
     lang: Language = Field(default=Language.DE)
 
 
+class WarehouseMetadataInput(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+
+    cube_id: str = Field(
+        ...,
+        description="SNB Warehouse cube ID to inspect.",
+        min_length=5,
+        max_length=60,
+        pattern=r"^[A-Z][A-Z0-9_.]+$",
+    )
+    lang: Language = Field(default=Language.DE)
+
+
 # ---------------------------------------------------------------------------
 # Tool: snb_get_warehouse_data
 # ---------------------------------------------------------------------------
@@ -336,6 +349,77 @@ async def snb_get_warehouse_data(params: WarehouseDataInput) -> str:
         lines.append(json_str[:8000])
         if len(json_str) > 8000:
             lines.append("... (truncated, use a narrower date range)")
+        lines.append("```")
+
+        return "\n".join(lines)
+
+    except Exception as e:
+        return _handle_http_error(e)
+
+
+# ---------------------------------------------------------------------------
+# Tool: snb_get_warehouse_metadata
+# ---------------------------------------------------------------------------
+
+
+@mcp.tool(
+    name="snb_get_warehouse_metadata",
+    annotations={
+        "title": "SNB Warehouse Cube Metadata",
+        "readOnlyHint": True,
+        "destructiveHint": False,
+        "idempotentHint": True,
+        "openWorldHint": True,
+    },
+)
+async def snb_get_warehouse_metadata(params: WarehouseMetadataInput) -> str:
+    """Get metadata and dimension structure for any SNB Warehouse cube.
+
+    Retrieves the cube's dimension definitions and last update date.
+    Use this before querying snb_get_warehouse_data to understand
+    what dimensions and filter values are available.
+
+    Args:
+        params (WarehouseMetadataInput):
+            - cube_id: SNB Warehouse cube ID to inspect.
+            - lang: Language for labels (de/en/fr).
+
+    Returns:
+        str: Cube ID, edition date, dimensions and their items.
+    """
+    try:
+        # Fetch dimensions
+        dim_data = await _fetch_warehouse(params.cube_id, "dimensions", params.lang.value)
+
+        # Fetch last update (no language segment!)
+        async with httpx.AsyncClient(timeout=DEFAULT_TIMEOUT) as client:
+            try:
+                lu_resp = await client.get(f"{WAREHOUSE_BASE_URL}/{params.cube_id}/lastUpdate")
+                lu_resp.raise_for_status()
+                lu_data = lu_resp.json()
+                edition_date = lu_data.get("editionDate", "unbekannt")
+            except Exception:
+                edition_date = "nicht verfügbar"
+
+        lines = [
+            f"## SNB Warehouse Metadata: `{params.cube_id}`",
+            f"**Letzte Aktualisierung:** {edition_date}\n",
+        ]
+
+        for dim in dim_data.get("dimensions", []):
+            lines.append(f"### Dimension: {dim['name']} (ID: `{dim['id']}`)")
+            items = dim.get("dimensionItems", [])
+            for item in items:
+                sub_items = item.get("dimensionItems", [])
+                if sub_items:
+                    lines.append(f"  **{item['id']}**: {item['name']}")
+                    for sub in sub_items:
+                        lines.append(f"    - `{sub['id']}`: {sub['name']}")
+                else:
+                    lines.append(f"  - `{item['id']}`: {item['name']}")
+
+        lines.append("\n```json")
+        lines.append(json.dumps(dim_data, ensure_ascii=False, indent=2))
         lines.append("```")
 
         return "\n".join(lines)

@@ -22,7 +22,9 @@ from swiss_snb_mcp.warehouse import (
     snb_list_warehouse_cubes,
     snb_list_bank_groups,
     snb_get_warehouse_data,
+    snb_get_warehouse_metadata,
     WarehouseDataInput,
+    WarehouseMetadataInput,
     _fetch_warehouse,
 )
 
@@ -127,6 +129,24 @@ async def test_02_warehouse_data_monthly():
     )
 
 
+async def test_03_warehouse_metadata_bil():
+    """Scenario 3: Warehouse metadata - BSTA BIL dimensions."""
+    await run_test(
+        "03 – Metadaten: BSTA BIL Dimensionen",
+        snb_get_warehouse_metadata(WarehouseMetadataInput(cube_id="BSTA.SNB.JAHR_K.BIL.AKT.TOT")),
+        checks=["__SUCCESS__", "BANKENGRUPPE", "WAEHRUNG", "Dimension"],
+    )
+
+
+async def test_04_warehouse_metadata_efr():
+    """Scenario 4: Warehouse metadata - BSTA EFR dimensions."""
+    await run_test(
+        "04 – Metadaten: BSTA EFR Dimensionen",
+        snb_get_warehouse_metadata(WarehouseMetadataInput(cube_id="BSTA.SNB.JAHR_K.EFR.GER")),
+        checks=["__SUCCESS__", "BANKENGRUPPE", "Dimension"],
+    )
+
+
 async def test_14_list_warehouse_cubes():
     """Scenario 14: List all available warehouse cubes."""
     await run_test(
@@ -182,6 +202,8 @@ async def main():
     tests = [
         test_01_warehouse_data_annual,
         test_02_warehouse_data_monthly,
+        test_03_warehouse_metadata_bil,
+        test_04_warehouse_metadata_efr,
         test_14_list_warehouse_cubes,
         test_15_list_bank_groups,
         test_16_invalid_cube_id,
