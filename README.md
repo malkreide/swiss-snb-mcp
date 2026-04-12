@@ -13,6 +13,10 @@
 
 [🇩🇪 Deutsche Version](README.de.md)
 
+<p align="center">
+  <img src="assets/demo.png" alt="Demo: Claude queries SNB banking statistics via MCP tool call" width="720">
+</p>
+
 ---
 
 ## Overview
@@ -180,6 +184,20 @@ No API key or authentication required. The SNB data portal is fully public.
 
 ---
 
+## Safety & Limits
+
+| Aspect | Details |
+|--------|---------|
+| **Access** | Read-only (`readOnlyHint: true`) — the server cannot modify or delete any data |
+| **Personal data** | No personal data — all sources are aggregated, public macroeconomic statistics |
+| **Rate limits** | SNB Warehouse API has WAF protection (HTTP 503 after ~100 rapid requests); the server retries automatically with exponential backoff (max 3 retries, delays 2/4/8s) |
+| **Timeout** | 15 seconds per API call |
+| **Authentication** | No API keys required — both APIs (`/api/cube/` and `/api/warehouse/cube/`) are publicly accessible |
+| **Data source** | [Swiss National Bank — data.snb.ch](https://data.snb.ch) |
+| **Terms of Service** | Subject to SNB's [Terms of Use](https://www.snb.ch/en/the-snb/mandates-goals/legal-framework/terms-of-use) and [Copyright](https://www.snb.ch/en/the-snb/mandates-goals/legal-framework/copyright); data is free for non-commercial use with source attribution |
+
+---
+
 ## Architecture
 
 ```
@@ -232,7 +250,6 @@ swiss-snb-mcp/
 - **Balance sheet:** Monthly data; some positions may have a publication lag of 1–2 months
 - **Cube access:** Cube IDs are not officially documented by the SNB — use `snb_list_known_cubes` for verified IDs
 - **Historical depth:** Coverage varies by series; exchange rates go back to 1980, some interest rate series start later
-- **Warehouse API rate limiting:** The SNB Warehouse API has WAF protection that may return HTTP 503 after many rapid requests; the server retries automatically with exponential backoff
 - **No forecasts:** All data is historical/realised — SNB does not publish forecasts via this API
 
 ---

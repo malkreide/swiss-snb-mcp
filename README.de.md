@@ -13,6 +13,10 @@
 
 > MCP-Server für das Datenportal der Schweizerischen Nationalbank — Wechselkurse, Bilanz, Zinssätze, SARON, Geldmengen, Bankenstatistik und Zahlungsbilanz.
 
+<p align="center">
+  <img src="assets/demo.png" alt="Demo: Claude fragt SNB-Bankenstatistik via MCP Tool Call ab" width="720">
+</p>
+
 ---
 
 ## Übersicht
@@ -182,6 +186,20 @@ Kein API-Schlüssel oder Authentifizierung erforderlich. Das SNB-Datenportal ist
 
 ---
 
+## Safety & Limits
+
+| Aspekt | Details |
+|--------|---------|
+| **Zugriff** | Nur lesend (`readOnlyHint: true`) — der Server kann keine Daten ändern oder löschen |
+| **Personendaten** | Keine personenbezogenen Daten — alle Quellen sind aggregierte, öffentliche makroökonomische Statistiken |
+| **Rate Limits** | SNB-Warehouse-API hat WAF-Schutz (HTTP 503 nach ~100 schnellen Anfragen); der Server wiederholt automatisch mit exponentiellem Backoff (max. 3 Versuche, Wartezeit 2/4/8s) |
+| **Timeout** | 15 Sekunden pro API-Aufruf |
+| **Authentifizierung** | Keine API-Keys nötig — beide APIs (`/api/cube/` und `/api/warehouse/cube/`) sind öffentlich zugänglich |
+| **Datenquelle** | [Schweizerische Nationalbank — data.snb.ch](https://data.snb.ch) |
+| **Nutzungsbedingungen** | Es gelten die [Nutzungsbedingungen](https://www.snb.ch/de/die-snb/auftrag-ziele/rechtliche-grundlagen/nutzungsbedingungen) und das [Urheberrecht](https://www.snb.ch/de/die-snb/auftrag-ziele/rechtliche-grundlagen/urheberrecht) der SNB; Daten sind bei nichtkommerzieller Nutzung mit Quellenangabe frei verwendbar |
+
+---
+
 ## Architektur
 
 ```
@@ -234,7 +252,6 @@ swiss-snb-mcp/
 - **Bilanz:** Monatsdaten; einzelne Positionen können mit 1–2 Monaten Publikationsverzug erscheinen
 - **Cube-Zugriff:** Cube-IDs sind von der SNB nicht offiziell dokumentiert — `snb_list_known_cubes` für verifizierte IDs verwenden
 - **Historische Tiefe:** Abdeckung je nach Zeitreihe unterschiedlich; Wechselkurse ab 1980, einige Zinssätze beginnen später
-- **Warehouse-API Rate-Limiting:** Die SNB-Warehouse-API hat einen WAF-Schutz, der bei vielen schnellen Anfragen HTTP 503 zurückgibt; der Server wiederholt automatisch mit exponentiellem Backoff
 - **Keine Prognosen:** Alle Daten sind historisch/realisiert — die SNB veröffentlicht keine Prognosen über diese API
 
 ---
