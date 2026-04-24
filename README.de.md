@@ -184,7 +184,7 @@ Kein API-Schlüssel oder Authentifizierung erforderlich. Das SNB-Datenportal ist
 | *«Zahlungsbilanz der Schweiz?»* | `snb_get_balance_of_payments` |
 | *«Welche Cubes sind verfügbar?»* | `snb_list_known_cubes` |
 
-→ Weitere Anwendungsbeispiele nach Zielgruppe →
+→ [Weitere Anwendungsbeispiele nach Zielgruppe](EXAMPLES.md) →
 
 ---
 
