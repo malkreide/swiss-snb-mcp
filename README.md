@@ -182,6 +182,8 @@ No API key or authentication required. The SNB data portal is fully public.
 | *"Switzerland's balance of payments?"* | `snb_get_balance_of_payments` |
 | *"Which cubes are available?"* | `snb_list_known_cubes` |
 
+→ More use cases by audience →
+
 ---
 
 ## Safety & Limits
