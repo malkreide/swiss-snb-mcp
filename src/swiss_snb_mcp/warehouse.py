@@ -16,7 +16,7 @@ from swiss_snb_mcp.server import (
     Language,
     _handle_http_error,
     _assert_host_allowed,
-    DEFAULT_TIMEOUT,
+    _http,
 )
 
 # ---------------------------------------------------------------------------
@@ -95,12 +95,12 @@ async def _fetch_warehouse(
         params["toDate"] = to_date
 
     last_exc: Exception | None = None
+    client = _http()
     for attempt in range(MAX_RETRIES):
         try:
-            async with httpx.AsyncClient(timeout=DEFAULT_TIMEOUT) as client:
-                response = await client.get(url, params=params)
-                response.raise_for_status()
-                return response.json()
+            response = await client.get(url, params=params)
+            response.raise_for_status()
+            return response.json()
         except httpx.HTTPStatusError as e:
             if e.response.status_code == 503 and attempt < MAX_RETRIES - 1:
                 last_exc = e
@@ -411,14 +411,14 @@ async def snb_get_warehouse_metadata(params: WarehouseMetadataInput) -> str:
         # Fetch last update (no language segment!)
         lu_url = f"{WAREHOUSE_BASE_URL}/{params.cube_id}/lastUpdate"
         _assert_host_allowed(lu_url)
-        async with httpx.AsyncClient(timeout=DEFAULT_TIMEOUT) as client:
-            try:
-                lu_resp = await client.get(lu_url)
-                lu_resp.raise_for_status()
-                lu_data = lu_resp.json()
-                edition_date = lu_data.get("editionDate", "unbekannt")
-            except Exception:
-                edition_date = "nicht verfügbar"
+        client = _http()
+        try:
+            lu_resp = await client.get(lu_url)
+            lu_resp.raise_for_status()
+            lu_data = lu_resp.json()
+            edition_date = lu_data.get("editionDate", "unbekannt")
+        except Exception:
+            edition_date = "nicht verfügbar"
 
         lines = [
             f"## SNB Warehouse Metadata: `{params.cube_id}`",
