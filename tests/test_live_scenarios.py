@@ -1,6 +1,11 @@
 """
-20 diverse test scenarios for swiss-snb-mcp
+20 diverse test scenarios for swiss-snb-mcp.
+
 Tests run against the LIVE SNB API at data.snb.ch (no mocks).
+
+Two invocation paths:
+  - `python tests/test_live_scenarios.py`  (legacy script entry, used in CI nightly)
+  - `pytest -m live tests/test_live_scenarios.py`  (pytest-style)
 """
 
 import asyncio
@@ -10,9 +15,20 @@ import sys
 import traceback
 from datetime import datetime, timedelta
 
-# Fix Windows console encoding
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+import pytest
+
+pytestmark = pytest.mark.live
+
+# Fix Windows console encoding — only when run as a script. Doing it at
+# import time breaks pytest's stdout capture, which prevents test collection
+# under `pytest -m "not live"`.
+def _force_utf8_stdio() -> None:
+    sys.stdout = io.TextIOWrapper(
+        sys.stdout.buffer, encoding="utf-8", errors="replace"
+    )
+    sys.stderr = io.TextIOWrapper(
+        sys.stderr.buffer, encoding="utf-8", errors="replace"
+    )
 
 # Add source to path
 sys.path.insert(0, "src")
@@ -422,6 +438,13 @@ async def _run_tests():
     return FAILED == 0
 
 
+async def test_all_live_scenarios():
+    """Pytest entry: runs all scenarios; fails if any underlying scenario failed."""
+    success = await main()
+    assert success, f"{FAILED} live scenario(s) failed; see captured stdout for details."
+
+
 if __name__ == "__main__":
+    _force_utf8_stdio()
     success = asyncio.run(main())
     sys.exit(0 if success else 1)

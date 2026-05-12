@@ -234,8 +234,9 @@ swiss-snb-mcp/
 │       ├── server.py       # Core tools and FastMCP server (Phase 1–2 + BoP)
 │       └── warehouse.py    # Warehouse API tools (Phase 3: banking statistics)
 ├── tests/
-│   ├── test_scenarios.py           # 20 tests for Phase 1–2
-│   └── test_warehouse_scenarios.py # 20 tests for Phase 3
+│   ├── test_unit.py                # respx-mocked unit tests (run in CI)
+│   ├── test_live_scenarios.py      # 20 live scenarios for Phase 1–2 (nightly)
+│   └── test_live_warehouse.py      # 20 live scenarios for Phase 3 (nightly)
 ├── pyproject.toml          # Build configuration (hatchling)
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
