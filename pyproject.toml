@@ -20,6 +20,14 @@ Homepage = "https://github.com/malkreide/swiss-snb-mcp"
 Repository = "https://github.com/malkreide/swiss-snb-mcp"
 Changelog = "https://github.com/malkreide/swiss-snb-mcp/blob/main/CHANGELOG.md"
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "respx>=0.21",
+    "ruff>=0.5",
+]
+
 [project.scripts]
 swiss-snb-mcp = "swiss_snb_mcp.server:main"
 
@@ -28,3 +36,10 @@ packages = ["src/swiss_snb_mcp"]
 
 [tool.hatch.build]
 sources = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = [
+    "live: hits data.snb.ch — slow, brittle, runs only with `pytest -m live`",
+]

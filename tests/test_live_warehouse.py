@@ -1,6 +1,11 @@
 """
 Test scenarios for swiss-snb-mcp Warehouse API tools.
+
 Tests run against the LIVE SNB Warehouse API at data.snb.ch (no mocks).
+
+Two invocation paths:
+  - `python tests/test_live_warehouse.py`  (legacy script entry, used in CI nightly)
+  - `pytest -m live tests/test_live_warehouse.py`  (pytest-style)
 """
 
 import asyncio
@@ -10,9 +15,18 @@ import sys
 import traceback
 from datetime import datetime, timedelta
 
+import pytest
+
+pytestmark = pytest.mark.live
+
 # Fix Windows console encoding
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+def _force_utf8_stdio() -> None:
+    sys.stdout = io.TextIOWrapper(
+        sys.stdout.buffer, encoding="utf-8", errors="replace"
+    )
+    sys.stderr = io.TextIOWrapper(
+        sys.stderr.buffer, encoding="utf-8", errors="replace"
+    )
 
 # Add source to path
 sys.path.insert(0, "src")
@@ -454,6 +468,13 @@ async def _run_tests():
     return FAILED == 0
 
 
+async def test_all_live_warehouse_scenarios():
+    """Pytest entry: runs all scenarios; fails if any underlying scenario failed."""
+    success = await main()
+    assert success, f"{FAILED} live scenario(s) failed; see captured stdout for details."
+
+
 if __name__ == "__main__":
+    _force_utf8_stdio()
     success = asyncio.run(main())
     sys.exit(0 if success else 1)
