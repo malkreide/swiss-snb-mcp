@@ -10,8 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.4.0] - 2026-05-12
 
 Audit-driven hardening release. All changes are responses to findings from the
-[mcp-audit-skill](https://github.com/malkreide/mcp-audit-skill) report in
-`audits/2026-05-11-swiss-snb-mcp/audit-report.md`.
+[mcp-audit-skill](https://github.com/malkreide/mcp-audit-skill) audit (initial
+report in `audits/2026-05-11-swiss-snb-mcp/audit-report.md`, post-remediation
+re-audit in `audits/2026-05-12-swiss-snb-mcp-reaudit/audit-report.md` — final
+score 27 pass / 3 partial / 0 fail).
 
 ### Added
 - **5 MCP resources** for static catalogs (`data://snb/currencies`,
@@ -40,6 +42,8 @@ Audit-driven hardening release. All changes are responses to findings from the
   `tests/test_warehouse_scenarios.py` → `test_live_warehouse.py`. Each carries
   `pytest.mark.live`; the legacy `python tests/test_live_*.py` script entry
   still works.
+- Cap `mcp[cli]` at `>=1.0.0,<2.0.0` so a future SDK 2.x breaks loudly at
+  install time rather than silently at runtime (SDK-003).
 
 ## [0.3.0] - 2026-04-01
 
