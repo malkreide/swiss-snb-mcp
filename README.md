@@ -143,8 +143,6 @@ No API key or authentication required. The SNB data portal is fully public.
 | `snb_get_annual_exchange_rates` | Annual average rates, data from 1980 |
 | `snb_get_balance_sheet` | SNB Bilanz positions in millions CHF (monthly) |
 | `snb_convert_currency` | Convert any amount to CHF using official SNB rates |
-| `snb_list_currencies` | List all 27 currency IDs with labels and units |
-| `snb_list_balance_sheet_positions` | List all asset and liability position IDs |
 
 ### Phase 2 — Generic Cube Tools
 
@@ -152,7 +150,6 @@ No API key or authentication required. The SNB data portal is fully public.
 |---|---|
 | `snb_get_cube_data` | Generic access to any SNB cube by ID |
 | `snb_get_cube_metadata` | Inspect dimensions and filter values of any cube |
-| `snb_list_known_cubes` | Overview of all 10 verified cubes (Phase 1–3) and discovery guide |
 
 ### Phase 3 — Warehouse API (Banking Statistics) and Balance of Payments
 
@@ -163,8 +160,18 @@ No API key or authentication required. The SNB data portal is fully public.
 | `snb_get_balance_of_payments` | Balance of payments and international investment position (quarterly) |
 | `snb_get_warehouse_data` | Generic access to any SNB Warehouse cube by ID |
 | `snb_get_warehouse_metadata` | Inspect dimensions and last update of a Warehouse cube |
-| `snb_list_warehouse_cubes` | Overview of available Warehouse cube IDs (BSTA) |
-| `snb_list_bank_groups` | List all 12 bank group IDs with labels |
+
+### Resources (static catalogs)
+
+Discovery aids served as MCP resources rather than tools so they don't crowd the tool manifest:
+
+| URI | Description |
+|---|---|
+| `data://snb/currencies` | All 27 currency IDs with labels and units |
+| `data://snb/balance-sheet-positions` | Asset and liability position IDs |
+| `data://snb/cubes` | All verified Cube-API IDs (Phase 1–2) + discovery guide |
+| `data://snb/warehouse-cubes` | Available Warehouse cube IDs (BSTA) |
+| `data://snb/bank-groups` | All 12 bank group IDs with labels |
 
 ### Example Use Cases
 
@@ -180,7 +187,7 @@ No API key or authentication required. The SNB data portal is fully public.
 | *"Total assets of all Swiss banks?"* | `snb_get_banking_balance_sheet` |
 | *"Income statement of cantonal banks?"* | `snb_get_banking_income` (bank_group: `G10`) |
 | *"Switzerland's balance of payments?"* | `snb_get_balance_of_payments` |
-| *"Which cubes are available?"* | `snb_list_known_cubes` |
+| *"Which cubes are available?"* | resource `data://snb/cubes` |
 
 → [More use cases by audience](EXAMPLES.md) →
 
@@ -220,7 +227,7 @@ No API key or authentication required. The SNB data portal is fully public.
 
 ### Cube Discovery Pattern
 
-The SNB API follows a consistent cube-based structure. Use `snb_list_known_cubes` to explore verified cube IDs, then `snb_get_cube_metadata` to inspect dimensions before querying with `snb_get_cube_data`. Phase 3 adds the Warehouse API (`/api/warehouse/cube/`) for granular banking statistics — use `snb_list_warehouse_cubes` and `snb_list_bank_groups` as starting points.
+The SNB API follows a consistent cube-based structure. Read the `data://snb/cubes` resource to explore verified cube IDs, then `snb_get_cube_metadata` to inspect dimensions before querying with `snb_get_cube_data`. Phase 3 adds the Warehouse API (`/api/warehouse/cube/`) for granular banking statistics — start from the `data://snb/warehouse-cubes` and `data://snb/bank-groups` resources.
 
 ---
 
@@ -251,7 +258,7 @@ swiss-snb-mcp/
 
 - **Exchange rates:** Monthly averages only — no intraday or daily rates available via this API
 - **Balance sheet:** Monthly data; some positions may have a publication lag of 1–2 months
-- **Cube access:** Cube IDs are not officially documented by the SNB — use `snb_list_known_cubes` for verified IDs
+- **Cube access:** Cube IDs are not officially documented by the SNB — read the `data://snb/cubes` resource for verified IDs
 - **Historical depth:** Coverage varies by series; exchange rates go back to 1980, some interest rate series start later
 - **No forecasts:** All data is historical/realised — SNB does not publish forecasts via this API
 

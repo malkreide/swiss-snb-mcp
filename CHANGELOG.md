@@ -7,6 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-05-12
+
+Audit-driven hardening release. All changes are responses to findings from the
+[mcp-audit-skill](https://github.com/malkreide/mcp-audit-skill) report in
+`audits/2026-05-11-swiss-snb-mcp/audit-report.md`.
+
+### Added
+- **5 MCP resources** for static catalogs (`data://snb/currencies`,
+  `data://snb/balance-sheet-positions`, `data://snb/cubes`,
+  `data://snb/warehouse-cubes`, `data://snb/bank-groups`).
+- Egress allow-list (`ALLOWED_HOSTS = {"data.snb.ch"}`) enforced before every
+  outbound HTTP request (SEC-021).
+- Pydantic `strict=True` on every tool input model — type coercion at the
+  tool boundary is rejected (SEC-018).
+- `_lifespan` opens one shared `httpx.AsyncClient` for the whole server
+  lifetime instead of per call (SDK-001). Performance + reduces WAF 503s.
+- Explicit `logging.basicConfig(stream=sys.stderr, ...)` at module top — stdout
+  stays reserved for the JSON-RPC protocol (OBS-004).
+- `tests/test_unit.py` with 11 respx-mocked unit tests. CI runs `pytest -m
+  "not live"` on every PR; live tests moved to a nightly schedule (OPS-001).
+
+### Changed
+- **BREAKING:** The 5 listing capabilities are now MCP **resources**, not tools.
+  Clients that called `snb_list_currencies()` etc. as tools must switch to
+  `read_resource("data://snb/currencies")` etc. Tool count drops 16 → 11
+  (ARCH-006).
+- `_handle_http_error()` no longer leaks `response.text[:200]` or exception
+  class names into LLM-visible output. Unknown exceptions are logged with
+  full traceback to stderr and reduced to a generic user message (OBS-002).
+- Live test scripts renamed: `tests/test_scenarios.py` → `test_live_scenarios.py`,
+  `tests/test_warehouse_scenarios.py` → `test_live_warehouse.py`. Each carries
+  `pytest.mark.live`; the legacy `python tests/test_live_*.py` script entry
+  still works.
+
 ## [0.3.0] - 2026-04-01
 
 ### Added

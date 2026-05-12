@@ -211,15 +211,11 @@ def _filter_timeseries(
 # ---------------------------------------------------------------------------
 
 
-@mcp.tool(
+@mcp.resource(
+    "data://snb/bank-groups",
     name="snb_list_bank_groups",
-    annotations={
-        "title": "List SNB Bank Groups",
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False,
-    },
+    title="List SNB Bank Groups",
+    mime_type="text/markdown",
 )
 async def snb_list_bank_groups() -> str:
     """List all bank group IDs used in SNB Warehouse banking statistics (BSTA).
@@ -452,15 +448,11 @@ async def snb_get_warehouse_metadata(params: WarehouseMetadataInput) -> str:
 # ---------------------------------------------------------------------------
 
 
-@mcp.tool(
+@mcp.resource(
+    "data://snb/warehouse-cubes",
     name="snb_list_warehouse_cubes",
-    annotations={
-        "title": "List SNB Warehouse Data Cubes",
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False,
-    },
+    title="List SNB Warehouse Data Cubes",
+    mime_type="text/markdown",
 )
 async def snb_list_warehouse_cubes() -> str:
     """List available SNB Warehouse cube IDs for banking statistics (BSTA).
