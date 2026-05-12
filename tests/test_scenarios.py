@@ -34,6 +34,8 @@ from swiss_snb_mcp.server import (
     CubeDataInput,
     CubeMetadataInput,
     Language,
+    _lifespan,
+    mcp,
 )
 
 # ─────────────────────────────────────────────────────
@@ -370,6 +372,12 @@ async def main():
     print("=" * 70)
     print("  swiss-snb-mcp — 20 Testszenarien gegen LIVE SNB API")
     print("=" * 70)
+
+    async with _lifespan(mcp):
+        return await _run_tests()
+
+
+async def _run_tests():
 
     tests = [
         test_01_monthly_fx_eur_usd,
