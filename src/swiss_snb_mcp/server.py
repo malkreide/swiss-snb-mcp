@@ -7,6 +7,7 @@ and monetary statistics via the public REST API at data.snb.ch.
 import json
 from typing import Literal, Optional
 from enum import Enum
+from urllib.parse import urlparse
 
 import httpx
 from mcp.server.fastmcp import FastMCP
@@ -18,6 +19,17 @@ from pydantic import BaseModel, Field, ConfigDict
 
 SNB_BASE_URL = "https://data.snb.ch/api/cube"
 DEFAULT_TIMEOUT = 15.0
+
+# Egress allow-list. The server must only ever talk to data.snb.ch.
+ALLOWED_HOSTS = frozenset({"data.snb.ch"})
+
+
+def _assert_host_allowed(url: str) -> None:
+    """Reject any URL whose host is not in ALLOWED_HOSTS (defense-in-depth)."""
+    host = urlparse(url).hostname or ""
+    if host not in ALLOWED_HOSTS:
+        raise PermissionError(f"Host not in allow-list: {host!r}")
+
 
 # Known cube identifiers (verified against the live API)
 CUBE_EXCHANGE_RATES_MONTHLY = "devkum"  # Wechselkurse Monatsmittel/-ende
@@ -151,6 +163,7 @@ mcp = FastMCP(
 async def _fetch_snb(path: str, params: dict | None = None) -> dict:
     """Fetch data from the SNB REST API and return parsed JSON."""
     url = f"{SNB_BASE_URL}/{path}"
+    _assert_host_allowed(url)
     async with httpx.AsyncClient(timeout=DEFAULT_TIMEOUT) as client:
         response = await client.get(url, params=params)
         response.raise_for_status()
@@ -229,7 +242,7 @@ class Language(str, Enum):
 
 
 class ExchangeRatesInput(BaseModel):
-    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+    model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
     currencies: Optional[list[str]] = Field(
         default=None,
@@ -261,7 +274,7 @@ class ExchangeRatesInput(BaseModel):
 
 
 class AnnualExchangeRatesInput(BaseModel):
-    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+    model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
     currencies: Optional[list[str]] = Field(
         default=None,
@@ -286,7 +299,7 @@ class AnnualExchangeRatesInput(BaseModel):
 
 
 class BalanceSheetInput(BaseModel):
-    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+    model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
     positions: Optional[list[str]] = Field(
         default=None,
@@ -311,7 +324,7 @@ class BalanceSheetInput(BaseModel):
 
 
 class ConvertCurrencyInput(BaseModel):
-    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+    model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
     amount: float = Field(
         ...,
@@ -338,7 +351,7 @@ class ConvertCurrencyInput(BaseModel):
 
 
 class CubeDataInput(BaseModel):
-    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+    model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
     cube_id: str = Field(
         ...,
@@ -366,7 +379,7 @@ class CubeDataInput(BaseModel):
 
 
 class CubeMetadataInput(BaseModel):
-    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+    model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
     cube_id: str = Field(
         ...,
@@ -379,7 +392,7 @@ class CubeMetadataInput(BaseModel):
 
 
 class BalanceOfPaymentsInput(BaseModel):
-    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+    model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
     category: Literal["overview", "iip"] = Field(
         default="overview",
