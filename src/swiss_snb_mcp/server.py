@@ -7,7 +7,8 @@ and monetary statistics via the public REST API at data.snb.ch.
 import json
 import logging
 import sys
-from typing import Literal, Optional
+from contextlib import asynccontextmanager
+from typing import AsyncIterator, Literal, Optional
 from enum import Enum
 from urllib.parse import urlparse
 
@@ -150,6 +151,43 @@ BALANCE_SHEET_POSITIONS = {
 }
 
 # ---------------------------------------------------------------------------
+# Shared HTTP client (managed via FastMCP lifespan, see _lifespan below).
+# Module-level container so warehouse.py can reach the same client by
+# importing _runtime — re-assignment of _runtime.http remains visible
+# across both modules.
+# ---------------------------------------------------------------------------
+
+
+class _Runtime:
+    http: httpx.AsyncClient | None = None
+
+
+_runtime = _Runtime()
+
+
+def _http() -> httpx.AsyncClient:
+    """Return the shared httpx.AsyncClient managed by the lifespan."""
+    client = _runtime.http
+    if client is None:
+        raise RuntimeError(
+            "HTTP client not initialised — _lifespan did not run. "
+            "This usually means the server was started without going through FastMCP.run()."
+        )
+    return client
+
+
+@asynccontextmanager
+async def _lifespan(server: FastMCP) -> AsyncIterator[None]:
+    """Open one httpx.AsyncClient for the whole server lifetime."""
+    _runtime.http = httpx.AsyncClient(timeout=DEFAULT_TIMEOUT, follow_redirects=False)
+    try:
+        yield
+    finally:
+        await _runtime.http.aclose()
+        _runtime.http = None
+
+
+# ---------------------------------------------------------------------------
 # MCP server instance
 # ---------------------------------------------------------------------------
 
@@ -164,6 +202,7 @@ mcp = FastMCP(
         "cube data tool for additional datasets. All monetary data is in CHF. "
         "No authentication required."
     ),
+    lifespan=_lifespan,
 )
 
 # ---------------------------------------------------------------------------
@@ -175,10 +214,9 @@ async def _fetch_snb(path: str, params: dict | None = None) -> dict:
     """Fetch data from the SNB REST API and return parsed JSON."""
     url = f"{SNB_BASE_URL}/{path}"
     _assert_host_allowed(url)
-    async with httpx.AsyncClient(timeout=DEFAULT_TIMEOUT) as client:
-        response = await client.get(url, params=params)
-        response.raise_for_status()
-        return response.json()
+    response = await _http().get(url, params=params)
+    response.raise_for_status()
+    return response.json()
 
 
 def _handle_http_error(e: Exception) -> str:

@@ -22,6 +22,8 @@ from swiss_snb_mcp.server import (
     _handle_http_error,
     snb_get_balance_of_payments,
     BalanceOfPaymentsInput,
+    _lifespan,
+    mcp,
 )
 from swiss_snb_mcp.warehouse import (
     snb_list_warehouse_cubes,
@@ -404,6 +406,11 @@ async def main():
     print("  swiss-snb-mcp — Warehouse Testszenarien gegen LIVE SNB API")
     print("=" * 70)
 
+    async with _lifespan(mcp):
+        return await _run_tests()
+
+
+async def _run_tests():
     tests = [
         test_01_warehouse_data_annual,
         test_02_warehouse_data_monthly,
