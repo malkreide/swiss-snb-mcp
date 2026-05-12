@@ -5,6 +5,8 @@ and monetary statistics via the public REST API at data.snb.ch.
 """
 
 import json
+import logging
+import sys
 from typing import Literal, Optional
 from enum import Enum
 from urllib.parse import urlparse
@@ -12,6 +14,15 @@ from urllib.parse import urlparse
 import httpx
 from mcp.server.fastmcp import FastMCP
 from pydantic import BaseModel, Field, ConfigDict
+
+# stdio-transport MCP servers must keep stdout reserved for the JSON-RPC
+# stream — every log line goes to stderr.
+logging.basicConfig(
+    stream=sys.stderr,
+    level=logging.INFO,
+    format="%(asctime)s %(name)s %(levelname)s: %(message)s",
+)
+logger = logging.getLogger("swiss_snb_mcp")
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -171,7 +182,14 @@ async def _fetch_snb(path: str, params: dict | None = None) -> dict:
 
 
 def _handle_http_error(e: Exception) -> str:
-    """Return a clear, actionable error message for HTTP failures."""
+    """Return a clear, actionable error message for HTTP failures.
+
+    Known error classes return user-friendly messages. Unknown exceptions are
+    logged in full to stderr (server-side only) and reduced to a generic
+    message in the LLM-visible return value, so stack-trace fragments,
+    URLs with query params and credential-like data don't leak into the
+    conversation context.
+    """
     if isinstance(e, httpx.HTTPStatusError):
         code = e.response.status_code
         if code == 404:
@@ -184,12 +202,13 @@ def _handle_http_error(e: Exception) -> str:
                 "Error: Bad request (HTTP 400). "
                 "Verify date format (YYYY-MM for monthly, YYYY for annual) and parameter names."
             )
-        return f"Error: SNB API returned HTTP {code}: {e.response.text[:200]}"
+        return f"Error: SNB API returned HTTP {code}."
     if isinstance(e, httpx.TimeoutException):
         return "Error: Request to data.snb.ch timed out. Please try again."
     if isinstance(e, httpx.ConnectError):
         return "Error: Cannot reach data.snb.ch. Check network connectivity."
-    return f"Error: Unexpected error ({type(e).__name__}): {str(e)[:200]}"
+    logger.exception("Unhandled error while calling the SNB API")
+    return "Error: Unexpected error processing the request. See server log for details."
 
 
 def _format_timeseries_table(
