@@ -145,8 +145,6 @@ Kein API-Schlüssel oder Authentifizierung erforderlich. Das SNB-Datenportal ist
 | `snb_get_annual_exchange_rates` | Jahresdurchschnitte, Daten ab 1980 |
 | `snb_get_balance_sheet` | SNB-Bilanzpositionen in Millionen CHF (monatlich) |
 | `snb_convert_currency` | Betrag in CHF umrechnen mit offiziellen SNB-Kursen |
-| `snb_list_currencies` | Alle 27 Währungs-IDs mit Bezeichnungen und Einheiten |
-| `snb_list_balance_sheet_positions` | Alle Bilanzpositionen (Aktiven/Passiven) |
 
 ### Phase 2 — Generische Cube-Tools
 
@@ -154,7 +152,6 @@ Kein API-Schlüssel oder Authentifizierung erforderlich. Das SNB-Datenportal ist
 |---|---|
 | `snb_get_cube_data` | Generischer Zugriff auf beliebige SNB-Cubes nach ID |
 | `snb_get_cube_metadata` | Dimensionen und Filterwerte eines Cubes abfragen |
-| `snb_list_known_cubes` | Übersicht aller 10 verifizierten Cubes (Phase 1–3) und Entdeckungshinweise |
 
 ### Phase 3 — Warehouse-API (Bankenstatistik) und Zahlungsbilanz
 
@@ -165,8 +162,18 @@ Kein API-Schlüssel oder Authentifizierung erforderlich. Das SNB-Datenportal ist
 | `snb_get_balance_of_payments` | Zahlungsbilanz und Auslandvermögen (quartalsweise) |
 | `snb_get_warehouse_data` | Generischer Zugriff auf beliebige SNB-Warehouse-Cubes nach ID |
 | `snb_get_warehouse_metadata` | Dimensionen und letzte Aktualisierung eines Warehouse-Cubes |
-| `snb_list_warehouse_cubes` | Übersicht der verfügbaren Warehouse-Cube-IDs (BSTA) |
-| `snb_list_bank_groups` | Liste aller 12 Bankengruppen-IDs mit Bezeichnungen |
+
+### Resources (statische Kataloge)
+
+Discovery-Hilfen werden als MCP-Resources statt Tools ausgeliefert, damit das Tool-Manifest schlank bleibt:
+
+| URI | Beschreibung |
+|---|---|
+| `data://snb/currencies` | Alle 27 Währungs-IDs mit Bezeichnungen und Einheiten |
+| `data://snb/balance-sheet-positions` | Alle Bilanzpositionen (Aktiven/Passiven) |
+| `data://snb/cubes` | Alle verifizierten Cube-API-IDs (Phase 1–2) + Entdeckungshinweise |
+| `data://snb/warehouse-cubes` | Verfügbare Warehouse-Cube-IDs (BSTA) |
+| `data://snb/bank-groups` | Alle 12 Bankengruppen-IDs mit Bezeichnungen |
 
 ### Beispiel-Abfragen
 
@@ -182,7 +189,7 @@ Kein API-Schlüssel oder Authentifizierung erforderlich. Das SNB-Datenportal ist
 | *«Total Aktiven aller Schweizer Banken?»* | `snb_get_banking_balance_sheet` |
 | *«Erfolgsrechnung der Kantonalbanken?»* | `snb_get_banking_income` (bank_group: `G10`) |
 | *«Zahlungsbilanz der Schweiz?»* | `snb_get_balance_of_payments` |
-| *«Welche Cubes sind verfügbar?»* | `snb_list_known_cubes` |
+| *«Welche Cubes sind verfügbar?»* | Resource `data://snb/cubes` |
 
 → [Weitere Anwendungsbeispiele nach Zielgruppe](EXAMPLES.md) →
 
@@ -222,7 +229,7 @@ Kein API-Schlüssel oder Authentifizierung erforderlich. Das SNB-Datenportal ist
 
 ### Cube-Entdeckungsmuster
 
-Die SNB-API folgt einer einheitlichen Cube-Struktur. Mit `snb_list_known_cubes` lassen sich verifizierte Cube-IDs erkunden, dann mit `snb_get_cube_metadata` die Dimensionen prüfen, bevor `snb_get_cube_data` für die eigentliche Abfrage genutzt wird. Phase 3 ergänzt die Warehouse-API (`/api/warehouse/cube/`) für detaillierte Bankenstatistik — `snb_list_warehouse_cubes` und `snb_list_bank_groups` als Einstieg verwenden.
+Die SNB-API folgt einer einheitlichen Cube-Struktur. Über die Resource `data://snb/cubes` lassen sich verifizierte Cube-IDs erkunden, dann mit `snb_get_cube_metadata` die Dimensionen prüfen, bevor `snb_get_cube_data` für die eigentliche Abfrage genutzt wird. Phase 3 ergänzt die Warehouse-API (`/api/warehouse/cube/`) für detaillierte Bankenstatistik — Einstieg über die Resources `data://snb/warehouse-cubes` und `data://snb/bank-groups`.
 
 ---
 
@@ -253,7 +260,7 @@ swiss-snb-mcp/
 
 - **Wechselkurse:** Nur Monatsmittel — keine Tages- oder Intraday-Kurse über diese API verfügbar
 - **Bilanz:** Monatsdaten; einzelne Positionen können mit 1–2 Monaten Publikationsverzug erscheinen
-- **Cube-Zugriff:** Cube-IDs sind von der SNB nicht offiziell dokumentiert — `snb_list_known_cubes` für verifizierte IDs verwenden
+- **Cube-Zugriff:** Cube-IDs sind von der SNB nicht offiziell dokumentiert — Resource `data://snb/cubes` für verifizierte IDs verwenden
 - **Historische Tiefe:** Abdeckung je nach Zeitreihe unterschiedlich; Wechselkurse ab 1980, einige Zinssätze beginnen später
 - **Keine Prognosen:** Alle Daten sind historisch/realisiert — die SNB veröffentlicht keine Prognosen über diese API
 

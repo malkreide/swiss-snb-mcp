@@ -1176,15 +1176,11 @@ async def snb_get_balance_of_payments(params: BalanceOfPaymentsInput) -> str:
         return _handle_http_error(e)
 
 
-@mcp.tool(
+@mcp.resource(
+    "data://snb/currencies",
     name="snb_list_currencies",
-    annotations={
-        "title": "List Available SNB Currencies",
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False,
-    },
+    title="List Available SNB Currencies",
+    mime_type="text/markdown",
 )
 async def snb_list_currencies() -> str:
     """List all currency IDs available in SNB exchange rate cubes.
@@ -1215,15 +1211,11 @@ async def snb_list_currencies() -> str:
     return "\n".join(lines)
 
 
-@mcp.tool(
+@mcp.resource(
+    "data://snb/balance-sheet-positions",
     name="snb_list_balance_sheet_positions",
-    annotations={
-        "title": "List SNB Balance Sheet Positions",
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False,
-    },
+    title="List SNB Balance Sheet Positions",
+    mime_type="text/markdown",
 )
 async def snb_list_balance_sheet_positions() -> str:
     """List all balance sheet position IDs for the SNB balance sheet cube (snbbipo).
@@ -1280,15 +1272,11 @@ async def snb_list_balance_sheet_positions() -> str:
     return "\n".join(lines)
 
 
-@mcp.tool(
+@mcp.resource(
+    "data://snb/cubes",
     name="snb_list_known_cubes",
-    annotations={
-        "title": "List Known SNB Data Cubes",
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False,
-    },
+    title="List Known SNB Data Cubes",
+    mime_type="text/markdown",
 )
 async def snb_list_known_cubes() -> str:
     """List all verified SNB data cube IDs with descriptions and available tools.
