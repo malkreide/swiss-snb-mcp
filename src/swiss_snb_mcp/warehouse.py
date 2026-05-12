@@ -11,7 +11,13 @@ from typing import Literal, Optional
 import httpx
 from pydantic import BaseModel, Field, ConfigDict
 
-from swiss_snb_mcp.server import mcp, Language, _handle_http_error, DEFAULT_TIMEOUT
+from swiss_snb_mcp.server import (
+    mcp,
+    Language,
+    _handle_http_error,
+    _assert_host_allowed,
+    DEFAULT_TIMEOUT,
+)
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -81,6 +87,7 @@ async def _fetch_warehouse(
     Retries up to MAX_RETRIES times with exponential backoff on HTTP 503.
     """
     url = f"{WAREHOUSE_BASE_URL}/{cube_id}/{endpoint}/{lang}"
+    _assert_host_allowed(url)
     params: dict[str, str] = {}
     if from_date:
         params["fromDate"] = from_date
@@ -245,7 +252,7 @@ async def snb_list_bank_groups() -> str:
 
 
 class WarehouseDataInput(BaseModel):
-    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+    model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
     cube_id: str = Field(
         ...,
@@ -270,7 +277,7 @@ class WarehouseDataInput(BaseModel):
 
 
 class WarehouseMetadataInput(BaseModel):
-    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+    model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
     cube_id: str = Field(
         ...,
@@ -402,11 +409,11 @@ async def snb_get_warehouse_metadata(params: WarehouseMetadataInput) -> str:
         )
 
         # Fetch last update (no language segment!)
+        lu_url = f"{WAREHOUSE_BASE_URL}/{params.cube_id}/lastUpdate"
+        _assert_host_allowed(lu_url)
         async with httpx.AsyncClient(timeout=DEFAULT_TIMEOUT) as client:
             try:
-                lu_resp = await client.get(
-                    f"{WAREHOUSE_BASE_URL}/{params.cube_id}/lastUpdate"
-                )
+                lu_resp = await client.get(lu_url)
                 lu_resp.raise_for_status()
                 lu_data = lu_resp.json()
                 edition_date = lu_data.get("editionDate", "unbekannt")
@@ -515,7 +522,7 @@ async def snb_list_warehouse_cubes() -> str:
 
 
 class BankingBalanceSheetInput(BaseModel):
-    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+    model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
     side: Literal["assets", "liabilities", "both"] = Field(
         default="both",
@@ -683,7 +690,7 @@ async def snb_get_banking_balance_sheet(params: BankingBalanceSheetInput) -> str
 
 
 class BankingIncomeInput(BaseModel):
-    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+    model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
     bank_groups: Optional[list[str]] = Field(
         default=None,
