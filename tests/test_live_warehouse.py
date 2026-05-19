@@ -386,13 +386,12 @@ async def test_20_retry_logic():
                 return mock_response_503
             return mock_response_200
 
-        with patch("swiss_snb_mcp.warehouse.httpx.AsyncClient") as mock_client_cls:
-            mock_client = AsyncMock()
-            mock_client.get = mock_get
-            mock_client.__aenter__ = AsyncMock(return_value=mock_client)
-            mock_client.__aexit__ = AsyncMock(return_value=False)
-            mock_client_cls.return_value = mock_client
+        # _fetch_warehouse obtains its client via warehouse._http(), the
+        # shared lifespan-managed client — patch that, not httpx.AsyncClient.
+        mock_client = MagicMock()
+        mock_client.get = mock_get
 
+        with patch("swiss_snb_mcp.warehouse._http", return_value=mock_client):
             # Patch asyncio.sleep to not actually wait
             with patch("swiss_snb_mcp.warehouse.asyncio.sleep", new_callable=AsyncMock):
                 result = await _fetch_warehouse("BSTA.SNB.JAHR_K.BIL.AKT.TOT", "data/json", "de")
