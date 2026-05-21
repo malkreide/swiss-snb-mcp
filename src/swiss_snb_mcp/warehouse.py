@@ -27,6 +27,9 @@ WAREHOUSE_BASE_URL = "https://data.snb.ch/api/warehouse/cube"
 
 MAX_RETRIES = 3
 RETRY_DELAYS = [2, 4, 8]  # seconds, exponential backoff
+# 503 Service Unavailable and 423 Locked are both transient — the SNB
+# warehouse returns 423 while a cube is being re-published.
+RETRY_STATUS_CODES = {423, 503}
 
 BANK_GROUPS = {
     "A30": "Banken in der Schweiz (alle)",
@@ -84,7 +87,8 @@ async def _fetch_warehouse(
     URL pattern: {WAREHOUSE_BASE_URL}/{cube_id}/{endpoint}/{lang}
     Query params: fromDate, toDate (optional).
 
-    Retries up to MAX_RETRIES times with exponential backoff on HTTP 503.
+    Retries up to MAX_RETRIES times with exponential backoff on transient
+    HTTP errors (see RETRY_STATUS_CODES).
     """
     url = f"{WAREHOUSE_BASE_URL}/{cube_id}/{endpoint}/{lang}"
     _assert_host_allowed(url)
@@ -102,7 +106,7 @@ async def _fetch_warehouse(
             response.raise_for_status()
             return response.json()
         except httpx.HTTPStatusError as e:
-            if e.response.status_code == 503 and attempt < MAX_RETRIES - 1:
+            if e.response.status_code in RETRY_STATUS_CODES and attempt < MAX_RETRIES - 1:
                 last_exc = e
                 await asyncio.sleep(RETRY_DELAYS[attempt])
                 continue
