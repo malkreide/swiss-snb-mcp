@@ -106,7 +106,10 @@ async def _fetch_warehouse(
             response.raise_for_status()
             return response.json()
         except httpx.HTTPStatusError as e:
-            if e.response.status_code in RETRY_STATUS_CODES and attempt < MAX_RETRIES - 1:
+            if (
+                e.response.status_code in RETRY_STATUS_CODES
+                and attempt < MAX_RETRIES - 1
+            ):
                 last_exc = e
                 await asyncio.sleep(RETRY_DELAYS[attempt])
                 continue
