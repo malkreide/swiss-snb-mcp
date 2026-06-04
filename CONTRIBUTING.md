@@ -1,5 +1,7 @@
 # Contributing to swiss-snb-mcp
 
+[🇩🇪 Deutsche Version](CONTRIBUTING.de.md)
+
 Thank you for your interest in contributing to `swiss-snb-mcp`! This project is part of the [Swiss Public Data MCP Portfolio](https://github.com/malkreide).
 
 ---

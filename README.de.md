@@ -4,7 +4,7 @@
 
 # 🏦 swiss-snb-mcp
 
-![Version](https://img.shields.io/badge/version-0.3.0-blue)
+![Version](https://img.shields.io/badge/version-0.4.0-blue)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-purple)](https://modelcontextprotocol.io/)
@@ -216,7 +216,7 @@ Discovery-Hilfen werden als MCP-Resources statt Tools ausgeliefert, damit das To
 │   Claude / KI   │────▶│     Swiss SNB MCP         │────▶│     data.snb.ch      │
 │   (MCP Host)    │◀────│     (MCP Server)          │◀────│                      │
 └─────────────────┘     │                           │     │  /api/cube/ (JSON)   │
-                        │  16 Tools                 │     │  /api/warehouse/     │
+                        │  11 Tools · 5 Resources   │     │  /api/warehouse/     │
                         │  Stdio | SSE              │     │  Öffentlich · Kein   │
                         │                           │     │  Login erforderlich  │
                         │  Phase 1: ded. Tools      │     │                      │
@@ -248,7 +248,10 @@ swiss-snb-mcp/
 │   └── test_live_warehouse.py      # 20 Live-Szenarien Phase 3 (nightly)
 ├── pyproject.toml          # Build-Konfiguration (hatchling)
 ├── CHANGELOG.md
-├── CONTRIBUTING.md
+├── CONTRIBUTING.md         # Beitragsrichtlinien (Englisch)
+├── CONTRIBUTING.de.md      # Deutsche Version
+├── SECURITY.md             # Sicherheitsrichtlinie & -lage (Englisch)
+├── SECURITY.de.md          # Deutsche Version
 ├── LICENSE
 ├── README.md               # Englische Hauptversion
 └── README.de.md            # Diese Datei (Deutsch)
@@ -286,7 +289,13 @@ Siehe [CHANGELOG.md](CHANGELOG.md)
 
 ## Mitwirken
 
-Hinweise zum Melden von Fehlern, Vorschlagen neuer SNB-Cube-IDs und Beiträgen zum Code: [CONTRIBUTING.md](CONTRIBUTING.md)
+Hinweise zum Melden von Fehlern, Vorschlagen neuer SNB-Cube-IDs und Beiträgen zum Code: [CONTRIBUTING.de.md](CONTRIBUTING.de.md)
+
+---
+
+## Sicherheit
+
+Dieser Server ist rein lesend, verarbeitet keine personenbezogenen Daten und kommuniziert ausschliesslich mit `data.snb.ch`. Die vollständige Sicherheitslage, die Audit-Ergebnisse und Hinweise zum Melden von Schwachstellen finden Sie in [SECURITY.de.md](SECURITY.de.md).
 
 ---
 
