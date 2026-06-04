@@ -2,7 +2,7 @@
 
 # 🏦 swiss-snb-mcp
 
-![Version](https://img.shields.io/badge/version-0.3.0-blue)
+![Version](https://img.shields.io/badge/version-0.4.0-blue)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-purple)](https://modelcontextprotocol.io/)
@@ -214,7 +214,7 @@ Discovery aids served as MCP resources rather than tools so they don't crowd the
 │   Claude / AI   │────▶│     Swiss SNB MCP         │────▶│     data.snb.ch      │
 │   (MCP Host)    │◀────│     (MCP Server)          │◀────│                      │
 └─────────────────┘     │                           │     │  /api/cube/ (JSON)   │
-                        │  16 Tools                 │     │  /api/warehouse/     │
+                        │  11 Tools · 5 Resources   │     │  /api/warehouse/     │
                         │  Stdio | SSE              │     │  Public · No Auth    │
                         │                           │     │                      │
                         │  Phase 1: dedicated tools │     │  Exchange rates      │
@@ -246,7 +246,10 @@ swiss-snb-mcp/
 │   └── test_live_warehouse.py      # 20 live scenarios for Phase 3 (nightly)
 ├── pyproject.toml          # Build configuration (hatchling)
 ├── CHANGELOG.md
-├── CONTRIBUTING.md
+├── CONTRIBUTING.md         # Contribution guidelines (English)
+├── CONTRIBUTING.de.md      # German version
+├── SECURITY.md             # Security policy & posture (English)
+├── SECURITY.de.md          # German version
 ├── LICENSE
 ├── README.md               # This file (English)
 └── README.de.md            # German version
@@ -285,6 +288,12 @@ See [CHANGELOG.md](CHANGELOG.md)
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on reporting issues, suggesting new SNB cube IDs, and contributing code.
+
+---
+
+## Security
+
+This server is read-only, processes no personal data, and talks only to `data.snb.ch`. See [SECURITY.md](SECURITY.md) for the full security posture, audit results, and how to report a vulnerability.
 
 ---
 
