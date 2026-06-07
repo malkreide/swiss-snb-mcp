@@ -35,3 +35,8 @@ jobs:
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         # Kein 'with: password:' nötig — Trusted Publisher übernimmt das
+        with:
+          # Bricht nicht ab, wenn eine Version bereits auf PyPI existiert
+          # (PyPI ist immutable; ein Re-Upload derselben Version schlägt sonst
+          # mit "400 File already exists" fehl).
+          skip-existing: true
