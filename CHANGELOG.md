@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.4] - 2026-06-07
+
+### Fixed
+- Republish release because the PyPI upload for `0.4.3` collided with an older,
+  stale artifact already occupying that version. PyPI is immutable, so the
+  current build is shipped under a new version number.
+- `publish.yml` now sets `skip-existing: true` so the workflow no longer fails
+  hard when a version already exists on PyPI.
+
 ## [0.4.0] - 2026-05-12
 
 Audit-driven hardening release. All changes are responses to findings from the
