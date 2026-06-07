@@ -16,7 +16,6 @@ dependencies = [
 ]
 
 [project.urls]
-"mcp-name" = "io.github.malkreide/swiss-snb-mcp"
 Homepage = "https://github.com/malkreide/swiss-snb-mcp"
 Repository = "https://github.com/malkreide/swiss-snb-mcp"
 Changelog = "https://github.com/malkreide/swiss-snb-mcp/blob/main/CHANGELOG.md"
