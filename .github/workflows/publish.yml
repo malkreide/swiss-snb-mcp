@@ -4,6 +4,10 @@ on:
   push:
     tags:
       - "v*"          # Ausgelöst bei jedem Tag wie v0.2.0, v1.0.0 etc.
+  workflow_dispatch:  # Erlaubt manuelles Auslösen (z.B. wenn kein Tag gepusht
+                      # werden kann). Veröffentlicht die Version aus pyproject.toml
+                      # des ausgewählten Branches. skip-existing schützt vor
+                      # Doppel-Uploads.
 
 jobs:
   build-and-publish:
