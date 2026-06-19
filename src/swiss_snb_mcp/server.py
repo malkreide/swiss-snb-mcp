@@ -240,6 +240,11 @@ def _handle_http_error(e: Exception) -> str:
                 "Error: Bad request (HTTP 400). "
                 "Verify date format (YYYY-MM for monthly, YYYY for annual) and parameter names."
             )
+        if code == 423:
+            return (
+                "Error: SNB cube temporarily locked (HTTP 423). "
+                "The cube is being re-published by the SNB; please retry in a few minutes."
+            )
         return f"Error: SNB API returned HTTP {code}."
     if isinstance(e, httpx.TimeoutException):
         return "Error: Request to data.snb.ch timed out. Please try again."

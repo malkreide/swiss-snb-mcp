@@ -756,6 +756,7 @@ async def snb_get_banking_income(params: BankingIncomeInput) -> str:
         ]
 
         result_data: list[dict] = []
+        last_exc: Exception | None = None
 
         for pos_id, pos_name in EFR_POSITIONS.items():
             cube_id = f"BSTA.SNB.JAHR_K.EFR.{pos_id}"
@@ -767,7 +768,8 @@ async def snb_get_banking_income(params: BankingIncomeInput) -> str:
                     params.from_year,
                     params.to_year,
                 )
-            except Exception:
+            except Exception as e:
+                last_exc = e
                 lines.append(
                     f"| \u26a0 BSTA.SNB.JAHR_K.EFR.{pos_id}: nicht verfügbar | | | |"
                 )
@@ -821,6 +823,12 @@ async def snb_get_banking_income(params: BankingIncomeInput) -> str:
                         "values": values,
                     }
                 )
+
+        # If every cube fetch failed (e.g. all annual cubes are locked while
+        # the SNB re-publishes them), surface the underlying error instead of
+        # returning a misleading empty "success" response.
+        if not result_data and last_exc is not None:
+            return _handle_http_error(last_exc)
 
         lines.append("\n```json")
         json_str = json.dumps(result_data, ensure_ascii=False, indent=2)
