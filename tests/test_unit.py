@@ -28,7 +28,9 @@ from swiss_snb_mcp.server import (
 )
 from swiss_snb_mcp.warehouse import (
     snb_get_warehouse_data,
+    snb_get_banking_income,
     WarehouseDataInput,
+    BankingIncomeInput,
 )
 
 
@@ -179,6 +181,52 @@ async def test_500_does_not_leak_response_body(lifespan_started):
     assert "500" in result
     assert "postgres" not in result
     assert "hunter2" not in result
+
+
+# ---------------------------------------------------------------------------
+# Transient SNB lock (HTTP 423) handling
+# ---------------------------------------------------------------------------
+
+
+@respx.mock
+async def test_423_returns_locked_message(lifespan_started, monkeypatch):
+    # A 423 should produce a clear, identifiable "temporarily locked" message
+    # (HTTP 423 is what the SNB warehouse returns while re-publishing a cube).
+    import swiss_snb_mcp.warehouse as wh
+
+    async def _no_sleep(*_a, **_k):
+        return None
+
+    monkeypatch.setattr(wh.asyncio, "sleep", _no_sleep)
+    respx.get(
+        "https://data.snb.ch/api/warehouse/cube/BSTA.SNB.JAHR_K.BIL.AKT.TOT/data/json/de"
+    ).mock(return_value=httpx.Response(423, text="locked"))
+
+    result = await snb_get_warehouse_data(
+        WarehouseDataInput(cube_id="BSTA.SNB.JAHR_K.BIL.AKT.TOT")
+    )
+    assert "423" in result
+    assert result.startswith("Error:")
+    assert "locked" not in result.lower() or "temporarily locked" in result.lower()
+
+
+@respx.mock
+async def test_banking_income_all_locked_surfaces_error(lifespan_started, monkeypatch):
+    # When every EFR cube is locked, the income tool must surface the error
+    # instead of returning a misleading empty "success" response.
+    import swiss_snb_mcp.warehouse as wh
+
+    async def _no_sleep(*_a, **_k):
+        return None
+
+    monkeypatch.setattr(wh.asyncio, "sleep", _no_sleep)
+    respx.get(url__regex=r".*/warehouse/cube/BSTA\.SNB\.JAHR_K\.EFR\..*").mock(
+        return_value=httpx.Response(423, text="locked")
+    )
+
+    result = await snb_get_banking_income(BankingIncomeInput())
+    assert result.startswith("Error:")
+    assert "423" in result
 
 
 # ---------------------------------------------------------------------------

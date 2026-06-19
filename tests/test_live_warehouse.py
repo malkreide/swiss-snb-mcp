@@ -59,12 +59,26 @@ from swiss_snb_mcp.warehouse import (
 
 PASSED = 0
 FAILED = 0
+SKIPPED = 0
 RESULTS = []
+
+# HTTP status codes that signal a transient SNB-side condition rather than a
+# defect in our code: 423 Locked (an annual cube is being re-published) and
+# 503 Service Unavailable. Live scenarios hitting these are skipped, not
+# failed, so CI doesn't go red during SNB maintenance/publication windows.
+TRANSIENT_HTTP_CODES = ("423", "503")
+
+
+def _is_transient_upstream_error(result: str) -> bool:
+    """Return True if `result` is an error caused by a transient SNB lock."""
+    if not result.startswith("Error:"):
+        return False
+    return any(f"HTTP {code}" in result for code in TRANSIENT_HTTP_CODES)
 
 
 async def run_test(name: str, coro, checks: list[str] | None = None):
     """Run a single test scenario and report results."""
-    global PASSED, FAILED
+    global PASSED, FAILED, SKIPPED
     print(f"\n{'='*70}")
     print(f"TEST: {name}")
     print(f"{'='*70}")
@@ -73,6 +87,17 @@ async def run_test(name: str, coro, checks: list[str] | None = None):
         # Basic check: result should be a non-empty string
         assert isinstance(result, str), f"Expected str, got {type(result)}"
         assert len(result) > 0, "Result is empty"
+
+        # A transient upstream lock (HTTP 423 while a cube is being
+        # re-published) or 503 is not a defect in our code — skip rather than
+        # fail so the live suite stays green during SNB publication windows.
+        if _is_transient_upstream_error(result):
+            preview = result[:500] + ("..." if len(result) > 500 else "")
+            print(f"Result ({len(result)} chars):\n{preview}")
+            print("\n→ SKIPPED ⚠ (transient SNB API lock — HTTP 423/503)")
+            SKIPPED += 1
+            RESULTS.append((name, "SKIPPED ⚠", None))
+            return
 
         # Check for error indicators
         is_error = result.startswith("Error:") or result.startswith("Keine Daten")
@@ -455,13 +480,26 @@ async def _run_tests():
     print("  ZUSAMMENFASSUNG")
     print("=" * 70)
     for name, status, err in RESULTS:
-        icon = "✓" if "PASSED" in status else "✗"
+        if "PASSED" in status:
+            icon = "✓"
+        elif "SKIPPED" in status:
+            icon = "⚠"
+        else:
+            icon = "✗"
         line = f"  {icon} {name}: {status}"
         if err:
             line += f" ({err[:60]})"
         print(line)
 
-    print(f"\n  Total: {PASSED + FAILED} | Bestanden: {PASSED} | Fehlgeschlagen: {FAILED}")
+    print(
+        f"\n  Total: {PASSED + FAILED + SKIPPED} | Bestanden: {PASSED} | "
+        f"Fehlgeschlagen: {FAILED} | Übersprungen: {SKIPPED}"
+    )
+    if SKIPPED:
+        print(
+            "  Hinweis: Übersprungene Szenarien trafen auf eine transiente "
+            "SNB-Sperre (HTTP 423/503) und werden nicht als Fehler gewertet."
+        )
     print("=" * 70)
 
     return FAILED == 0
