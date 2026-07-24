@@ -6,17 +6,17 @@ Warehouse REST API at data.snb.ch/api/warehouse/cube/.
 
 import asyncio
 import json
-from typing import Literal, Optional
+from typing import Literal
 
 import httpx
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 from swiss_snb_mcp.server import (
-    mcp,
     Language,
-    _handle_http_error,
     _assert_host_allowed,
+    _handle_http_error,
     _http,
+    mcp,
 )
 
 # ---------------------------------------------------------------------------
@@ -192,7 +192,7 @@ def _filter_timeseries(
             continue
 
         # Build a dimension name -> value mapping
-        dim_map = dict(zip(dim_order, dim_values))
+        dim_map = dict(zip(dim_order, dim_values, strict=True))
 
         # Check all filters match
         match = True
@@ -268,11 +268,11 @@ class WarehouseDataInput(BaseModel):
         max_length=60,
         pattern=r"^[A-Z][A-Z0-9_.]+$",
     )
-    from_date: Optional[str] = Field(
+    from_date: str | None = Field(
         default=None,
         description="Start date. Use YYYY for annual cubes, YYYY-MM for monthly.",
     )
-    to_date: Optional[str] = Field(
+    to_date: str | None = Field(
         default=None,
         description="End date, same format as from_date.",
     )
@@ -527,7 +527,7 @@ class BankingBalanceSheetInput(BaseModel):
         default="both",
         description="Balance sheet side: 'assets', 'liabilities', or 'both'.",
     )
-    bank_groups: Optional[list[str]] = Field(
+    bank_groups: list[str] | None = Field(
         default=None,
         description=(
             "Bank group IDs, e.g. ['A30', 'G10']. "
@@ -543,11 +543,11 @@ class BankingBalanceSheetInput(BaseModel):
         default="T",
         description="Currency filter: 'T' (Total), 'CHF', 'USD', 'EUR', 'JPY', 'EM', 'U'.",
     )
-    from_date: Optional[str] = Field(
+    from_date: str | None = Field(
         default=None,
         description="Start date. YYYY for annual, YYYY-MM for monthly.",
     )
-    to_date: Optional[str] = Field(
+    to_date: str | None = Field(
         default=None,
         description="End date.",
     )
@@ -691,19 +691,19 @@ async def snb_get_banking_balance_sheet(params: BankingBalanceSheetInput) -> str
 class BankingIncomeInput(BaseModel):
     model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
-    bank_groups: Optional[list[str]] = Field(
+    bank_groups: list[str] | None = Field(
         default=None,
         description=(
             "Bank group IDs. Default: ['A30']. Use snb_list_bank_groups for valid IDs."
         ),
         max_length=15,
     )
-    from_year: Optional[str] = Field(
+    from_year: str | None = Field(
         default=None,
         description="Start year (YYYY). Default: 5 years ago.",
         pattern=r"^\d{4}$",
     )
-    to_year: Optional[str] = Field(
+    to_year: str | None = Field(
         default=None,
         description="End year (YYYY). Default: current year.",
         pattern=r"^\d{4}$",

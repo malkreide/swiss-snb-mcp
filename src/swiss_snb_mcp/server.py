@@ -7,14 +7,15 @@ and monetary statistics via the public REST API at data.snb.ch.
 import json
 import logging
 import sys
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
-from typing import AsyncIterator, Literal, Optional
-from enum import Enum
+from enum import StrEnum
+from typing import Literal
 from urllib.parse import urlparse
 
 import httpx
 from mcp.server.fastmcp import FastMCP
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 # stdio-transport MCP servers must keep stdout reserved for the JSON-RPC
 # stream — every log line goes to stderr.
@@ -297,7 +298,7 @@ def _latest_value(timeseries: list[dict], dim_id: str) -> dict | None:
 # ---------------------------------------------------------------------------
 
 
-class Language(str, Enum):
+class Language(StrEnum):
     DE = "de"
     EN = "en"
     FR = "fr"
@@ -306,7 +307,7 @@ class Language(str, Enum):
 class ExchangeRatesInput(BaseModel):
     model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
-    currencies: Optional[list[str]] = Field(
+    currencies: list[str] | None = Field(
         default=None,
         description=(
             "List of currency IDs to retrieve, e.g. ['EUR1', 'USD1', 'GBP1']. "
@@ -315,12 +316,12 @@ class ExchangeRatesInput(BaseModel):
         ),
         max_length=30,
     )
-    from_date: Optional[str] = Field(
+    from_date: str | None = Field(
         default=None,
         description="Start date in YYYY-MM format, e.g. '2024-01'. Defaults to 12 months ago.",
         pattern=r"^\d{4}-\d{2}$",
     )
-    to_date: Optional[str] = Field(
+    to_date: str | None = Field(
         default=None,
         description="End date in YYYY-MM format, e.g. '2025-03'. Defaults to today's month.",
         pattern=r"^\d{4}-\d{2}$",
@@ -338,7 +339,7 @@ class ExchangeRatesInput(BaseModel):
 class AnnualExchangeRatesInput(BaseModel):
     model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
-    currencies: Optional[list[str]] = Field(
+    currencies: list[str] | None = Field(
         default=None,
         description=(
             "List of currency IDs, e.g. ['EUR1', 'USD1']. "
@@ -347,12 +348,12 @@ class AnnualExchangeRatesInput(BaseModel):
         ),
         max_length=30,
     )
-    from_year: Optional[str] = Field(
+    from_year: str | None = Field(
         default=None,
         description="Start year, e.g. '2020'. Defaults to 5 years ago.",
         pattern=r"^\d{4}$",
     )
-    to_year: Optional[str] = Field(
+    to_year: str | None = Field(
         default=None,
         description="End year, e.g. '2025'. Defaults to current year.",
         pattern=r"^\d{4}$",
@@ -363,7 +364,7 @@ class AnnualExchangeRatesInput(BaseModel):
 class BalanceSheetInput(BaseModel):
     model_config = ConfigDict(strict=True, str_strip_whitespace=True, extra="forbid")
 
-    positions: Optional[list[str]] = Field(
+    positions: list[str] | None = Field(
         default=None,
         description=(
             "List of balance sheet position IDs, e.g. ['GFG', 'D', 'T0', 'GB', 'T1']. "
@@ -372,12 +373,12 @@ class BalanceSheetInput(BaseModel):
         ),
         max_length=30,
     )
-    from_date: Optional[str] = Field(
+    from_date: str | None = Field(
         default=None,
         description="Start date in YYYY-MM format. Defaults to 24 months ago.",
         pattern=r"^\d{4}-\d{2}$",
     )
-    to_date: Optional[str] = Field(
+    to_date: str | None = Field(
         default=None,
         description="End date in YYYY-MM format. Defaults to latest available.",
         pattern=r"^\d{4}-\d{2}$",
@@ -402,7 +403,7 @@ class ConvertCurrencyInput(BaseModel):
         min_length=3,
         max_length=10,
     )
-    reference_month: Optional[str] = Field(
+    reference_month: str | None = Field(
         default=None,
         description=(
             "Month for which to use the exchange rate, in YYYY-MM format. "
@@ -426,14 +427,14 @@ class CubeDataInput(BaseModel):
         max_length=20,
         pattern=r"^[a-z][a-z0-9]+$",
     )
-    from_date: Optional[str] = Field(
+    from_date: str | None = Field(
         default=None,
         description=(
             "Start date. Use YYYY-MM for monthly cubes, YYYY for annual cubes. "
             "Defaults to the last 24 months / 5 years."
         ),
     )
-    to_date: Optional[str] = Field(
+    to_date: str | None = Field(
         default=None,
         description="End date, same format as from_date.",
     )
@@ -464,11 +465,11 @@ class BalanceOfPaymentsInput(BaseModel):
             "'iip' (Auslandvermögen, cube auvekomq)."
         ),
     )
-    from_date: Optional[str] = Field(
+    from_date: str | None = Field(
         default=None,
         description="Start date, e.g. '2020-Q1' or '2020'. Default: API default range.",
     )
-    to_date: Optional[str] = Field(
+    to_date: str | None = Field(
         default=None,
         description="End date, same format as from_date.",
     )
@@ -538,7 +539,7 @@ async def snb_get_exchange_rates(params: ExchangeRatesInput) -> str:
 
         # Filter by currency if requested
         if params.currencies:
-            wanted = set(c.upper() for c in params.currencies)
+            wanted = {c.upper() for c in params.currencies}
             timeseries = [
                 ts
                 for ts in timeseries
@@ -555,9 +556,8 @@ async def snb_get_exchange_rates(params: ExchangeRatesInput) -> str:
                 for c in params.currencies:
                     if c.upper() in meta_key:
                         # Respect include_month_end filter
-                        if not params.include_month_end:
-                            if "M1" in meta_key:
-                                continue
+                        if not params.include_month_end and "M1" in meta_key:
+                            continue
                         timeseries_filtered.append(ts)
                         break
             timeseries = timeseries_filtered
@@ -686,7 +686,7 @@ async def snb_get_annual_exchange_rates(params: AnnualExchangeRatesInput) -> str
 
         # Filter by currency
         if params.currencies:
-            wanted = set(c.upper() for c in params.currencies)
+            wanted = {c.upper() for c in params.currencies}
             filtered = []
             for ts in timeseries:
                 meta_key = ts.get("metadata", {}).get("key", "")
@@ -798,7 +798,7 @@ async def snb_get_balance_sheet(params: BalanceSheetInput) -> str:
         # Default key positions if none specified
         default_positions = {"GFG", "D", "N", "GB", "T0", "T1"}
         filter_positions = (
-            set(p.upper() for p in params.positions)
+            {p.upper() for p in params.positions}
             if params.positions
             else default_positions
         )
@@ -916,10 +916,9 @@ async def snb_convert_currency(params: ConvertCurrencyInput) -> str:
                 f"{{{cid}}}" in meta_key
                 or f",{cid}}}" in meta_key
                 or f"{{{cid}," in meta_key
-            ):
-                if "M0" in meta_key and "M1" not in meta_key:
-                    matching_ts = ts
-                    break
+            ) and ("M0" in meta_key and "M1" not in meta_key):
+                matching_ts = ts
+                break
             # Fallback: just find currency without specifying type
             if cid in meta_key and "M1" not in meta_key:
                 matching_ts = ts
@@ -1447,7 +1446,6 @@ async def snb_list_known_cubes() -> str:
 # ---------------------------------------------------------------------------
 
 import swiss_snb_mcp.warehouse  # noqa: F401, E402
-
 
 # ---------------------------------------------------------------------------
 # Entry point
