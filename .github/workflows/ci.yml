@@ -53,7 +53,9 @@ jobs:
         with:
           python-version: "3.11"
 
-      - run: pip install ruff
+      # Pin ruff so an upstream release cannot change the default rule set or
+      # formatter and break CI on unrelated, untouched code. Bump deliberately.
+      - run: pip install ruff==0.15.8
 
       - run: ruff check src/
 
