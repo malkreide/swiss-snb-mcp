@@ -14,7 +14,7 @@ from typing import Literal
 from urllib.parse import urlparse
 
 import httpx
-from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 from pydantic import BaseModel, ConfigDict, Field
 
 # stdio-transport MCP servers must keep stdout reserved for the JSON-RPC
@@ -152,7 +152,7 @@ BALANCE_SHEET_POSITIONS = {
 }
 
 # ---------------------------------------------------------------------------
-# Shared HTTP client (managed via FastMCP lifespan, see _lifespan below).
+# Shared HTTP client (managed via MCPServer lifespan, see _lifespan below).
 # Module-level container so warehouse.py can reach the same client by
 # importing _runtime — re-assignment of _runtime.http remains visible
 # across both modules.
@@ -172,13 +172,13 @@ def _http() -> httpx.AsyncClient:
     if client is None:
         raise RuntimeError(
             "HTTP client not initialised — _lifespan did not run. "
-            "This usually means the server was started without going through FastMCP.run()."
+            "This usually means the server was started without going through MCPServer.run()."
         )
     return client
 
 
 @asynccontextmanager
-async def _lifespan(server: FastMCP) -> AsyncIterator[None]:
+async def _lifespan(server: MCPServer) -> AsyncIterator[None]:
     """Open one httpx.AsyncClient for the whole server lifetime."""
     _runtime.http = httpx.AsyncClient(timeout=DEFAULT_TIMEOUT, follow_redirects=False)
     try:
@@ -192,7 +192,7 @@ async def _lifespan(server: FastMCP) -> AsyncIterator[None]:
 # MCP server instance
 # ---------------------------------------------------------------------------
 
-mcp = FastMCP(
+mcp = MCPServer(
     "swiss_snb_mcp",
     instructions=(
         "MCP server for the Swiss National Bank (SNB) data portal at data.snb.ch. "
