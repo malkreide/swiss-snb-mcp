@@ -61,6 +61,14 @@ jobs:
 
       - run: ruff format --check src/
 
+      # server.json stand hier auf 0.4.3, während pyproject.toml bei 0.4.4 war,
+      # und niemandem fiel es auf: publish.yml schreibt das Feld beim
+      # Veröffentlichen aus dem Tag, die committete Zahl wirkt also nie auf das
+      # Artefakt und wird von nichts widerlegt. Im lint-Job und nicht in der
+      # Test-Matrix, weil der Check nur die Standardbibliothek braucht.
+      - name: Versions-Sync (pyproject ↔ server.json / README / src)
+        run: python scripts/check_version_sync.py
+
   live:
     # Only on the nightly schedule or manual dispatch — never on PR/push so the
     # mainline build is not held hostage to data.snb.ch availability or quota.
