@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Hinzugefuegt
+
+- **`scripts/check_version_sync.py` und ein CI-Schritt dafuer.** Der Check
+  vergleicht `pyproject.toml` gegen `server.json` und die README-Badges und
+  meldet zusaetzlich jede von Hand gepflegte Versionsnummer unter `src/`.
+
+  Anlass ist ein Befund in genau diesem Repo: `server.json` stand auf `0.4.3`,
+  waehrend `pyproject.toml` bei `0.4.4` war. Aufgefallen ist es niemandem, und
+  das hat einen strukturellen Grund — `publish.yml` schreibt das Feld beim
+  Veroeffentlichen aus dem Tag-Namen, die committete Zahl wirkt also nie auf
+  das Artefakt und wird von nichts widerlegt. Sie ist aber die Zahl, die
+  Menschen im Repo lesen.
+
+  Dieses Repo war eines von nur zwei im Portfolio ohne diesen Check, und beide
+  waren verstimmt; die uebrigen 31 tragen ihn und waren alle synchron.
+
+  Der Schritt haengt im `lint`-Job, nicht in der Test-Matrix: der Check kommt
+  mit der Standardbibliothek aus und braucht keine Installation.
+
+  Gegengeprueft: mit dem realen Vorzustand (`server.json` auf 0.4.3) meldet der
+  Check `DRIFT` und beendet sich mit Exit 1.
+
 ## [0.4.5] - 2026-07-31
 
 ### Hinzugefuegt
