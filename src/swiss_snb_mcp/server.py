@@ -17,6 +17,15 @@ import httpx
 from mcp.server.mcpserver import MCPServer
 from pydantic import BaseModel, ConfigDict, Field
 
+from . import __version__
+
+# Wer fragt hier an? Ohne eigenen User-Agent geht der httpx-Default
+# hinaus und der Betreiber der Datenquelle sieht bloss eine Bibliothek.
+# Die Version stammt aus den Paket-Metadaten und kann nicht driften.
+USER_AGENT = (
+    f"swiss-snb-mcp/{__version__} (+https://github.com/malkreide/swiss-snb-mcp)"
+)
+
 # stdio-transport MCP servers must keep stdout reserved for the JSON-RPC
 # stream — every log line goes to stderr.
 logging.basicConfig(
@@ -180,7 +189,11 @@ def _http() -> httpx.AsyncClient:
 @asynccontextmanager
 async def _lifespan(server: MCPServer) -> AsyncIterator[None]:
     """Open one httpx.AsyncClient for the whole server lifetime."""
-    _runtime.http = httpx.AsyncClient(timeout=DEFAULT_TIMEOUT, follow_redirects=False)
+    _runtime.http = httpx.AsyncClient(
+        timeout=DEFAULT_TIMEOUT,
+        follow_redirects=False,
+        headers={"User-Agent": USER_AGENT},
+    )
     try:
         yield
     finally:
