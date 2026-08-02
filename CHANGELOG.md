@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Retry-Politik gegenueber dem SNB-Warehouse** (ARCH-014): `Retry-After` wird
+  gelesen und schlaegt die Backoff-Tabelle, der Backoff ist gestreut, und ein
+  Gesamtbudget von 25 s begrenzt den ganzen Aufruf.
+
+  `Retry-After` bei 429/503 in beiden Formen der RFC 9110 §10.2.3. Ein
+  unbrauchbarer Header fuehrt zurueck auf die Tabelle statt zum Absturz.
+
+  Jitter: `RETRY_DELAYS[attempt]` war deterministisch, alle Clients retryen im
+  Gleichtakt, und die Last kommt als Welle zurueck, genau wenn das Warehouse
+  sich erholt. Neu [0.5x, 1.5x]; auf einem `Retry-After` einseitig
+  [1.0x, 1.25x]. Gedeckelt bei 20 s **nach** dem Jittern, damit der Deckel eine
+  echte Schranke ist.
+
+  Gesamtbudget verankert an `MCP_DEFAULT_TIMEOUT = 30.0` des Python-SDK. Das
+  Warehouse liefert vorbereitete Cubes und antwortet gesund deutlich unter einer
+  Sekunde — anders als bei den SPARQL-Servern gibt es hier keinen Langlaeufer zu
+  schuetzen. Der Request liegt in einer `asyncio.timeout`-Deadline, weil httpx'
+  Timeout pro Operation gilt und den Aufruf nicht begrenzen kann.
+
+
 ### Hinzugefuegt
 
 - **`scripts/check_ruff_pin.py` und je ein Schritt dafuer in CI und Hook.** Der
