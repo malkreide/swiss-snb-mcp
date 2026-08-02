@@ -26,6 +26,10 @@ dev = [
     "pytest-asyncio>=0.23",
     "respx>=0.21",
     "ruff>=0.5",
+    # Fährt die Hooks aus .pre-commit-config.yaml, die den lint-Job der CI
+    # spiegeln. Ruff selbst zieht pre-commit dabei in der dort gepinnten
+    # Version — die Zeile darüber gilt nur für ein manuelles `ruff …`.
+    "pre-commit>=3.5",
 ]
 
 [project.scripts]

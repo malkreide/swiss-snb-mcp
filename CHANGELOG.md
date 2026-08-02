@@ -9,6 +9,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Hinzugefuegt
 
+- **`.pre-commit-config.yaml` — der `lint`-Job der CI, lokal vorgezogen.** Die
+  Hooks fahren dieselben drei Schritte wie der Job: `ruff check src/`,
+  `ruff format src/` und `scripts/check_version_sync.py`.
+
+  Anlass ist ein realer Fehlschlag in diesem Repo: `ruff format --check src/`
+  brach auf `df973d8` ab, und der Fix kam vier Minuten spaeter als eigener
+  Commit hinterher. Lokal war nichts aufgefallen, und das hat einen Grund —
+  `pyproject.toml` verlangt fuer die Entwicklung `ruff>=0.5`, die CI pinnt
+  `ruff==0.15.8`. Zwei Versionen, zwei Formatierungen.
+
+  pre-commit loest genau das: es installiert Ruff in einer eigenen Umgebung in
+  der Version, die in `.pre-commit-config.yaml` steht. Nicht mehr das lokal
+  installierte Ruff entscheidet, sondern der Pin. Damit die beiden Pins nicht
+  auseinanderlaufen, steht in beiden Dateien ein Verweis auf die jeweils
+  andere.
+
+  Bewusst nur `src/`, wie der CI-Job: `tests/` und `scripts/` sind heute nicht
+  ruff-sauber (22 Lint-Befunde, drei unformatierte Dateien). Sie einzubeziehen
+  haette Commits an unberuehrtem Alt-Code blockiert, das die CI durchwinkt —
+  der Hook waere strenger gewesen als die Regel, die tatsaechlich gilt.
+
+  Gegengeprueft: mit dem realen Vorzustand von `df973d8` meldet der Hook
+  `ruff format … Failed` und beendet sich mit Exit 1, der Commit kaeme also
+  nicht durch.
+
 - **`scripts/check_version_sync.py` und ein CI-Schritt dafuer.** Der Check
   vergleicht `pyproject.toml` gegen `server.json` und die README-Badges und
   meldet zusaetzlich jede von Hand gepflegte Versionsnummer unter `src/`.

@@ -46,6 +46,30 @@ Tippfehler, unklare Erklärungen oder fehlende Beispiele sind als Pull Requests 
 git clone https://github.com/malkreide/swiss-snb-mcp.git
 cd swiss-snb-mcp
 pip install -e ".[dev]"
+pre-commit install
+```
+
+**Pre-Commit-Hook:**
+
+`pre-commit install` ist ein einmaliger Schritt pro Clone. Er aktiviert die
+Hooks aus `.pre-commit-config.yaml`, die den `lint`-Job der CI spiegeln:
+`ruff check`, `ruff format` und den Versions-Sync-Check. Was durch den Hook
+kommt, kommt auch durch diesen Job.
+
+Zwei Details, die man kennen sollte:
+
+- Der Hook nutzt Ruff in der Version, die in `.pre-commit-config.yaml` gepinnt
+  ist, in einer eigenen isolierten Umgebung — nicht das lokal installierte
+  Ruff. Dieser Pin und der `ruff==…`-Pin in `.github/workflows/ci.yml` müssen
+  übereinstimmen; beim Anheben beide Stellen ändern.
+- `ruff format` formatiert die Dateien direkt um und lässt den Commit dann
+  fehlschlagen. Die umformatierten Dateien stagen und erneut committen.
+  `ruff check` meldet nur, genau wie die CI.
+
+Die Hooks über den ganzen Baum laufen lassen, ohne zu committen:
+
+```bash
+pre-commit run --all-files
 ```
 
 **Tests ausführen:**

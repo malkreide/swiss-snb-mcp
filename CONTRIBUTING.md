@@ -46,6 +46,29 @@ Typos, unclear explanations, or missing examples are always welcome as pull requ
 git clone https://github.com/malkreide/swiss-snb-mcp.git
 cd swiss-snb-mcp
 pip install -e ".[dev]"
+pre-commit install
+```
+
+**Pre-commit hook:**
+
+`pre-commit install` is a one-off step per clone. It wires up the hooks in
+`.pre-commit-config.yaml`, which mirror the `lint` job in CI: `ruff check`,
+`ruff format` and the version-sync check. If the hook passes, that job passes.
+
+Two details worth knowing:
+
+- The hook runs Ruff at the version pinned in `.pre-commit-config.yaml`, in its
+  own isolated environment — not whatever Ruff you happen to have installed.
+  That pin and the `ruff==…` pin in `.github/workflows/ci.yml` must stay in
+  sync; bump both together.
+- `ruff format` reformats your files in place and then fails the commit. Stage
+  the reformatted files and commit again. `ruff check` only reports, matching
+  what CI does.
+
+To run the hooks over the whole tree without committing:
+
+```bash
+pre-commit run --all-files
 ```
 
 **Run tests:**
