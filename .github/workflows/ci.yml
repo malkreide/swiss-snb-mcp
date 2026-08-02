@@ -57,9 +57,9 @@ jobs:
       # formatter and break CI on unrelated, untouched code. Bump deliberately.
       - run: pip install ruff==0.15.8
 
-      - run: ruff check src/
+      - run: ruff check src/ tests/ scripts/
 
-      - run: ruff format --check src/
+      - run: ruff format --check src/ tests/ scripts/
 
       # server.json stand hier auf 0.4.3, während pyproject.toml bei 0.4.4 war,
       # und niemandem fiel es auf: publish.yml schreibt das Feld beim
@@ -68,6 +68,14 @@ jobs:
       # Test-Matrix, weil der Check nur die Standardbibliothek braucht.
       - name: Versions-Sync (pyproject ↔ server.json / README / src)
         run: python scripts/check_version_sync.py
+
+      # Der Ruff-Pin steht zweimal: hier und als `rev` in
+      # .pre-commit-config.yaml. Laufen sie auseinander, formatiert der Hook
+      # nach der einen und dieser Job prüft nach der anderen Version — der
+      # Hook meldet grün und die CI wird rot. Ein Kommentar an beiden Stellen
+      # bittet darum, sie zusammen zu bumpen; das hier prüft es.
+      - name: Ruff-Pin-Sync (ci.yml ↔ .pre-commit-config.yaml)
+        run: python scripts/check_ruff_pin.py
 
   live:
     # Only on the nightly schedule or manual dispatch — never on PR/push so the

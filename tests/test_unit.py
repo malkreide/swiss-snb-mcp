@@ -12,27 +12,27 @@ from pathlib import Path
 import httpx
 import pytest
 import respx
+from pydantic import ValidationError
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from swiss_snb_mcp.server import (
+    BalanceSheetInput,
+    CubeDataInput,
+    ExchangeRatesInput,
     _assert_host_allowed,
     _lifespan,
     mcp,
     snb_get_balance_sheet,
     snb_get_cube_data,
     snb_get_exchange_rates,
-    BalanceSheetInput,
-    CubeDataInput,
-    ExchangeRatesInput,
 )
 from swiss_snb_mcp.warehouse import (
-    snb_get_warehouse_data,
-    snb_get_banking_income,
-    WarehouseDataInput,
     BankingIncomeInput,
+    WarehouseDataInput,
+    snb_get_banking_income,
+    snb_get_warehouse_data,
 )
-
 
 # ---------------------------------------------------------------------------
 # Fixtures
@@ -244,17 +244,15 @@ def test_allow_list_accepts_snb_host():
 
 
 def test_pydantic_strict_rejects_int_coerced_to_str():
-    with pytest.raises(Exception) as excinfo:
+    with pytest.raises(ValidationError):
         CubeDataInput(cube_id=12345)
-    assert "ValidationError" in type(excinfo.value).__name__
 
 
 def test_pydantic_strict_rejects_extra_fields():
-    with pytest.raises(Exception) as excinfo:
+    with pytest.raises(ValidationError):
         CubeDataInput(cube_id="devkum", bogus_field="x")
-    assert "ValidationError" in type(excinfo.value).__name__
 
 
 def test_cube_id_pattern_rejects_path_traversal():
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         CubeDataInput(cube_id="../../../etc/passwd")

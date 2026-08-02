@@ -16,14 +16,12 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.15.8
     hooks:
-      # `files: ^src/` bildet den CI-Job exakt ab: der prüft ausschliesslich
-      # `src/`. `tests/` und `scripts/` sind heute nicht ruff-sauber; sie hier
-      # einzubeziehen würde Commits an unberührtem Alt-Code blockieren, den die
-      # CI durchwinkt — der Hook wäre strenger als das, was tatsächlich gilt.
+      # Ohne `files`-Filter: jede Python-Datei im Repo. `tests/` und `scripts/`
+      # waren anfangs ausgenommen, weil sie nicht ruff-sauber waren; seit sie
+      # es sind, gilt für den ganzen Baum derselbe Massstab. Der lint-Job in
+      # ci.yml prüft dieselben drei Verzeichnisse.
       - id: ruff-check
-        files: ^src/
       - id: ruff-format
-        files: ^src/
 
   - repo: local
     hooks:
@@ -36,6 +34,16 @@ repos:
       - id: version-sync
         name: Versions-Sync (pyproject ↔ server.json / README / src)
         entry: python3 scripts/check_version_sync.py
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      # Vierter Schritt des lint-Jobs. Prüft, dass die `rev` oben und der
+      # `ruff==`-Pin in ci.yml dieselbe Version nennen — die Bitte im
+      # Kommentar allein hat noch nie eine Drift verhindert.
+      - id: ruff-pin-sync
+        name: Ruff-Pin-Sync (ci.yml ↔ .pre-commit-config.yaml)
+        entry: python3 scripts/check_ruff_pin.py
         language: system
         pass_filenames: false
         always_run: true

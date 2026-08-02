@@ -10,49 +10,48 @@ Two invocation paths:
 
 import asyncio
 import io
-import json
 import sys
 import traceback
 from datetime import datetime, timedelta
 
 import pytest
 
-pytestmark = pytest.mark.live
-
-# Fix Windows console encoding — only when run as a script. Doing it at
-# import time breaks pytest's stdout capture, which prevents test collection
-# under `pytest -m "not live"`.
-def _force_utf8_stdio() -> None:
-    sys.stdout = io.TextIOWrapper(
-        sys.stdout.buffer, encoding="utf-8", errors="replace"
-    )
-    sys.stderr = io.TextIOWrapper(
-        sys.stderr.buffer, encoding="utf-8", errors="replace"
-    )
-
-# Add source to path
+# Add source to path. Must stand between the imports above and the project
+# imports below — anything else in between (a `def`, an assignment) would make
+# those project imports trip E402.
 sys.path.insert(0, "src")
 
 from swiss_snb_mcp.server import (
-    snb_get_exchange_rates,
-    snb_get_annual_exchange_rates,
-    snb_get_balance_sheet,
-    snb_convert_currency,
-    snb_get_cube_data,
-    snb_get_cube_metadata,
-    snb_list_currencies,
-    snb_list_balance_sheet_positions,
-    snb_list_known_cubes,
-    ExchangeRatesInput,
     AnnualExchangeRatesInput,
     BalanceSheetInput,
     ConvertCurrencyInput,
     CubeDataInput,
     CubeMetadataInput,
+    ExchangeRatesInput,
     Language,
     _lifespan,
     mcp,
+    snb_convert_currency,
+    snb_get_annual_exchange_rates,
+    snb_get_balance_sheet,
+    snb_get_cube_data,
+    snb_get_cube_metadata,
+    snb_get_exchange_rates,
+    snb_list_balance_sheet_positions,
+    snb_list_currencies,
+    snb_list_known_cubes,
 )
+
+pytestmark = pytest.mark.live
+
+
+# Fix Windows console encoding — only when run as a script. Doing it at
+# import time breaks pytest's stdout capture, which prevents test collection
+# under `pytest -m "not live"`.
+def _force_utf8_stdio() -> None:
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
+
 
 # ─────────────────────────────────────────────────────
 # Helpers
@@ -75,9 +74,9 @@ def months_ago(n):
 async def run_test(name: str, coro, checks: list[str] | None = None):
     """Run a single test scenario and report results."""
     global PASSED, FAILED
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"TEST: {name}")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
     try:
         result = await coro
         # Basic check: result should be a non-empty string
@@ -95,20 +94,24 @@ async def run_test(name: str, coro, checks: list[str] | None = None):
                     # Negative check: string should NOT be present
                     target = check[1:]
                     if target in result:
-                        check_results.append(f"  FAIL: '{target}' should NOT be in result")
+                        check_results.append(
+                            f"  FAIL: '{target}' should NOT be in result"
+                        )
                     else:
                         check_results.append(f"  OK: '{target}' correctly absent")
                 elif check == "__ERROR__":
                     # Expect an error response
                     if is_error:
-                        check_results.append(f"  OK: Got expected error response")
+                        check_results.append("  OK: Got expected error response")
                     else:
-                        check_results.append(f"  FAIL: Expected error but got success")
+                        check_results.append("  FAIL: Expected error but got success")
                 elif check == "__SUCCESS__":
                     if not is_error:
-                        check_results.append(f"  OK: Got successful response")
+                        check_results.append("  OK: Got successful response")
                     else:
-                        check_results.append(f"  FAIL: Expected success but got error: {result[:100]}")
+                        check_results.append(
+                            f"  FAIL: Expected success but got error: {result[:100]}"
+                        )
                 else:
                     if check in result:
                         check_results.append(f"  OK: Found '{check}'")
@@ -146,15 +149,18 @@ async def run_test(name: str, coro, checks: list[str] | None = None):
 # 20 Test Scenarios
 # ─────────────────────────────────────────────────────
 
+
 async def test_01_monthly_fx_eur_usd():
     """Scenario 1: Monthly EUR and USD exchange rates for the last 3 months."""
     await run_test(
         "01 – Monatliche Wechselkurse EUR/USD (3 Monate)",
-        snb_get_exchange_rates(ExchangeRatesInput(
-            currencies=["EUR1", "USD1"],
-            from_date=months_ago(3),
-            to_date=now_month(),
-        )),
+        snb_get_exchange_rates(
+            ExchangeRatesInput(
+                currencies=["EUR1", "USD1"],
+                from_date=months_ago(3),
+                to_date=now_month(),
+            )
+        ),
         checks=["__SUCCESS__", "EUR", "USD", "CHF"],
     )
 
@@ -172,11 +178,13 @@ async def test_03_monthly_fx_with_month_end():
     """Scenario 3: EUR rates with both monthly average AND month-end rates."""
     await run_test(
         "03 – EUR mit Monatsmittel + Monatsende",
-        snb_get_exchange_rates(ExchangeRatesInput(
-            currencies=["EUR1"],
-            include_month_end=True,
-            from_date=months_ago(6),
-        )),
+        snb_get_exchange_rates(
+            ExchangeRatesInput(
+                currencies=["EUR1"],
+                include_month_end=True,
+                from_date=months_ago(6),
+            )
+        ),
         checks=["__SUCCESS__", "EUR"],
     )
 
@@ -185,12 +193,14 @@ async def test_04_monthly_fx_french():
     """Scenario 4: Exchange rates in French language."""
     await run_test(
         "04 – Wechselkurse auf Französisch",
-        snb_get_exchange_rates(ExchangeRatesInput(
-            currencies=["GBP1", "JPY100"],
-            lang=Language.FR,
-            from_date="2025-01",
-            to_date="2025-06",
-        )),
+        snb_get_exchange_rates(
+            ExchangeRatesInput(
+                currencies=["GBP1", "JPY100"],
+                lang=Language.FR,
+                from_date="2025-01",
+                to_date="2025-06",
+            )
+        ),
         checks=["__SUCCESS__", "CHF"],
     )
 
@@ -199,11 +209,13 @@ async def test_05_annual_fx_long_history():
     """Scenario 5: Annual exchange rates over a 20-year period."""
     await run_test(
         "05 – Jährliche Wechselkurse 2005–2025 (20 Jahre)",
-        snb_get_annual_exchange_rates(AnnualExchangeRatesInput(
-            currencies=["EUR1", "USD1"],
-            from_year="2005",
-            to_year="2025",
-        )),
+        snb_get_annual_exchange_rates(
+            AnnualExchangeRatesInput(
+                currencies=["EUR1", "USD1"],
+                from_year="2005",
+                to_year="2025",
+            )
+        ),
         checks=["__SUCCESS__", "devkua", "2005"],
     )
 
@@ -212,11 +224,13 @@ async def test_06_annual_fx_single_year():
     """Scenario 6: Annual rate for a single year."""
     await run_test(
         "06 – Jahresdurchschnitt 2020 (Einzeljahr)",
-        snb_get_annual_exchange_rates(AnnualExchangeRatesInput(
-            currencies=["CHF1"] if False else ["USD1"],
-            from_year="2020",
-            to_year="2020",
-        )),
+        snb_get_annual_exchange_rates(
+            AnnualExchangeRatesInput(
+                currencies=["CHF1"] if False else ["USD1"],
+                from_year="2020",
+                to_year="2020",
+            )
+        ),
         checks=["__SUCCESS__", "2020"],
     )
 
@@ -234,10 +248,12 @@ async def test_08_balance_sheet_all_assets():
     """Scenario 8: All asset positions of the SNB balance sheet."""
     await run_test(
         "08 – SNB Bilanz: Alle Aktiven",
-        snb_get_balance_sheet(BalanceSheetInput(
-            positions=["GFG", "D", "RIWF", "IZ", "T0"],
-            from_date=months_ago(6),
-        )),
+        snb_get_balance_sheet(
+            BalanceSheetInput(
+                positions=["GFG", "D", "RIWF", "IZ", "T0"],
+                from_date=months_ago(6),
+            )
+        ),
         checks=["__SUCCESS__", "Mio. CHF"],
     )
 
@@ -246,11 +262,13 @@ async def test_09_balance_sheet_english():
     """Scenario 9: Balance sheet in English language."""
     await run_test(
         "09 – SNB Bilanz auf Englisch",
-        snb_get_balance_sheet(BalanceSheetInput(
-            positions=["T0", "T1"],
-            lang=Language.EN,
-            from_date=months_ago(12),
-        )),
+        snb_get_balance_sheet(
+            BalanceSheetInput(
+                positions=["T0", "T1"],
+                lang=Language.EN,
+                from_date=months_ago(12),
+            )
+        ),
         checks=["__SUCCESS__"],
     )
 
@@ -259,10 +277,12 @@ async def test_10_convert_eur_to_chf():
     """Scenario 10: Convert 10,000 EUR to CHF."""
     await run_test(
         "10 – Umrechnung 10'000 EUR → CHF",
-        snb_convert_currency(ConvertCurrencyInput(
-            amount=10000.0,
-            currency_id="EUR1",
-        )),
+        snb_convert_currency(
+            ConvertCurrencyInput(
+                amount=10000.0,
+                currency_id="EUR1",
+            )
+        ),
         checks=["__SUCCESS__", "CHF", "EUR", "Monatsmittel"],
     )
 
@@ -271,10 +291,12 @@ async def test_11_convert_jpy_to_chf():
     """Scenario 11: Convert JPY (100-unit currency) to CHF."""
     await run_test(
         "11 – Umrechnung 500'000 JPY → CHF (100er-Einheit)",
-        snb_convert_currency(ConvertCurrencyInput(
-            amount=500000.0,
-            currency_id="JPY100",
-        )),
+        snb_convert_currency(
+            ConvertCurrencyInput(
+                amount=500000.0,
+                currency_id="JPY100",
+            )
+        ),
         checks=["__SUCCESS__", "CHF", "JPY"],
     )
 
@@ -283,11 +305,13 @@ async def test_12_convert_with_reference_month():
     """Scenario 12: Convert USD with a specific historical reference month."""
     await run_test(
         "12 – Umrechnung 45'000 USD mit Referenzmonat 2024-06",
-        snb_convert_currency(ConvertCurrencyInput(
-            amount=45000.0,
-            currency_id="USD1",
-            reference_month="2024-06",
-        )),
+        snb_convert_currency(
+            ConvertCurrencyInput(
+                amount=45000.0,
+                currency_id="USD1",
+                reference_month="2024-06",
+            )
+        ),
         checks=["__SUCCESS__", "CHF", "2024-06"],
     )
 
@@ -296,10 +320,12 @@ async def test_13_convert_invalid_currency():
     """Scenario 13: Convert with an invalid currency ID → expect error."""
     await run_test(
         "13 – Ungültige Währung (XYZ1) → Fehlermeldung",
-        snb_convert_currency(ConvertCurrencyInput(
-            amount=100.0,
-            currency_id="XYZ1",
-        )),
+        snb_convert_currency(
+            ConvertCurrencyInput(
+                amount=100.0,
+                currency_id="XYZ1",
+            )
+        ),
         checks=["__ERROR__"],
     )
 
@@ -308,11 +334,13 @@ async def test_14_cube_data_saron():
     """Scenario 14: Generic cube access – SARON/policy rate data."""
     await run_test(
         "14 – Cube-Daten: SNB-Leitzins/SARON (snbgwdzid)",
-        snb_get_cube_data(CubeDataInput(
-            cube_id="snbgwdzid",
-            from_date="2024-01",
-            to_date="2024-12",
-        )),
+        snb_get_cube_data(
+            CubeDataInput(
+                cube_id="snbgwdzid",
+                from_date="2024-01",
+                to_date="2024-12",
+            )
+        ),
         checks=["__SUCCESS__", "snbgwdzid"],
     )
 
@@ -321,11 +349,13 @@ async def test_15_cube_data_monetary_aggregates():
     """Scenario 15: Generic cube – M1/M2/M3 monetary aggregates."""
     await run_test(
         "15 – Cube-Daten: Geldmengen M1/M2/M3 (snbmonagg)",
-        snb_get_cube_data(CubeDataInput(
-            cube_id="snbmonagg",
-            from_date="2024-01",
-            to_date="2024-12",
-        )),
+        snb_get_cube_data(
+            CubeDataInput(
+                cube_id="snbmonagg",
+                from_date="2024-01",
+                to_date="2024-12",
+            )
+        ),
         checks=["__SUCCESS__", "snbmonagg"],
     )
 
@@ -334,9 +364,11 @@ async def test_16_cube_metadata_exchange_rates():
     """Scenario 16: Metadata inspection for the monthly exchange rate cube."""
     await run_test(
         "16 – Metadaten: Cube devkum (Monatskurse)",
-        snb_get_cube_metadata(CubeMetadataInput(
-            cube_id="devkum",
-        )),
+        snb_get_cube_metadata(
+            CubeMetadataInput(
+                cube_id="devkum",
+            )
+        ),
         checks=["__SUCCESS__", "Dimension", "devkum"],
     )
 
@@ -345,10 +377,12 @@ async def test_17_cube_metadata_international_rates():
     """Scenario 17: Metadata for international money market rates cube."""
     await run_test(
         "17 – Metadaten: Cube zimoma (Int. Geldmarktsätze)",
-        snb_get_cube_metadata(CubeMetadataInput(
-            cube_id="zimoma",
-            lang=Language.EN,
-        )),
+        snb_get_cube_metadata(
+            CubeMetadataInput(
+                cube_id="zimoma",
+                lang=Language.EN,
+            )
+        ),
         checks=["__SUCCESS__", "Dimension", "zimoma"],
     )
 
@@ -376,13 +410,23 @@ async def test_20_list_known_cubes():
     await run_test(
         "20 – Übersicht bekannte SNB Cubes",
         snb_list_known_cubes(),
-        checks=["devkum", "devkua", "snbbipo", "snbgwdzid", "zirepo", "zimoma", "snboffzisa", "snbmonagg"],
+        checks=[
+            "devkum",
+            "devkua",
+            "snbbipo",
+            "snbgwdzid",
+            "zirepo",
+            "zimoma",
+            "snboffzisa",
+            "snbmonagg",
+        ],
     )
 
 
 # ─────────────────────────────────────────────────────
 # Main runner
 # ─────────────────────────────────────────────────────
+
 
 async def main():
     print("=" * 70)
@@ -432,7 +476,9 @@ async def _run_tests():
             line += f" ({err[:60]})"
         print(line)
 
-    print(f"\n  Total: {PASSED + FAILED} | Bestanden: {PASSED} | Fehlgeschlagen: {FAILED}")
+    print(
+        f"\n  Total: {PASSED + FAILED} | Bestanden: {PASSED} | Fehlgeschlagen: {FAILED}"
+    )
     print("=" * 70)
 
     return FAILED == 0
@@ -441,7 +487,9 @@ async def _run_tests():
 async def test_all_live_scenarios():
     """Pytest entry: runs all scenarios; fails if any underlying scenario failed."""
     success = await main()
-    assert success, f"{FAILED} live scenario(s) failed; see captured stdout for details."
+    assert success, (
+        f"{FAILED} live scenario(s) failed; see captured stdout for details."
+    )
 
 
 if __name__ == "__main__":
