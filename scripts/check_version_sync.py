@@ -25,6 +25,20 @@ Verwendung:
 Bewusst nur Standardbibliothek — der Check braucht keine Projekt-Installation
 und läuft damit auch in schlanken CI-Jobs. Auf Python 3.10 (noch keine
 `tomllib`) greift ein Minimal-Parser für die zwei benötigten Felder.
+
+Formatierung: die Datei wird zwischen den Repos kopiert, und dort stehen
+`line-length` 88, 100, 110 und 120 nebeneinander. `ruff format` zieht einen
+Ausdruck zusammen, sobald er in die jeweilige Breite passt — eine Zeile
+zwischen 89 und 120 Zeichen wäre also in der einen Hälfte der Repos
+formatgerecht und in der anderen nicht, und `ruff format --check` fiele beim
+Kopieren um. Zwei Regeln halten die Datei bei jeder Breite identisch:
+
+  - keine Zeile über 88 Zeichen — lange Ausdrücke bekommen eine lokale
+    Variable statt eines Umbruchs
+  - keine impliziten String-Verkettungen über mehrere Zeilen, ausser in
+    Aufrufen mit Magic Trailing Comma: `ruff format` fügt sie zusammen,
+    sobald das Ergebnis in die Breite passt, und das ist wieder
+    breitenabhängig
 """
 
 import io
@@ -118,9 +132,8 @@ def find_hardcoded(dist: str) -> list[tuple[str, int, str]]:
     dunder = re.compile(r"""__version__\s*=\s*["']([^"']+)["']""")
 
     for path in sorted(SRC.rglob("*.py")):
-        for lineno, line in enumerate(
-            code_lines(path.read_text(encoding="utf-8")), start=1
-        ):
+        lines = code_lines(path.read_text(encoding="utf-8"))
+        for lineno, line in enumerate(lines, start=1):
             values = own_ua_versions(line, dist)
             for m in dunder.finditer(line):
                 if re.match(r"\d+\.\d", m.group(1)):
@@ -138,9 +151,8 @@ def collect_declared(expected: str) -> list[tuple[str, str]]:
         server = json.loads(SERVER_JSON.read_text(encoding="utf-8"))
         found.append(("server.json → version", server.get("version", "")))
         for i, pkg in enumerate(server.get("packages", [])):
-            found.append(
-                (f"server.json → packages[{i}].version", pkg.get("version", ""))
-            )
+            label = f"server.json → packages[{i}].version"
+            found.append((label, pkg.get("version", "")))
 
     for readme in sorted(ROOT.glob("README*.md")):
         for match in _BADGE.finditer(readme.read_text(encoding="utf-8")):
@@ -179,16 +191,14 @@ def main() -> None:
     if version is None:
         # `dynamic = ["version"]`: die Version entsteht beim Bauen, ein
         # Literal in src/ ist dort die Quelle und kein Fehler.
-        print(
-            "Versions-Sync übersprungen: pyproject.toml nutzt eine dynamische Version."
-        )
+        print("Versions-Sync übersprungen: dynamische Version in pyproject.toml.")
         return
 
     found = collect_declared(version)
     mismatches = [(where, value) for where, value in found if value != version]
     if mismatches:
         print(
-            f"DRIFT: pyproject.toml steht auf {version!r}, folgende Stellen weichen ab:",
+            f"DRIFT: pyproject.toml steht auf {version!r}, diese Stellen weichen ab:",
             file=sys.stderr,
         )
         for where, value in mismatches:
@@ -215,9 +225,8 @@ def main() -> None:
         sys.exit(1)
 
     checked = ", ".join(where for where, _ in found) or "keine weiteren Stellen"
-    print(
-        f"Versions-Sync OK ({version}; geprüft: {checked}; keine hartkodierte Version in src/)"
-    )
+    summary = f"Versions-Sync OK ({version}; geprüft: {checked};"
+    print(f"{summary} keine hartkodierte Version in src/)")
 
 
 if __name__ == "__main__":
