@@ -61,6 +61,32 @@ jobs:
 
       - run: ruff format --check src/ tests/ scripts/
 
+      # `check_version_sync.py` wird zwischen den Portfolio-Repos kopiert, und
+      # dort steht line-length auf 88, 100, 110 oder 120. Der Schritt oben
+      # prüft nur die Breite dieses Repos — hier der Default 88, der schmalste
+      # Wert im Portfolio. Eine zu lange Zeile fängt er damit bereits ab, und
+      # zwar als einziges Repo: die Datei bricht hier, bevor sie irgendwo
+      # sonst auffällt.
+      #
+      # Nicht gefangen wird die Gegenrichtung. `ruff format` zieht einen
+      # Ausdruck zusammen, sobald er passt — eine für 88 umgebrochene Zeile
+      # besteht hier und würde in jedem 100er-Repo zusammengezogen. Deshalb
+      # die Schleife über alle im Portfolio genutzten Breiten statt nur der
+      # eigenen.
+      #
+      # Bewusst die einzelne Datei und nicht `scripts/`: `check_ruff_pin.py`
+      # gibt es nur in diesem Repo, wird also nirgends hinkopiert und hat
+      # keinen Grund, breitenunabhängig zu sein. Kommt ein weiteres geteiltes
+      # Skript dazu, gehört es in diese Liste.
+      - name: Format-Stabilität der Portfolio-Skripte
+        run: |
+          for ll in 88 100 110 120; do
+            if ! ruff format --check --line-length "$ll" scripts/check_version_sync.py; then
+              echo "::error file=scripts/check_version_sync.py::Nicht formatgerecht bei line-length $ll. Die Datei wird portfolioweit kopiert und muss bei jeder genutzten Breite gleich formatiert sein — Begründung im Modul-Docstring."
+              exit 1
+            fi
+          done
+
       # server.json stand hier auf 0.4.3, während pyproject.toml bei 0.4.4 war,
       # und niemandem fiel es auf: publish.yml schreibt das Feld beim
       # Veröffentlichen aus dem Tag, die committete Zahl wirkt also nie auf das
