@@ -27,6 +27,18 @@ Verwendung:
 Bewusst nur Standardbibliothek — wie check_version_sync.py läuft der Check
 damit ohne Projekt-Installation in schlanken CI-Jobs. Deshalb auch Regex statt
 PyYAML: für zwei Felder lohnt keine Abhängigkeit.
+
+Formatierung: dieselben zwei Regeln wie in check_version_sync.py, denn diese
+Datei wird genauso zwischen den Repos kopiert, und dort stehen `line-length`
+88, 100, 110 und 120 nebeneinander. `ruff format` zieht einen Ausdruck
+zusammen, sobald er in die jeweilige Breite passt — eine Zeile zwischen 89 und
+120 Zeichen wäre also in der einen Hälfte der Repos formatgerecht und in der
+anderen nicht, und `ruff format --check` fiele beim Kopieren um:
+
+  - keine Zeile über 88 Zeichen — lange Ausdrücke bekommen eine lokale
+    Variable statt eines Umbruchs
+  - keine impliziten String-Verkettungen über mehrere Zeilen, ausser in
+    Aufrufen mit Magic Trailing Comma
 """
 
 import re
@@ -86,22 +98,17 @@ def main() -> None:
     if not ci:
         fail("KEIN PIN: in .github/workflows/ci.yml steht kein `ruff==<version>`.")
     if hook is None:
-        fail(
-            "KEIN PIN: in .pre-commit-config.yaml fehlt das ruff-pre-commit-Repo "
-            "oder dessen `rev:`."
-        )
+        missing = "fehlt das ruff-pre-commit-Repo oder dessen `rev:`."
+        fail(f"KEIN PIN: in .pre-commit-config.yaml {missing}")
 
     divergent = sorted({v for v in ci if v != hook})
     if divergent:
-        fail(
-            f"DRIFT: .pre-commit-config.yaml pinnt Ruff auf {hook!r}, "
-            f".github/workflows/ci.yml auf {', '.join(repr(v) for v in divergent)}."
-        )
+        others = ", ".join(repr(v) for v in divergent)
+        head = f"DRIFT: .pre-commit-config.yaml pinnt Ruff auf {hook!r},"
+        fail(f"{head} .github/workflows/ci.yml auf {others}.")
 
-    print(
-        f"Ruff-Pin OK ({hook}; geprüft: .pre-commit-config.yaml → rev, "
-        f".github/workflows/ci.yml → pip install ruff==)"
-    )
+    checked = ".pre-commit-config.yaml → rev, .github/workflows/ci.yml → ruff=="
+    print(f"Ruff-Pin OK ({hook}; geprüft: {checked})")
 
 
 if __name__ == "__main__":
