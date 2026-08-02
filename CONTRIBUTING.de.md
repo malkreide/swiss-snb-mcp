@@ -53,8 +53,8 @@ pre-commit install
 
 `pre-commit install` ist ein einmaliger Schritt pro Clone. Er aktiviert die
 Hooks aus `.pre-commit-config.yaml`, die den `lint`-Job der CI spiegeln:
-`ruff check`, `ruff format` und den Versions-Sync-Check. Was durch den Hook
-kommt, kommt auch durch diesen Job.
+`ruff check`, `ruff format`, den Versions-Sync-Check und den
+Ruff-Pin-Sync-Check. Was durch den Hook kommt, kommt auch durch diesen Job.
 
 Zwei Details, die man kennen sollte:
 
@@ -62,6 +62,7 @@ Zwei Details, die man kennen sollte:
   ist, in einer eigenen isolierten Umgebung — nicht das lokal installierte
   Ruff. Dieser Pin und der `ruff==…`-Pin in `.github/workflows/ci.yml` müssen
   übereinstimmen; beim Anheben beide Stellen ändern.
+  `scripts/check_ruff_pin.py` erzwingt das, im Hook wie in der CI.
 - `ruff format` formatiert die Dateien direkt um und lässt den Commit dann
   fehlschlagen. Die umformatierten Dateien stagen und erneut committen.
   `ruff check` meldet nur, genau wie die CI.
@@ -85,8 +86,8 @@ PYTHONPATH=src pytest tests/ -m "live"
 **Linten und formatieren:**
 
 ```bash
-ruff check src/ tests/
-ruff format src/ tests/
+ruff check src/ tests/ scripts/
+ruff format src/ tests/ scripts/
 ```
 
 ---

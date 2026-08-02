@@ -10,48 +10,46 @@ Two invocation paths:
 
 import asyncio
 import io
-import json
 import sys
 import traceback
-from datetime import datetime, timedelta
 
 import pytest
 
-pytestmark = pytest.mark.live
-
-# Fix Windows console encoding
-def _force_utf8_stdio() -> None:
-    sys.stdout = io.TextIOWrapper(
-        sys.stdout.buffer, encoding="utf-8", errors="replace"
-    )
-    sys.stderr = io.TextIOWrapper(
-        sys.stderr.buffer, encoding="utf-8", errors="replace"
-    )
-
-# Add source to path
+# Add source to path. Must stand between the imports above and the project
+# imports below — anything else in between (a `def`, an assignment) would make
+# those project imports trip E402.
 sys.path.insert(0, "src")
 
 from swiss_snb_mcp.server import (
+    BalanceOfPaymentsInput,
     Language,
     _handle_http_error,
-    snb_get_balance_of_payments,
-    BalanceOfPaymentsInput,
     _lifespan,
     mcp,
+    snb_get_balance_of_payments,
 )
 from swiss_snb_mcp.warehouse import (
-    snb_list_warehouse_cubes,
-    snb_list_bank_groups,
-    snb_get_warehouse_data,
-    snb_get_warehouse_metadata,
-    snb_get_banking_balance_sheet,
-    snb_get_banking_income,
-    WarehouseDataInput,
-    WarehouseMetadataInput,
     BankingBalanceSheetInput,
     BankingIncomeInput,
+    WarehouseDataInput,
+    WarehouseMetadataInput,
     _fetch_warehouse,
+    snb_get_banking_balance_sheet,
+    snb_get_banking_income,
+    snb_get_warehouse_data,
+    snb_get_warehouse_metadata,
+    snb_list_bank_groups,
+    snb_list_warehouse_cubes,
 )
+
+pytestmark = pytest.mark.live
+
+
+# Fix Windows console encoding
+def _force_utf8_stdio() -> None:
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
+
 
 # ─────────────────────────────────────────────────────
 # Helpers
@@ -79,9 +77,9 @@ def _is_transient_upstream_error(result: str) -> bool:
 async def run_test(name: str, coro, checks: list[str] | None = None):
     """Run a single test scenario and report results."""
     global PASSED, FAILED, SKIPPED
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"TEST: {name}")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
     try:
         result = await coro
         # Basic check: result should be a non-empty string
@@ -110,20 +108,24 @@ async def run_test(name: str, coro, checks: list[str] | None = None):
                     # Negative check: string should NOT be present
                     target = check[1:]
                     if target in result:
-                        check_results.append(f"  FAIL: '{target}' should NOT be in result")
+                        check_results.append(
+                            f"  FAIL: '{target}' should NOT be in result"
+                        )
                     else:
                         check_results.append(f"  OK: '{target}' correctly absent")
                 elif check == "__ERROR__":
                     # Expect an error response
                     if is_error:
-                        check_results.append(f"  OK: Got expected error response")
+                        check_results.append("  OK: Got expected error response")
                     else:
-                        check_results.append(f"  FAIL: Expected error but got success")
+                        check_results.append("  FAIL: Expected error but got success")
                 elif check == "__SUCCESS__":
                     if not is_error:
-                        check_results.append(f"  OK: Got successful response")
+                        check_results.append("  OK: Got successful response")
                     else:
-                        check_results.append(f"  FAIL: Expected success but got error: {result[:100]}")
+                        check_results.append(
+                            f"  FAIL: Expected success but got error: {result[:100]}"
+                        )
                 else:
                     if check in result:
                         check_results.append(f"  OK: Found '{check}'")
@@ -161,11 +163,16 @@ async def run_test(name: str, coro, checks: list[str] | None = None):
 # Test Scenarios
 # ─────────────────────────────────────────────────────
 
+
 async def test_01_warehouse_data_annual():
     """Scenario 1: Generic warehouse data - BSTA annual total assets."""
     await run_test(
         "01 – Warehouse-Daten: BSTA jährlich Total Aktiven",
-        snb_get_warehouse_data(WarehouseDataInput(cube_id="BSTA.SNB.JAHR_K.BIL.AKT.TOT", from_date="2020", to_date="2024")),
+        snb_get_warehouse_data(
+            WarehouseDataInput(
+                cube_id="BSTA.SNB.JAHR_K.BIL.AKT.TOT", from_date="2020", to_date="2024"
+            )
+        ),
         checks=["__SUCCESS__", "BSTA.SNB.JAHR_K.BIL.AKT.TOT", "Zeitreihe"],
     )
 
@@ -174,7 +181,13 @@ async def test_02_warehouse_data_monthly():
     """Scenario 2: Generic warehouse data - BSTA monthly total assets."""
     await run_test(
         "02 – Warehouse-Daten: BSTA monatlich Total Aktiven",
-        snb_get_warehouse_data(WarehouseDataInput(cube_id="BSTA.SNB.MONA_US.BIL.AKT.TOT", from_date="2024-01", to_date="2024-06")),
+        snb_get_warehouse_data(
+            WarehouseDataInput(
+                cube_id="BSTA.SNB.MONA_US.BIL.AKT.TOT",
+                from_date="2024-01",
+                to_date="2024-06",
+            )
+        ),
         checks=["__SUCCESS__", "BSTA.SNB.MONA_US.BIL.AKT.TOT"],
     )
 
@@ -183,7 +196,9 @@ async def test_03_warehouse_metadata_bil():
     """Scenario 3: Warehouse metadata - BSTA BIL dimensions."""
     await run_test(
         "03 – Metadaten: BSTA BIL Dimensionen",
-        snb_get_warehouse_metadata(WarehouseMetadataInput(cube_id="BSTA.SNB.JAHR_K.BIL.AKT.TOT")),
+        snb_get_warehouse_metadata(
+            WarehouseMetadataInput(cube_id="BSTA.SNB.JAHR_K.BIL.AKT.TOT")
+        ),
         checks=["__SUCCESS__", "BANKENGRUPPE", "WAEHRUNG", "Dimension"],
     )
 
@@ -192,7 +207,9 @@ async def test_04_warehouse_metadata_efr():
     """Scenario 4: Warehouse metadata - BSTA EFR dimensions."""
     await run_test(
         "04 – Metadaten: BSTA EFR Dimensionen",
-        snb_get_warehouse_metadata(WarehouseMetadataInput(cube_id="BSTA.SNB.JAHR_K.EFR.GER")),
+        snb_get_warehouse_metadata(
+            WarehouseMetadataInput(cube_id="BSTA.SNB.JAHR_K.EFR.GER")
+        ),
         checks=["__SUCCESS__", "BANKENGRUPPE", "Dimension"],
     )
 
@@ -201,9 +218,11 @@ async def test_11_bop_overview():
     """Scenario 11: Balance of payments - overview."""
     await run_test(
         "11 – Zahlungsbilanz: Uebersicht (bopoverq)",
-        snb_get_balance_of_payments(BalanceOfPaymentsInput(
-            category="overview",
-        )),
+        snb_get_balance_of_payments(
+            BalanceOfPaymentsInput(
+                category="overview",
+            )
+        ),
         checks=["__SUCCESS__", "bopoverq"],
     )
 
@@ -212,9 +231,11 @@ async def test_12_bop_iip():
     """Scenario 12: Balance of payments - IIP."""
     await run_test(
         "12 – Auslandvermoegen (auvekomq)",
-        snb_get_balance_of_payments(BalanceOfPaymentsInput(
-            category="iip",
-        )),
+        snb_get_balance_of_payments(
+            BalanceOfPaymentsInput(
+                category="iip",
+            )
+        ),
         checks=["__SUCCESS__", "auvekomq"],
     )
 
@@ -223,10 +244,12 @@ async def test_13_bop_french():
     """Scenario 13: Balance of payments - French language."""
     await run_test(
         "13 – Zahlungsbilanz auf Franzoesisch",
-        snb_get_balance_of_payments(BalanceOfPaymentsInput(
-            category="overview",
-            lang=Language.FR,
-        )),
+        snb_get_balance_of_payments(
+            BalanceOfPaymentsInput(
+                category="overview",
+                lang=Language.FR,
+            )
+        ),
         checks=["__SUCCESS__"],
     )
 
@@ -256,6 +279,7 @@ async def test_15_list_bank_groups():
 
 async def test_16_invalid_cube_id():
     """Scenario 16: Error handling with invalid warehouse cube ID."""
+
     async def _fetch_invalid():
         try:
             await _fetch_warehouse(
@@ -278,6 +302,7 @@ async def test_16_invalid_cube_id():
 # Banking Balance Sheet Tests (Task 6)
 # ─────────────────────────────────────────────────────
 
+
 async def test_05_banking_balance_sheet_default():
     """Scenario 5: Banking balance sheet - annual, default (all banks, both sides)."""
     await run_test(
@@ -291,9 +316,9 @@ async def test_06_banking_balance_sheet_multi_groups():
     """Scenario 6: Banking balance sheet - specific bank groups, assets only."""
     await run_test(
         "06 – Bankenbilanz: G10, G15, G25, nur Aktiven",
-        snb_get_banking_balance_sheet(BankingBalanceSheetInput(
-            bank_groups=["G10", "G15", "G25"], side="assets"
-        )),
+        snb_get_banking_balance_sheet(
+            BankingBalanceSheetInput(bank_groups=["G10", "G15", "G25"], side="assets")
+        ),
         checks=["__SUCCESS__", "Millionen CHF"],
     )
 
@@ -302,10 +327,14 @@ async def test_07_banking_balance_sheet_monthly():
     """Scenario 7: Banking balance sheet - monthly, assets, date range."""
     await run_test(
         "07 – Bankenbilanz: monatlich, Aktiven, 2024-01 bis 2024-06",
-        snb_get_banking_balance_sheet(BankingBalanceSheetInput(
-            frequency="monthly", side="assets",
-            from_date="2024-01", to_date="2024-06"
-        )),
+        snb_get_banking_balance_sheet(
+            BankingBalanceSheetInput(
+                frequency="monthly",
+                side="assets",
+                from_date="2024-01",
+                to_date="2024-06",
+            )
+        ),
         checks=["__SUCCESS__", "Millionen CHF"],
     )
 
@@ -314,9 +343,9 @@ async def test_08_banking_balance_sheet_liabilities_chf():
     """Scenario 8: Banking balance sheet - liabilities, CHF currency."""
     await run_test(
         "08 – Bankenbilanz: Passiven, Währung CHF",
-        snb_get_banking_balance_sheet(BankingBalanceSheetInput(
-            side="liabilities", currency="CHF"
-        )),
+        snb_get_banking_balance_sheet(
+            BankingBalanceSheetInput(side="liabilities", currency="CHF")
+        ),
         checks=["__SUCCESS__", "Millionen CHF"],
     )
 
@@ -325,9 +354,9 @@ async def test_17_banking_balance_sheet_english():
     """Scenario 17: Banking balance sheet - English language, assets."""
     await run_test(
         "17 – Bankenbilanz: Englisch, Aktiven",
-        snb_get_banking_balance_sheet(BankingBalanceSheetInput(
-            lang=Language.EN, side="assets"
-        )),
+        snb_get_banking_balance_sheet(
+            BankingBalanceSheetInput(lang=Language.EN, side="assets")
+        ),
         checks=["__SUCCESS__", "Millionen CHF"],
     )
 
@@ -336,9 +365,9 @@ async def test_19_banking_balance_sheet_plausibility():
     """Scenario 19: Banking balance sheet - plausibility check for 2023."""
     await run_test(
         "19 – Bankenbilanz: Plausibilität 2023, Aktiven",
-        snb_get_banking_balance_sheet(BankingBalanceSheetInput(
-            side="assets", from_date="2023", to_date="2023"
-        )),
+        snb_get_banking_balance_sheet(
+            BankingBalanceSheetInput(side="assets", from_date="2023", to_date="2023")
+        ),
         checks=["__SUCCESS__", "Millionen CHF"],
     )
 
@@ -346,6 +375,7 @@ async def test_19_banking_balance_sheet_plausibility():
 # ─────────────────────────────────────────────────────
 # Banking Income Tests (Task 7)
 # ─────────────────────────────────────────────────────
+
 
 async def test_09_banking_income_default():
     """Scenario 9: Banking income - default (all banks)."""
@@ -360,9 +390,7 @@ async def test_10_banking_income_multi_groups():
     """Scenario 10: Banking income - G10, G15."""
     await run_test(
         "10 – Erfolgsrechnung: Kantonal- und Grossbanken",
-        snb_get_banking_income(BankingIncomeInput(
-            bank_groups=["G10", "G15"]
-        )),
+        snb_get_banking_income(BankingIncomeInput(bank_groups=["G10", "G15"])),
         checks=["__SUCCESS__", "Millionen CHF"],
     )
 
@@ -380,15 +408,17 @@ async def test_18_banking_income_french():
 # Retry Logic Test (Task 10)
 # ─────────────────────────────────────────────────────
 
+
 async def test_20_retry_logic():
     """Scenario 20: Verify _fetch_warehouse retries on HTTP 503."""
     global PASSED, FAILED
-    from unittest.mock import AsyncMock, patch, MagicMock
+    from unittest.mock import AsyncMock, MagicMock, patch
+
     import httpx as httpx_mod
 
-    print(f"\n{'='*70}")
-    print(f"TEST: 20 – Retry-Logik (503 → 503 → 200)")
-    print(f"{'='*70}")
+    print(f"\n{'=' * 70}")
+    print("TEST: 20 – Retry-Logik (503 → 503 → 200)")
+    print(f"{'=' * 70}")
 
     try:
         # Mock httpx to return 503 twice, then 200
@@ -404,6 +434,7 @@ async def test_20_retry_logic():
         mock_response_200.json.return_value = {"timeseries": []}
 
         call_count = 0
+
         async def mock_get(*args, **kwargs):
             nonlocal call_count
             call_count += 1
@@ -416,28 +447,36 @@ async def test_20_retry_logic():
         mock_client = MagicMock()
         mock_client.get = mock_get
 
-        with patch("swiss_snb_mcp.warehouse._http", return_value=mock_client):
-            # Patch asyncio.sleep to not actually wait
-            with patch("swiss_snb_mcp.warehouse.asyncio.sleep", new_callable=AsyncMock):
-                result = await _fetch_warehouse("BSTA.SNB.JAHR_K.BIL.AKT.TOT", "data/json", "de")
+        # Patch asyncio.sleep too, so the retry backoff does not actually wait.
+        with (
+            patch("swiss_snb_mcp.warehouse._http", return_value=mock_client),
+            patch("swiss_snb_mcp.warehouse.asyncio.sleep", new_callable=AsyncMock),
+        ):
+            result = await _fetch_warehouse(
+                "BSTA.SNB.JAHR_K.BIL.AKT.TOT", "data/json", "de"
+            )
 
-        assert call_count == 3, f"Expected 3 calls (2 retries + 1 success), got {call_count}"
+        assert call_count == 3, (
+            f"Expected 3 calls (2 retries + 1 success), got {call_count}"
+        )
         assert result == {"timeseries": []}
         PASSED += 1
         print(f"  OK: Retry logic works (503 -> 503 -> 200, {call_count} calls)")
-        print(f"\n→ PASSED ✓")
+        print("\n→ PASSED ✓")
         RESULTS.append(("20 – Retry-Logik (503 → 503 → 200)", "PASSED ✓", None))
     except Exception as e:
         FAILED += 1
         import traceback as tb_mod
+
         print(f"  FAIL: {e}\n{tb_mod.format_exc()}")
-        print(f"\n→ FAILED ✗")
+        print("\n→ FAILED ✗")
         RESULTS.append(("20 – Retry-Logik (503 → 503 → 200)", "FAILED ✗", str(e)))
 
 
 # ─────────────────────────────────────────────────────
 # Main runner
 # ─────────────────────────────────────────────────────
+
 
 async def main():
     print("=" * 70)
@@ -508,7 +547,9 @@ async def _run_tests():
 async def test_all_live_warehouse_scenarios():
     """Pytest entry: runs all scenarios; fails if any underlying scenario failed."""
     success = await main()
-    assert success, f"{FAILED} live scenario(s) failed; see captured stdout for details."
+    assert success, (
+        f"{FAILED} live scenario(s) failed; see captured stdout for details."
+    )
 
 
 if __name__ == "__main__":

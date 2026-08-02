@@ -9,6 +9,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Hinzugefuegt
 
+- **`scripts/check_ruff_pin.py` und je ein Schritt dafuer in CI und Hook.** Der
+  Check vergleicht die `rev` des ruff-pre-commit-Repos in
+  `.pre-commit-config.yaml` mit dem `ruff==`-Pin im lint-Job und meldet auch,
+  wenn einer der beiden Pins ganz fehlt.
+
+  Anlass ist eine Luecke im Eintrag darunter: der Pre-Commit-Hook existiert, um
+  lokal genau die Formatierung zu erzwingen, die der lint-Job prueft. Das haelt
+  nur, solange beide dieselbe Ruff-Version nennen. Laufen die Pins
+  auseinander, formatiert der Hook nach der einen und die CI prueft nach der
+  anderen — der Hook meldet gruen, die CI wird rot. Das ist derselbe
+  Fehlschlag, gegen den der Hook eingefuehrt wurde, nur eine Ebene hoeher.
+
+  Abgesichert war das bis dahin durch einen Kommentar in beiden Dateien, der
+  darum bittet, sie zusammen zu bumpen. Bitten ist keine Pruefung — dieselbe
+  Bauart von Luecke wie bei `server.json`, wo die committete Version von nichts
+  widerlegt wurde.
+
+  Gegengeprueft mit vier gebauten Vorzustaenden: nur `ci.yml` gebumpt, nur die
+  `rev` gebumpt, `rev` entfernt, `ruff==`-Pin entfernt. Alle vier melden und
+  beenden sich mit Exit 1.
+
+- **`tests/` und `scripts/` sind jetzt ruff-sauber und werden geprueft.** Bisher
+  deckten Hook und lint-Job nur `src/` ab; beide pruefen jetzt
+  `src/ tests/ scripts/`, und der Hook laeuft ohne `files`-Filter ueber jede
+  Python-Datei im Repo.
+
+  Der Grund fuer die alte Einschraenkung war, dass `tests/` und `scripts/` 22
+  Lint-Befunde und drei unformatierte Dateien trugen; sie einzubeziehen haette
+  Commits an unberuehrtem Alt-Code blockiert. Die Befunde sind jetzt behoben,
+  damit faellt der Grund weg.
+
+  Behoben wurden: ungenutzte Importe (`json`, `datetime`, `timedelta`),
+  unsortierte Import-Bloecke, f-Strings ohne Platzhalter, ein verschachteltes
+  `with` (SIM117) und drei `pytest.raises(Exception)` (B017), die jetzt auf
+  `pydantic.ValidationError` zeigen statt auf den Namen der Exception zu
+  vergleichen — ein blindes `Exception` haette dort auch ein `TypeError`
+  durchgehen lassen.
+
+  Die drei E402-Befunde kamen daher, dass in den beiden Live-Test-Dateien eine
+  Funktionsdefinition und eine Zuweisung zwischen `sys.path.insert()` und den
+  Projekt-Importen standen. Statt sie per `noqa` stumm zu schalten, steht das
+  Path-Setup jetzt direkt vor den Projekt-Importen — dasselbe Muster, das
+  `test_unit.py` schon nutzte und das ruff akzeptiert.
+
+  Gegengeprueft: `pytest -m "not live"` meldet unveraendert 13 passed, die
+  Sammlung der Live-Tests unveraendert 42 — die Importe tragen also weiterhin.
+  Der einzige vollstaendig gemockte Live-Test (`test_20_retry_logic`, der das
+  umgeschriebene `with` enthaelt) laeuft gruen.
+
 - **`.pre-commit-config.yaml` — der `lint`-Job der CI, lokal vorgezogen.** Die
   Hooks fahren dieselben drei Schritte wie der Job: `ruff check src/`,
   `ruff format src/` und `scripts/check_version_sync.py`.
