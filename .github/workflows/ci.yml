@@ -74,17 +74,20 @@ jobs:
       # die Schleife über alle im Portfolio genutzten Breiten statt nur der
       # eigenen.
       #
-      # Bewusst die einzelne Datei und nicht `scripts/`: `check_ruff_pin.py`
-      # gibt es nur in diesem Repo, wird also nirgends hinkopiert und hat
-      # keinen Grund, breitenunabhängig zu sein. Kommt ein weiteres geteiltes
-      # Skript dazu, gehört es in diese Liste.
+      # Bewusst einzelne Dateien und nicht `scripts/`: geprüft wird nur, was
+      # tatsächlich zwischen Repos wandert. `check_ruff_pin.py` steht seit
+      # mcp-audit-skill#70 auch dort und ist seit #29 bzw.
+      # mcp-audit-skill#73 in beiden Fassungen breitenunabhängig — es gehört
+      # also in die Liste. Kommt ein weiteres geteiltes Skript dazu, ebenso.
       - name: Format-Stabilität der Portfolio-Skripte
         run: |
-          for ll in 88 100 110 120; do
-            if ! ruff format --check --line-length "$ll" scripts/check_version_sync.py; then
-              echo "::error file=scripts/check_version_sync.py::Nicht formatgerecht bei line-length $ll. Die Datei wird portfolioweit kopiert und muss bei jeder genutzten Breite gleich formatiert sein — Begründung im Modul-Docstring."
-              exit 1
-            fi
+          for f in scripts/check_version_sync.py scripts/check_ruff_pin.py; do
+            for ll in 88 100 110 120; do
+              if ! ruff format --check --line-length "$ll" "$f"; then
+                echo "::error file=$f::Nicht formatgerecht bei line-length $ll. Die Datei wird portfolioweit kopiert und muss bei jeder genutzten Breite gleich formatiert sein — Begründung im Modul-Docstring."
+                exit 1
+              fi
+            done
           done
 
       # server.json stand hier auf 0.4.3, während pyproject.toml bei 0.4.4 war,
