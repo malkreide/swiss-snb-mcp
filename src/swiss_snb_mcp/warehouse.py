@@ -107,6 +107,8 @@ def retry_delay(attempt: int, last_error: Exception | None) -> float:
         )
     # Cap *after* jitter — the other order made MAX_DELAY_S not a bound at all.
     return min(jittered, MAX_DELAY_S)
+
+
 # 503 Service Unavailable and 423 Locked are both transient — the SNB
 # warehouse returns 423 while a cube is being re-published.
 RETRY_STATUS_CODES = {423, 503}
@@ -215,7 +217,10 @@ async def _fetch_warehouse(
             last_exc = e
             break
         except httpx.HTTPStatusError as e:
-            if e.response.status_code in RETRY_STATUS_CODES and attempt < MAX_RETRIES - 1:
+            if (
+                e.response.status_code in RETRY_STATUS_CODES
+                and attempt < MAX_RETRIES - 1
+            ):
                 last_exc = e
                 if not await _wait(attempt, e):
                     break

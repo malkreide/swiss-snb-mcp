@@ -31,7 +31,9 @@ class TestParseRetryAfter:
 
     def test_http_date_in_the_past_means_now(self):
         when = datetime.now(UTC) - timedelta(hours=1)
-        assert w.parse_retry_after(_resp(503, format_datetime(when, usegmt=True))) == 0.0
+        assert (
+            w.parse_retry_after(_resp(503, format_datetime(when, usegmt=True))) == 0.0
+        )
 
     def test_absent_header(self):
         assert w.parse_retry_after(_resp(429)) is None
@@ -78,7 +80,8 @@ class TestRetryDelay:
         assert len(draws) > 1, "delay is deterministic — jitter is not applied"
         base = w.RETRY_DELAYS[2]
         assert all(
-            base * (1 - w.JITTER_SPREAD) <= d <= base * (1 + w.JITTER_SPREAD) for d in draws
+            base * (1 - w.JITTER_SPREAD) <= d <= base * (1 + w.JITTER_SPREAD)
+            for d in draws
         )
 
 
