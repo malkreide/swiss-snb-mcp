@@ -7,6 +7,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Hinzugefuegt — der naechtliche Live-Lauf wird sichtbar, wenn er faellt
+
+Der `live`-Job faehrt seit jeher jede Nacht `python tests/test_live_scenarios.py`
+und `python tests/test_live_warehouse.py` gegen `data.snb.ch`. Das ist mehr, als
+die meisten Server im Portfolio haben — und es fehlte trotzdem das Entscheidende:
+**Ein rotes Ergebnis sah niemand.**
+
+Ein geplanter Lauf, dessen Ausgang nur als roter Eintrag im Actions-Tab landet,
+ist eine teurere Variante von «laeuft nicht». Rote Cron-Jobs werden nach der
+zweiten Woche nicht mehr angeschaut, und dann faellt der Ausfall wieder erst
+einem Nutzer auf.
+
+Eine rote Nacht oeffnet jetzt ein Issue mit stabilem Titel-Praefix und Label
+`upstream` und kommentiert ein bestehendes, statt ein zweites aufzumachen — bei
+einem taeglichen Cron der Unterschied zwischen einem Thread und dreissig Issues
+im Monat. Ein wieder gruener Lauf schliesst es.
+
+**Drei Antworten, nicht zwei.** `if: failure()` kennt rot und nicht rot; ein
+gescheitertes `pip install` saehe damit aus wie ein gebrochener Vertrag mit der
+SNB. `scripts/classify_live_scenarios.py` liest deshalb die Summenzeile der
+Szenarienlaeufe und trennt `clear`, `finding` und `unknown`. Ein `unknown`
+schliesst nie ein Issue: zuzumachen hiesse zu behaupten, der Vergleich sei
+gelaufen.
+
+Der Fall, der die Einordnung noetig macht, steht im eigenen Code: `main()` gibt
+`FAILED == 0` zurueck. Bei null registrierten Szenarien ist das `True` — ein
+gruener Lauf, der nichts geprueft hat. `Total: 0` ist deshalb `unknown`, und eine
+fehlende Summenzeile ebenfalls.
+
+Die Einordnung steht in einem Skript mit eigenem Test
+(`tests/test_classify_live_scenarios.py`, 15 Tests) und nicht in einem
+`run:`-Block: Sie entscheidet, ob ein Issue auf- oder zugeht, und das ist der
+einzige Teil des Jobs, der etwas behauptet.
+
+Die Szenarien-Ausgabe geht ueber `env` ins `github-script`, nicht ueber `${{ }}`
+— sie ist fremder Text, der sonst in einem JavaScript-Template-Literal landet.
+Das Label wird vor dem ersten Issue angelegt, sonst scheitert genau die Nacht, in
+der es gebraucht wird. `permissions: issues: write` kommt dazu.
+
+Gemessen mit `live_schedule_probe` aus `mcp-continuous-auditor`: vorher
+`LIVE_SCHEDULED_SILENT`, jetzt `LIVE_SCHEDULED`.
+
 ### Added
 
 - **Retry-Politik gegenueber dem SNB-Warehouse** (ARCH-014): `Retry-After` wird

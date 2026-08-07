@@ -116,3 +116,36 @@ Seien Sie respektvoll und konstruktiv. Dies ist ein kleines Open-Source-Projekt,
 ## Lizenz
 
 Mit Ihrem Beitrag erklären Sie sich damit einverstanden, dass Ihre Beiträge unter der [MIT-Lizenz](LICENSE) lizenziert werden.
+
+## Der nächtliche Live-Lauf: wer ein rotes Ergebnis sieht
+
+**Kadenz:** jede Nacht um 03:17 UTC, dazu von Hand über *Actions → CI → Run
+workflow*. Der `live`-Job läuft nie auf einem Pull Request — ein Ausfall von
+`data.snb.ch` darf den Mainline-Build nicht in Geiselhaft nehmen.
+
+Diesen Job gibt es, seit dieses Repo geschrieben wurde. Was fehlte, ist das
+Folgende: **Ein rotes Ergebnis sah niemand.** Ein geplanter Lauf, dessen Ausgang
+nur als roter Eintrag im Actions-Tab landet, ist eine teurere Variante von «läuft
+nicht» — rote Cron-Jobs werden nach der zweiten Woche nicht mehr angeschaut.
+
+**Wer es jetzt sieht:** Eine rote Nacht öffnet ein Issue mit dem Titel
+`Live-Tests gegen data.snb.ch rot …` und dem Label `upstream` — und kommentiert
+das bestehende, statt ein zweites aufzumachen. Bei einem *täglichen* Cron ist das
+keine Feinheit, sondern der Unterschied zwischen einem Thread und dreissig Issues
+im Monat. Wird der Lauf wieder grün, wird es geschlossen.
+
+**Drei Antworten, nicht zwei.** `scripts/classify_live_scenarios.py` liest die
+Summenzeile der Szenarienläufe statt nur den Exit-Code und trennt `clear`
+(gelaufen, alle bestanden), `finding` (gelaufen, etwas gefallen) und `unknown`
+(nicht gelaufen — Installation gescheitert, Timeout, Import-Fehler oder **null
+registrierte Szenarien**). Der letzte Fall zählt: `main()` gibt `FAILED == 0`
+zurück, was bei null Szenarien `True` ist — ein grüner Lauf, der nichts geprüft
+hat. Ein `unknown` schliesst nie ein Issue: Zuzumachen hiesse zu behaupten, der
+Vergleich sei gelaufen.
+
+**Ein roter Live-Lauf heisst nicht zwingend «unser Fehler».** Er heisst: Der
+Vertrag mit der SNB hat sich geändert, oder die Quelle ist gerade aus. Beides
+gehört gesehen, nur das Erste gehört gefixt. Bitte den Lauf lesen, bevor der Job
+deaktiviert wird — die Live-Szenarien sind die einzigen Tests hier, die einer
+falschen Grundannahme über `data.snb.ch` widersprechen können, denn jeder andere
+Test prüft gegen eine Fixture, die aus derselben Annahme geschrieben ist.
