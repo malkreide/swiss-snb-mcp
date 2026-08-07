@@ -10,6 +10,13 @@ on:
     - cron: "17 3 * * *"
   workflow_dispatch:
 
+# Der `live`-Job legt bei einem roten Lauf ein Issue an oder schliesst es
+# wieder. Ohne `issues: write` scheitert genau der Schritt, der den Lauf
+# ueberhaupt sichtbar macht.
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -120,14 +127,162 @@ jobs:
 
       - run: pip install -e ".[dev]"
 
+      # `continue-on-error` an beiden Schritten, damit die Einordnung unten in
+      # jedem Fall laeuft. Rot wird der Job am Ende, aus dem eingeordneten
+      # Ergebnis — nicht aus dem ersten Schritt, der stolpert.
       - name: Live-Tests gegen SNB API
-        run: python tests/test_live_scenarios.py
+        id: scenarios
+        continue-on-error: true
         env:
           PYTHONPATH: src
         timeout-minutes: 5
+        run: |
+          set +e
+          python tests/test_live_scenarios.py 2>&1 | tee scenarios.log
+          echo "exit=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
 
       - name: Live-Tests Warehouse API
-        run: python tests/test_live_warehouse.py
+        id: warehouse
+        continue-on-error: true
         env:
           PYTHONPATH: src
         timeout-minutes: 5
+        run: |
+          set +e
+          python tests/test_live_warehouse.py 2>&1 | tee warehouse.log
+          echo "exit=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      # Der Job faehrt seit jeher jede Nacht. Was fehlte, war das hier: Ein
+      # rotes Ergebnis sah niemand. Ein geplanter Lauf, dessen Ausgang nur als
+      # roter Eintrag im Actions-Tab landet, ist eine teurere Variante von
+      # «laeuft nicht» — rote Cron-Jobs werden nach der zweiten Woche nicht
+      # mehr angeschaut.
+      #
+      # Die Einordnung steht in einem Skript mit eigenem Test und nicht hier:
+      # Sie entscheidet, ob ein Issue auf- oder zugeht, und das ist der einzige
+      # Teil dieses Jobs, der etwas behauptet. In YAML kann das niemand testen.
+      - name: Ergebnis einordnen
+        id: verdict
+        run: |
+          python scripts/classify_live_scenarios.py \
+            "scenarios.log:${{ steps.scenarios.outputs.exit }}" \
+            "warehouse.log:${{ steps.warehouse.outputs.exit }}"
+          {
+            echo "tail<<LIVE_TAIL"
+            tail -n 25 scenarios.log 2>/dev/null || true
+            echo "---"
+            tail -n 25 warehouse.log 2>/dev/null || true
+            echo "LIVE_TAIL"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Issue oeffnen, aktualisieren oder schliessen
+        uses: actions/github-script@v7
+        # Ueber `env`, nicht ueber `${{ }}` im Skript: Die Szenarien-Ausgabe ist
+        # fremder Text, der sonst in einem JavaScript-Template-Literal landet.
+        # Ein Backtick oder ein `${` darin bricht das Skript.
+        env:
+          LIVE_STATE: ${{ steps.verdict.outputs.state }}
+          LIVE_REASON: ${{ steps.verdict.outputs.reason }}
+          LIVE_TAIL: ${{ steps.verdict.outputs.tail }}
+        with:
+          script: |
+            const state = process.env.LIVE_STATE;
+            const reason = process.env.LIVE_REASON || '';
+            const tail = process.env.LIVE_TAIL || '(keine Ausgabe)';
+            // Stabiles Praefix: Damit eine zweite rote Nacht den bestehenden
+            // Thread verlaengert statt einen zweiten aufzumachen. Bei einem
+            // TAEGLICHEN Cron ist das keine Feinheit, sondern der Unterschied
+            // zwischen einem Thread und dreissig Issues im Monat.
+            const PREFIX = 'Live-Tests gegen data.snb.ch rot';
+            const LABEL = 'upstream';
+            const run = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}` +
+                        `/actions/runs/${context.runId}`;
+            const heute = new Date().toISOString().slice(0, 10);
+
+            // `issues.listForRepo` statt der Such-API: Die Suche hat ein
+            // eigenes, knappes Rate-Limit und indexiert verzoegert — ein frisch
+            // geoeffnetes Issue findet sie unter Umstaenden nicht, und dann
+            // legt die naechste rote Nacht ein zweites an.
+            const issues = await github.rest.issues.listForRepo({
+              ...context.repo, state: 'open', labels: LABEL, per_page: 100,
+            });
+            const open = issues.data.find(
+              (i) => !i.pull_request && i.title.startsWith(PREFIX)
+            );
+
+            if (state === 'unknown') {
+              // Weder oeffnen noch schliessen. Der Lauf hat nichts ueber den
+              // Vertrag mit der SNB festgestellt, und ein Issue, das auf so
+              // einen Lauf hin zugeht, behauptet einen Vergleich, den es nicht
+              // gab.
+              core.warning(`Live-Lauf nicht ausgewertet: ${reason}. Am Issue wurde nichts geaendert.`);
+              return;
+            }
+
+            if (state === 'finding') {
+              const body = [
+                'Der naechtliche Live-Lauf gegen `data.snb.ch` ist rot.',
+                '',
+                `Lauf: ${run}`,
+                `Einordnung: ${reason}`,
+                '',
+                '**Rot heisst hier nicht zwingend «unser Fehler».** Es heisst: Der Vertrag',
+                'mit der Quelle hat sich geaendert, oder die Quelle ist gerade aus. Beides',
+                'gehoert gesehen, nur das Erste gehoert gefixt — und genau das Erste sehen',
+                'die Unit-Tests nicht, weil ihre Fixtures aus derselben Annahme geschrieben',
+                'sind wie der Code.',
+                '',
+                '<details><summary>Letzte Zeilen beider Szenarienlaeufe</summary>',
+                '',
+                '```',
+                tail,
+                '```',
+                '',
+                '</details>',
+              ].join('\n');
+
+              if (open) {
+                await github.rest.issues.createComment({
+                  ...context.repo, issue_number: open.number,
+                  body: `Wieder rot am ${heute}.\n\n${body}`,
+                });
+              } else {
+                // Das Label anlegen, falls das Repo es noch nicht kennt: Sonst
+                // scheitert `issues.create` in genau der Nacht, in der das
+                // Issue gebraucht wird.
+                try {
+                  await github.rest.issues.createLabel({
+                    ...context.repo, name: LABEL, color: 'd93f0b',
+                    description: 'Vertrag mit einer externen Quelle betroffen',
+                  });
+                } catch (e) {
+                  if (e.status !== 422) throw e;  // 422 = existiert bereits
+                }
+                await github.rest.issues.create({
+                  ...context.repo, title: `${PREFIX} (${heute})`, body, labels: [LABEL],
+                });
+              }
+              return;
+            }
+
+            // clear — und nur hier wird zugemacht, weil nur hier wirklich
+            // verglichen und nichts gefunden wurde.
+            if (open) {
+              await github.rest.issues.createComment({
+                ...context.repo, issue_number: open.number,
+                body: `Der Live-Lauf ist wieder gruen (${reason}). Lauf: ${run}`,
+              });
+              await github.rest.issues.update({
+                ...context.repo, issue_number: open.number,
+                state: 'closed', state_reason: 'completed',
+              });
+            }
+
+      # Erst hier wird der Job rot. `clear` ist gruen; `finding` und `unknown`
+      # sind beide rot, aber nur `finding` hat oben ein Issue erzeugt.
+      - name: Ergebnis durchreichen
+        if: steps.verdict.outputs.state != 'clear'
+        run: |
+          echo "Live-Lauf: ${{ steps.verdict.outputs.state }}"
+          echo "${{ steps.verdict.outputs.reason }}"
+          exit 1

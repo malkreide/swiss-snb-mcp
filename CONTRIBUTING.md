@@ -116,3 +116,36 @@ Be respectful and constructive. This is a small open-source project maintained i
 ## License
 
 By contributing, you agree that your contributions will be licensed under the [MIT License](LICENSE).
+
+## The nightly live run: who sees a red result
+
+**Cadence:** every night at 03:17 UTC, plus on demand via *Actions → CI → Run
+workflow*. The `live` job never runs on a pull request — a `data.snb.ch` outage
+must not hold the mainline build hostage.
+
+That job has run since this repository was written. What it lacked was the part
+below: **nobody saw a red result.** A scheduled run whose outcome only lands as a
+red entry in the Actions tab is a more expensive way of not running — red crons
+stop being looked at in the second week.
+
+**Who sees it now:** a red night opens an issue titled `Live-Tests gegen
+data.snb.ch rot …` with the `upstream` label, and comments on the existing one
+instead of opening a second. With a *daily* cron that is not a nicety; it is the
+difference between one thread and thirty issues a month. A run that goes green
+again closes it.
+
+**Three answers, not two.** `scripts/classify_live_scenarios.py` reads the
+scenario runners' own summary line rather than the exit code alone, and
+separates `clear` (ran, all passed), `finding` (ran, something fell) and
+`unknown` (did not run — install failed, timeout, import error, or **zero
+scenarios registered**). That last one matters: `main()` returns `FAILED == 0`,
+which with no scenarios registered is `True` — a green run that checked nothing.
+An `unknown` never closes an issue: closing would claim a comparison that never
+happened.
+
+**A red live run does not necessarily mean *our* bug.** It means the contract
+with the SNB has changed, or the source is down. Both belong seen; only the first
+belongs fixed. Please read the run before disabling the job — the live scenarios
+are the only tests here that can contradict a wrong assumption about
+`data.snb.ch`, because every other test asserts against a fixture written from
+the same assumption.
