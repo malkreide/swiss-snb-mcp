@@ -1,0 +1,121 @@
+{
+  "cubeId": "BSTA.SNB.JAHR_K.BIL.AKT.TOT",
+  "dimensions": [
+    {
+      "id": "KONSOLIDIERUNGSSTUFE",
+      "name": "Konsolidierungsstufe",
+      "dimensionItems": [
+        {
+          "id": "K",
+          "name": "Konzern"
+        }
+      ]
+    },
+    {
+      "id": "INLANDAUSLAND",
+      "name": "Inland und Ausland",
+      "dimensionItems": [
+        {
+          "id": "T",
+          "name": "Total Inland und Ausland"
+        },
+        {
+          "id": "I",
+          "name": "Inland"
+        },
+        {
+          "id": "A",
+          "name": "Ausland"
+        }
+      ]
+    },
+    {
+      "id": "WAEHRUNG",
+      "name": "Währung",
+      "dimensionItems": [
+        {
+          "id": "T",
+          "name": "Total Währung"
+        },
+        {
+          "id": "CHF",
+          "name": "Schweizer Franken"
+        },
+        {
+          "id": "EM",
+          "name": "Edelmetalle"
+        },
+        {
+          "id": "EUR",
+          "name": "Euro"
+        },
+        {
+          "id": "JPY",
+          "name": "Yen"
+        },
+        {
+          "id": "USD",
+          "name": "US-Dollar"
+        },
+        {
+          "id": "U",
+          "name": "Übrige Währungen"
+        }
+      ]
+    },
+    {
+      "id": "BANKENGRUPPE",
+      "name": "Bankengruppe",
+      "dimensionItems": [
+        {
+          "id": "A30",
+          "name": "Banken in der Schweiz"
+        },
+        {
+          "id": "G10",
+          "name": "Kantonalbanken"
+        },
+        {
+          "id": "G15",
+          "name": "Grossbanken"
+        },
+        {
+          "id": "G20",
+          "name": "Regionalbanken und Sparkassen"
+        },
+        {
+          "id": "G25",
+          "name": "Raiffeisenbanken"
+        },
+        {
+          "id": "G35",
+          "name": "Börsenbanken"
+        },
+        {
+          "id": "G45",
+          "name": "Andere Banken"
+        },
+        {
+          "id": "A10",
+          "name": "Privatbankiers"
+        },
+        {
+          "id": "A25",
+          "name": "Ausländische Banken"
+        },
+        {
+          "id": "G65",
+          "name": "Ausländisch beherrschte Banken"
+        },
+        {
+          "id": "G70",
+          "name": "Filialen ausländischer Banken"
+        },
+        {
+          "id": "S10",
+          "name": "Banken in der Schweiz ohne Privatbankiers und ohne Filialen ausländischer Banken"
+        }
+      ]
+    }
+  ]
+}

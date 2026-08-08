@@ -1,0 +1,6268 @@
+{
+  "timeseries": [
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - EUR 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,EUR1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.94494
+        },
+        {
+          "date": "2024-09",
+          "value": 0.94101
+        },
+        {
+          "date": "2024-10",
+          "value": 0.93867
+        },
+        {
+          "date": "2024-11",
+          "value": 0.9354
+        },
+        {
+          "date": "2024-12",
+          "value": 0.93383
+        },
+        {
+          "date": "2025-01",
+          "value": 0.94162
+        },
+        {
+          "date": "2025-02",
+          "value": 0.94114
+        },
+        {
+          "date": "2025-03",
+          "value": 0.95488
+        },
+        {
+          "date": "2025-04",
+          "value": 0.93799
+        },
+        {
+          "date": "2025-05",
+          "value": 0.93578
+        },
+        {
+          "date": "2025-06",
+          "value": 0.93766
+        },
+        {
+          "date": "2025-07",
+          "value": 0.93245
+        },
+        {
+          "date": "2025-08",
+          "value": 0.93875
+        },
+        {
+          "date": "2025-09",
+          "value": 0.93483
+        },
+        {
+          "date": "2025-10",
+          "value": 0.92857
+        },
+        {
+          "date": "2025-11",
+          "value": 0.92887
+        },
+        {
+          "date": "2025-12",
+          "value": 0.93313
+        },
+        {
+          "date": "2026-01",
+          "value": 0.92732
+        },
+        {
+          "date": "2026-02",
+          "value": 0.91406
+        },
+        {
+          "date": "2026-03",
+          "value": 0.90912
+        },
+        {
+          "date": "2026-04",
+          "value": 0.92116
+        },
+        {
+          "date": "2026-05",
+          "value": 0.91503
+        },
+        {
+          "date": "2026-06",
+          "value": 0.92045
+        },
+        {
+          "date": "2026-07",
+          "value": 0.92538
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Vereinigtes Königreich – GBP 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,GBP1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 1.10943
+        },
+        {
+          "date": "2024-09",
+          "value": 1.11956
+        },
+        {
+          "date": "2024-10",
+          "value": 1.12372
+        },
+        {
+          "date": "2024-11",
+          "value": 1.12169
+        },
+        {
+          "date": "2024-12",
+          "value": 1.12782
+        },
+        {
+          "date": "2025-01",
+          "value": 1.12201
+        },
+        {
+          "date": "2025-02",
+          "value": 1.13291
+        },
+        {
+          "date": "2025-03",
+          "value": 1.14062
+        },
+        {
+          "date": "2025-04",
+          "value": 1.09923
+        },
+        {
+          "date": "2025-05",
+          "value": 1.10814
+        },
+        {
+          "date": "2025-06",
+          "value": 1.10318
+        },
+        {
+          "date": "2025-07",
+          "value": 1.07794
+        },
+        {
+          "date": "2025-08",
+          "value": 1.08509
+        },
+        {
+          "date": "2025-09",
+          "value": 1.07581
+        },
+        {
+          "date": "2025-10",
+          "value": 1.0655
+        },
+        {
+          "date": "2025-11",
+          "value": 1.05529
+        },
+        {
+          "date": "2025-12",
+          "value": 1.0662
+        },
+        {
+          "date": "2026-01",
+          "value": 1.06864
+        },
+        {
+          "date": "2026-02",
+          "value": 1.05012
+        },
+        {
+          "date": "2026-03",
+          "value": 1.04908
+        },
+        {
+          "date": "2026-04",
+          "value": 1.05937
+        },
+        {
+          "date": "2026-05",
+          "value": 1.05676
+        },
+        {
+          "date": "2026-06",
+          "value": 1.06551
+        },
+        {
+          "date": "2026-07",
+          "value": 1.08371
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Dänemark – DKK 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,DKK100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 12.66426
+        },
+        {
+          "date": "2024-09",
+          "value": 12.61399
+        },
+        {
+          "date": "2024-10",
+          "value": 12.58383
+        },
+        {
+          "date": "2024-11",
+          "value": 12.54173
+        },
+        {
+          "date": "2024-12",
+          "value": 12.52015
+        },
+        {
+          "date": "2025-01",
+          "value": 12.62055
+        },
+        {
+          "date": "2025-02",
+          "value": 12.61708
+        },
+        {
+          "date": "2025-03",
+          "value": 12.80071
+        },
+        {
+          "date": "2025-04",
+          "value": 12.56531
+        },
+        {
+          "date": "2025-05",
+          "value": 12.54397
+        },
+        {
+          "date": "2025-06",
+          "value": 12.57
+        },
+        {
+          "date": "2025-07",
+          "value": 12.49525
+        },
+        {
+          "date": "2025-08",
+          "value": 12.57762
+        },
+        {
+          "date": "2025-09",
+          "value": 12.52379
+        },
+        {
+          "date": "2025-10",
+          "value": 12.43428
+        },
+        {
+          "date": "2025-11",
+          "value": 12.43825
+        },
+        {
+          "date": "2025-12",
+          "value": 12.4928
+        },
+        {
+          "date": "2026-01",
+          "value": 12.4133
+        },
+        {
+          "date": "2026-02",
+          "value": 12.23616
+        },
+        {
+          "date": "2026-03",
+          "value": 12.16752
+        },
+        {
+          "date": "2026-04",
+          "value": 12.32668
+        },
+        {
+          "date": "2026-05",
+          "value": 12.24504
+        },
+        {
+          "date": "2026-06",
+          "value": 12.31486
+        },
+        {
+          "date": "2026-07",
+          "value": 12.3796
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Norwegen – NOK 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,NOK100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 8.01461
+        },
+        {
+          "date": "2024-09",
+          "value": 7.98581
+        },
+        {
+          "date": "2024-10",
+          "value": 7.95869
+        },
+        {
+          "date": "2024-11",
+          "value": 7.96342
+        },
+        {
+          "date": "2024-12",
+          "value": 7.95615
+        },
+        {
+          "date": "2025-01",
+          "value": 8.01414
+        },
+        {
+          "date": "2025-02",
+          "value": 8.0731
+        },
+        {
+          "date": "2025-03",
+          "value": 8.26861
+        },
+        {
+          "date": "2025-04",
+          "value": 7.93362
+        },
+        {
+          "date": "2025-05",
+          "value": 8.06451
+        },
+        {
+          "date": "2025-06",
+          "value": 8.09352
+        },
+        {
+          "date": "2025-07",
+          "value": 7.86063
+        },
+        {
+          "date": "2025-08",
+          "value": 7.90953
+        },
+        {
+          "date": "2025-09",
+          "value": 8.01101
+        },
+        {
+          "date": "2025-10",
+          "value": 7.95535
+        },
+        {
+          "date": "2025-11",
+          "value": 7.91461
+        },
+        {
+          "date": "2025-12",
+          "value": 7.88348
+        },
+        {
+          "date": "2026-01",
+          "value": 7.94367
+        },
+        {
+          "date": "2026-02",
+          "value": 8.07176
+        },
+        {
+          "date": "2026-03",
+          "value": 8.14175
+        },
+        {
+          "date": "2026-04",
+          "value": 8.3464
+        },
+        {
+          "date": "2026-05",
+          "value": 8.46781
+        },
+        {
+          "date": "2026-06",
+          "value": 8.346
+        },
+        {
+          "date": "2026-07",
+          "value": 8.34064
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Tschechische Republik – CZK 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,CZK100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 3.75497
+        },
+        {
+          "date": "2024-09",
+          "value": 3.74907
+        },
+        {
+          "date": "2024-10",
+          "value": 3.71029
+        },
+        {
+          "date": "2024-11",
+          "value": 3.6963
+        },
+        {
+          "date": "2024-12",
+          "value": 3.71591
+        },
+        {
+          "date": "2025-01",
+          "value": 3.74265
+        },
+        {
+          "date": "2025-02",
+          "value": 3.75307
+        },
+        {
+          "date": "2025-03",
+          "value": 3.81862
+        },
+        {
+          "date": "2025-04",
+          "value": 3.745
+        },
+        {
+          "date": "2025-05",
+          "value": 3.75546
+        },
+        {
+          "date": "2025-06",
+          "value": 3.78079
+        },
+        {
+          "date": "2025-07",
+          "value": 3.78631
+        },
+        {
+          "date": "2025-08",
+          "value": 3.82938
+        },
+        {
+          "date": "2025-09",
+          "value": 3.83955
+        },
+        {
+          "date": "2025-10",
+          "value": 3.81913
+        },
+        {
+          "date": "2025-11",
+          "value": 3.83201
+        },
+        {
+          "date": "2025-12",
+          "value": 3.84657
+        },
+        {
+          "date": "2026-01",
+          "value": 3.82044
+        },
+        {
+          "date": "2026-02",
+          "value": 3.76823
+        },
+        {
+          "date": "2026-03",
+          "value": 3.72058
+        },
+        {
+          "date": "2026-04",
+          "value": 3.77782
+        },
+        {
+          "date": "2026-05",
+          "value": 3.76308
+        },
+        {
+          "date": "2026-06",
+          "value": 3.80219
+        },
+        {
+          "date": "2026-07",
+          "value": 3.82249
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Ungarn – HUF 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,HUF100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.23933
+        },
+        {
+          "date": "2024-09",
+          "value": 0.23828
+        },
+        {
+          "date": "2024-10",
+          "value": 0.23367
+        },
+        {
+          "date": "2024-11",
+          "value": 0.22843
+        },
+        {
+          "date": "2024-12",
+          "value": 0.22677
+        },
+        {
+          "date": "2025-01",
+          "value": 0.22862
+        },
+        {
+          "date": "2025-02",
+          "value": 0.23344
+        },
+        {
+          "date": "2025-03",
+          "value": 0.23889
+        },
+        {
+          "date": "2025-04",
+          "value": 0.23071
+        },
+        {
+          "date": "2025-05",
+          "value": 0.23168
+        },
+        {
+          "date": "2025-06",
+          "value": 0.23323
+        },
+        {
+          "date": "2025-07",
+          "value": 0.23359
+        },
+        {
+          "date": "2025-08",
+          "value": 0.23683
+        },
+        {
+          "date": "2025-09",
+          "value": 0.23862
+        },
+        {
+          "date": "2025-10",
+          "value": 0.23808
+        },
+        {
+          "date": "2025-11",
+          "value": 0.24166
+        },
+        {
+          "date": "2025-12",
+          "value": 0.24249
+        },
+        {
+          "date": "2026-01",
+          "value": 0.24134
+        },
+        {
+          "date": "2026-02",
+          "value": 0.2415
+        },
+        {
+          "date": "2026-03",
+          "value": 0.23369
+        },
+        {
+          "date": "2026-04",
+          "value": 0.24961
+        },
+        {
+          "date": "2026-05",
+          "value": 0.25534
+        },
+        {
+          "date": "2026-06",
+          "value": 0.26017
+        },
+        {
+          "date": "2026-07",
+          "value": 0.25763
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Polen – PLN 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,PLN100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 22.01625
+        },
+        {
+          "date": "2024-09",
+          "value": 21.99999
+        },
+        {
+          "date": "2024-10",
+          "value": 21.74647
+        },
+        {
+          "date": "2024-11",
+          "value": 21.57432
+        },
+        {
+          "date": "2024-12",
+          "value": 21.86461
+        },
+        {
+          "date": "2025-01",
+          "value": 22.17575
+        },
+        {
+          "date": "2025-02",
+          "value": 22.55001
+        },
+        {
+          "date": "2025-03",
+          "value": 22.8318
+        },
+        {
+          "date": "2025-04",
+          "value": 21.99663
+        },
+        {
+          "date": "2025-05",
+          "value": 21.99494
+        },
+        {
+          "date": "2025-06",
+          "value": 21.98641
+        },
+        {
+          "date": "2025-07",
+          "value": 21.91656
+        },
+        {
+          "date": "2025-08",
+          "value": 22.02424
+        },
+        {
+          "date": "2025-09",
+          "value": 21.94901
+        },
+        {
+          "date": "2025-10",
+          "value": 21.85281
+        },
+        {
+          "date": "2025-11",
+          "value": 21.91476
+        },
+        {
+          "date": "2025-12",
+          "value": 22.08736
+        },
+        {
+          "date": "2026-01",
+          "value": 22.01307
+        },
+        {
+          "date": "2026-02",
+          "value": 21.67345
+        },
+        {
+          "date": "2026-03",
+          "value": 21.28167
+        },
+        {
+          "date": "2026-04",
+          "value": 21.66613
+        },
+        {
+          "date": "2026-05",
+          "value": 21.56953
+        },
+        {
+          "date": "2026-06",
+          "value": 21.62046
+        },
+        {
+          "date": "2026-07",
+          "value": 21.43088
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Russische Föderation – RUB 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,RUB1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.00958
+        },
+        {
+          "date": "2024-09",
+          "value": 0.00926
+        },
+        {
+          "date": "2024-10",
+          "value": 0.00892
+        },
+        {
+          "date": "2024-11",
+          "value": 0.00872
+        },
+        {
+          "date": "2024-12",
+          "value": 0.00861
+        },
+        {
+          "date": "2025-01",
+          "value": 0.00895
+        },
+        {
+          "date": "2025-02",
+          "value": 0.00982
+        },
+        {
+          "date": "2025-03",
+          "value": 0.01029
+        },
+        {
+          "date": "2025-04",
+          "value": 0.01003
+        },
+        {
+          "date": "2025-05",
+          "value": 0.01028
+        },
+        {
+          "date": "2025-06",
+          "value": 0.01033
+        },
+        {
+          "date": "2025-07",
+          "value": 0.01011
+        },
+        {
+          "date": "2025-08",
+          "value": 0.01006
+        },
+        {
+          "date": "2025-09",
+          "value": 0.00962
+        },
+        {
+          "date": "2025-10",
+          "value": 0.00988
+        },
+        {
+          "date": "2025-11",
+          "value": 0.01002
+        },
+        {
+          "date": "2025-12",
+          "value": 0.01016
+        },
+        {
+          "date": "2026-01",
+          "value": 0.01013
+        },
+        {
+          "date": "2026-02",
+          "value": 0.01005
+        },
+        {
+          "date": "2026-03",
+          "value": 0.00978
+        },
+        {
+          "date": "2026-04",
+          "value": 0.01031
+        },
+        {
+          "date": "2026-05",
+          "value": 0.01077
+        },
+        {
+          "date": "2026-06",
+          "value": 0.01085
+        },
+        {
+          "date": "2026-07",
+          "value": 0.0104
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Schweden – SEK 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,SEK100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 8.25208
+        },
+        {
+          "date": "2024-09",
+          "value": 8.28394
+        },
+        {
+          "date": "2024-10",
+          "value": 8.23001
+        },
+        {
+          "date": "2024-11",
+          "value": 8.07525
+        },
+        {
+          "date": "2024-12",
+          "value": 8.1154
+        },
+        {
+          "date": "2025-01",
+          "value": 8.2002
+        },
+        {
+          "date": "2025-02",
+          "value": 8.36523
+        },
+        {
+          "date": "2025-03",
+          "value": 8.708
+        },
+        {
+          "date": "2025-04",
+          "value": 8.55182
+        },
+        {
+          "date": "2025-05",
+          "value": 8.59568
+        },
+        {
+          "date": "2025-06",
+          "value": 8.5199
+        },
+        {
+          "date": "2025-07",
+          "value": 8.32884
+        },
+        {
+          "date": "2025-08",
+          "value": 8.41276
+        },
+        {
+          "date": "2025-09",
+          "value": 8.49996
+        },
+        {
+          "date": "2025-10",
+          "value": 8.46117
+        },
+        {
+          "date": "2025-11",
+          "value": 8.45338
+        },
+        {
+          "date": "2025-12",
+          "value": 8.56667
+        },
+        {
+          "date": "2026-01",
+          "value": 8.68205
+        },
+        {
+          "date": "2026-02",
+          "value": 8.60235
+        },
+        {
+          "date": "2026-03",
+          "value": 8.44483
+        },
+        {
+          "date": "2026-04",
+          "value": 8.49915
+        },
+        {
+          "date": "2026-05",
+          "value": 8.42272
+        },
+        {
+          "date": "2026-06",
+          "value": 8.40545
+        },
+        {
+          "date": "2026-07",
+          "value": 8.37448
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Türkei – TRY 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,TRY100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 2.54181
+        },
+        {
+          "date": "2024-09",
+          "value": 2.48702
+        },
+        {
+          "date": "2024-10",
+          "value": 2.51244
+        },
+        {
+          "date": "2024-11",
+          "value": 2.5544
+        },
+        {
+          "date": "2024-12",
+          "value": 2.54723
+        },
+        {
+          "date": "2025-01",
+          "value": 2.55688
+        },
+        {
+          "date": "2025-02",
+          "value": 2.49694
+        },
+        {
+          "date": "2025-03",
+          "value": 2.37529
+        },
+        {
+          "date": "2025-04",
+          "value": 2.19389
+        },
+        {
+          "date": "2025-05",
+          "value": 2.13684
+        },
+        {
+          "date": "2025-06",
+          "value": 2.062
+        },
+        {
+          "date": "2025-07",
+          "value": 1.9824
+        },
+        {
+          "date": "2025-08",
+          "value": 1.97389
+        },
+        {
+          "date": "2025-09",
+          "value": 1.92697
+        },
+        {
+          "date": "2025-10",
+          "value": 1.90612
+        },
+        {
+          "date": "2025-11",
+          "value": 1.9004
+        },
+        {
+          "date": "2025-12",
+          "value": 1.86747
+        },
+        {
+          "date": "2026-01",
+          "value": 1.82737
+        },
+        {
+          "date": "2026-02",
+          "value": 1.76807
+        },
+        {
+          "date": "2026-03",
+          "value": 1.77973
+        },
+        {
+          "date": "2026-04",
+          "value": 1.7566
+        },
+        {
+          "date": "2026-05",
+          "value": 1.72092
+        },
+        {
+          "date": "2026-06",
+          "value": 1.72658
+        },
+        {
+          "date": "2026-07",
+          "value": 1.7201
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Amerika - USA – USD 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,USD1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.85732
+        },
+        {
+          "date": "2024-09",
+          "value": 0.84719
+        },
+        {
+          "date": "2024-10",
+          "value": 0.86059
+        },
+        {
+          "date": "2024-11",
+          "value": 0.88034
+        },
+        {
+          "date": "2024-12",
+          "value": 0.89113
+        },
+        {
+          "date": "2025-01",
+          "value": 0.90933
+        },
+        {
+          "date": "2025-02",
+          "value": 0.90396
+        },
+        {
+          "date": "2025-03",
+          "value": 0.88351
+        },
+        {
+          "date": "2025-04",
+          "value": 0.83684
+        },
+        {
+          "date": "2025-05",
+          "value": 0.82921
+        },
+        {
+          "date": "2025-06",
+          "value": 0.81376
+        },
+        {
+          "date": "2025-07",
+          "value": 0.79786
+        },
+        {
+          "date": "2025-08",
+          "value": 0.80649
+        },
+        {
+          "date": "2025-09",
+          "value": 0.79661
+        },
+        {
+          "date": "2025-10",
+          "value": 0.79772
+        },
+        {
+          "date": "2025-11",
+          "value": 0.80389
+        },
+        {
+          "date": "2025-12",
+          "value": 0.79709
+        },
+        {
+          "date": "2026-01",
+          "value": 0.79023
+        },
+        {
+          "date": "2026-02",
+          "value": 0.77275
+        },
+        {
+          "date": "2026-03",
+          "value": 0.78678
+        },
+        {
+          "date": "2026-04",
+          "value": 0.78713
+        },
+        {
+          "date": "2026-05",
+          "value": 0.78369
+        },
+        {
+          "date": "2026-06",
+          "value": 0.7992
+        },
+        {
+          "date": "2026-07",
+          "value": 0.81002
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Amerika - Kanada – CAD 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,CAD1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.62763
+        },
+        {
+          "date": "2024-09",
+          "value": 0.6258
+        },
+        {
+          "date": "2024-10",
+          "value": 0.62595
+        },
+        {
+          "date": "2024-11",
+          "value": 0.62994
+        },
+        {
+          "date": "2024-12",
+          "value": 0.62614
+        },
+        {
+          "date": "2025-01",
+          "value": 0.63189
+        },
+        {
+          "date": "2025-02",
+          "value": 0.632
+        },
+        {
+          "date": "2025-03",
+          "value": 0.61557
+        },
+        {
+          "date": "2025-04",
+          "value": 0.59769
+        },
+        {
+          "date": "2025-05",
+          "value": 0.59794
+        },
+        {
+          "date": "2025-06",
+          "value": 0.59489
+        },
+        {
+          "date": "2025-07",
+          "value": 0.58305
+        },
+        {
+          "date": "2025-08",
+          "value": 0.58429
+        },
+        {
+          "date": "2025-09",
+          "value": 0.57605
+        },
+        {
+          "date": "2025-10",
+          "value": 0.57011
+        },
+        {
+          "date": "2025-11",
+          "value": 0.57186
+        },
+        {
+          "date": "2025-12",
+          "value": 0.5771
+        },
+        {
+          "date": "2026-01",
+          "value": 0.57307
+        },
+        {
+          "date": "2026-02",
+          "value": 0.56628
+        },
+        {
+          "date": "2026-03",
+          "value": 0.57377
+        },
+        {
+          "date": "2026-04",
+          "value": 0.57243
+        },
+        {
+          "date": "2026-05",
+          "value": 0.57107
+        },
+        {
+          "date": "2026-06",
+          "value": 0.56942
+        },
+        {
+          "date": "2026-07",
+          "value": 0.57392
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Amerika - Argentinien – ARS 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,ARS1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.00091
+        },
+        {
+          "date": "2024-09",
+          "value": 0.00088
+        },
+        {
+          "date": "2024-10",
+          "value": 0.00088
+        },
+        {
+          "date": "2024-11",
+          "value": 0.00088
+        },
+        {
+          "date": "2024-12",
+          "value": 0.00088
+        },
+        {
+          "date": "2025-01",
+          "value": 0.00087
+        },
+        {
+          "date": "2025-02",
+          "value": 0.00085
+        },
+        {
+          "date": "2025-03",
+          "value": 0.00083
+        },
+        {
+          "date": "2025-04",
+          "value": 0.00075
+        },
+        {
+          "date": "2025-05",
+          "value": 0.00072
+        },
+        {
+          "date": "2025-06",
+          "value": 0.00069
+        },
+        {
+          "date": "2025-07",
+          "value": 0.00063
+        },
+        {
+          "date": "2025-08",
+          "value": 0.00061
+        },
+        {
+          "date": "2025-09",
+          "value": 0.00057
+        },
+        {
+          "date": "2025-10",
+          "value": 0.00056
+        },
+        {
+          "date": "2025-11",
+          "value": 0.00056
+        },
+        {
+          "date": "2025-12",
+          "value": 0.00055
+        },
+        {
+          "date": "2026-01",
+          "value": 0.00054
+        },
+        {
+          "date": "2026-02",
+          "value": 0.00055
+        },
+        {
+          "date": "2026-03",
+          "value": 0.00056
+        },
+        {
+          "date": "2026-04",
+          "value": 0.00057
+        },
+        {
+          "date": "2026-05",
+          "value": 0.00056
+        },
+        {
+          "date": "2026-06",
+          "value": 0.00055
+        },
+        {
+          "date": "2026-07",
+          "value": 0.00055
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Amerika - Brasilien – BRL 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,BRL100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 15.44905
+        },
+        {
+          "date": "2024-09",
+          "value": 15.27289
+        },
+        {
+          "date": "2024-10",
+          "value": 15.34413
+        },
+        {
+          "date": "2024-11",
+          "value": 15.1956
+        },
+        {
+          "date": "2024-12",
+          "value": 14.6259
+        },
+        {
+          "date": "2025-01",
+          "value": 15.1065
+        },
+        {
+          "date": "2025-02",
+          "value": 15.68208
+        },
+        {
+          "date": "2025-03",
+          "value": 15.32263
+        },
+        {
+          "date": "2025-04",
+          "value": 14.4949
+        },
+        {
+          "date": "2025-05",
+          "value": 14.63379
+        },
+        {
+          "date": "2025-06",
+          "value": 14.65737
+        },
+        {
+          "date": "2025-07",
+          "value": 14.44395
+        },
+        {
+          "date": "2025-08",
+          "value": 14.80997
+        },
+        {
+          "date": "2025-09",
+          "value": 14.82875
+        },
+        {
+          "date": "2025-10",
+          "value": 14.81056
+        },
+        {
+          "date": "2025-11",
+          "value": 15.04943
+        },
+        {
+          "date": "2025-12",
+          "value": 14.63028
+        },
+        {
+          "date": "2026-01",
+          "value": 14.81067
+        },
+        {
+          "date": "2026-02",
+          "value": 14.83924
+        },
+        {
+          "date": "2026-03",
+          "value": 15.05188
+        },
+        {
+          "date": "2026-04",
+          "value": 15.65144
+        },
+        {
+          "date": "2026-05",
+          "value": 15.74908
+        },
+        {
+          "date": "2026-06",
+          "value": 15.60348
+        },
+        {
+          "date": "2026-07",
+          "value": 15.82971
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Amerika - Mexiko – MXN 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,MXN100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 4.47658
+        },
+        {
+          "date": "2024-09",
+          "value": 4.32247
+        },
+        {
+          "date": "2024-10",
+          "value": 4.37229
+        },
+        {
+          "date": "2024-11",
+          "value": 4.32976
+        },
+        {
+          "date": "2024-12",
+          "value": 4.39728
+        },
+        {
+          "date": "2025-01",
+          "value": 4.42126
+        },
+        {
+          "date": "2025-02",
+          "value": 4.4123
+        },
+        {
+          "date": "2025-03",
+          "value": 4.36776
+        },
+        {
+          "date": "2025-04",
+          "value": 4.16871
+        },
+        {
+          "date": "2025-05",
+          "value": 4.26665
+        },
+        {
+          "date": "2025-06",
+          "value": 4.27288
+        },
+        {
+          "date": "2025-07",
+          "value": 4.26807
+        },
+        {
+          "date": "2025-08",
+          "value": 4.31003
+        },
+        {
+          "date": "2025-09",
+          "value": 4.30615
+        },
+        {
+          "date": "2025-10",
+          "value": 4.32807
+        },
+        {
+          "date": "2025-11",
+          "value": 4.36225
+        },
+        {
+          "date": "2025-12",
+          "value": 4.40691
+        },
+        {
+          "date": "2026-01",
+          "value": 4.47581
+        },
+        {
+          "date": "2026-02",
+          "value": 4.48484
+        },
+        {
+          "date": "2026-03",
+          "value": 4.42969
+        },
+        {
+          "date": "2026-04",
+          "value": 4.51512
+        },
+        {
+          "date": "2026-05",
+          "value": 4.52617
+        },
+        {
+          "date": "2026-06",
+          "value": 4.59963
+        },
+        {
+          "date": "2026-07",
+          "value": 4.63868
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Afrika - Südafrika – ZAR 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,ZAR1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.04754
+        },
+        {
+          "date": "2024-09",
+          "value": 0.0481
+        },
+        {
+          "date": "2024-10",
+          "value": 0.049
+        },
+        {
+          "date": "2024-11",
+          "value": 0.04911
+        },
+        {
+          "date": "2024-12",
+          "value": 0.04904
+        },
+        {
+          "date": "2025-01",
+          "value": 0.04856
+        },
+        {
+          "date": "2025-02",
+          "value": 0.04889
+        },
+        {
+          "date": "2025-03",
+          "value": 0.04836
+        },
+        {
+          "date": "2025-04",
+          "value": 0.04428
+        },
+        {
+          "date": "2025-05",
+          "value": 0.0458
+        },
+        {
+          "date": "2025-06",
+          "value": 0.0456
+        },
+        {
+          "date": "2025-07",
+          "value": 0.04492
+        },
+        {
+          "date": "2025-08",
+          "value": 0.04555
+        },
+        {
+          "date": "2025-09",
+          "value": 0.04565
+        },
+        {
+          "date": "2025-10",
+          "value": 0.04615
+        },
+        {
+          "date": "2025-11",
+          "value": 0.04665
+        },
+        {
+          "date": "2025-12",
+          "value": 0.0473
+        },
+        {
+          "date": "2026-01",
+          "value": 0.04855
+        },
+        {
+          "date": "2026-02",
+          "value": 0.0483
+        },
+        {
+          "date": "2026-03",
+          "value": 0.04702
+        },
+        {
+          "date": "2026-04",
+          "value": 0.04759
+        },
+        {
+          "date": "2026-05",
+          "value": 0.04753
+        },
+        {
+          "date": "2026-06",
+          "value": 0.04876
+        },
+        {
+          "date": "2026-07",
+          "value": 0.04922
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Japan – JPY 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,JPY100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.58674
+        },
+        {
+          "date": "2024-09",
+          "value": 0.59182
+        },
+        {
+          "date": "2024-10",
+          "value": 0.57536
+        },
+        {
+          "date": "2024-11",
+          "value": 0.57306
+        },
+        {
+          "date": "2024-12",
+          "value": 0.57998
+        },
+        {
+          "date": "2025-01",
+          "value": 0.58142
+        },
+        {
+          "date": "2025-02",
+          "value": 0.59539
+        },
+        {
+          "date": "2025-03",
+          "value": 0.59254
+        },
+        {
+          "date": "2025-04",
+          "value": 0.57933
+        },
+        {
+          "date": "2025-05",
+          "value": 0.57335
+        },
+        {
+          "date": "2025-06",
+          "value": 0.5633
+        },
+        {
+          "date": "2025-07",
+          "value": 0.54317
+        },
+        {
+          "date": "2025-08",
+          "value": 0.54669
+        },
+        {
+          "date": "2025-09",
+          "value": 0.53878
+        },
+        {
+          "date": "2025-10",
+          "value": 0.52708
+        },
+        {
+          "date": "2025-11",
+          "value": 0.51814
+        },
+        {
+          "date": "2025-12",
+          "value": 0.5114
+        },
+        {
+          "date": "2026-01",
+          "value": 0.50424
+        },
+        {
+          "date": "2026-02",
+          "value": 0.49808
+        },
+        {
+          "date": "2026-03",
+          "value": 0.49584
+        },
+        {
+          "date": "2026-04",
+          "value": 0.49427
+        },
+        {
+          "date": "2026-05",
+          "value": 0.49554
+        },
+        {
+          "date": "2026-06",
+          "value": 0.49732
+        },
+        {
+          "date": "2026-07",
+          "value": 0.49875
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Australien – AUD 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,AUD1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.57081
+        },
+        {
+          "date": "2024-09",
+          "value": 0.57361
+        },
+        {
+          "date": "2024-10",
+          "value": 0.5775
+        },
+        {
+          "date": "2024-11",
+          "value": 0.57504
+        },
+        {
+          "date": "2024-12",
+          "value": 0.56522
+        },
+        {
+          "date": "2025-01",
+          "value": 0.56641
+        },
+        {
+          "date": "2025-02",
+          "value": 0.56951
+        },
+        {
+          "date": "2025-03",
+          "value": 0.5566
+        },
+        {
+          "date": "2025-04",
+          "value": 0.52599
+        },
+        {
+          "date": "2025-05",
+          "value": 0.53417
+        },
+        {
+          "date": "2025-06",
+          "value": 0.52878
+        },
+        {
+          "date": "2025-07",
+          "value": 0.52177
+        },
+        {
+          "date": "2025-08",
+          "value": 0.52363
+        },
+        {
+          "date": "2025-09",
+          "value": 0.52527
+        },
+        {
+          "date": "2025-10",
+          "value": 0.52197
+        },
+        {
+          "date": "2025-11",
+          "value": 0.52285
+        },
+        {
+          "date": "2025-12",
+          "value": 0.52921
+        },
+        {
+          "date": "2026-01",
+          "value": 0.53606
+        },
+        {
+          "date": "2026-02",
+          "value": 0.54546
+        },
+        {
+          "date": "2026-03",
+          "value": 0.55223
+        },
+        {
+          "date": "2026-04",
+          "value": 0.55863
+        },
+        {
+          "date": "2026-05",
+          "value": 0.56248
+        },
+        {
+          "date": "2026-06",
+          "value": 0.56142
+        },
+        {
+          "date": "2026-07",
+          "value": 0.56415
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - China – CNY 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,CNY100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 11.99358
+        },
+        {
+          "date": "2024-09",
+          "value": 11.96862
+        },
+        {
+          "date": "2024-10",
+          "value": 12.14234
+        },
+        {
+          "date": "2024-11",
+          "value": 12.21271
+        },
+        {
+          "date": "2024-12",
+          "value": 12.23695
+        },
+        {
+          "date": "2025-01",
+          "value": 12.45953
+        },
+        {
+          "date": "2025-02",
+          "value": 12.42677
+        },
+        {
+          "date": "2025-03",
+          "value": 12.18519
+        },
+        {
+          "date": "2025-04",
+          "value": 11.46118
+        },
+        {
+          "date": "2025-05",
+          "value": 11.49497
+        },
+        {
+          "date": "2025-06",
+          "value": 11.33098
+        },
+        {
+          "date": "2025-07",
+          "value": 11.12389
+        },
+        {
+          "date": "2025-08",
+          "value": 11.24384
+        },
+        {
+          "date": "2025-09",
+          "value": 11.18146
+        },
+        {
+          "date": "2025-10",
+          "value": 11.20319
+        },
+        {
+          "date": "2025-11",
+          "value": 11.30979
+        },
+        {
+          "date": "2025-12",
+          "value": 11.31454
+        },
+        {
+          "date": "2026-01",
+          "value": 11.34082
+        },
+        {
+          "date": "2026-02",
+          "value": 11.18798
+        },
+        {
+          "date": "2026-03",
+          "value": 11.41046
+        },
+        {
+          "date": "2026-04",
+          "value": 11.51681
+        },
+        {
+          "date": "2026-05",
+          "value": 11.52706
+        },
+        {
+          "date": "2026-06",
+          "value": 11.79397
+        },
+        {
+          "date": "2026-07",
+          "value": 11.95218
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Hongkong – HKD 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,HKD100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 10.99883
+        },
+        {
+          "date": "2024-09",
+          "value": 10.87318
+        },
+        {
+          "date": "2024-10",
+          "value": 11.07543
+        },
+        {
+          "date": "2024-11",
+          "value": 11.31575
+        },
+        {
+          "date": "2024-12",
+          "value": 11.46391
+        },
+        {
+          "date": "2025-01",
+          "value": 11.67982
+        },
+        {
+          "date": "2025-02",
+          "value": 11.61589
+        },
+        {
+          "date": "2025-03",
+          "value": 11.36625
+        },
+        {
+          "date": "2025-04",
+          "value": 10.77888
+        },
+        {
+          "date": "2025-05",
+          "value": 10.62893
+        },
+        {
+          "date": "2025-06",
+          "value": 10.36815
+        },
+        {
+          "date": "2025-07",
+          "value": 10.16417
+        },
+        {
+          "date": "2025-08",
+          "value": 10.30556
+        },
+        {
+          "date": "2025-09",
+          "value": 10.23243
+        },
+        {
+          "date": "2025-10",
+          "value": 10.26035
+        },
+        {
+          "date": "2025-11",
+          "value": 10.33568
+        },
+        {
+          "date": "2025-12",
+          "value": 10.24324
+        },
+        {
+          "date": "2026-01",
+          "value": 10.1343
+        },
+        {
+          "date": "2026-02",
+          "value": 9.88604
+        },
+        {
+          "date": "2026-03",
+          "value": 10.05175
+        },
+        {
+          "date": "2026-04",
+          "value": 10.04731
+        },
+        {
+          "date": "2026-05",
+          "value": 10.00526
+        },
+        {
+          "date": "2026-06",
+          "value": 10.19692
+        },
+        {
+          "date": "2026-07",
+          "value": 10.32988
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Korea Republik (Süd-) – KRW 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,KRW100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.06345
+        },
+        {
+          "date": "2024-09",
+          "value": 0.06362
+        },
+        {
+          "date": "2024-10",
+          "value": 0.06323
+        },
+        {
+          "date": "2024-11",
+          "value": 0.06311
+        },
+        {
+          "date": "2024-12",
+          "value": 0.06197
+        },
+        {
+          "date": "2025-01",
+          "value": 0.06263
+        },
+        {
+          "date": "2025-02",
+          "value": 0.06255
+        },
+        {
+          "date": "2025-03",
+          "value": 0.06061
+        },
+        {
+          "date": "2025-04",
+          "value": 0.05797
+        },
+        {
+          "date": "2025-05",
+          "value": 0.05963
+        },
+        {
+          "date": "2025-06",
+          "value": 0.0596
+        },
+        {
+          "date": "2025-07",
+          "value": 0.05792
+        },
+        {
+          "date": "2025-08",
+          "value": 0.05804
+        },
+        {
+          "date": "2025-09",
+          "value": 0.05721
+        },
+        {
+          "date": "2025-10",
+          "value": 0.05605
+        },
+        {
+          "date": "2025-11",
+          "value": 0.05504
+        },
+        {
+          "date": "2025-12",
+          "value": 0.05433
+        },
+        {
+          "date": "2026-01",
+          "value": 0.05421
+        },
+        {
+          "date": "2026-02",
+          "value": 0.05337
+        },
+        {
+          "date": "2026-03",
+          "value": 0.05279
+        },
+        {
+          "date": "2026-04",
+          "value": 0.05311
+        },
+        {
+          "date": "2026-05",
+          "value": 0.05261
+        },
+        {
+          "date": "2026-06",
+          "value": 0.05226
+        },
+        {
+          "date": "2026-07",
+          "value": 0.05437
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Malaysia MYR – 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,MYR100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 19.45343
+        },
+        {
+          "date": "2024-09",
+          "value": 19.87728
+        },
+        {
+          "date": "2024-10",
+          "value": 20.01728
+        },
+        {
+          "date": "2024-11",
+          "value": 19.84594
+        },
+        {
+          "date": "2024-12",
+          "value": 19.98138
+        },
+        {
+          "date": "2025-01",
+          "value": 20.36653
+        },
+        {
+          "date": "2025-02",
+          "value": 20.34668
+        },
+        {
+          "date": "2025-03",
+          "value": 19.92189
+        },
+        {
+          "date": "2025-04",
+          "value": 18.9478
+        },
+        {
+          "date": "2025-05",
+          "value": 19.44773
+        },
+        {
+          "date": "2025-06",
+          "value": 19.18247
+        },
+        {
+          "date": "2025-07",
+          "value": 18.83314
+        },
+        {
+          "date": "2025-08",
+          "value": 19.09008
+        },
+        {
+          "date": "2025-09",
+          "value": 18.90983
+        },
+        {
+          "date": "2025-10",
+          "value": 18.91929
+        },
+        {
+          "date": "2025-11",
+          "value": 19.35109
+        },
+        {
+          "date": "2025-12",
+          "value": 19.47613
+        },
+        {
+          "date": "2026-01",
+          "value": 19.62933
+        },
+        {
+          "date": "2026-02",
+          "value": 19.74899
+        },
+        {
+          "date": "2026-03",
+          "value": 19.90736
+        },
+        {
+          "date": "2026-04",
+          "value": 19.8191
+        },
+        {
+          "date": "2026-05",
+          "value": 19.82605
+        },
+        {
+          "date": "2026-06",
+          "value": 19.64311
+        },
+        {
+          "date": "2026-07",
+          "value": 19.84199
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Neuseeland – NZD 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,NZD1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.5217
+        },
+        {
+          "date": "2024-09",
+          "value": 0.52716
+        },
+        {
+          "date": "2024-10",
+          "value": 0.52375
+        },
+        {
+          "date": "2024-11",
+          "value": 0.52062
+        },
+        {
+          "date": "2024-12",
+          "value": 0.51296
+        },
+        {
+          "date": "2025-01",
+          "value": 0.51208
+        },
+        {
+          "date": "2025-02",
+          "value": 0.51338
+        },
+        {
+          "date": "2025-03",
+          "value": 0.50581
+        },
+        {
+          "date": "2025-04",
+          "value": 0.48727
+        },
+        {
+          "date": "2025-05",
+          "value": 0.49242
+        },
+        {
+          "date": "2025-06",
+          "value": 0.49033
+        },
+        {
+          "date": "2025-07",
+          "value": 0.47869
+        },
+        {
+          "date": "2025-08",
+          "value": 0.47573
+        },
+        {
+          "date": "2025-09",
+          "value": 0.46888
+        },
+        {
+          "date": "2025-10",
+          "value": 0.45956
+        },
+        {
+          "date": "2025-11",
+          "value": 0.45456
+        },
+        {
+          "date": "2025-12",
+          "value": 0.46092
+        },
+        {
+          "date": "2026-01",
+          "value": 0.46168
+        },
+        {
+          "date": "2026-02",
+          "value": 0.46444
+        },
+        {
+          "date": "2026-03",
+          "value": 0.46013
+        },
+        {
+          "date": "2026-04",
+          "value": 0.46055
+        },
+        {
+          "date": "2026-05",
+          "value": 0.46239
+        },
+        {
+          "date": "2026-06",
+          "value": 0.46211
+        },
+        {
+          "date": "2026-07",
+          "value": 0.46811
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Singapur – SGD 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,SGD1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.65198
+        },
+        {
+          "date": "2024-09",
+          "value": 0.65357
+        },
+        {
+          "date": "2024-10",
+          "value": 0.65711
+        },
+        {
+          "date": "2024-11",
+          "value": 0.65852
+        },
+        {
+          "date": "2024-12",
+          "value": 0.66009
+        },
+        {
+          "date": "2025-01",
+          "value": 0.66813
+        },
+        {
+          "date": "2025-02",
+          "value": 0.6712
+        },
+        {
+          "date": "2025-03",
+          "value": 0.66125
+        },
+        {
+          "date": "2025-04",
+          "value": 0.63166
+        },
+        {
+          "date": "2025-05",
+          "value": 0.6409
+        },
+        {
+          "date": "2025-06",
+          "value": 0.63418
+        },
+        {
+          "date": "2025-07",
+          "value": 0.6229
+        },
+        {
+          "date": "2025-08",
+          "value": 0.6276
+        },
+        {
+          "date": "2025-09",
+          "value": 0.62009
+        },
+        {
+          "date": "2025-10",
+          "value": 0.6157
+        },
+        {
+          "date": "2025-11",
+          "value": 0.61691
+        },
+        {
+          "date": "2025-12",
+          "value": 0.61719
+        },
+        {
+          "date": "2026-01",
+          "value": 0.61731
+        },
+        {
+          "date": "2026-02",
+          "value": 0.61009
+        },
+        {
+          "date": "2026-03",
+          "value": 0.61475
+        },
+        {
+          "date": "2026-04",
+          "value": 0.61695
+        },
+        {
+          "date": "2026-05",
+          "value": 0.61443
+        },
+        {
+          "date": "2026-06",
+          "value": 0.62054
+        },
+        {
+          "date": "2026-07",
+          "value": 0.62733
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Thailand – THB 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,THB100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 2.46884
+        },
+        {
+          "date": "2024-09",
+          "value": 2.54235
+        },
+        {
+          "date": "2024-10",
+          "value": 2.57707
+        },
+        {
+          "date": "2024-11",
+          "value": 2.55552
+        },
+        {
+          "date": "2024-12",
+          "value": 2.60849
+        },
+        {
+          "date": "2025-01",
+          "value": 2.65448
+        },
+        {
+          "date": "2025-02",
+          "value": 2.67538
+        },
+        {
+          "date": "2025-03",
+          "value": 2.61351
+        },
+        {
+          "date": "2025-04",
+          "value": 2.47505
+        },
+        {
+          "date": "2025-05",
+          "value": 2.5179
+        },
+        {
+          "date": "2025-06",
+          "value": 2.4959
+        },
+        {
+          "date": "2025-07",
+          "value": 2.45959
+        },
+        {
+          "date": "2025-08",
+          "value": 2.48664
+        },
+        {
+          "date": "2025-09",
+          "value": 2.48948
+        },
+        {
+          "date": "2025-10",
+          "value": 2.45007
+        },
+        {
+          "date": "2025-11",
+          "value": 2.48152
+        },
+        {
+          "date": "2025-12",
+          "value": 2.52151
+        },
+        {
+          "date": "2026-01",
+          "value": 2.52637
+        },
+        {
+          "date": "2026-02",
+          "value": 2.47321
+        },
+        {
+          "date": "2026-03",
+          "value": 2.43743
+        },
+        {
+          "date": "2026-04",
+          "value": 2.43783
+        },
+        {
+          "date": "2026-05",
+          "value": 2.40977
+        },
+        {
+          "date": "2026-06",
+          "value": 2.43009
+        },
+        {
+          "date": "2026-07",
+          "value": 2.41791
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "SZR - XDR 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,XDR1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 1.15054
+        },
+        {
+          "date": "2024-09",
+          "value": 1.14415
+        },
+        {
+          "date": "2024-10",
+          "value": 1.15022
+        },
+        {
+          "date": "2024-11",
+          "value": 1.1607
+        },
+        {
+          "date": "2024-12",
+          "value": 1.16838
+        },
+        {
+          "date": "2025-01",
+          "value": 1.18247
+        },
+        {
+          "date": "2025-02",
+          "value": 1.18209
+        },
+        {
+          "date": "2025-03",
+          "value": 1.17323
+        },
+        {
+          "date": "2025-04",
+          "value": 1.12462
+        },
+        {
+          "date": "2025-05",
+          "value": 1.12173
+        },
+        {
+          "date": "2025-06",
+          "value": 1.1109
+        },
+        {
+          "date": "2025-07",
+          "value": 1.09367
+        },
+        {
+          "date": "2025-08",
+          "value": 1.10101
+        },
+        {
+          "date": "2025-09",
+          "value": 1.09138
+        },
+        {
+          "date": "2025-10",
+          "value": 1.08857
+        },
+        {
+          "date": "2025-11",
+          "value": 1.09075
+        },
+        {
+          "date": "2025-12",
+          "value": 1.08806
+        },
+        {
+          "date": "2026-01",
+          "value": 1.08011
+        },
+        {
+          "date": "2026-02",
+          "value": 1.06331
+        },
+        {
+          "date": "2026-03",
+          "value": 1.07182
+        },
+        {
+          "date": "2026-04",
+          "value": 1.07863
+        },
+        {
+          "date": "2026-05",
+          "value": 1.07401
+        },
+        {
+          "date": "2026-06",
+          "value": 1.08918
+        },
+        {
+          "date": "2026-07",
+          "value": 1.1004
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "USD Terminkurse - US-Dollar 3-Monats-Terminkurs (CHF pro 1 USD)"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,USD3M}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.8488
+        },
+        {
+          "date": "2024-09",
+          "value": 0.8383999999999999
+        },
+        {
+          "date": "2024-10",
+          "value": 0.8517
+        },
+        {
+          "date": "2024-11",
+          "value": 0.8711
+        },
+        {
+          "date": "2024-12",
+          "value": 0.8827
+        },
+        {
+          "date": "2025-01",
+          "value": 0.8996000000000001
+        },
+        {
+          "date": "2025-02",
+          "value": 0.8945000000000001
+        },
+        {
+          "date": "2025-03",
+          "value": 0.874
+        },
+        {
+          "date": "2025-04",
+          "value": 0.8254
+        },
+        {
+          "date": "2025-05",
+          "value": 0.8199000000000001
+        },
+        {
+          "date": "2025-06",
+          "value": 0.8046
+        },
+        {
+          "date": "2025-07",
+          "value": 0.7887
+        },
+        {
+          "date": "2025-08",
+          "value": 0.7978999999999999
+        },
+        {
+          "date": "2025-09",
+          "value": 0.7881
+        },
+        {
+          "date": "2025-10",
+          "value": 0.7892
+        },
+        {
+          "date": "2025-11",
+          "value": 0.7954
+        },
+        {
+          "date": "2025-12",
+          "value": 0.7884
+        },
+        {
+          "date": "2026-01",
+          "value": 0.7827999999999999
+        },
+        {
+          "date": "2026-02",
+          "value": 0.7653000000000001
+        },
+        {
+          "date": "2026-03",
+          "value": 0.7789
+        },
+        {
+          "date": "2026-04",
+          "value": 0.7803
+        },
+        {
+          "date": "2026-05",
+          "value": 0.7756
+        },
+        {
+          "date": "2026-06",
+          "value": 0.7912
+        },
+        {
+          "date": "2026-07",
+          "value": 0.8018000000000001
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsmittel"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "USD Terminkurse - US-Dollar 6-Monats-Terminkurs (CHF pro 1 USD)"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M0,USD6M}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.8403999999999999
+        },
+        {
+          "date": "2024-09",
+          "value": 0.8309
+        },
+        {
+          "date": "2024-10",
+          "value": 0.8437
+        },
+        {
+          "date": "2024-11",
+          "value": 0.8623999999999999
+        },
+        {
+          "date": "2024-12",
+          "value": 0.8734000000000001
+        },
+        {
+          "date": "2025-01",
+          "value": 0.8902
+        },
+        {
+          "date": "2025-02",
+          "value": 0.885
+        },
+        {
+          "date": "2025-03",
+          "value": 0.865
+        },
+        {
+          "date": "2025-04",
+          "value": 0.8167
+        },
+        {
+          "date": "2025-05",
+          "value": 0.8106
+        },
+        {
+          "date": "2025-06",
+          "value": 0.7956
+        },
+        {
+          "date": "2025-07",
+          "value": 0.7798999999999999
+        },
+        {
+          "date": "2025-08",
+          "value": 0.7894
+        },
+        {
+          "date": "2025-09",
+          "value": 0.7804
+        },
+        {
+          "date": "2025-10",
+          "value": 0.7818999999999999
+        },
+        {
+          "date": "2025-11",
+          "value": 0.7878
+        },
+        {
+          "date": "2025-12",
+          "value": 0.781
+        },
+        {
+          "date": "2026-01",
+          "value": 0.7755
+        },
+        {
+          "date": "2026-02",
+          "value": 0.7581000000000001
+        },
+        {
+          "date": "2026-03",
+          "value": 0.7713000000000001
+        },
+        {
+          "date": "2026-04",
+          "value": 0.7727
+        },
+        {
+          "date": "2026-05",
+          "value": 0.768
+        },
+        {
+          "date": "2026-06",
+          "value": 0.7832
+        },
+        {
+          "date": "2026-07",
+          "value": 0.7933
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - EUR 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,EUR1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.94005
+        },
+        {
+          "date": "2024-09",
+          "value": 0.94483
+        },
+        {
+          "date": "2024-10",
+          "value": 0.94023
+        },
+        {
+          "date": "2024-11",
+          "value": 0.93031
+        },
+        {
+          "date": "2024-12",
+          "value": 0.94185
+        },
+        {
+          "date": "2025-01",
+          "value": 0.94563
+        },
+        {
+          "date": "2025-02",
+          "value": 0.93762
+        },
+        {
+          "date": "2025-03",
+          "value": 0.95353
+        },
+        {
+          "date": "2025-04",
+          "value": 0.93879
+        },
+        {
+          "date": "2025-05",
+          "value": 0.93326
+        },
+        {
+          "date": "2025-06",
+          "value": 0.93546
+        },
+        {
+          "date": "2025-07",
+          "value": 0.93053
+        },
+        {
+          "date": "2025-08",
+          "value": 0.93482
+        },
+        {
+          "date": "2025-09",
+          "value": 0.9359
+        },
+        {
+          "date": "2025-10",
+          "value": 0.92781
+        },
+        {
+          "date": "2025-11",
+          "value": 0.93303
+        },
+        {
+          "date": "2025-12",
+          "value": 0.9311
+        },
+        {
+          "date": "2026-01",
+          "value": 0.91637
+        },
+        {
+          "date": "2026-02",
+          "value": 0.91171
+        },
+        {
+          "date": "2026-03",
+          "value": 0.91752
+        },
+        {
+          "date": "2026-04",
+          "value": 0.92225
+        },
+        {
+          "date": "2026-05",
+          "value": 0.91206
+        },
+        {
+          "date": "2026-06",
+          "value": 0.92218
+        },
+        {
+          "date": "2026-07",
+          "value": 0.92913
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Vereinigtes Königreich – GBP 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,GBP1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 1.1187
+        },
+        {
+          "date": "2024-09",
+          "value": 1.13171
+        },
+        {
+          "date": "2024-10",
+          "value": 1.1232
+        },
+        {
+          "date": "2024-11",
+          "value": 1.11851
+        },
+        {
+          "date": "2024-12",
+          "value": 1.13499
+        },
+        {
+          "date": "2025-01",
+          "value": 1.13111
+        },
+        {
+          "date": "2025-02",
+          "value": 1.13603
+        },
+        {
+          "date": "2025-03",
+          "value": 1.14015
+        },
+        {
+          "date": "2025-04",
+          "value": 1.10379
+        },
+        {
+          "date": "2025-05",
+          "value": 1.10976
+        },
+        {
+          "date": "2025-06",
+          "value": 1.09277
+        },
+        {
+          "date": "2025-07",
+          "value": 1.07705
+        },
+        {
+          "date": "2025-08",
+          "value": 1.0791
+        },
+        {
+          "date": "2025-09",
+          "value": 1.07067
+        },
+        {
+          "date": "2025-10",
+          "value": 1.05367
+        },
+        {
+          "date": "2025-11",
+          "value": 1.06543
+        },
+        {
+          "date": "2025-12",
+          "value": 1.06623
+        },
+        {
+          "date": "2026-01",
+          "value": 1.05701
+        },
+        {
+          "date": "2026-02",
+          "value": 1.04233
+        },
+        {
+          "date": "2026-03",
+          "value": 1.05704
+        },
+        {
+          "date": "2026-04",
+          "value": 1.06501
+        },
+        {
+          "date": "2026-05",
+          "value": 1.05201
+        },
+        {
+          "date": "2026-06",
+          "value": 1.07105
+        },
+        {
+          "date": "2026-07",
+          "value": 1.08537
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Dänemark – DKK 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,DKK100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 12.60351
+        },
+        {
+          "date": "2024-09",
+          "value": 12.67215
+        },
+        {
+          "date": "2024-10",
+          "value": 12.6025
+        },
+        {
+          "date": "2024-11",
+          "value": 12.4739
+        },
+        {
+          "date": "2024-12",
+          "value": 12.62917
+        },
+        {
+          "date": "2025-01",
+          "value": 12.67333
+        },
+        {
+          "date": "2025-02",
+          "value": 12.57161
+        },
+        {
+          "date": "2025-03",
+          "value": 12.78053
+        },
+        {
+          "date": "2025-04",
+          "value": 12.57521
+        },
+        {
+          "date": "2025-05",
+          "value": 12.51196
+        },
+        {
+          "date": "2025-06",
+          "value": 12.53871
+        },
+        {
+          "date": "2025-07",
+          "value": 12.47037
+        },
+        {
+          "date": "2025-08",
+          "value": 12.52327
+        },
+        {
+          "date": "2025-09",
+          "value": 12.5379
+        },
+        {
+          "date": "2025-10",
+          "value": 12.42474
+        },
+        {
+          "date": "2025-11",
+          "value": 12.49235
+        },
+        {
+          "date": "2025-12",
+          "value": 12.4667
+        },
+        {
+          "date": "2026-01",
+          "value": 12.27154
+        },
+        {
+          "date": "2026-02",
+          "value": 12.20182
+        },
+        {
+          "date": "2026-03",
+          "value": 12.28152
+        },
+        {
+          "date": "2026-04",
+          "value": 12.34275
+        },
+        {
+          "date": "2026-05",
+          "value": 12.20537
+        },
+        {
+          "date": "2026-06",
+          "value": 12.33806
+        },
+        {
+          "date": "2026-07",
+          "value": 12.42967
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Norwegen – NOK 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,NOK100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 8.06383
+        },
+        {
+          "date": "2024-09",
+          "value": 8.02944
+        },
+        {
+          "date": "2024-10",
+          "value": 7.88917
+        },
+        {
+          "date": "2024-11",
+          "value": 7.9536
+        },
+        {
+          "date": "2024-12",
+          "value": 7.9884
+        },
+        {
+          "date": "2025-01",
+          "value": 8.03953
+        },
+        {
+          "date": "2025-02",
+          "value": 8.0082
+        },
+        {
+          "date": "2025-03",
+          "value": 8.37916
+        },
+        {
+          "date": "2025-04",
+          "value": 7.97204
+        },
+        {
+          "date": "2025-05",
+          "value": 8.09001
+        },
+        {
+          "date": "2025-06",
+          "value": 7.91833
+        },
+        {
+          "date": "2025-07",
+          "value": 7.88657
+        },
+        {
+          "date": "2025-08",
+          "value": 7.9583
+        },
+        {
+          "date": "2025-09",
+          "value": 7.9708
+        },
+        {
+          "date": "2025-10",
+          "value": 7.95519
+        },
+        {
+          "date": "2025-11",
+          "value": 7.93004
+        },
+        {
+          "date": "2025-12",
+          "value": 7.88052
+        },
+        {
+          "date": "2026-01",
+          "value": 8.00766
+        },
+        {
+          "date": "2026-02",
+          "value": 8.13408
+        },
+        {
+          "date": "2026-03",
+          "value": 8.17896
+        },
+        {
+          "date": "2026-04",
+          "value": 8.43578
+        },
+        {
+          "date": "2026-05",
+          "value": 8.48962
+        },
+        {
+          "date": "2026-06",
+          "value": 8.15905
+        },
+        {
+          "date": "2026-07",
+          "value": 8.4633
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Tschechische Republik – CZK 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,CZK100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 3.75379
+        },
+        {
+          "date": "2024-09",
+          "value": 3.75257
+        },
+        {
+          "date": "2024-10",
+          "value": 3.70683
+        },
+        {
+          "date": "2024-11",
+          "value": 3.68262
+        },
+        {
+          "date": "2024-12",
+          "value": 3.74483
+        },
+        {
+          "date": "2025-01",
+          "value": 3.76253
+        },
+        {
+          "date": "2025-02",
+          "value": 3.74447
+        },
+        {
+          "date": "2025-03",
+          "value": 3.82213
+        },
+        {
+          "date": "2025-04",
+          "value": 3.76644
+        },
+        {
+          "date": "2025-05",
+          "value": 3.74234
+        },
+        {
+          "date": "2025-06",
+          "value": 3.78324
+        },
+        {
+          "date": "2025-07",
+          "value": 3.7848
+        },
+        {
+          "date": "2025-08",
+          "value": 3.81493
+        },
+        {
+          "date": "2025-09",
+          "value": 3.84617
+        },
+        {
+          "date": "2025-10",
+          "value": 3.81466
+        },
+        {
+          "date": "2025-11",
+          "value": 3.85889
+        },
+        {
+          "date": "2025-12",
+          "value": 3.84669
+        },
+        {
+          "date": "2026-01",
+          "value": 3.76497
+        },
+        {
+          "date": "2026-02",
+          "value": 3.75999
+        },
+        {
+          "date": "2026-03",
+          "value": 3.74066
+        },
+        {
+          "date": "2026-04",
+          "value": 3.78374
+        },
+        {
+          "date": "2026-05",
+          "value": 3.75582
+        },
+        {
+          "date": "2026-06",
+          "value": 3.80315
+        },
+        {
+          "date": "2026-07",
+          "value": 3.83819
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Ungarn – HUF 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,HUF100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.23944
+        },
+        {
+          "date": "2024-09",
+          "value": 0.23766
+        },
+        {
+          "date": "2024-10",
+          "value": 0.23022
+        },
+        {
+          "date": "2024-11",
+          "value": 0.22533
+        },
+        {
+          "date": "2024-12",
+          "value": 0.22966
+        },
+        {
+          "date": "2025-01",
+          "value": 0.23181
+        },
+        {
+          "date": "2025-02",
+          "value": 0.23411
+        },
+        {
+          "date": "2025-03",
+          "value": 0.23727
+        },
+        {
+          "date": "2025-04",
+          "value": 0.23206
+        },
+        {
+          "date": "2025-05",
+          "value": 0.23098
+        },
+        {
+          "date": "2025-06",
+          "value": 0.23431
+        },
+        {
+          "date": "2025-07",
+          "value": 0.23277
+        },
+        {
+          "date": "2025-08",
+          "value": 0.2355
+        },
+        {
+          "date": "2025-09",
+          "value": 0.23946
+        },
+        {
+          "date": "2025-10",
+          "value": 0.23907
+        },
+        {
+          "date": "2025-11",
+          "value": 0.24468
+        },
+        {
+          "date": "2025-12",
+          "value": 0.24175
+        },
+        {
+          "date": "2026-01",
+          "value": 0.23994
+        },
+        {
+          "date": "2026-02",
+          "value": 0.24263
+        },
+        {
+          "date": "2026-03",
+          "value": 0.23785
+        },
+        {
+          "date": "2026-04",
+          "value": 0.25191
+        },
+        {
+          "date": "2026-05",
+          "value": 0.25727
+        },
+        {
+          "date": "2026-06",
+          "value": 0.25974
+        },
+        {
+          "date": "2026-07",
+          "value": 0.25598
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Polen – PLN 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,PLN100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 21.96423
+        },
+        {
+          "date": "2024-09",
+          "value": 22.07938
+        },
+        {
+          "date": "2024-10",
+          "value": 21.60064
+        },
+        {
+          "date": "2024-11",
+          "value": 21.61307
+        },
+        {
+          "date": "2024-12",
+          "value": 22.04229
+        },
+        {
+          "date": "2025-01",
+          "value": 22.44553
+        },
+        {
+          "date": "2025-02",
+          "value": 22.55145
+        },
+        {
+          "date": "2025-03",
+          "value": 22.79067
+        },
+        {
+          "date": "2025-04",
+          "value": 21.94519
+        },
+        {
+          "date": "2025-05",
+          "value": 21.95577
+        },
+        {
+          "date": "2025-06",
+          "value": 22.05358
+        },
+        {
+          "date": "2025-07",
+          "value": 21.81286
+        },
+        {
+          "date": "2025-08",
+          "value": 21.90039
+        },
+        {
+          "date": "2025-09",
+          "value": 21.92267
+        },
+        {
+          "date": "2025-10",
+          "value": 21.80844
+        },
+        {
+          "date": "2025-11",
+          "value": 22.02119
+        },
+        {
+          "date": "2025-12",
+          "value": 22.02877
+        },
+        {
+          "date": "2026-01",
+          "value": 21.75006
+        },
+        {
+          "date": "2026-02",
+          "value": 21.58818
+        },
+        {
+          "date": "2026-03",
+          "value": 21.39152
+        },
+        {
+          "date": "2026-04",
+          "value": 21.65556
+        },
+        {
+          "date": "2026-05",
+          "value": 21.55101
+        },
+        {
+          "date": "2026-06",
+          "value": 21.46475
+        },
+        {
+          "date": "2026-07",
+          "value": 21.54364
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Russische Föderation – RUB 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,RUB1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.00929
+        },
+        {
+          "date": "2024-09",
+          "value": 0.00902
+        },
+        {
+          "date": "2024-10",
+          "value": 0.0089
+        },
+        {
+          "date": "2024-11",
+          "value": 0.00818
+        },
+        {
+          "date": "2024-12",
+          "value": 0.00824
+        },
+        {
+          "date": "2025-01",
+          "value": 0.00927
+        },
+        {
+          "date": "2025-02",
+          "value": 0.01022
+        },
+        {
+          "date": "2025-03",
+          "value": 0.0103
+        },
+        {
+          "date": "2025-04",
+          "value": 0.01012
+        },
+        {
+          "date": "2025-05",
+          "value": 0.01046
+        },
+        {
+          "date": "2025-06",
+          "value": 0.01016
+        },
+        {
+          "date": "2025-07",
+          "value": 0.01019
+        },
+        {
+          "date": "2025-08",
+          "value": 0.00993
+        },
+        {
+          "date": "2025-09",
+          "value": 0.00962
+        },
+        {
+          "date": "2025-10",
+          "value": 0.00993
+        },
+        {
+          "date": "2025-11",
+          "value": 0.01036
+        },
+        {
+          "date": "2025-12",
+          "value": 0.00978
+        },
+        {
+          "date": "2026-01",
+          "value": 0.01019
+        },
+        {
+          "date": "2026-02",
+          "value": 0.01001
+        },
+        {
+          "date": "2026-03",
+          "value": 0.00982
+        },
+        {
+          "date": "2026-04",
+          "value": 0.01055
+        },
+        {
+          "date": "2026-05",
+          "value": 0.01103
+        },
+        {
+          "date": "2026-06",
+          "value": 0.0104
+        },
+        {
+          "date": "2026-07",
+          "value": 0.01016
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Schweden – SEK 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,SEK100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 8.29285
+        },
+        {
+          "date": "2024-09",
+          "value": 8.36532
+        },
+        {
+          "date": "2024-10",
+          "value": 8.10107
+        },
+        {
+          "date": "2024-11",
+          "value": 8.08156
+        },
+        {
+          "date": "2024-12",
+          "value": 8.22436
+        },
+        {
+          "date": "2025-01",
+          "value": 8.24096
+        },
+        {
+          "date": "2025-02",
+          "value": 8.39289
+        },
+        {
+          "date": "2025-03",
+          "value": 8.81193
+        },
+        {
+          "date": "2025-04",
+          "value": 8.56547
+        },
+        {
+          "date": "2025-05",
+          "value": 8.58128
+        },
+        {
+          "date": "2025-06",
+          "value": 8.40365
+        },
+        {
+          "date": "2025-07",
+          "value": 8.34308
+        },
+        {
+          "date": "2025-08",
+          "value": 8.45441
+        },
+        {
+          "date": "2025-09",
+          "value": 8.46231
+        },
+        {
+          "date": "2025-10",
+          "value": 8.48962
+        },
+        {
+          "date": "2025-11",
+          "value": 8.48655
+        },
+        {
+          "date": "2025-12",
+          "value": 8.60963
+        },
+        {
+          "date": "2026-01",
+          "value": 8.68457
+        },
+        {
+          "date": "2026-02",
+          "value": 8.55621
+        },
+        {
+          "date": "2026-03",
+          "value": 8.38311
+        },
+        {
+          "date": "2026-04",
+          "value": 8.4932
+        },
+        {
+          "date": "2026-05",
+          "value": 8.46854
+        },
+        {
+          "date": "2026-06",
+          "value": 8.31997
+        },
+        {
+          "date": "2026-07",
+          "value": 8.47344
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Europa - Türkei – TRY 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,TRY100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 2.49097
+        },
+        {
+          "date": "2024-09",
+          "value": 2.46736
+        },
+        {
+          "date": "2024-10",
+          "value": 2.52582
+        },
+        {
+          "date": "2024-11",
+          "value": 2.54044
+        },
+        {
+          "date": "2024-12",
+          "value": 2.55602
+        },
+        {
+          "date": "2025-01",
+          "value": 2.53972
+        },
+        {
+          "date": "2025-02",
+          "value": 2.46895
+        },
+        {
+          "date": "2025-03",
+          "value": 2.32114
+        },
+        {
+          "date": "2025-04",
+          "value": 2.14428
+        },
+        {
+          "date": "2025-05",
+          "value": 2.09992
+        },
+        {
+          "date": "2025-06",
+          "value": 2.00546
+        },
+        {
+          "date": "2025-07",
+          "value": 2.00243
+        },
+        {
+          "date": "2025-08",
+          "value": 1.94578
+        },
+        {
+          "date": "2025-09",
+          "value": 1.91432
+        },
+        {
+          "date": "2025-10",
+          "value": 1.90649
+        },
+        {
+          "date": "2025-11",
+          "value": 1.89674
+        },
+        {
+          "date": "2025-12",
+          "value": 1.84639
+        },
+        {
+          "date": "2026-01",
+          "value": 1.76961
+        },
+        {
+          "date": "2026-02",
+          "value": 1.75817
+        },
+        {
+          "date": "2026-03",
+          "value": 1.7986
+        },
+        {
+          "date": "2026-04",
+          "value": 1.74791
+        },
+        {
+          "date": "2026-05",
+          "value": 1.70972
+        },
+        {
+          "date": "2026-06",
+          "value": 1.73488
+        },
+        {
+          "date": "2026-07",
+          "value": 1.69677
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Amerika - USA – USD 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,USD1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.8485
+        },
+        {
+          "date": "2024-09",
+          "value": 0.8433
+        },
+        {
+          "date": "2024-10",
+          "value": 0.8653
+        },
+        {
+          "date": "2024-11",
+          "value": 0.8811
+        },
+        {
+          "date": "2024-12",
+          "value": 0.9038
+        },
+        {
+          "date": "2025-01",
+          "value": 0.91075
+        },
+        {
+          "date": "2025-02",
+          "value": 0.9019
+        },
+        {
+          "date": "2025-03",
+          "value": 0.8807
+        },
+        {
+          "date": "2025-04",
+          "value": 0.8256
+        },
+        {
+          "date": "2025-05",
+          "value": 0.824
+        },
+        {
+          "date": "2025-06",
+          "value": 0.7977
+        },
+        {
+          "date": "2025-07",
+          "value": 0.8129
+        },
+        {
+          "date": "2025-08",
+          "value": 0.8007
+        },
+        {
+          "date": "2025-09",
+          "value": 0.7961
+        },
+        {
+          "date": "2025-10",
+          "value": 0.8017
+        },
+        {
+          "date": "2025-11",
+          "value": 0.80635
+        },
+        {
+          "date": "2025-12",
+          "value": 0.7933
+        },
+        {
+          "date": "2026-01",
+          "value": 0.7698
+        },
+        {
+          "date": "2026-02",
+          "value": 0.7729
+        },
+        {
+          "date": "2026-03",
+          "value": 0.8
+        },
+        {
+          "date": "2026-04",
+          "value": 0.7898
+        },
+        {
+          "date": "2026-05",
+          "value": 0.7845
+        },
+        {
+          "date": "2026-06",
+          "value": 0.8095
+        },
+        {
+          "date": "2026-07",
+          "value": 0.8064
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Amerika - Kanada – CAD 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,CAD1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.62964
+        },
+        {
+          "date": "2024-09",
+          "value": 0.62383
+        },
+        {
+          "date": "2024-10",
+          "value": 0.62171
+        },
+        {
+          "date": "2024-11",
+          "value": 0.62942
+        },
+        {
+          "date": "2024-12",
+          "value": 0.62899
+        },
+        {
+          "date": "2025-01",
+          "value": 0.62899
+        },
+        {
+          "date": "2025-02",
+          "value": 0.62471
+        },
+        {
+          "date": "2025-03",
+          "value": 0.61386
+        },
+        {
+          "date": "2025-04",
+          "value": 0.59645
+        },
+        {
+          "date": "2025-05",
+          "value": 0.59632
+        },
+        {
+          "date": "2025-06",
+          "value": 0.58324
+        },
+        {
+          "date": "2025-07",
+          "value": 0.58736
+        },
+        {
+          "date": "2025-08",
+          "value": 0.58271
+        },
+        {
+          "date": "2025-09",
+          "value": 0.57232
+        },
+        {
+          "date": "2025-10",
+          "value": 0.5724
+        },
+        {
+          "date": "2025-11",
+          "value": 0.57434
+        },
+        {
+          "date": "2025-12",
+          "value": 0.57901
+        },
+        {
+          "date": "2026-01",
+          "value": 0.56816
+        },
+        {
+          "date": "2026-02",
+          "value": 0.5654
+        },
+        {
+          "date": "2026-03",
+          "value": 0.57389
+        },
+        {
+          "date": "2026-04",
+          "value": 0.57766
+        },
+        {
+          "date": "2026-05",
+          "value": 0.56819
+        },
+        {
+          "date": "2026-06",
+          "value": 0.56875
+        },
+        {
+          "date": "2026-07",
+          "value": 0.57555
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Amerika - Argentinien – ARS 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,ARS1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.00089
+        },
+        {
+          "date": "2024-09",
+          "value": 0.00087
+        },
+        {
+          "date": "2024-10",
+          "value": 0.00088
+        },
+        {
+          "date": "2024-11",
+          "value": 0.00087
+        },
+        {
+          "date": "2024-12",
+          "value": 0.00088
+        },
+        {
+          "date": "2025-01",
+          "value": 0.00087
+        },
+        {
+          "date": "2025-02",
+          "value": 0.00085
+        },
+        {
+          "date": "2025-03",
+          "value": 0.00082
+        },
+        {
+          "date": "2025-04",
+          "value": 0.00071
+        },
+        {
+          "date": "2025-05",
+          "value": 0.0007
+        },
+        {
+          "date": "2025-06",
+          "value": 0.00067
+        },
+        {
+          "date": "2025-07",
+          "value": 0.00062
+        },
+        {
+          "date": "2025-08",
+          "value": 0.0006
+        },
+        {
+          "date": "2025-09",
+          "value": 0.00059
+        },
+        {
+          "date": "2025-10",
+          "value": 0.00056
+        },
+        {
+          "date": "2025-11",
+          "value": 0.00056
+        },
+        {
+          "date": "2025-12",
+          "value": 0.00055
+        },
+        {
+          "date": "2026-01",
+          "value": 0.00053
+        },
+        {
+          "date": "2026-02",
+          "value": 0.00055
+        },
+        {
+          "date": "2026-03",
+          "value": 0.00057
+        },
+        {
+          "date": "2026-04",
+          "value": 0.00057
+        },
+        {
+          "date": "2026-05",
+          "value": 0.00056
+        },
+        {
+          "date": "2026-06",
+          "value": 0.00055
+        },
+        {
+          "date": "2026-07",
+          "value": 0.00054
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Amerika - Brasilien – BRL 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,BRL100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 15.07935
+        },
+        {
+          "date": "2024-09",
+          "value": 15.51838
+        },
+        {
+          "date": "2024-10",
+          "value": 15.01371
+        },
+        {
+          "date": "2024-11",
+          "value": 14.65057
+        },
+        {
+          "date": "2024-12",
+          "value": 14.63028
+        },
+        {
+          "date": "2025-01",
+          "value": 15.50107
+        },
+        {
+          "date": "2025-02",
+          "value": 15.46388
+        },
+        {
+          "date": "2025-03",
+          "value": 15.28967
+        },
+        {
+          "date": "2025-04",
+          "value": 14.68752
+        },
+        {
+          "date": "2025-05",
+          "value": 14.54032
+        },
+        {
+          "date": "2025-06",
+          "value": 14.54357
+        },
+        {
+          "date": "2025-07",
+          "value": 14.5919
+        },
+        {
+          "date": "2025-08",
+          "value": 14.79572
+        },
+        {
+          "date": "2025-09",
+          "value": 14.95866
+        },
+        {
+          "date": "2025-10",
+          "value": 14.90093
+        },
+        {
+          "date": "2025-11",
+          "value": 15.06183
+        },
+        {
+          "date": "2025-12",
+          "value": 14.47628
+        },
+        {
+          "date": "2026-01",
+          "value": 14.83351
+        },
+        {
+          "date": "2026-02",
+          "value": 15.04399
+        },
+        {
+          "date": "2026-03",
+          "value": 15.23606
+        },
+        {
+          "date": "2026-04",
+          "value": 15.80453
+        },
+        {
+          "date": "2026-05",
+          "value": 15.56733
+        },
+        {
+          "date": "2026-06",
+          "value": 15.64342
+        },
+        {
+          "date": "2026-07",
+          "value": 15.94211
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Amerika - Mexiko – MXN 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,MXN100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 4.2921
+        },
+        {
+          "date": "2024-09",
+          "value": 4.28689
+        },
+        {
+          "date": "2024-10",
+          "value": 4.29803
+        },
+        {
+          "date": "2024-11",
+          "value": 4.31358
+        },
+        {
+          "date": "2024-12",
+          "value": 4.36416
+        },
+        {
+          "date": "2025-01",
+          "value": 4.40519
+        },
+        {
+          "date": "2025-02",
+          "value": 4.41204
+        },
+        {
+          "date": "2025-03",
+          "value": 4.3187
+        },
+        {
+          "date": "2025-04",
+          "value": 4.223
+        },
+        {
+          "date": "2025-05",
+          "value": 4.26645
+        },
+        {
+          "date": "2025-06",
+          "value": 4.23365
+        },
+        {
+          "date": "2025-07",
+          "value": 4.31576
+        },
+        {
+          "date": "2025-08",
+          "value": 4.28289
+        },
+        {
+          "date": "2025-09",
+          "value": 4.34277
+        },
+        {
+          "date": "2025-10",
+          "value": 4.32288
+        },
+        {
+          "date": "2025-11",
+          "value": 4.39461
+        },
+        {
+          "date": "2025-12",
+          "value": 4.4136
+        },
+        {
+          "date": "2026-01",
+          "value": 4.43955
+        },
+        {
+          "date": "2026-02",
+          "value": 4.49499
+        },
+        {
+          "date": "2026-03",
+          "value": 4.42512
+        },
+        {
+          "date": "2026-04",
+          "value": 4.50321
+        },
+        {
+          "date": "2026-05",
+          "value": 4.52349
+        },
+        {
+          "date": "2026-06",
+          "value": 4.6352
+        },
+        {
+          "date": "2026-07",
+          "value": 4.65584
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Afrika - Südafrika – ZAR 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,ZAR1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.04807
+        },
+        {
+          "date": "2024-09",
+          "value": 0.04926
+        },
+        {
+          "date": "2024-10",
+          "value": 0.04878
+        },
+        {
+          "date": "2024-11",
+          "value": 0.04876
+        },
+        {
+          "date": "2024-12",
+          "value": 0.04821
+        },
+        {
+          "date": "2025-01",
+          "value": 0.04893
+        },
+        {
+          "date": "2025-02",
+          "value": 0.04872
+        },
+        {
+          "date": "2025-03",
+          "value": 0.04818
+        },
+        {
+          "date": "2025-04",
+          "value": 0.04431
+        },
+        {
+          "date": "2025-05",
+          "value": 0.0461
+        },
+        {
+          "date": "2025-06",
+          "value": 0.04478
+        },
+        {
+          "date": "2025-07",
+          "value": 0.04501
+        },
+        {
+          "date": "2025-08",
+          "value": 0.04509
+        },
+        {
+          "date": "2025-09",
+          "value": 0.04607
+        },
+        {
+          "date": "2025-10",
+          "value": 0.04628
+        },
+        {
+          "date": "2025-11",
+          "value": 0.04703
+        },
+        {
+          "date": "2025-12",
+          "value": 0.04776
+        },
+        {
+          "date": "2026-01",
+          "value": 0.04805
+        },
+        {
+          "date": "2026-02",
+          "value": 0.0485
+        },
+        {
+          "date": "2026-03",
+          "value": 0.04676
+        },
+        {
+          "date": "2026-04",
+          "value": 0.04696
+        },
+        {
+          "date": "2026-05",
+          "value": 0.04826
+        },
+        {
+          "date": "2026-06",
+          "value": 0.04934
+        },
+        {
+          "date": "2026-07",
+          "value": 0.0489
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Japan – JPY 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,JPY100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.58485
+        },
+        {
+          "date": "2024-09",
+          "value": 0.59162
+        },
+        {
+          "date": "2024-10",
+          "value": 0.56743
+        },
+        {
+          "date": "2024-11",
+          "value": 0.58664
+        },
+        {
+          "date": "2024-12",
+          "value": 0.57705
+        },
+        {
+          "date": "2025-01",
+          "value": 0.58883
+        },
+        {
+          "date": "2025-02",
+          "value": 0.60023
+        },
+        {
+          "date": "2025-03",
+          "value": 0.59103
+        },
+        {
+          "date": "2025-04",
+          "value": 0.57775
+        },
+        {
+          "date": "2025-05",
+          "value": 0.57208
+        },
+        {
+          "date": "2025-06",
+          "value": 0.5535
+        },
+        {
+          "date": "2025-07",
+          "value": 0.54316
+        },
+        {
+          "date": "2025-08",
+          "value": 0.5449
+        },
+        {
+          "date": "2025-09",
+          "value": 0.53841
+        },
+        {
+          "date": "2025-10",
+          "value": 0.52008
+        },
+        {
+          "date": "2025-11",
+          "value": 0.51582
+        },
+        {
+          "date": "2025-12",
+          "value": 0.50646
+        },
+        {
+          "date": "2026-01",
+          "value": 0.49908
+        },
+        {
+          "date": "2026-02",
+          "value": 0.49519
+        },
+        {
+          "date": "2026-03",
+          "value": 0.50128
+        },
+        {
+          "date": "2026-04",
+          "value": 0.49513
+        },
+        {
+          "date": "2026-05",
+          "value": 0.49247
+        },
+        {
+          "date": "2026-06",
+          "value": 0.49864
+        },
+        {
+          "date": "2026-07",
+          "value": 0.50693
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Australien – AUD 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,AUD1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.57766
+        },
+        {
+          "date": "2024-09",
+          "value": 0.58407
+        },
+        {
+          "date": "2024-10",
+          "value": 0.56842
+        },
+        {
+          "date": "2024-11",
+          "value": 0.57342
+        },
+        {
+          "date": "2024-12",
+          "value": 0.56207
+        },
+        {
+          "date": "2025-01",
+          "value": 0.56676
+        },
+        {
+          "date": "2025-02",
+          "value": 0.56053
+        },
+        {
+          "date": "2025-03",
+          "value": 0.55119
+        },
+        {
+          "date": "2025-04",
+          "value": 0.52764
+        },
+        {
+          "date": "2025-05",
+          "value": 0.52868
+        },
+        {
+          "date": "2025-06",
+          "value": 0.52146
+        },
+        {
+          "date": "2025-07",
+          "value": 0.52497
+        },
+        {
+          "date": "2025-08",
+          "value": 0.5233
+        },
+        {
+          "date": "2025-09",
+          "value": 0.5263
+        },
+        {
+          "date": "2025-10",
+          "value": 0.52427
+        },
+        {
+          "date": "2025-11",
+          "value": 0.52614
+        },
+        {
+          "date": "2025-12",
+          "value": 0.53032
+        },
+        {
+          "date": "2026-01",
+          "value": 0.53678
+        },
+        {
+          "date": "2026-02",
+          "value": 0.54984
+        },
+        {
+          "date": "2026-03",
+          "value": 0.5488
+        },
+        {
+          "date": "2026-04",
+          "value": 0.56305
+        },
+        {
+          "date": "2026-05",
+          "value": 0.56107
+        },
+        {
+          "date": "2026-06",
+          "value": 0.55702
+        },
+        {
+          "date": "2026-07",
+          "value": 0.56771
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - China – CNY 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,CNY100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 11.96553
+        },
+        {
+          "date": "2024-09",
+          "value": 12.02533
+        },
+        {
+          "date": "2024-10",
+          "value": 12.15702
+        },
+        {
+          "date": "2024-11",
+          "value": 12.17073
+        },
+        {
+          "date": "2024-12",
+          "value": 12.38201
+        },
+        {
+          "date": "2025-01",
+          "value": 12.57143
+        },
+        {
+          "date": "2025-02",
+          "value": 12.38755
+        },
+        {
+          "date": "2025-03",
+          "value": 12.14306
+        },
+        {
+          "date": "2025-04",
+          "value": 11.36658
+        },
+        {
+          "date": "2025-05",
+          "value": 11.45017
+        },
+        {
+          "date": "2025-06",
+          "value": 11.13313
+        },
+        {
+          "date": "2025-07",
+          "value": 11.30064
+        },
+        {
+          "date": "2025-08",
+          "value": 11.22576
+        },
+        {
+          "date": "2025-09",
+          "value": 11.18165
+        },
+        {
+          "date": "2025-10",
+          "value": 11.27028
+        },
+        {
+          "date": "2025-11",
+          "value": 11.39685
+        },
+        {
+          "date": "2025-12",
+          "value": 11.35069
+        },
+        {
+          "date": "2026-01",
+          "value": 11.07164
+        },
+        {
+          "date": "2026-02",
+          "value": 11.26742
+        },
+        {
+          "date": "2026-03",
+          "value": 11.58346
+        },
+        {
+          "date": "2026-04",
+          "value": 11.55912
+        },
+        {
+          "date": "2026-05",
+          "value": 11.58977
+        },
+        {
+          "date": "2026-06",
+          "value": 11.92862
+        },
+        {
+          "date": "2026-07",
+          "value": 11.95038
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Hongkong – HKD 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,HKD100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 10.88281
+        },
+        {
+          "date": "2024-09",
+          "value": 10.85622
+        },
+        {
+          "date": "2024-10",
+          "value": 11.13169
+        },
+        {
+          "date": "2024-11",
+          "value": 11.32025
+        },
+        {
+          "date": "2024-12",
+          "value": 11.63776
+        },
+        {
+          "date": "2025-01",
+          "value": 11.68722
+        },
+        {
+          "date": "2025-02",
+          "value": 11.59523
+        },
+        {
+          "date": "2025-03",
+          "value": 11.32122
+        },
+        {
+          "date": "2025-04",
+          "value": 10.6448
+        },
+        {
+          "date": "2025-05",
+          "value": 10.50632
+        },
+        {
+          "date": "2025-06",
+          "value": 10.16191
+        },
+        {
+          "date": "2025-07",
+          "value": 10.35541
+        },
+        {
+          "date": "2025-08",
+          "value": 10.27447
+        },
+        {
+          "date": "2025-09",
+          "value": 10.23212
+        },
+        {
+          "date": "2025-10",
+          "value": 10.31709
+        },
+        {
+          "date": "2025-11",
+          "value": 10.3588
+        },
+        {
+          "date": "2025-12",
+          "value": 10.19181
+        },
+        {
+          "date": "2026-01",
+          "value": 9.85912
+        },
+        {
+          "date": "2026-02",
+          "value": 9.87769
+        },
+        {
+          "date": "2026-03",
+          "value": 10.20564
+        },
+        {
+          "date": "2026-04",
+          "value": 10.08067
+        },
+        {
+          "date": "2026-05",
+          "value": 10.01251
+        },
+        {
+          "date": "2026-06",
+          "value": 10.32302
+        },
+        {
+          "date": "2026-07",
+          "value": 10.28296
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Korea Republik (Süd-) – KRW 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,KRW100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.06361
+        },
+        {
+          "date": "2024-09",
+          "value": 0.06433
+        },
+        {
+          "date": "2024-10",
+          "value": 0.06279
+        },
+        {
+          "date": "2024-11",
+          "value": 0.06311
+        },
+        {
+          "date": "2024-12",
+          "value": 0.06143
+        },
+        {
+          "date": "2025-01",
+          "value": 0.06279
+        },
+        {
+          "date": "2025-02",
+          "value": 0.06177
+        },
+        {
+          "date": "2025-03",
+          "value": 0.05979
+        },
+        {
+          "date": "2025-04",
+          "value": 0.05807
+        },
+        {
+          "date": "2025-05",
+          "value": 0.0597
+        },
+        {
+          "date": "2025-06",
+          "value": 0.05891
+        },
+        {
+          "date": "2025-07",
+          "value": 0.05836
+        },
+        {
+          "date": "2025-08",
+          "value": 0.05755
+        },
+        {
+          "date": "2025-09",
+          "value": 0.0568
+        },
+        {
+          "date": "2025-10",
+          "value": 0.05618
+        },
+        {
+          "date": "2025-11",
+          "value": 0.05481
+        },
+        {
+          "date": "2025-12",
+          "value": 0.05481
+        },
+        {
+          "date": "2026-01",
+          "value": 0.05325
+        },
+        {
+          "date": "2026-02",
+          "value": 0.05366
+        },
+        {
+          "date": "2026-03",
+          "value": 0.05226
+        },
+        {
+          "date": "2026-04",
+          "value": 0.05334
+        },
+        {
+          "date": "2026-05",
+          "value": 0.05196
+        },
+        {
+          "date": "2026-06",
+          "value": 0.05216
+        },
+        {
+          "date": "2026-07",
+          "value": 0.05641
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Malaysia MYR – 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,MYR100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 19.65941
+        },
+        {
+          "date": "2024-09",
+          "value": 20.45703
+        },
+        {
+          "date": "2024-10",
+          "value": 19.76428
+        },
+        {
+          "date": "2024-11",
+          "value": 19.81113
+        },
+        {
+          "date": "2024-12",
+          "value": 20.20884
+        },
+        {
+          "date": "2025-01",
+          "value": 20.42498
+        },
+        {
+          "date": "2025-02",
+          "value": 20.212
+        },
+        {
+          "date": "2025-03",
+          "value": 19.84318
+        },
+        {
+          "date": "2025-04",
+          "value": 19.11908
+        },
+        {
+          "date": "2025-05",
+          "value": 19.40193
+        },
+        {
+          "date": "2025-06",
+          "value": 18.9374
+        },
+        {
+          "date": "2025-07",
+          "value": 19.06873
+        },
+        {
+          "date": "2025-08",
+          "value": 18.95731
+        },
+        {
+          "date": "2025-09",
+          "value": 18.91468
+        },
+        {
+          "date": "2025-10",
+          "value": 19.13913
+        },
+        {
+          "date": "2025-11",
+          "value": 19.5091
+        },
+        {
+          "date": "2025-12",
+          "value": 19.53797
+        },
+        {
+          "date": "2026-01",
+          "value": 19.51281
+        },
+        {
+          "date": "2026-02",
+          "value": 19.85613
+        },
+        {
+          "date": "2026-03",
+          "value": 19.77115
+        },
+        {
+          "date": "2026-04",
+          "value": 19.8902
+        },
+        {
+          "date": "2026-05",
+          "value": 19.75822
+        },
+        {
+          "date": "2026-06",
+          "value": 19.8548
+        },
+        {
+          "date": "2026-07",
+          "value": 19.74777
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Neuseeland – NZD 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,NZD1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.53142
+        },
+        {
+          "date": "2024-09",
+          "value": 0.53617
+        },
+        {
+          "date": "2024-10",
+          "value": 0.51684
+        },
+        {
+          "date": "2024-11",
+          "value": 0.52108
+        },
+        {
+          "date": "2024-12",
+          "value": 0.50875
+        },
+        {
+          "date": "2025-01",
+          "value": 0.51466
+        },
+        {
+          "date": "2025-02",
+          "value": 0.50515
+        },
+        {
+          "date": "2025-03",
+          "value": 0.50112
+        },
+        {
+          "date": "2025-04",
+          "value": 0.48876
+        },
+        {
+          "date": "2025-05",
+          "value": 0.49053
+        },
+        {
+          "date": "2025-06",
+          "value": 0.48404
+        },
+        {
+          "date": "2025-07",
+          "value": 0.48075
+        },
+        {
+          "date": "2025-08",
+          "value": 0.47189
+        },
+        {
+          "date": "2025-09",
+          "value": 0.4619
+        },
+        {
+          "date": "2025-10",
+          "value": 0.45873
+        },
+        {
+          "date": "2025-11",
+          "value": 0.46035
+        },
+        {
+          "date": "2025-12",
+          "value": 0.4575
+        },
+        {
+          "date": "2026-01",
+          "value": 0.46457
+        },
+        {
+          "date": "2026-02",
+          "value": 0.46274
+        },
+        {
+          "date": "2026-03",
+          "value": 0.45712
+        },
+        {
+          "date": "2026-04",
+          "value": 0.46116
+        },
+        {
+          "date": "2026-05",
+          "value": 0.46752
+        },
+        {
+          "date": "2026-06",
+          "value": 0.45745
+        },
+        {
+          "date": "2026-07",
+          "value": 0.47449
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Singapur – SGD 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,SGD1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 0.65139
+        },
+        {
+          "date": "2024-09",
+          "value": 0.65883
+        },
+        {
+          "date": "2024-10",
+          "value": 0.65479
+        },
+        {
+          "date": "2024-11",
+          "value": 0.65744
+        },
+        {
+          "date": "2024-12",
+          "value": 0.66402
+        },
+        {
+          "date": "2025-01",
+          "value": 0.67174
+        },
+        {
+          "date": "2025-02",
+          "value": 0.66882
+        },
+        {
+          "date": "2025-03",
+          "value": 0.65665
+        },
+        {
+          "date": "2025-04",
+          "value": 0.6323
+        },
+        {
+          "date": "2025-05",
+          "value": 0.63831
+        },
+        {
+          "date": "2025-06",
+          "value": 0.62579
+        },
+        {
+          "date": "2025-07",
+          "value": 0.62748
+        },
+        {
+          "date": "2025-08",
+          "value": 0.6234
+        },
+        {
+          "date": "2025-09",
+          "value": 0.61761
+        },
+        {
+          "date": "2025-10",
+          "value": 0.61636
+        },
+        {
+          "date": "2025-11",
+          "value": 0.62118
+        },
+        {
+          "date": "2025-12",
+          "value": 0.61683
+        },
+        {
+          "date": "2026-01",
+          "value": 0.60652
+        },
+        {
+          "date": "2026-02",
+          "value": 0.61065
+        },
+        {
+          "date": "2026-03",
+          "value": 0.62016
+        },
+        {
+          "date": "2026-04",
+          "value": 0.61751
+        },
+        {
+          "date": "2026-05",
+          "value": 0.61371
+        },
+        {
+          "date": "2026-06",
+          "value": 0.62524
+        },
+        {
+          "date": "2026-07",
+          "value": 0.62931
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Asien und Australien - Thailand – THB 100.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,THB100}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 2.50037
+        },
+        {
+          "date": "2024-09",
+          "value": 2.62008
+        },
+        {
+          "date": "2024-10",
+          "value": 2.56416
+        },
+        {
+          "date": "2024-11",
+          "value": 2.56955
+        },
+        {
+          "date": "2024-12",
+          "value": 2.64261
+        },
+        {
+          "date": "2025-01",
+          "value": 2.70421
+        },
+        {
+          "date": "2025-02",
+          "value": 2.63945
+        },
+        {
+          "date": "2025-03",
+          "value": 2.59679
+        },
+        {
+          "date": "2025-04",
+          "value": 2.47193
+        },
+        {
+          "date": "2025-05",
+          "value": 2.51334
+        },
+        {
+          "date": "2025-06",
+          "value": 2.4565
+        },
+        {
+          "date": "2025-07",
+          "value": 2.48989
+        },
+        {
+          "date": "2025-08",
+          "value": 2.47328
+        },
+        {
+          "date": "2025-09",
+          "value": 2.45998
+        },
+        {
+          "date": "2025-10",
+          "value": 2.47928
+        },
+        {
+          "date": "2025-11",
+          "value": 2.50466
+        },
+        {
+          "date": "2025-12",
+          "value": 2.5149
+        },
+        {
+          "date": "2026-01",
+          "value": 2.44513
+        },
+        {
+          "date": "2026-02",
+          "value": 2.48673
+        },
+        {
+          "date": "2026-03",
+          "value": 2.43265
+        },
+        {
+          "date": "2026-04",
+          "value": 2.41899
+        },
+        {
+          "date": "2026-05",
+          "value": 2.40674
+        },
+        {
+          "date": "2026-06",
+          "value": 2.43671
+        },
+        {
+          "date": "2026-07",
+          "value": 2.41915
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Monatsmittel/-ende",
+          "dimItem": "Monatsende"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "SZR - XDR 1.-"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkum{M1,XDR1}",
+        "frequency": "P1M",
+        "scale": "",
+        "unit": "Kurse von 11 Uhr in CHF"
+      },
+      "values": [
+        {
+          "date": "2024-08",
+          "value": 1.1442
+        },
+        {
+          "date": "2024-09",
+          "value": 1.145
+        },
+        {
+          "date": "2024-10",
+          "value": 1.1511
+        },
+        {
+          "date": "2024-11",
+          "value": 1.1583
+        },
+        {
+          "date": "2024-12",
+          "value": 1.1796
+        },
+        {
+          "date": "2025-01",
+          "value": 1.1865
+        },
+        {
+          "date": "2025-02",
+          "value": 1.1812
+        },
+        {
+          "date": "2025-03",
+          "value": 1.1724
+        },
+        {
+          "date": "2025-04",
+          "value": 1.1158
+        },
+        {
+          "date": "2025-05",
+          "value": 1.1177
+        },
+        {
+          "date": "2025-06",
+          "value": 1.0953
+        },
+        {
+          "date": "2025-07",
+          "value": 1.1032
+        },
+        {
+          "date": "2025-08",
+          "value": 1.0963
+        },
+        {
+          "date": "2025-09",
+          "value": 1.0918
+        },
+        {
+          "date": "2025-10",
+          "value": 1.0916
+        },
+        {
+          "date": "2025-11",
+          "value": 1.0937
+        },
+        {
+          "date": "2025-12",
+          "value": 1.0861
+        },
+        {
+          "date": "2026-01",
+          "value": 1.0629
+        },
+        {
+          "date": "2026-02",
+          "value": 1.0569
+        },
+        {
+          "date": "2026-03",
+          "value": 1.0854
+        },
+        {
+          "date": "2026-04",
+          "value": 1.0757
+        },
+        {
+          "date": "2026-05",
+          "value": 1.0693
+        },
+        {
+          "date": "2026-06",
+          "value": 1.0971
+        },
+        {
+          "date": "2026-07",
+          "value": 1.1075
+        }
+      ]
+    }
+  ]
+}

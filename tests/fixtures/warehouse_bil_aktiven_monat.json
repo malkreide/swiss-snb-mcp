@@ -1,0 +1,4612 @@
+{
+  "timeseries": [
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Total Sektorale Gliederung nach ESVG"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,T,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 2181301459.880475
+        },
+        {
+          "date": "2024-07",
+          "value": 2191652268.4296155
+        },
+        {
+          "date": "2024-08",
+          "value": 2206581959.592871
+        },
+        {
+          "date": "2024-09",
+          "value": 2197462595.8607726
+        },
+        {
+          "date": "2024-10",
+          "value": 2223479192.895665
+        },
+        {
+          "date": "2024-11",
+          "value": 2234070896.89824
+        },
+        {
+          "date": "2024-12",
+          "value": 2176054224.256194
+        },
+        {
+          "date": "2025-01",
+          "value": 2209781823.492046
+        },
+        {
+          "date": "2025-02",
+          "value": 2213090667.755737
+        },
+        {
+          "date": "2025-03",
+          "value": 2189707625.6969786
+        },
+        {
+          "date": "2025-04",
+          "value": 2219626755.7036433
+        },
+        {
+          "date": "2025-05",
+          "value": 2212329383.530857
+        },
+        {
+          "date": "2025-06",
+          "value": 2187333234.627738
+        },
+        {
+          "date": "2025-07",
+          "value": 2236876583.943443
+        },
+        {
+          "date": "2025-08",
+          "value": 2248528813.957564
+        },
+        {
+          "date": "2025-09",
+          "value": 2216516359.57131
+        },
+        {
+          "date": "2025-10",
+          "value": 2243161861.829917
+        },
+        {
+          "date": "2025-11",
+          "value": 2251830598.007155
+        },
+        {
+          "date": "2025-12",
+          "value": 2205710729.5815454
+        },
+        {
+          "date": "2026-01",
+          "value": 2262728249.855684
+        },
+        {
+          "date": "2026-02",
+          "value": 2268931951.544801
+        },
+        {
+          "date": "2026-03",
+          "value": 2264392547.980865
+        },
+        {
+          "date": "2026-04",
+          "value": 2273292039.7334404
+        },
+        {
+          "date": "2026-05",
+          "value": 2292099880.848372
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Nichtfinanzielle Unternehmen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,NFU,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 355413263.3428423
+        },
+        {
+          "date": "2024-07",
+          "value": 354916585.1772165
+        },
+        {
+          "date": "2024-08",
+          "value": 355910212.3291908
+        },
+        {
+          "date": "2024-09",
+          "value": 356201006.2885044
+        },
+        {
+          "date": "2024-10",
+          "value": 358046665.4173342
+        },
+        {
+          "date": "2024-11",
+          "value": 361861971.7129542
+        },
+        {
+          "date": "2024-12",
+          "value": 360389629.7689222
+        },
+        {
+          "date": "2025-01",
+          "value": 365185443.4659799
+        },
+        {
+          "date": "2025-02",
+          "value": 366241823.8264802
+        },
+        {
+          "date": "2025-03",
+          "value": 365815457.6385591
+        },
+        {
+          "date": "2025-04",
+          "value": 366097256.4055198
+        },
+        {
+          "date": "2025-05",
+          "value": 367626930.05061585
+        },
+        {
+          "date": "2025-06",
+          "value": 361698864.2490869
+        },
+        {
+          "date": "2025-07",
+          "value": 363029569.7924562
+        },
+        {
+          "date": "2025-08",
+          "value": 364543484.6840725
+        },
+        {
+          "date": "2025-09",
+          "value": 362859087.2132335
+        },
+        {
+          "date": "2025-10",
+          "value": 365286499.8060758
+        },
+        {
+          "date": "2025-11",
+          "value": 367199462.698431
+        },
+        {
+          "date": "2025-12",
+          "value": 363562599.7210122
+        },
+        {
+          "date": "2026-01",
+          "value": 342660233.6829452
+        },
+        {
+          "date": "2026-02",
+          "value": 344645190.6021832
+        },
+        {
+          "date": "2026-03",
+          "value": 341798443.2756872
+        },
+        {
+          "date": "2026-04",
+          "value": 340725618.5777964
+        },
+        {
+          "date": "2026-05",
+          "value": 342736856.8276048
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Finanzielle Unternehmen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,FUN,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 861505230.8268142
+        },
+        {
+          "date": "2024-07",
+          "value": 870352275.8436657
+        },
+        {
+          "date": "2024-08",
+          "value": 879176248.5221251
+        },
+        {
+          "date": "2024-09",
+          "value": 865690378.0355936
+        },
+        {
+          "date": "2024-10",
+          "value": 884125694.0279633
+        },
+        {
+          "date": "2024-11",
+          "value": 888816025.8287145
+        },
+        {
+          "date": "2024-12",
+          "value": 838001725.5035346
+        },
+        {
+          "date": "2025-01",
+          "value": 865442229.262237
+        },
+        {
+          "date": "2025-02",
+          "value": 863640659.7035028
+        },
+        {
+          "date": "2025-03",
+          "value": 837357332.6458544
+        },
+        {
+          "date": "2025-04",
+          "value": 865941393.1322855
+        },
+        {
+          "date": "2025-05",
+          "value": 851044178.3628529
+        },
+        {
+          "date": "2025-06",
+          "value": 833336046.5402974
+        },
+        {
+          "date": "2025-07",
+          "value": 876385262.3251295
+        },
+        {
+          "date": "2025-08",
+          "value": 881527165.098341
+        },
+        {
+          "date": "2025-09",
+          "value": 847905563.449617
+        },
+        {
+          "date": "2025-10",
+          "value": 864875513.2307577
+        },
+        {
+          "date": "2025-11",
+          "value": 866267242.7185026
+        },
+        {
+          "date": "2025-12",
+          "value": 823502948.5390922
+        },
+        {
+          "date": "2026-01",
+          "value": 868066772.7828615
+        },
+        {
+          "date": "2026-02",
+          "value": 867001383.2785105
+        },
+        {
+          "date": "2026-03",
+          "value": 870641132.977294
+        },
+        {
+          "date": "2026-04",
+          "value": 876190310.51966
+        },
+        {
+          "date": "2026-05",
+          "value": 891436889.3123034
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Nationalbank"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,SNB,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 471193742.196291
+        },
+        {
+          "date": "2024-07",
+          "value": 477753988.134986
+        },
+        {
+          "date": "2024-08",
+          "value": 489395730.011028
+        },
+        {
+          "date": "2024-09",
+          "value": 483536202.606905
+        },
+        {
+          "date": "2024-10",
+          "value": 480764508.70038396
+        },
+        {
+          "date": "2024-11",
+          "value": 486305253.559745
+        },
+        {
+          "date": "2024-12",
+          "value": 460264402.98552
+        },
+        {
+          "date": "2025-01",
+          "value": 476152070.394703
+        },
+        {
+          "date": "2025-02",
+          "value": 474567199.879265
+        },
+        {
+          "date": "2025-03",
+          "value": 460910325.463657
+        },
+        {
+          "date": "2025-04",
+          "value": 472509318.82784206
+        },
+        {
+          "date": "2025-05",
+          "value": 458061918.690019
+        },
+        {
+          "date": "2025-06",
+          "value": 456015276.380057
+        },
+        {
+          "date": "2025-07",
+          "value": 477079450.269797
+        },
+        {
+          "date": "2025-08",
+          "value": 476953895.786567
+        },
+        {
+          "date": "2025-09",
+          "value": 458725128.5305073
+        },
+        {
+          "date": "2025-10",
+          "value": 465384277.318008
+        },
+        {
+          "date": "2025-11",
+          "value": 466179680.896439
+        },
+        {
+          "date": "2025-12",
+          "value": 445660481.5269111
+        },
+        {
+          "date": "2026-01",
+          "value": 461024070.9403223
+        },
+        {
+          "date": "2026-02",
+          "value": 460701459.3905431
+        },
+        {
+          "date": "2026-03",
+          "value": 451958332.1914268
+        },
+        {
+          "date": "2026-04",
+          "value": 459242360.809488
+        },
+        {
+          "date": "2026-05",
+          "value": 459208098.90055
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Banken"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,BAN,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 292853760.749562
+        },
+        {
+          "date": "2024-07",
+          "value": 297081597.130532
+        },
+        {
+          "date": "2024-08",
+          "value": 294195531.5432591
+        },
+        {
+          "date": "2024-09",
+          "value": 287007345.679403
+        },
+        {
+          "date": "2024-10",
+          "value": 303389718.02886605
+        },
+        {
+          "date": "2024-11",
+          "value": 301705016.437875
+        },
+        {
+          "date": "2024-12",
+          "value": 278459773.186029
+        },
+        {
+          "date": "2025-01",
+          "value": 287873852.5573584
+        },
+        {
+          "date": "2025-02",
+          "value": 287440625.8314411
+        },
+        {
+          "date": "2025-03",
+          "value": 275019115.468128
+        },
+        {
+          "date": "2025-04",
+          "value": 294571022.1022035
+        },
+        {
+          "date": "2025-05",
+          "value": 293198438.5697706
+        },
+        {
+          "date": "2025-06",
+          "value": 279461157.7734312
+        },
+        {
+          "date": "2025-07",
+          "value": 300016360.59129226
+        },
+        {
+          "date": "2025-08",
+          "value": 303821496.0815383
+        },
+        {
+          "date": "2025-09",
+          "value": 287885014.9402173
+        },
+        {
+          "date": "2025-10",
+          "value": 295193720.598174
+        },
+        {
+          "date": "2025-11",
+          "value": 297776309.0567036
+        },
+        {
+          "date": "2025-12",
+          "value": 280180211.3542745
+        },
+        {
+          "date": "2026-01",
+          "value": 229173087.8746938
+        },
+        {
+          "date": "2026-02",
+          "value": 225356310.6656588
+        },
+        {
+          "date": "2026-03",
+          "value": 224944423.1484402
+        },
+        {
+          "date": "2026-04",
+          "value": 230575448.861392
+        },
+        {
+          "date": "2026-05",
+          "value": 241218024.1404746
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Finanzierungs- und Vermögensverwaltungsinstitutionen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,FVW,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 76161674.2866091
+        },
+        {
+          "date": "2024-07",
+          "value": 75852048.6425466
+        },
+        {
+          "date": "2024-08",
+          "value": 75594274.4262623
+        },
+        {
+          "date": "2024-09",
+          "value": 75214438.3739271
+        },
+        {
+          "date": "2024-10",
+          "value": 77397134.7308072
+        },
+        {
+          "date": "2024-11",
+          "value": 77874184.9292686
+        },
+        {
+          "date": "2024-12",
+          "value": 77501432.3594669
+        },
+        {
+          "date": "2025-01",
+          "value": 78812505.9275581
+        },
+        {
+          "date": "2025-02",
+          "value": 79263243.2432488
+        },
+        {
+          "date": "2025-03",
+          "value": 79461733.2729408
+        },
+        {
+          "date": "2025-04",
+          "value": 77427088.4490411
+        },
+        {
+          "date": "2025-05",
+          "value": 77714895.9049018
+        },
+        {
+          "date": "2025-06",
+          "value": 76180389.4925995
+        },
+        {
+          "date": "2025-07",
+          "value": 77138367.1827142
+        },
+        {
+          "date": "2025-08",
+          "value": 77207710.7058946
+        },
+        {
+          "date": "2025-09",
+          "value": 78100550.330915
+        },
+        {
+          "date": "2025-10",
+          "value": 80765953.428082
+        },
+        {
+          "date": "2025-11",
+          "value": 79333516.6615726
+        },
+        {
+          "date": "2025-12",
+          "value": 77084771.5365009
+        },
+        {
+          "date": "2026-01",
+          "value": 155236738.8831923
+        },
+        {
+          "date": "2026-02",
+          "value": 158839841.2784517
+        },
+        {
+          "date": "2026-03",
+          "value": 165547602.0675475
+        },
+        {
+          "date": "2026-04",
+          "value": 161791873.9837644
+        },
+        {
+          "date": "2026-05",
+          "value": 166584471.6696488
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Kollektivanlageinstitutionen gemäss KAG"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,KAI,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 20864035.483921
+        },
+        {
+          "date": "2024-07",
+          "value": 20491033.760398
+        },
+        {
+          "date": "2024-08",
+          "value": 21057738.814398
+        },
+        {
+          "date": "2024-09",
+          "value": 20858420.135926
+        },
+        {
+          "date": "2024-10",
+          "value": 21490937.016733
+        },
+        {
+          "date": "2024-11",
+          "value": 21395653.08974
+        },
+        {
+          "date": "2024-12",
+          "value": 21520818.378872
+        },
+        {
+          "date": "2025-01",
+          "value": 21596252.505656
+        },
+        {
+          "date": "2025-02",
+          "value": 21243872.966575
+        },
+        {
+          "date": "2025-03",
+          "value": 21623290.456615
+        },
+        {
+          "date": "2025-04",
+          "value": 21142906.930224
+        },
+        {
+          "date": "2025-05",
+          "value": 21571916.403039
+        },
+        {
+          "date": "2025-06",
+          "value": 21040412.276739
+        },
+        {
+          "date": "2025-07",
+          "value": 20728227.261525
+        },
+        {
+          "date": "2025-08",
+          "value": 20890700.350341
+        },
+        {
+          "date": "2025-09",
+          "value": 20674036.354412
+        },
+        {
+          "date": "2025-10",
+          "value": 20921054.836108994
+        },
+        {
+          "date": "2025-11",
+          "value": 20974412.35826
+        },
+        {
+          "date": "2025-12",
+          "value": 20125931.893158
+        },
+        {
+          "date": "2026-01",
+          "value": 25755108.79788381
+        },
+        {
+          "date": "2026-02",
+          "value": 26458593.16621966
+        },
+        {
+          "date": "2026-03",
+          "value": 28394133.61284706
+        },
+        {
+          "date": "2026-04",
+          "value": 26135170.0590846
+        },
+        {
+          "date": "2026-05",
+          "value": 26003216.14118146
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Versicherungen und Pensionskassen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,VPK,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 12511205.4845581
+        },
+        {
+          "date": "2024-07",
+          "value": 10403745.6849291
+        },
+        {
+          "date": "2024-08",
+          "value": 11314071.3042848
+        },
+        {
+          "date": "2024-09",
+          "value": 11332179.5802464
+        },
+        {
+          "date": "2024-10",
+          "value": 13060767.817662
+        },
+        {
+          "date": "2024-11",
+          "value": 13206665.712391
+        },
+        {
+          "date": "2024-12",
+          "value": 13004658.7042348
+        },
+        {
+          "date": "2025-01",
+          "value": 13612475.5267867
+        },
+        {
+          "date": "2025-02",
+          "value": 12689726.7013889
+        },
+        {
+          "date": "2025-03",
+          "value": 13331498.2439329
+        },
+        {
+          "date": "2025-04",
+          "value": 11869126.975901
+        },
+        {
+          "date": "2025-05",
+          "value": 12548257.6651857
+        },
+        {
+          "date": "2025-06",
+          "value": 11920918.4038932
+        },
+        {
+          "date": "2025-07",
+          "value": 12823396.5946569
+        },
+        {
+          "date": "2025-08",
+          "value": 13943826.1562382
+        },
+        {
+          "date": "2025-09",
+          "value": 13179635.6063362
+        },
+        {
+          "date": "2025-10",
+          "value": 13835844.001002694
+        },
+        {
+          "date": "2025-11",
+          "value": 13807637.6937064
+        },
+        {
+          "date": "2025-12",
+          "value": 10955766.208312
+        },
+        {
+          "date": "2026-01",
+          "value": 11990162.16251295
+        },
+        {
+          "date": "2026-02",
+          "value": 11986755.52205665
+        },
+        {
+          "date": "2026-03",
+          "value": 16084868.143962223
+        },
+        {
+          "date": "2026-04",
+          "value": 13897035.54027509
+        },
+        {
+          "date": "2026-05",
+          "value": 13297755.482451955
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Pensionskassen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,PKA,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 4001144.927551
+        },
+        {
+          "date": "2024-07",
+          "value": 3308846.976099
+        },
+        {
+          "date": "2024-08",
+          "value": 3658283.146214
+        },
+        {
+          "date": "2024-09",
+          "value": 3146070.834927
+        },
+        {
+          "date": "2024-10",
+          "value": 4074129.287371
+        },
+        {
+          "date": "2024-11",
+          "value": 4394559.40555
+        },
+        {
+          "date": "2024-12",
+          "value": 4968364.358629
+        },
+        {
+          "date": "2025-01",
+          "value": 4968930.791149
+        },
+        {
+          "date": "2025-02",
+          "value": 3900100.827132
+        },
+        {
+          "date": "2025-03",
+          "value": 3443144.757449
+        },
+        {
+          "date": "2025-04",
+          "value": 3187881.12338
+        },
+        {
+          "date": "2025-05",
+          "value": 3574517.624897
+        },
+        {
+          "date": "2025-06",
+          "value": 2900250.139966
+        },
+        {
+          "date": "2025-07",
+          "value": 3015673.236526
+        },
+        {
+          "date": "2025-08",
+          "value": 2973944.627577
+        },
+        {
+          "date": "2025-09",
+          "value": 3073996.529847
+        },
+        {
+          "date": "2025-10",
+          "value": 3239045.83159
+        },
+        {
+          "date": "2025-11",
+          "value": 3218698.656918
+        },
+        {
+          "date": "2025-12",
+          "value": 2636860.284851
+        },
+        {
+          "date": "2026-01",
+          "value": 2860317.326736415
+        },
+        {
+          "date": "2026-02",
+          "value": 2655813.141031044
+        },
+        {
+          "date": "2026-03",
+          "value": 5064517.119068383
+        },
+        {
+          "date": "2026-04",
+          "value": 2844274.40494382
+        },
+        {
+          "date": "2026-05",
+          "value": 2323955.705527075
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Mit Finanz- und Versicherungsdienstleistungen verbundene Tätigkeiten"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,FVT,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 8784848.119794
+        },
+        {
+          "date": "2024-07",
+          "value": 9260896.250672
+        },
+        {
+          "date": "2024-08",
+          "value": 8676641.237301
+        },
+        {
+          "date": "2024-09",
+          "value": 8600211.795112
+        },
+        {
+          "date": "2024-10",
+          "value": 9513564.750244
+        },
+        {
+          "date": "2024-11",
+          "value": 9724905.287295
+        },
+        {
+          "date": "2024-12",
+          "value": 8771458.275044
+        },
+        {
+          "date": "2025-01",
+          "value": 8991324.855831
+        },
+        {
+          "date": "2025-02",
+          "value": 9679864.048159
+        },
+        {
+          "date": "2025-03",
+          "value": 8634660.07647561
+        },
+        {
+          "date": "2025-04",
+          "value": 9564836.777297717
+        },
+        {
+          "date": "2025-05",
+          "value": 9520667.54945574
+        },
+        {
+          "date": "2025-06",
+          "value": 9758304.53449664
+        },
+        {
+          "date": "2025-07",
+          "value": 9327687.68666912
+        },
+        {
+          "date": "2025-08",
+          "value": 9600236.433793
+        },
+        {
+          "date": "2025-09",
+          "value": 10015234.123671245
+        },
+        {
+          "date": "2025-10",
+          "value": 9695717.885490999
+        },
+        {
+          "date": "2025-11",
+          "value": 9170098.800801
+        },
+        {
+          "date": "2025-12",
+          "value": 9621718.401513694
+        },
+        {
+          "date": "2026-01",
+          "value": 10642712.922139987
+        },
+        {
+          "date": "2026-02",
+          "value": 10117016.42181024
+        },
+        {
+          "date": "2026-03",
+          "value": 12105907.42592716
+        },
+        {
+          "date": "2026-04",
+          "value": 10683591.32475025
+        },
+        {
+          "date": "2026-05",
+          "value": 11128539.119188124
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Öffentliche Hand"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,OEH,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 44202051.279189
+        },
+        {
+          "date": "2024-07",
+          "value": 44098776.349509
+        },
+        {
+          "date": "2024-08",
+          "value": 45874179.700094
+        },
+        {
+          "date": "2024-09",
+          "value": 48207451.625033
+        },
+        {
+          "date": "2024-10",
+          "value": 47659993.535576
+        },
+        {
+          "date": "2024-11",
+          "value": 49026797.304172
+        },
+        {
+          "date": "2024-12",
+          "value": 47237594.195679
+        },
+        {
+          "date": "2025-01",
+          "value": 45978044.922612
+        },
+        {
+          "date": "2025-02",
+          "value": 47109092.996082
+        },
+        {
+          "date": "2025-03",
+          "value": 47291519.266755
+        },
+        {
+          "date": "2025-04",
+          "value": 47158249.219541
+        },
+        {
+          "date": "2025-05",
+          "value": 46921255.919514
+        },
+        {
+          "date": "2025-06",
+          "value": 47490258.986916
+        },
+        {
+          "date": "2025-07",
+          "value": 47307797.311586
+        },
+        {
+          "date": "2025-08",
+          "value": 48707331.12519591
+        },
+        {
+          "date": "2025-09",
+          "value": 50174542.27969509
+        },
+        {
+          "date": "2025-10",
+          "value": 48517162.04720034
+        },
+        {
+          "date": "2025-11",
+          "value": 49638775.608167
+        },
+        {
+          "date": "2025-12",
+          "value": 50075415.779615
+        },
+        {
+          "date": "2026-01",
+          "value": 51379601.23582041
+        },
+        {
+          "date": "2026-02",
+          "value": 53140684.94685445
+        },
+        {
+          "date": "2026-03",
+          "value": 52630253.45117358
+        },
+        {
+          "date": "2026-04",
+          "value": 50166515.49050256
+        },
+        {
+          "date": "2026-05",
+          "value": 47951956.97885224
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Bund"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,BUN,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 10412892.515839
+        },
+        {
+          "date": "2024-07",
+          "value": 10242660.182848
+        },
+        {
+          "date": "2024-08",
+          "value": 11010759.164401
+        },
+        {
+          "date": "2024-09",
+          "value": 12739121.797166
+        },
+        {
+          "date": "2024-10",
+          "value": 11420645.858942
+        },
+        {
+          "date": "2024-11",
+          "value": 11665639.498536
+        },
+        {
+          "date": "2024-12",
+          "value": 11159867.605472
+        },
+        {
+          "date": "2025-01",
+          "value": 9659258.858393
+        },
+        {
+          "date": "2025-02",
+          "value": 10387548.594193
+        },
+        {
+          "date": "2025-03",
+          "value": 10582427.741073
+        },
+        {
+          "date": "2025-04",
+          "value": 10826852.168921
+        },
+        {
+          "date": "2025-05",
+          "value": 10431013.750015
+        },
+        {
+          "date": "2025-06",
+          "value": 10856517.342569
+        },
+        {
+          "date": "2025-07",
+          "value": 10716684.419439
+        },
+        {
+          "date": "2025-08",
+          "value": 11238090.768947912
+        },
+        {
+          "date": "2025-09",
+          "value": 12132013.32836509
+        },
+        {
+          "date": "2025-10",
+          "value": 10620053.246472338
+        },
+        {
+          "date": "2025-11",
+          "value": 11472862.223274
+        },
+        {
+          "date": "2025-12",
+          "value": 12573830.127637
+        },
+        {
+          "date": "2026-01",
+          "value": 14324492.63985291
+        },
+        {
+          "date": "2026-02",
+          "value": 15611934.374909839
+        },
+        {
+          "date": "2026-03",
+          "value": 14950738.69208243
+        },
+        {
+          "date": "2026-04",
+          "value": 12728562.88852932
+        },
+        {
+          "date": "2026-05",
+          "value": 10308590.071590085
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Kantone"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,KAN,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 9983867.01544
+        },
+        {
+          "date": "2024-07",
+          "value": 9963440.070483
+        },
+        {
+          "date": "2024-08",
+          "value": 10521239.15777
+        },
+        {
+          "date": "2024-09",
+          "value": 11319579.827583
+        },
+        {
+          "date": "2024-10",
+          "value": 11683639.501239
+        },
+        {
+          "date": "2024-11",
+          "value": 12356219.320247
+        },
+        {
+          "date": "2024-12",
+          "value": 10977237.902829
+        },
+        {
+          "date": "2025-01",
+          "value": 10789191.45721
+        },
+        {
+          "date": "2025-02",
+          "value": 11073278.607226
+        },
+        {
+          "date": "2025-03",
+          "value": 11412783.837497
+        },
+        {
+          "date": "2025-04",
+          "value": 10768434.553817
+        },
+        {
+          "date": "2025-05",
+          "value": 10823700.863596
+        },
+        {
+          "date": "2025-06",
+          "value": 11017449.503807
+        },
+        {
+          "date": "2025-07",
+          "value": 11015277.667257
+        },
+        {
+          "date": "2025-08",
+          "value": 11831962.575553
+        },
+        {
+          "date": "2025-09",
+          "value": 12473020.138784999
+        },
+        {
+          "date": "2025-10",
+          "value": 12248264.252678
+        },
+        {
+          "date": "2025-11",
+          "value": 12589368.565654
+        },
+        {
+          "date": "2025-12",
+          "value": 12060570.160482
+        },
+        {
+          "date": "2026-01",
+          "value": 11547385.81416061
+        },
+        {
+          "date": "2026-02",
+          "value": 11854477.032451222
+        },
+        {
+          "date": "2026-03",
+          "value": 11914607.674446303
+        },
+        {
+          "date": "2026-04",
+          "value": 11665742.98326212
+        },
+        {
+          "date": "2026-05",
+          "value": 11736251.67425462
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Gemeinden"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,GEM,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 23805291.74791
+        },
+        {
+          "date": "2024-07",
+          "value": 23892676.096178
+        },
+        {
+          "date": "2024-08",
+          "value": 24342181.377923
+        },
+        {
+          "date": "2024-09",
+          "value": 24148750.000284
+        },
+        {
+          "date": "2024-10",
+          "value": 24555708.175395
+        },
+        {
+          "date": "2024-11",
+          "value": 25004938.485389
+        },
+        {
+          "date": "2024-12",
+          "value": 25100488.687378
+        },
+        {
+          "date": "2025-01",
+          "value": 25529594.607009
+        },
+        {
+          "date": "2025-02",
+          "value": 25648265.794663
+        },
+        {
+          "date": "2025-03",
+          "value": 25296307.688185
+        },
+        {
+          "date": "2025-04",
+          "value": 25562962.496803
+        },
+        {
+          "date": "2025-05",
+          "value": 25666541.305903
+        },
+        {
+          "date": "2025-06",
+          "value": 25616292.14054
+        },
+        {
+          "date": "2025-07",
+          "value": 25575835.22489
+        },
+        {
+          "date": "2025-08",
+          "value": 25637277.780695
+        },
+        {
+          "date": "2025-09",
+          "value": 25569508.812545
+        },
+        {
+          "date": "2025-10",
+          "value": 25648844.54805
+        },
+        {
+          "date": "2025-11",
+          "value": 25576544.819239
+        },
+        {
+          "date": "2025-12",
+          "value": 25441015.491496
+        },
+        {
+          "date": "2026-01",
+          "value": 25507722.78180689
+        },
+        {
+          "date": "2026-02",
+          "value": 25674273.5394934
+        },
+        {
+          "date": "2026-03",
+          "value": 25764907.08464484
+        },
+        {
+          "date": "2026-04",
+          "value": 25772209.61871112
+        },
+        {
+          "date": "2026-05",
+          "value": 25907115.23300754
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Sozialversicherungen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,SOZ,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 68728.52204
+        },
+        {
+          "date": "2024-07",
+          "value": 34731.91908
+        },
+        {
+          "date": "2024-08",
+          "value": 48997.46472
+        },
+        {
+          "date": "2024-09",
+          "value": 39210.10524
+        },
+        {
+          "date": "2024-10",
+          "value": 250178.17667
+        },
+        {
+          "date": "2024-11",
+          "value": 44700.58704
+        },
+        {
+          "date": "2024-12",
+          "value": 29899.26462
+        },
+        {
+          "date": "2025-01",
+          "value": 47535.27642
+        },
+        {
+          "date": "2025-02",
+          "value": 63195.88692
+        },
+        {
+          "date": "2025-03",
+          "value": 49775.65237
+        },
+        {
+          "date": "2025-04",
+          "value": 42484.85254
+        },
+        {
+          "date": "2025-05",
+          "value": 59088.72788
+        },
+        {
+          "date": "2025-06",
+          "value": 27177.82309
+        },
+        {
+          "date": "2025-07",
+          "value": 23232.02346
+        },
+        {
+          "date": "2025-08",
+          "value": 39963.36473
+        },
+        {
+          "date": "2025-09",
+          "value": 30597.26697
+        },
+        {
+          "date": "2025-10",
+          "value": 29850.09836
+        },
+        {
+          "date": "2025-11",
+          "value": 35716.60264
+        },
+        {
+          "date": "2025-12",
+          "value": 21317.32555
+        },
+        {
+          "date": "2026-01",
+          "value": 22171.11536
+        },
+        {
+          "date": "2026-02",
+          "value": 30502.74761
+        },
+        {
+          "date": "2026-03",
+          "value": 51972.175
+        },
+        {
+          "date": "2026-04",
+          "value": 59298.51994
+        },
+        {
+          "date": "2026-05",
+          "value": 71558.05772
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Private Haushalte"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,PHA,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 868323647.1996657
+        },
+        {
+          "date": "2024-07",
+          "value": 871105473.4349267
+        },
+        {
+          "date": "2024-08",
+          "value": 873327732.6676306
+        },
+        {
+          "date": "2024-09",
+          "value": 874256038.8762517
+        },
+        {
+          "date": "2024-10",
+          "value": 878300790.8205416
+        },
+        {
+          "date": "2024-11",
+          "value": 881468794.9431379
+        },
+        {
+          "date": "2024-12",
+          "value": 879539609.6889424
+        },
+        {
+          "date": "2025-01",
+          "value": 881626422.1128381
+        },
+        {
+          "date": "2025-02",
+          "value": 884530670.0536822
+        },
+        {
+          "date": "2025-03",
+          "value": 885819657.3297677
+        },
+        {
+          "date": "2025-04",
+          "value": 888850603.3567647
+        },
+        {
+          "date": "2025-05",
+          "value": 892600296.8007123
+        },
+        {
+          "date": "2025-06",
+          "value": 893863631.4950398
+        },
+        {
+          "date": "2025-07",
+          "value": 896773989.5430588
+        },
+        {
+          "date": "2025-08",
+          "value": 899985243.2771357
+        },
+        {
+          "date": "2025-09",
+          "value": 901670094.8443456
+        },
+        {
+          "date": "2025-10",
+          "value": 905770186.4148471
+        },
+        {
+          "date": "2025-11",
+          "value": 909544697.8720217
+        },
+        {
+          "date": "2025-12",
+          "value": 908493883.3577093
+        },
+        {
+          "date": "2026-01",
+          "value": 938556864.0960349
+        },
+        {
+          "date": "2026-02",
+          "value": 941778320.1297678
+        },
+        {
+          "date": "2026-03",
+          "value": 942967226.4499542
+        },
+        {
+          "date": "2026-04",
+          "value": 947422415.1276635
+        },
+        {
+          "date": "2026-05",
+          "value": 951134920.4437442
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Private Organisationen ohne Erwerbszweck"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,POE,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 15496900.987845
+        },
+        {
+          "date": "2024-07",
+          "value": 15234149.273353001
+        },
+        {
+          "date": "2024-08",
+          "value": 15403111.485293
+        },
+        {
+          "date": "2024-09",
+          "value": 15373589.191049
+        },
+        {
+          "date": "2024-10",
+          "value": 15317529.884631
+        },
+        {
+          "date": "2024-11",
+          "value": 15416931.955028001
+        },
+        {
+          "date": "2024-12",
+          "value": 15036417.645828
+        },
+        {
+          "date": "2025-01",
+          "value": 15615952.340723
+        },
+        {
+          "date": "2025-02",
+          "value": 15417222.529986
+        },
+        {
+          "date": "2025-03",
+          "value": 15279865.684819
+        },
+        {
+          "date": "2025-04",
+          "value": 15566421.321022
+        },
+        {
+          "date": "2025-05",
+          "value": 15639825.106589999
+        },
+        {
+          "date": "2025-06",
+          "value": 15303726.050624
+        },
+        {
+          "date": "2025-07",
+          "value": 15681351.075771
+        },
+        {
+          "date": "2025-08",
+          "value": 15629514.613464
+        },
+        {
+          "date": "2025-09",
+          "value": 15187863.142215
+        },
+        {
+          "date": "2025-10",
+          "value": 15814370.296853
+        },
+        {
+          "date": "2025-11",
+          "value": 15577009.803555
+        },
+        {
+          "date": "2025-12",
+          "value": 15079446.04365
+        },
+        {
+          "date": "2026-01",
+          "value": 11146727.43708354
+        },
+        {
+          "date": "2026-02",
+          "value": 10476065.83002001
+        },
+        {
+          "date": "2026-03",
+          "value": 10260974.590089949
+        },
+        {
+          "date": "2026-04",
+          "value": 11025822.48043119
+        },
+        {
+          "date": "2026-05",
+          "value": 10585910.735017223
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Keinem Sektor zuordenbare Positionen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,T,U,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 36291637.99251
+        },
+        {
+          "date": "2024-07",
+          "value": 35910276.431865
+        },
+        {
+          "date": "2024-08",
+          "value": 36841477.42381713
+        },
+        {
+          "date": "2024-09",
+          "value": 37694921.739101
+        },
+        {
+          "date": "2024-10",
+          "value": 39778341.03294899
+        },
+        {
+          "date": "2024-11",
+          "value": 37435674.469343
+        },
+        {
+          "date": "2024-12",
+          "value": 35819348.181918
+        },
+        {
+          "date": "2025-01",
+          "value": 35886196.11124655
+        },
+        {
+          "date": "2025-02",
+          "value": 36088002.75908362
+        },
+        {
+          "date": "2025-03",
+          "value": 38094017.47885371
+        },
+        {
+          "date": "2025-04",
+          "value": 35970347.41598045
+        },
+        {
+          "date": "2025-05",
+          "value": 38437808.54622197
+        },
+        {
+          "date": "2025-06",
+          "value": 35613529.43849314
+        },
+        {
+          "date": "2025-07",
+          "value": 37675381.8719817
+        },
+        {
+          "date": "2025-08",
+          "value": 38096111.72893443
+        },
+        {
+          "date": "2025-09",
+          "value": 38688611.29319398
+        },
+        {
+          "date": "2025-10",
+          "value": 42868279.93582291
+        },
+        {
+          "date": "2025-11",
+          "value": 43567692.462208
+        },
+        {
+          "date": "2025-12",
+          "value": 44975118.32649661
+        },
+        {
+          "date": "2026-01",
+          "value": 50895879.50558839
+        },
+        {
+          "date": "2026-02",
+          "value": 51859804.00984526
+        },
+        {
+          "date": "2026-03",
+          "value": 46042545.06165524
+        },
+        {
+          "date": "2026-04",
+          "value": 47702059.01743609
+        },
+        {
+          "date": "2026-05",
+          "value": 48181788.49313024
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Total Sektorale Gliederung nach ESVG"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,T,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 2078677532.167192
+        },
+        {
+          "date": "2024-07",
+          "value": 2090234252.2077937
+        },
+        {
+          "date": "2024-08",
+          "value": 2111100254.17889
+        },
+        {
+          "date": "2024-09",
+          "value": 2100530549.297886
+        },
+        {
+          "date": "2024-10",
+          "value": 2119583396.450459
+        },
+        {
+          "date": "2024-11",
+          "value": 2129028000.615713
+        },
+        {
+          "date": "2024-12",
+          "value": 2074889198.8912656
+        },
+        {
+          "date": "2025-01",
+          "value": 2109745860.2605746
+        },
+        {
+          "date": "2025-02",
+          "value": 2115051340.276587
+        },
+        {
+          "date": "2025-03",
+          "value": 2090320942.2327604
+        },
+        {
+          "date": "2025-04",
+          "value": 2124565905.52953
+        },
+        {
+          "date": "2025-05",
+          "value": 2117699336.7190452
+        },
+        {
+          "date": "2025-06",
+          "value": 2099838718.363844
+        },
+        {
+          "date": "2025-07",
+          "value": 2135324768.4754055
+        },
+        {
+          "date": "2025-08",
+          "value": 2150991250.2928495
+        },
+        {
+          "date": "2025-09",
+          "value": 2125050962.757871
+        },
+        {
+          "date": "2025-10",
+          "value": 2147641340.3624077
+        },
+        {
+          "date": "2025-11",
+          "value": 2156165660.815575
+        },
+        {
+          "date": "2025-12",
+          "value": 2110912054.030668
+        },
+        {
+          "date": "2026-01",
+          "value": 2158438641.2891827
+        },
+        {
+          "date": "2026-02",
+          "value": 2161851282.772653
+        },
+        {
+          "date": "2026-03",
+          "value": 2157258281.233847
+        },
+        {
+          "date": "2026-04",
+          "value": 2169967217.0925016
+        },
+        {
+          "date": "2026-05",
+          "value": 2185341931.148467
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Nichtfinanzielle Unternehmen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,NFU,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 334070604.5331515
+        },
+        {
+          "date": "2024-07",
+          "value": 334737018.2692923
+        },
+        {
+          "date": "2024-08",
+          "value": 336679004.1171882
+        },
+        {
+          "date": "2024-09",
+          "value": 336850933.1811852
+        },
+        {
+          "date": "2024-10",
+          "value": 339427498.5649787
+        },
+        {
+          "date": "2024-11",
+          "value": 342496487.9979698
+        },
+        {
+          "date": "2024-12",
+          "value": 339384927.3123987
+        },
+        {
+          "date": "2025-01",
+          "value": 344780457.36442
+        },
+        {
+          "date": "2025-02",
+          "value": 347196197.7339113
+        },
+        {
+          "date": "2025-03",
+          "value": 345993145.5538653
+        },
+        {
+          "date": "2025-04",
+          "value": 348300463.6175324
+        },
+        {
+          "date": "2025-05",
+          "value": 349757159.11272526
+        },
+        {
+          "date": "2025-06",
+          "value": 343364930.1167534
+        },
+        {
+          "date": "2025-07",
+          "value": 345701076.3280293
+        },
+        {
+          "date": "2025-08",
+          "value": 347831326.6919279
+        },
+        {
+          "date": "2025-09",
+          "value": 345259932.0236383
+        },
+        {
+          "date": "2025-10",
+          "value": 347364752.9773187
+        },
+        {
+          "date": "2025-11",
+          "value": 350202422.3917382
+        },
+        {
+          "date": "2025-12",
+          "value": 345104020.9260402
+        },
+        {
+          "date": "2026-01",
+          "value": 325444261.059734
+        },
+        {
+          "date": "2026-02",
+          "value": 328287869.6913661
+        },
+        {
+          "date": "2026-03",
+          "value": 323183919.8087253
+        },
+        {
+          "date": "2026-04",
+          "value": 324325168.0062675
+        },
+        {
+          "date": "2026-05",
+          "value": 325874390.2014214
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Finanzielle Unternehmen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,FUN,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 808226902.4402682
+        },
+        {
+          "date": "2024-07",
+          "value": 816374433.0489637
+        },
+        {
+          "date": "2024-08",
+          "value": 830124287.8620366
+        },
+        {
+          "date": "2024-09",
+          "value": 817602223.35456
+        },
+        {
+          "date": "2024-10",
+          "value": 830203222.1759799
+        },
+        {
+          "date": "2024-11",
+          "value": 832532126.5018274
+        },
+        {
+          "date": "2024-12",
+          "value": 787313876.056749
+        },
+        {
+          "date": "2025-01",
+          "value": 814697694.07562
+        },
+        {
+          "date": "2025-02",
+          "value": 813401619.81163
+        },
+        {
+          "date": "2025-03",
+          "value": 789212835.259134
+        },
+        {
+          "date": "2025-04",
+          "value": 817293573.5567299
+        },
+        {
+          "date": "2025-05",
+          "value": 804783062.2681993
+        },
+        {
+          "date": "2025-06",
+          "value": 792649191.132601
+        },
+        {
+          "date": "2025-07",
+          "value": 822459385.0052736
+        },
+        {
+          "date": "2025-08",
+          "value": 830796906.5759408
+        },
+        {
+          "date": "2025-09",
+          "value": 805741201.9578975
+        },
+        {
+          "date": "2025-10",
+          "value": 822958218.5631558
+        },
+        {
+          "date": "2025-11",
+          "value": 823807765.9183824
+        },
+        {
+          "date": "2025-12",
+          "value": 785021831.8845402
+        },
+        {
+          "date": "2026-01",
+          "value": 823284143.835854
+        },
+        {
+          "date": "2026-02",
+          "value": 819200551.3677517
+        },
+        {
+          "date": "2026-03",
+          "value": 820651749.7939205
+        },
+        {
+          "date": "2026-04",
+          "value": 828878461.000413
+        },
+        {
+          "date": "2026-05",
+          "value": 840666441.9068083
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Nationalbank"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,SNB,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 471185173.3064949
+        },
+        {
+          "date": "2024-07",
+          "value": 477732745.3634639
+        },
+        {
+          "date": "2024-08",
+          "value": 489273114.8814551
+        },
+        {
+          "date": "2024-09",
+          "value": 483526879.030041
+        },
+        {
+          "date": "2024-10",
+          "value": 480759604.282968
+        },
+        {
+          "date": "2024-11",
+          "value": 486302394.793398
+        },
+        {
+          "date": "2024-12",
+          "value": 460259180.6420633
+        },
+        {
+          "date": "2025-01",
+          "value": 476146334.003975
+        },
+        {
+          "date": "2025-02",
+          "value": 474561871.2812056
+        },
+        {
+          "date": "2025-03",
+          "value": 460903514.8981364
+        },
+        {
+          "date": "2025-04",
+          "value": 472504817.5587899
+        },
+        {
+          "date": "2025-05",
+          "value": 458059259.6219793
+        },
+        {
+          "date": "2025-06",
+          "value": 456012830.8845569
+        },
+        {
+          "date": "2025-07",
+          "value": 477076565.558037
+        },
+        {
+          "date": "2025-08",
+          "value": 476945406.4874495
+        },
+        {
+          "date": "2025-09",
+          "value": 458721965.87286234
+        },
+        {
+          "date": "2025-10",
+          "value": 465381069.3972431
+        },
+        {
+          "date": "2025-11",
+          "value": 466161647.057057
+        },
+        {
+          "date": "2025-12",
+          "value": 445650676.6764071
+        },
+        {
+          "date": "2026-01",
+          "value": 461003856.0179607
+        },
+        {
+          "date": "2026-02",
+          "value": 460687573.4035996
+        },
+        {
+          "date": "2026-03",
+          "value": 451928722.6493238
+        },
+        {
+          "date": "2026-04",
+          "value": 457818157.6352502
+        },
+        {
+          "date": "2026-05",
+          "value": 459201069.0540997
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Banken"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,BAN,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 253196091.8317872
+        },
+        {
+          "date": "2024-07",
+          "value": 256304109.0444151
+        },
+        {
+          "date": "2024-08",
+          "value": 257822852.1426679
+        },
+        {
+          "date": "2024-09",
+          "value": 250978077.7182853
+        },
+        {
+          "date": "2024-10",
+          "value": 263435535.607951
+        },
+        {
+          "date": "2024-11",
+          "value": 258707187.3379326
+        },
+        {
+          "date": "2024-12",
+          "value": 240910671.6254165
+        },
+        {
+          "date": "2025-01",
+          "value": 251297484.5728736
+        },
+        {
+          "date": "2025-02",
+          "value": 252767354.2345363
+        },
+        {
+          "date": "2025-03",
+          "value": 241666723.6053261
+        },
+        {
+          "date": "2025-04",
+          "value": 258880459.3905044
+        },
+        {
+          "date": "2025-05",
+          "value": 259178319.2596907
+        },
+        {
+          "date": "2025-06",
+          "value": 251013965.9325777
+        },
+        {
+          "date": "2025-07",
+          "value": 259027574.6526479
+        },
+        {
+          "date": "2025-08",
+          "value": 265435620.797338
+        },
+        {
+          "date": "2025-09",
+          "value": 258260170.4426721
+        },
+        {
+          "date": "2025-10",
+          "value": 267563280.5390189
+        },
+        {
+          "date": "2025-11",
+          "value": 267317314.7657888
+        },
+        {
+          "date": "2025-12",
+          "value": 252915450.5928277
+        },
+        {
+          "date": "2026-01",
+          "value": 197295609.6659115
+        },
+        {
+          "date": "2026-02",
+          "value": 192278084.1958097
+        },
+        {
+          "date": "2026-03",
+          "value": 192168631.2498164
+        },
+        {
+          "date": "2026-04",
+          "value": 199115348.85698256
+        },
+        {
+          "date": "2026-05",
+          "value": 204792329.6905869
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Finanzierungs- und Vermögensverwaltungsinstitutionen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,FVW,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 64526120.09009163
+        },
+        {
+          "date": "2024-07",
+          "value": 64972885.8537165
+        },
+        {
+          "date": "2024-08",
+          "value": 65319699.36306986
+        },
+        {
+          "date": "2024-09",
+          "value": 65345632.78238813
+        },
+        {
+          "date": "2024-10",
+          "value": 66644250.65524582
+        },
+        {
+          "date": "2024-11",
+          "value": 67116063.0179943
+        },
+        {
+          "date": "2024-12",
+          "value": 66515678.95848324
+        },
+        {
+          "date": "2025-01",
+          "value": 67176798.08634566
+        },
+        {
+          "date": "2025-02",
+          "value": 66421143.6678934
+        },
+        {
+          "date": "2025-03",
+          "value": 66780629.55183897
+        },
+        {
+          "date": "2025-04",
+          "value": 66872193.06748267
+        },
+        {
+          "date": "2025-05",
+          "value": 67605563.0392559
+        },
+        {
+          "date": "2025-06",
+          "value": 66001278.10289257
+        },
+        {
+          "date": "2025-07",
+          "value": 66252901.029514
+        },
+        {
+          "date": "2025-08",
+          "value": 67286073.658314
+        },
+        {
+          "date": "2025-09",
+          "value": 67819397.32935095
+        },
+        {
+          "date": "2025-10",
+          "value": 68770949.18503372
+        },
+        {
+          "date": "2025-11",
+          "value": 69445272.07427935
+        },
+        {
+          "date": "2025-12",
+          "value": 67864381.10849296
+        },
+        {
+          "date": "2026-01",
+          "value": 144948400.93124396
+        },
+        {
+          "date": "2026-02",
+          "value": 146537568.07656676
+        },
+        {
+          "date": "2026-03",
+          "value": 151660332.41615173
+        },
+        {
+          "date": "2026-04",
+          "value": 149593063.7241854
+        },
+        {
+          "date": "2026-05",
+          "value": 154594577.764261
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Kollektivanlageinstitutionen gemäss KAG"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,KAI,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 20312202.90096392
+        },
+        {
+          "date": "2024-07",
+          "value": 20003804.71717795
+        },
+        {
+          "date": "2024-08",
+          "value": 20495268.9086876
+        },
+        {
+          "date": "2024-09",
+          "value": 20515962.57316338
+        },
+        {
+          "date": "2024-10",
+          "value": 20655123.21095671
+        },
+        {
+          "date": "2024-11",
+          "value": 20893817.02971727
+        },
+        {
+          "date": "2024-12",
+          "value": 21061857.73593588
+        },
+        {
+          "date": "2025-01",
+          "value": 21131492.59587624
+        },
+        {
+          "date": "2025-02",
+          "value": 20729181.22924845
+        },
+        {
+          "date": "2025-03",
+          "value": 20906946.53360056
+        },
+        {
+          "date": "2025-04",
+          "value": 20737327.11545129
+        },
+        {
+          "date": "2025-05",
+          "value": 21064949.13180586
+        },
+        {
+          "date": "2025-06",
+          "value": 20427077.594391845
+        },
+        {
+          "date": "2025-07",
+          "value": 20254557.58142126
+        },
+        {
+          "date": "2025-08",
+          "value": 20576161.62499819
+        },
+        {
+          "date": "2025-09",
+          "value": 20184517.60236828
+        },
+        {
+          "date": "2025-10",
+          "value": 20366667.30104104
+        },
+        {
+          "date": "2025-11",
+          "value": 20261541.29267578
+        },
+        {
+          "date": "2025-12",
+          "value": 19600910.67617222
+        },
+        {
+          "date": "2026-01",
+          "value": 24566490.12363879
+        },
+        {
+          "date": "2026-02",
+          "value": 25285055.79234615
+        },
+        {
+          "date": "2026-03",
+          "value": 25758345.15606748
+        },
+        {
+          "date": "2026-04",
+          "value": 24762437.40593863
+        },
+        {
+          "date": "2026-05",
+          "value": 24914319.61280453
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Versicherungen und Pensionskassen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,VPK,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 12127724.60785027
+        },
+        {
+          "date": "2024-07",
+          "value": 9754879.27869336
+        },
+        {
+          "date": "2024-08",
+          "value": 10532486.62855514
+        },
+        {
+          "date": "2024-09",
+          "value": 10972998.04935431
+        },
+        {
+          "date": "2024-10",
+          "value": 11617136.15663054
+        },
+        {
+          "date": "2024-11",
+          "value": 12552360.97636921
+        },
+        {
+          "date": "2024-12",
+          "value": 12195594.07831102
+        },
+        {
+          "date": "2025-01",
+          "value": 12631046.001646776
+        },
+        {
+          "date": "2025-02",
+          "value": 11747729.3507213
+        },
+        {
+          "date": "2025-03",
+          "value": 12740046.14330151
+        },
+        {
+          "date": "2025-04",
+          "value": 10944216.59813328
+        },
+        {
+          "date": "2025-05",
+          "value": 12001209.144711772
+        },
+        {
+          "date": "2025-06",
+          "value": 11370604.636231944
+        },
+        {
+          "date": "2025-07",
+          "value": 12104241.19715852
+        },
+        {
+          "date": "2025-08",
+          "value": 12990162.11953942
+        },
+        {
+          "date": "2025-09",
+          "value": 12628087.57686548
+        },
+        {
+          "date": "2025-10",
+          "value": 13016069.51195941
+        },
+        {
+          "date": "2025-11",
+          "value": 13113638.03658122
+        },
+        {
+          "date": "2025-12",
+          "value": 10341539.201403486
+        },
+        {
+          "date": "2026-01",
+          "value": 11322885.955677276
+        },
+        {
+          "date": "2026-02",
+          "value": 11229340.174502255
+        },
+        {
+          "date": "2026-03",
+          "value": 14907739.09164765
+        },
+        {
+          "date": "2026-04",
+          "value": 13420478.974559255
+        },
+        {
+          "date": "2026-05",
+          "value": 12859470.61006766
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Pensionskassen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,PKA,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 3901728.14272917
+        },
+        {
+          "date": "2024-07",
+          "value": 3108255.918768261
+        },
+        {
+          "date": "2024-08",
+          "value": 3583242.280888339
+        },
+        {
+          "date": "2024-09",
+          "value": 3089640.081958909
+        },
+        {
+          "date": "2024-10",
+          "value": 3876456.117212538
+        },
+        {
+          "date": "2024-11",
+          "value": 4186830.993148207
+        },
+        {
+          "date": "2024-12",
+          "value": 4668916.777792
+        },
+        {
+          "date": "2025-01",
+          "value": 4685115.211592999
+        },
+        {
+          "date": "2025-02",
+          "value": 3714252.100128575
+        },
+        {
+          "date": "2025-03",
+          "value": 3198943.069998999
+        },
+        {
+          "date": "2025-04",
+          "value": 2903969.742099032
+        },
+        {
+          "date": "2025-05",
+          "value": 3437907.708891072
+        },
+        {
+          "date": "2025-06",
+          "value": 2805442.756011544
+        },
+        {
+          "date": "2025-07",
+          "value": 2898736.050496614
+        },
+        {
+          "date": "2025-08",
+          "value": 2914614.42911722
+        },
+        {
+          "date": "2025-09",
+          "value": 2943384.35882128
+        },
+        {
+          "date": "2025-10",
+          "value": 3122360.57298
+        },
+        {
+          "date": "2025-11",
+          "value": 3082691.563479819
+        },
+        {
+          "date": "2025-12",
+          "value": 2461407.633265484
+        },
+        {
+          "date": "2026-01",
+          "value": 2739841.516597809
+        },
+        {
+          "date": "2026-02",
+          "value": 2565405.935931511
+        },
+        {
+          "date": "2026-03",
+          "value": 4491597.457891934
+        },
+        {
+          "date": "2026-04",
+          "value": 2683700.790894665
+        },
+        {
+          "date": "2026-05",
+          "value": 2220535.63361781
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Mit Finanz- und Versicherungsdienstleistungen verbundene Tätigkeiten"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,FVT,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 7191792.598024271
+        },
+        {
+          "date": "2024-07",
+          "value": 7609813.996404766
+        },
+        {
+          "date": "2024-08",
+          "value": 7176135.0944883935
+        },
+        {
+          "date": "2024-09",
+          "value": 6778635.552691279
+        },
+        {
+          "date": "2024-10",
+          "value": 7746695.480874548
+        },
+        {
+          "date": "2024-11",
+          "value": 7854120.902963358
+        },
+        {
+          "date": "2024-12",
+          "value": 7432750.672125
+        },
+        {
+          "date": "2025-01",
+          "value": 7446031.554749
+        },
+        {
+          "date": "2025-02",
+          "value": 7903520.950553523
+        },
+        {
+          "date": "2025-03",
+          "value": 7121920.945731343
+        },
+        {
+          "date": "2025-04",
+          "value": 8091886.749899604
+        },
+        {
+          "date": "2025-05",
+          "value": 7938711.202581509
+        },
+        {
+          "date": "2025-06",
+          "value": 8250511.576341511
+        },
+        {
+          "date": "2025-07",
+          "value": 7998102.567916185
+        },
+        {
+          "date": "2025-08",
+          "value": 8139643.51329976
+        },
+        {
+          "date": "2025-09",
+          "value": 8311580.736146963
+        },
+        {
+          "date": "2025-10",
+          "value": 8226849.92990084
+        },
+        {
+          "date": "2025-11",
+          "value": 7769894.133776
+        },
+        {
+          "date": "2025-12",
+          "value": 8249784.305409
+        },
+        {
+          "date": "2026-01",
+          "value": 8713391.26506052
+        },
+        {
+          "date": "2026-02",
+          "value": 8467985.517273493
+        },
+        {
+          "date": "2026-03",
+          "value": 9986324.60498082
+        },
+        {
+          "date": "2026-04",
+          "value": 8931412.067985559
+        },
+        {
+          "date": "2026-05",
+          "value": 9218995.094453147
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Öffentliche Hand"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,OEH,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 44189071.06680886
+        },
+        {
+          "date": "2024-07",
+          "value": 44075788.87677183
+        },
+        {
+          "date": "2024-08",
+          "value": 45859951.817748
+        },
+        {
+          "date": "2024-09",
+          "value": 48194562.927312
+        },
+        {
+          "date": "2024-10",
+          "value": 47645244.961715
+        },
+        {
+          "date": "2024-11",
+          "value": 49010302.000886
+        },
+        {
+          "date": "2024-12",
+          "value": 47215981.860132
+        },
+        {
+          "date": "2025-01",
+          "value": 45966543.205136
+        },
+        {
+          "date": "2025-02",
+          "value": 47094957.6099197
+        },
+        {
+          "date": "2025-03",
+          "value": 47279652.534337
+        },
+        {
+          "date": "2025-04",
+          "value": 47146297.6631
+        },
+        {
+          "date": "2025-05",
+          "value": 46908154.79115962
+        },
+        {
+          "date": "2025-06",
+          "value": 47434271.720397
+        },
+        {
+          "date": "2025-07",
+          "value": 47288456.278537
+        },
+        {
+          "date": "2025-08",
+          "value": 48686964.83725591
+        },
+        {
+          "date": "2025-09",
+          "value": 50155484.83038109
+        },
+        {
+          "date": "2025-10",
+          "value": 48499891.49835634
+        },
+        {
+          "date": "2025-11",
+          "value": 49425487.33688
+        },
+        {
+          "date": "2025-12",
+          "value": 50060841.036055
+        },
+        {
+          "date": "2026-01",
+          "value": 51361556.16564212
+        },
+        {
+          "date": "2026-02",
+          "value": 53123595.37039369
+        },
+        {
+          "date": "2026-03",
+          "value": 52603826.45425637
+        },
+        {
+          "date": "2026-04",
+          "value": 50132759.31085265
+        },
+        {
+          "date": "2026-05",
+          "value": 47922816.28328503
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Bund"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,BUN,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 10401518.288165865
+        },
+        {
+          "date": "2024-07",
+          "value": 10221360.796366824
+        },
+        {
+          "date": "2024-08",
+          "value": 10998914.35557
+        },
+        {
+          "date": "2024-09",
+          "value": 12727123.902214
+        },
+        {
+          "date": "2024-10",
+          "value": 11406797.924020002
+        },
+        {
+          "date": "2024-11",
+          "value": 11652020.42728
+        },
+        {
+          "date": "2024-12",
+          "value": 11145090.48357
+        },
+        {
+          "date": "2025-01",
+          "value": 9648426.819153
+        },
+        {
+          "date": "2025-02",
+          "value": 10374544.7121477
+        },
+        {
+          "date": "2025-03",
+          "value": 10572463.179475
+        },
+        {
+          "date": "2025-04",
+          "value": 10815590.9234
+        },
+        {
+          "date": "2025-05",
+          "value": 10418313.40567062
+        },
+        {
+          "date": "2025-06",
+          "value": 10835751.66375
+        },
+        {
+          "date": "2025-07",
+          "value": 10697575.42719
+        },
+        {
+          "date": "2025-08",
+          "value": 11218009.370537914
+        },
+        {
+          "date": "2025-09",
+          "value": 12113944.19081109
+        },
+        {
+          "date": "2025-10",
+          "value": 10603072.38505034
+        },
+        {
+          "date": "2025-11",
+          "value": 11260366.207421
+        },
+        {
+          "date": "2025-12",
+          "value": 12560715.166447
+        },
+        {
+          "date": "2026-01",
+          "value": 14307129.84621201
+        },
+        {
+          "date": "2026-02",
+          "value": 15595245.03633327
+        },
+        {
+          "date": "2026-03",
+          "value": 14937944.84438297
+        },
+        {
+          "date": "2026-04",
+          "value": 12715058.93227981
+        },
+        {
+          "date": "2026-05",
+          "value": 10295348.016238
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Kantone"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,KAN,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 9983636.169644
+        },
+        {
+          "date": "2024-07",
+          "value": 9963430.685608
+        },
+        {
+          "date": "2024-08",
+          "value": 10520675.675157
+        },
+        {
+          "date": "2024-09",
+          "value": 11319559.956593
+        },
+        {
+          "date": "2024-10",
+          "value": 11683620.723989
+        },
+        {
+          "date": "2024-11",
+          "value": 12356026.542807
+        },
+        {
+          "date": "2024-12",
+          "value": 10971652.864429
+        },
+        {
+          "date": "2025-01",
+          "value": 10789173.08078
+        },
+        {
+          "date": "2025-02",
+          "value": 11072705.306866
+        },
+        {
+          "date": "2025-03",
+          "value": 11411269.419677
+        },
+        {
+          "date": "2025-04",
+          "value": 10768352.043697
+        },
+        {
+          "date": "2025-05",
+          "value": 10823677.229266
+        },
+        {
+          "date": "2025-06",
+          "value": 10982496.788467
+        },
+        {
+          "date": "2025-07",
+          "value": 11015260.348937
+        },
+        {
+          "date": "2025-08",
+          "value": 11831946.293053
+        },
+        {
+          "date": "2025-09",
+          "value": 12472264.702515
+        },
+        {
+          "date": "2025-10",
+          "value": 12248247.356616
+        },
+        {
+          "date": "2025-11",
+          "value": 12589350.84303
+        },
+        {
+          "date": "2025-12",
+          "value": 12059335.460192
+        },
+        {
+          "date": "2026-01",
+          "value": 11547287.32956911
+        },
+        {
+          "date": "2026-02",
+          "value": 11854314.609781416
+        },
+        {
+          "date": "2026-03",
+          "value": 11913722.7777824
+        },
+        {
+          "date": "2026-04",
+          "value": 11657636.134596327
+        },
+        {
+          "date": "2026-05",
+          "value": 11736235.24355352
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Gemeinden"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,GEM,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 23803916.608999
+        },
+        {
+          "date": "2024-07",
+          "value": 23890997.394797
+        },
+        {
+          "date": "2024-08",
+          "value": 24340361.787021
+        },
+        {
+          "date": "2024-09",
+          "value": 24147879.068505
+        },
+        {
+          "date": "2024-10",
+          "value": 24554826.313706
+        },
+        {
+          "date": "2024-11",
+          "value": 25002255.030799
+        },
+        {
+          "date": "2024-12",
+          "value": 25099238.512133
+        },
+        {
+          "date": "2025-01",
+          "value": 25528943.305203
+        },
+        {
+          "date": "2025-02",
+          "value": 25647707.590906
+        },
+        {
+          "date": "2025-03",
+          "value": 25295919.935185
+        },
+        {
+          "date": "2025-04",
+          "value": 25562354.696003
+        },
+        {
+          "date": "2025-05",
+          "value": 25666164.156223
+        },
+        {
+          "date": "2025-06",
+          "value": 25616023.26818
+        },
+        {
+          "date": "2025-07",
+          "value": 25575620.50241
+        },
+        {
+          "date": "2025-08",
+          "value": 25637009.173665
+        },
+        {
+          "date": "2025-09",
+          "value": 25569275.937055
+        },
+        {
+          "date": "2025-10",
+          "value": 25648571.75669
+        },
+        {
+          "date": "2025-11",
+          "value": 25575770.286429
+        },
+        {
+          "date": "2025-12",
+          "value": 25440790.409416
+        },
+        {
+          "date": "2026-01",
+          "value": 25507138.989861
+        },
+        {
+          "date": "2026-02",
+          "value": 25674035.724279
+        },
+        {
+          "date": "2026-03",
+          "value": 25752158.832091
+        },
+        {
+          "date": "2026-04",
+          "value": 25760064.24397652
+        },
+        {
+          "date": "2026-05",
+          "value": 25891233.02349352
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Sozialversicherungen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,SOZ,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 68106.42399
+        },
+        {
+          "date": "2024-07",
+          "value": 32506.52751
+        },
+        {
+          "date": "2024-08",
+          "value": 48982.94445
+        },
+        {
+          "date": "2024-09",
+          "value": 39096.98922
+        },
+        {
+          "date": "2024-10",
+          "value": 250177.83457
+        },
+        {
+          "date": "2024-11",
+          "value": 44647.45935
+        },
+        {
+          "date": "2024-12",
+          "value": 29898.86471
+        },
+        {
+          "date": "2025-01",
+          "value": 47503.34649
+        },
+        {
+          "date": "2025-02",
+          "value": 63195.41233
+        },
+        {
+          "date": "2025-03",
+          "value": 49775.60364
+        },
+        {
+          "date": "2025-04",
+          "value": 42484.7112
+        },
+        {
+          "date": "2025-05",
+          "value": 59088.56706
+        },
+        {
+          "date": "2025-06",
+          "value": 27177.82309
+        },
+        {
+          "date": "2025-07",
+          "value": 23231.98335
+        },
+        {
+          "date": "2025-08",
+          "value": 39962.94629
+        },
+        {
+          "date": "2025-09",
+          "value": 30597.2554
+        },
+        {
+          "date": "2025-10",
+          "value": 29821.17995
+        },
+        {
+          "date": "2025-11",
+          "value": 35716.28216
+        },
+        {
+          "date": "2025-12",
+          "value": 21317.32557
+        },
+        {
+          "date": "2026-01",
+          "value": 22170.82849
+        },
+        {
+          "date": "2026-02",
+          "value": 30502.31279
+        },
+        {
+          "date": "2026-03",
+          "value": 51971.87669
+        },
+        {
+          "date": "2026-04",
+          "value": 59298.22125
+        },
+        {
+          "date": "2026-05",
+          "value": 71557.75963
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Private Haushalte"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,PHA,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 860287152.7905637
+        },
+        {
+          "date": "2024-07",
+          "value": 863207390.5493437
+        },
+        {
+          "date": "2024-08",
+          "value": 865847185.5886985
+        },
+        {
+          "date": "2024-09",
+          "value": 866333776.0921098
+        },
+        {
+          "date": "2024-10",
+          "value": 870238168.2628196
+        },
+        {
+          "date": "2024-11",
+          "value": 872718271.2208917
+        },
+        {
+          "date": "2024-12",
+          "value": 870793117.9292045
+        },
+        {
+          "date": "2025-01",
+          "value": 872773747.7696072
+        },
+        {
+          "date": "2025-02",
+          "value": 875776814.9457382
+        },
+        {
+          "date": "2025-03",
+          "value": 876811113.6054157
+        },
+        {
+          "date": "2025-04",
+          "value": 880156895.7628387
+        },
+        {
+          "date": "2025-05",
+          "value": 883824981.3166664
+        },
+        {
+          "date": "2025-06",
+          "value": 884967590.3354018
+        },
+        {
+          "date": "2025-07",
+          "value": 887868927.5041108
+        },
+        {
+          "date": "2025-08",
+          "value": 891157684.3167807
+        },
+        {
+          "date": "2025-09",
+          "value": 892830813.9980811
+        },
+        {
+          "date": "2025-10",
+          "value": 896714251.5716664
+        },
+        {
+          "date": "2025-11",
+          "value": 900382926.5060848
+        },
+        {
+          "date": "2025-12",
+          "value": 899716313.8701123
+        },
+        {
+          "date": "2026-01",
+          "value": 929118771.611694
+        },
+        {
+          "date": "2026-02",
+          "value": 932495094.9151411
+        },
+        {
+          "date": "2026-03",
+          "value": 933384510.7176439
+        },
+        {
+          "date": "2026-04",
+          "value": 937991993.547889
+        },
+        {
+          "date": "2026-05",
+          "value": 941942644.357664
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Private Organisationen ohne Erwerbszweck"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,POE,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 15303198.412459
+        },
+        {
+          "date": "2024-07",
+          "value": 15050997.175546
+        },
+        {
+          "date": "2024-08",
+          "value": 15180917.360441
+        },
+        {
+          "date": "2024-09",
+          "value": 15122399.767473
+        },
+        {
+          "date": "2024-10",
+          "value": 15100752.247201
+        },
+        {
+          "date": "2024-11",
+          "value": 15220921.566064
+        },
+        {
+          "date": "2024-12",
+          "value": 14888148.557043001
+        },
+        {
+          "date": "2025-01",
+          "value": 15393781.862207
+        },
+        {
+          "date": "2025-02",
+          "value": 15275803.261119999
+        },
+        {
+          "date": "2025-03",
+          "value": 15114713.734806
+        },
+        {
+          "date": "2025-04",
+          "value": 15464395.220796
+        },
+        {
+          "date": "2025-05",
+          "value": 15541873.386305999
+        },
+        {
+          "date": "2025-06",
+          "value": 15139473.819866
+        },
+        {
+          "date": "2025-07",
+          "value": 15534046.033821004
+        },
+        {
+          "date": "2025-08",
+          "value": 15507819.694477
+        },
+        {
+          "date": "2025-09",
+          "value": 15070435.308518
+        },
+        {
+          "date": "2025-10",
+          "value": 15635192.260246
+        },
+        {
+          "date": "2025-11",
+          "value": 15423019.575613
+        },
+        {
+          "date": "2025-12",
+          "value": 14904633.892156
+        },
+        {
+          "date": "2026-01",
+          "value": 10898375.743484544
+        },
+        {
+          "date": "2026-02",
+          "value": 10387916.20140201
+        },
+        {
+          "date": "2026-03",
+          "value": 10151443.316077948
+        },
+        {
+          "date": "2026-04",
+          "value": 10949632.591059187
+        },
+        {
+          "date": "2026-05",
+          "value": 10489330.47968522
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Unternehmung"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Sektorale Gliederung nach ESVG",
+          "dimItem": "Keinem Sektor zuordenbare Positionen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Alle Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.MONA_US.BIL.AKT.TOT{U,I,CHF,U,A40}",
+        "frequency": "P1M",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2024-06",
+          "value": 16532496.770382
+        },
+        {
+          "date": "2024-07",
+          "value": 16756117.760356
+        },
+        {
+          "date": "2024-08",
+          "value": 17359924.488328
+        },
+        {
+          "date": "2024-09",
+          "value": 16387556.986026
+        },
+        {
+          "date": "2024-10",
+          "value": 16718332.403194
+        },
+        {
+          "date": "2024-11",
+          "value": 17005243.770873
+        },
+        {
+          "date": "2024-12",
+          "value": 15263248.311028
+        },
+        {
+          "date": "2025-01",
+          "value": 16086132.637115013
+        },
+        {
+          "date": "2025-02",
+          "value": 16242751.501937818
+        },
+        {
+          "date": "2025-03",
+          "value": 15859705.941572
+        },
+        {
+          "date": "2025-04",
+          "value": 16161794.997343
+        },
+        {
+          "date": "2025-05",
+          "value": 16825017.276919
+        },
+        {
+          "date": "2025-06",
+          "value": 16256083.415735
+        },
+        {
+          "date": "2025-07",
+          "value": 16449645.342284
+        },
+        {
+          "date": "2025-08",
+          "value": 16970585.230177
+        },
+        {
+          "date": "2025-09",
+          "value": 15962497.3839445
+        },
+        {
+          "date": "2025-10",
+          "value": 16439212.311714
+        },
+        {
+          "date": "2025-11",
+          "value": 16888322.8047065
+        },
+        {
+          "date": "2025-12",
+          "value": 16083095.096194
+        },
+        {
+          "date": "2026-01",
+          "value": 18309362.04429372
+        },
+        {
+          "date": "2026-02",
+          "value": 18325752.9138187
+        },
+        {
+          "date": "2026-03",
+          "value": 17230859.04852333
+        },
+        {
+          "date": "2026-04",
+          "value": 17629904.15620989
+        },
+        {
+          "date": "2026-05",
+          "value": 18374749.853312567
+        }
+      ]
+    }
+  ]
+}

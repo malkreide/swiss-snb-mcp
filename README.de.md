@@ -26,7 +26,7 @@
 Der Server deckt drei Stufen verifizierter Datensätze ab:
 
 **Phase 1 — Dedizierte Tools:**
-- **Wechselkurse** (Monatsmittel, Monatsende, Jahresdurchschnitte) für 27 Währungen in CHF
+- **Wechselkurse** (Monatsmittel, Monatsende, Jahresdurchschnitte) für die 28 Kursreihen, die `devkum` in CHF führt — darunter zwei USD-Terminkurse, die auch als solche benannt sind
 - **SNB-Bilanz**: Gold, Devisenanlagen, Notenumlauf, Giroguthaben, Totals
 
 **Phase 2 — Via generische Cube-Tools (`snb_get_cube_data` + `snb_get_cube_metadata`):**
@@ -51,7 +51,7 @@ Alle Daten stammen von der Schweizerischen Nationalbank und sind in CHF ausgewie
 
 ## Funktionen
 
-- 💱 **Wechselkurse** — monatliche CHF-Kurse für EUR, USD, JPY, GBP, CNY und 22 weitere Währungen
+- 💱 **Wechselkurse** — monatliche CHF-Kurse für EUR, USD, JPY, GBP, CNY und 23 weitere Reihen
 - 📅 **Jahresdurchschnitte** — jahresweise Kurse ab 1980
 - 🏛️ **SNB-Bilanz** — Gold, Devisenanlagen, Notenumlauf, Giroguthaben (monatlich)
 - 🔄 **Währungsumrechnung** — Betrag in CHF umrechnen mit offiziellen SNB-Kursen
@@ -169,7 +169,7 @@ Discovery-Hilfen werden als MCP-Resources statt Tools ausgeliefert, damit das To
 
 | URI | Beschreibung |
 |---|---|
-| `data://snb/currencies` | Alle 27 Währungs-IDs mit Bezeichnungen und Einheiten |
+| `data://snb/currencies` | Alle 28 Währungs-IDs mit Bezeichnungen und Einheiten |
 | `data://snb/balance-sheet-positions` | Alle Bilanzpositionen (Aktiven/Passiven) |
 | `data://snb/cubes` | Alle verifizierten Cube-API-IDs (Phase 1–2) + Entdeckungshinweise |
 | `data://snb/warehouse-cubes` | Verfügbare Warehouse-Cube-IDs (BSTA) |
@@ -242,7 +242,11 @@ swiss-snb-mcp/
 │       ├── __init__.py
 │       ├── server.py       # Kern-Tools und FastMCP-Server (Phase 1–2 + Zahlungsbilanz)
 │       └── warehouse.py    # Warehouse-API-Tools (Phase 3: Bankenstatistik)
+├── scripts/
+│   └── record_fixtures.py          # zeichnet tests/fixtures/* von data.snb.ch auf
 ├── tests/
+│   ├── fixtures/                   # aufgezeichnete Antworten + PROVENANCE.md (Datum, Regel, SHA-256)
+│   ├── fixture_data.py             # Loader — ein fehlender Name ist ein Fehler, keine leere Struktur
 │   ├── test_unit.py                # respx-mockierte Unit-Tests (in CI)
 │   ├── test_live_scenarios.py      # 20 Live-Szenarien Phase 1–2 (nightly)
 │   └── test_live_warehouse.py      # 20 Live-Szenarien Phase 3 (nightly)
@@ -277,7 +281,20 @@ PYTHONPATH=src pytest tests/ -m "not live"
 
 # Integrationstests (Live-SNB-API)
 PYTHONPATH=src pytest tests/ -m "live"
+
+# Fixtures neu von data.snb.ch aufzeichnen (schreibt tests/fixtures/PROVENANCE.md)
+python scripts/record_fixtures.py
 ```
+
+Die Nutzdaten der Unit-Tests sind **aufgezeichnet, nicht ausgedacht**. Quelle,
+Aufzeichnungsdatum, Auswahlregel und SHA-256 je Datei stehen in
+[`tests/fixtures/PROVENANCE.md`](tests/fixtures/PROVENANCE.md). Ein
+handgeschriebener Mock kodiert die Annahme seines Autors und kann sie deshalb
+nie widerlegen — Produktivcode und Fixture stammen aus demselben Kopf, wo beide
+irren, irren beide gleich, und die Suite bleibt grün. Jede Datei behält **alle
+Reihen** und kürzt nur die Wertelisten: Über die Dimensionen argumentiert der
+Code, die Werte zeigt er nur an — «die ersten N Reihen» hätte genau das
+verdeckt, woran drei der Befunde hängen.
 
 ---
 
