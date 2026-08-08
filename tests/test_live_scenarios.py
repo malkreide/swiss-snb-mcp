@@ -150,7 +150,7 @@ async def run_test(name: str, coro, checks: list[str] | None = None):
 # ─────────────────────────────────────────────────────
 
 
-async def test_01_monthly_fx_eur_usd():
+async def scenario_01_monthly_fx_eur_usd():
     """Scenario 1: Monthly EUR and USD exchange rates for the last 3 months."""
     await run_test(
         "01 – Monatliche Wechselkurse EUR/USD (3 Monate)",
@@ -165,7 +165,7 @@ async def test_01_monthly_fx_eur_usd():
     )
 
 
-async def test_02_monthly_fx_all_currencies_default():
+async def scenario_02_monthly_fx_all_currencies_default():
     """Scenario 2: Default call – all currencies, default date range."""
     await run_test(
         "02 – Alle Währungen, Standardzeitraum",
@@ -174,7 +174,7 @@ async def test_02_monthly_fx_all_currencies_default():
     )
 
 
-async def test_03_monthly_fx_with_month_end():
+async def scenario_03_monthly_fx_with_month_end():
     """Scenario 3: EUR rates with both monthly average AND month-end rates."""
     await run_test(
         "03 – EUR mit Monatsmittel + Monatsende",
@@ -189,7 +189,7 @@ async def test_03_monthly_fx_with_month_end():
     )
 
 
-async def test_04_monthly_fx_french():
+async def scenario_04_monthly_fx_french():
     """Scenario 4: Exchange rates in French language."""
     await run_test(
         "04 – Wechselkurse auf Französisch",
@@ -205,7 +205,7 @@ async def test_04_monthly_fx_french():
     )
 
 
-async def test_05_annual_fx_long_history():
+async def scenario_05_annual_fx_long_history():
     """Scenario 5: Annual exchange rates over a 20-year period."""
     await run_test(
         "05 – Jährliche Wechselkurse 2005–2025 (20 Jahre)",
@@ -220,7 +220,7 @@ async def test_05_annual_fx_long_history():
     )
 
 
-async def test_06_annual_fx_single_year():
+async def scenario_06_annual_fx_single_year():
     """Scenario 6: Annual rate for a single year."""
     await run_test(
         "06 – Jahresdurchschnitt 2020 (Einzeljahr)",
@@ -235,7 +235,7 @@ async def test_06_annual_fx_single_year():
     )
 
 
-async def test_07_balance_sheet_default():
+async def scenario_07_balance_sheet_default():
     """Scenario 7: SNB balance sheet with default key positions."""
     await run_test(
         "07 – SNB Bilanz (Standard-Schlüsselpositionen)",
@@ -244,7 +244,7 @@ async def test_07_balance_sheet_default():
     )
 
 
-async def test_08_balance_sheet_all_assets():
+async def scenario_08_balance_sheet_all_assets():
     """Scenario 8: All asset positions of the SNB balance sheet."""
     await run_test(
         "08 – SNB Bilanz: Alle Aktiven",
@@ -258,7 +258,7 @@ async def test_08_balance_sheet_all_assets():
     )
 
 
-async def test_09_balance_sheet_english():
+async def scenario_09_balance_sheet_english():
     """Scenario 9: Balance sheet in English language."""
     await run_test(
         "09 – SNB Bilanz auf Englisch",
@@ -273,7 +273,7 @@ async def test_09_balance_sheet_english():
     )
 
 
-async def test_10_convert_eur_to_chf():
+async def scenario_10_convert_eur_to_chf():
     """Scenario 10: Convert 10,000 EUR to CHF."""
     await run_test(
         "10 – Umrechnung 10'000 EUR → CHF",
@@ -287,7 +287,7 @@ async def test_10_convert_eur_to_chf():
     )
 
 
-async def test_11_convert_jpy_to_chf():
+async def scenario_11_convert_jpy_to_chf():
     """Scenario 11: Convert JPY (100-unit currency) to CHF."""
     await run_test(
         "11 – Umrechnung 500'000 JPY → CHF (100er-Einheit)",
@@ -301,7 +301,7 @@ async def test_11_convert_jpy_to_chf():
     )
 
 
-async def test_12_convert_with_reference_month():
+async def scenario_12_convert_with_reference_month():
     """Scenario 12: Convert USD with a specific historical reference month."""
     await run_test(
         "12 – Umrechnung 45'000 USD mit Referenzmonat 2024-06",
@@ -316,7 +316,7 @@ async def test_12_convert_with_reference_month():
     )
 
 
-async def test_13_convert_invalid_currency():
+async def scenario_13_convert_invalid_currency():
     """Scenario 13: Convert with an invalid currency ID → expect error."""
     await run_test(
         "13 – Ungültige Währung (XYZ1) → Fehlermeldung",
@@ -330,7 +330,7 @@ async def test_13_convert_invalid_currency():
     )
 
 
-async def test_14_cube_data_saron():
+async def scenario_14_cube_data_saron():
     """Scenario 14: Generic cube access – SARON/policy rate data."""
     await run_test(
         "14 – Cube-Daten: SNB-Leitzins/SARON (snbgwdzid)",
@@ -345,7 +345,7 @@ async def test_14_cube_data_saron():
     )
 
 
-async def test_15_cube_data_monetary_aggregates():
+async def scenario_15_cube_data_monetary_aggregates():
     """Scenario 15: Generic cube – M1/M2/M3 monetary aggregates."""
     await run_test(
         "15 – Cube-Daten: Geldmengen M1/M2/M3 (snbmonagg)",
@@ -360,7 +360,7 @@ async def test_15_cube_data_monetary_aggregates():
     )
 
 
-async def test_16_cube_metadata_exchange_rates():
+async def scenario_16_cube_metadata_exchange_rates():
     """Scenario 16: Metadata inspection for the monthly exchange rate cube."""
     await run_test(
         "16 – Metadaten: Cube devkum (Monatskurse)",
@@ -373,7 +373,7 @@ async def test_16_cube_metadata_exchange_rates():
     )
 
 
-async def test_17_cube_metadata_international_rates():
+async def scenario_17_cube_metadata_international_rates():
     """Scenario 17: Metadata for international money market rates cube."""
     await run_test(
         "17 – Metadaten: Cube zimoma (Int. Geldmarktsätze)",
@@ -387,16 +387,16 @@ async def test_17_cube_metadata_international_rates():
     )
 
 
-async def test_18_list_currencies():
+async def scenario_18_list_currencies():
     """Scenario 18: List all available currency IDs."""
     await run_test(
-        "18 – Währungsliste (27 Währungen)",
+        "18 – Währungsliste (28 Reihen)",
         snb_list_currencies(),
         checks=["EUR1", "USD1", "JPY100", "GBP1", "CNY100", "XDR1"],
     )
 
 
-async def test_19_list_balance_sheet_positions():
+async def scenario_19_list_balance_sheet_positions():
     """Scenario 19: List all balance sheet position IDs."""
     await run_test(
         "19 – Bilanzpositionen-Liste (Aktiven + Passiven)",
@@ -405,7 +405,7 @@ async def test_19_list_balance_sheet_positions():
     )
 
 
-async def test_20_list_known_cubes():
+async def scenario_20_list_known_cubes():
     """Scenario 20: List all known cubes with descriptions."""
     await run_test(
         "20 – Übersicht bekannte SNB Cubes",
@@ -440,26 +440,26 @@ async def main():
 async def _run_tests():
 
     tests = [
-        test_01_monthly_fx_eur_usd,
-        test_02_monthly_fx_all_currencies_default,
-        test_03_monthly_fx_with_month_end,
-        test_04_monthly_fx_french,
-        test_05_annual_fx_long_history,
-        test_06_annual_fx_single_year,
-        test_07_balance_sheet_default,
-        test_08_balance_sheet_all_assets,
-        test_09_balance_sheet_english,
-        test_10_convert_eur_to_chf,
-        test_11_convert_jpy_to_chf,
-        test_12_convert_with_reference_month,
-        test_13_convert_invalid_currency,
-        test_14_cube_data_saron,
-        test_15_cube_data_monetary_aggregates,
-        test_16_cube_metadata_exchange_rates,
-        test_17_cube_metadata_international_rates,
-        test_18_list_currencies,
-        test_19_list_balance_sheet_positions,
-        test_20_list_known_cubes,
+        scenario_01_monthly_fx_eur_usd,
+        scenario_02_monthly_fx_all_currencies_default,
+        scenario_03_monthly_fx_with_month_end,
+        scenario_04_monthly_fx_french,
+        scenario_05_annual_fx_long_history,
+        scenario_06_annual_fx_single_year,
+        scenario_07_balance_sheet_default,
+        scenario_08_balance_sheet_all_assets,
+        scenario_09_balance_sheet_english,
+        scenario_10_convert_eur_to_chf,
+        scenario_11_convert_jpy_to_chf,
+        scenario_12_convert_with_reference_month,
+        scenario_13_convert_invalid_currency,
+        scenario_14_cube_data_saron,
+        scenario_15_cube_data_monetary_aggregates,
+        scenario_16_cube_metadata_exchange_rates,
+        scenario_17_cube_metadata_international_rates,
+        scenario_18_list_currencies,
+        scenario_19_list_balance_sheet_positions,
+        scenario_20_list_known_cubes,
     ]
 
     for test_fn in tests:

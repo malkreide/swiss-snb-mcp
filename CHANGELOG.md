@@ -7,6 +7,138 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Behoben — vier Befunde, die aus dem Aufzeichnen der Fixtures kamen
+
+Jeder Payload dieser Suite war ein Literal im Testmodul: `_devkum_response`,
+`_snbbipo_response`, `_warehouse_response`, jeder mit **einer** Reihe und dem
+Kommentar «minimal but structurally faithful». Beim ersten Vergleich mit der
+Quelle stimmte davon fast nichts — und mit den Abweichungen kamen vier
+ausgelieferte Fehler heraus.
+
+Was die Bauer behaupteten und was `data.snb.ch` liefert:
+
+| | erfunden | aufgezeichnet |
+|---|---|---|
+| `metadata.key` | `M.devkum.EUR1.M` | `EPB@SNB.devkum{M0,EUR1}` |
+| Warehouse-Header | 1 Dimension | **4** (Jahresreihe), **5** (Monatsreihe) |
+| `unit` | `Mio. CHF` / `1000 CHF` | `In Millionen Franken` / `CHF` mit `scale: "3"` |
+
+Der Header war der Knackpunkt: `_filter_timeseries` zerlegt den Schluessel
+positionsgleich zu den Dimensionen. Eine Fixture mit einer Dimension hat diese
+Zerlegung nie gesehen.
+
+**1. `frequency="monthly"` lieferte immer eine leere Tabelle.** Die
+Dimensionsordnung stand als Konstante `BIL_DIM_ORDER` im Code — vier Eintraege,
+gemessen an der Jahresreihe. Die Monatsreihe desselben Werkzeugs fuehrt **fuenf**
+Dimensionen; die vierte ist die sektorale Gliederung nach ESVG.
+`_filter_timeseries` verwarf jede Reihe, deren Laenge nicht passte, und zwar
+stumm. Ergebnis: HTTP 200, eine Tabelle mit Kopfzeile und nichts darunter. Zwei
+weitere Gruende kamen dazu und haetten je fuer sich genuegt: die
+Konsolidierungsstufe stand fest auf `K` (die Monatsreihe kennt nur `U`), und die
+Vorgabe `A30` fuer alle Banken heisst dort `A40`.
+
+Der Cube nennt seine Dimensionsordnung selbst — unter `/dimensions/<lang>`, mit
+stabilen IDs. Der Server liest sie jetzt, statt sie zu kennen. Gemessen:
+36 Zeilen statt null. `BIL_DIM_ORDER` und `EFR_DIM_ORDER` bleiben als Beleg im
+Code stehen und werden im Test gegen die aufgezeichneten Deklarationen
+gehalten — sie stimmen fuer zwei von drei Cubes, und der dritte ist der Punkt.
+
+**2. `snb_get_warehouse_metadata` war kaputt, seit es existiert.** Es baute
+`dimensions/json/<lang>` — in Analogie zu `data/json/<lang>`, und das war die
+naheliegende Annahme. Den Pfad gibt es nicht. `data.snb.ch` ist eine
+Angular-App vor einer API, und ein unbekannter Pfad unter `/api/` gibt kein
+404, sondern **HTTP 200 mit `text/html`** und dem Geruest der Web-App. Wer nur
+den Statuscode prueft, liest das als Erfolg. Richtig ist `dimensions/<lang>`,
+ohne `json`-Segment. Neu prueft `_fetch_warehouse` zusaetzlich den
+Content-Type und wirft `UpstreamShapeError`, statt irgendwo weit weg von der
+Ursache zu scheitern.
+
+**3. Drei Aggregate standen unter derselben Beschriftung.** Die Jahresreihe
+fuehrt `INLANDAUSLAND` mit Total, Inland und Ausland. Der Server filterte diese
+Dimension nicht und zeigte sie nicht an, also kamen fuer «alle Banken, Total
+Waehrung» **drei** Zeilen heraus, identisch beschriftet — und Inland + Ausland
+ergibt das Total. Gemessen fuer 2025: 2'179,6 + 1'240,1 = 3'419,7 Mrd. CHF. Wer
+die erste Zeile nahm, hatte Glueck; wer summierte, verdoppelte die Bilanz.
+Jede Dimension, die nicht eingegrenzt wurde, steht jetzt namentlich in der
+Zeile (Spalte «Gliederung»).
+
+**4. Eine Waehrung wurde angeboten, die es nicht gibt.** `CURRENCIES` fuehrte
+`INR100`; weder `devkum` noch `devkua` kennen es. `snb_list_currencies` bot es
+an, und jede Abfrage darauf antwortete mit «keine Daten» — derselbe Satz wie
+bei einem Tippfehler. Umgekehrt fehlten `USD3M` und `USD6M`, die es gibt: die
+USD-Terminkurse. Beides korrigiert, und ein Test haelt die Tabelle jetzt in
+**beide** Richtungen gegen die aufgezeichnete Antwort; eine Richtung allein
+haette genau die Haelfte durchgelassen. Dazu prueft `snb_convert_currency` die
+Einheit gegen die Beschriftung der Quelle («DKK 100.-», «EUR 1.-») und bricht
+bei Widerspruch ab, statt zu rechnen: ein um Faktor 100 falscher Kurs liefert
+ein vollstaendiges, formatiertes, plausibles Ergebnis.
+
+**Nullbefunde, die genauso dazugehoeren:** Die 28 Bilanzpositionen
+(`BALANCE_SHEET_POSITIONS`), die 12 Bankengruppen (`BANK_GROUPS`) und die
+6 Positionen der Erfolgsrechnung stimmen vollstaendig mit der Quelle ueberein.
+Auch das ist jetzt zugesichert statt angenommen.
+
+**Wo ein angefragter Dimensionswert im Cube nicht existiert**, nennt die
+Fehlermeldung die vorhandenen — statt eine leere Tabelle zu liefern, die sich
+liest wie «diese Banken haben keine Aktiven».
+
+### Behoben — der Live-Lauf meldete 16 Fehler, die er nicht benennen konnte
+
+Beide Live-Suiten liefen **doppelt**. Ihre Szenarien hiessen `test_01_…` bis
+`test_20_…`, also hat pytest jedes einzeln eingesammelt und ausserhalb von
+`_lifespan` ausgefuehrt — dort ist der geteilte HTTP-Client nicht offen, und
+jedes Szenario mit Netzzugriff faellt zwangslaeufig. Danach lief derselbe Satz
+noch einmal ueber `test_all_live_*_scenarios`, diesmal korrekt und gruen. Die
+Zaehler summierten beide Durchgaenge: `Total: 40 | Bestanden: 24 |
+Fehlgeschlagen: 16` bei 20 Szenarien, waehrend die Zusammenfassung jedes
+Szenario einmal rot und einmal gruen auflistete.
+
+Der Lauf war damit seit jeher rot, und deshalb steht der Job auf
+`continue-on-error` — ein Signal, das immer Alarm gibt, ist abgeschaltet. Genau
+dieses Signal haette Befund 1 und 2 gefunden: Szenario 07 faehrt die
+Monatsbilanz, Szenario 03 die Dimensionsmetadaten.
+
+Die Szenarien heissen jetzt `scenario_NN_…` und laufen nur noch ueber den einen
+Einstiegspunkt. Gemessen: 40 von 40 gruen, beide Suiten.
+
+### Hinzugefuegt — die Fixtures sind aufgezeichnet, nicht mehr ausgedacht
+
+**`scripts/record_fixtures.py`** holt elf Antworten von `data.snb.ch` — die
+Wechselkurs-, Bilanz- und Bankenstatistik-Cubes samt ihrer
+Dimensionsdeklarationen — und schreibt `tests/fixtures/PROVENANCE.md` mit
+Quelle, **Aufzeichnungsdatum**, Auswahlregel und SHA-256 je Datei. Ohne Datum
+ist «aufgezeichnet» nach zwei Jahren von «ausgedacht» nicht mehr zu
+unterscheiden.
+
+**Die Auswahlregel ist nicht «die ersten N».** `devkum` ist 889 KB, ein
+Vollabzug waere unlesbar — aber ein Zuschnitt nach Position haette hier
+ausgerechnet das weggeschnitten, worum es geht. Stattdessen bleiben **alle
+Reihen** erhalten und nur die Wertelisten sind gekuerzt: Ueber die Dimensionen
+argumentiert der Code, die Werte zeigt er an. Nur so bleibt die Frage «welche
+Waehrungen, Positionen und Bankengruppen fuehrt die Quelle ueberhaupt»
+beantwortbar — und an ihr haengen drei der vier Befunde.
+
+Das Skript bricht ausserdem ab, statt eine unbrauchbare Fixture zu schreiben:
+wenn `devkum` keine Monatsende-Reihen mehr fuehrt (dann prueft der Filter
+nichts), wenn die Jahresreihe nur noch eine Auspraegung von `INLANDAUSLAND`
+hat (dann belegt sie Befund 3 nicht mehr), wenn die Monatsreihe auf vier
+Dimensionen schrumpft (dann ist Befund 1 geheilt), oder wenn ein Endpunkt mit
+`text/html` antwortet (dann zeichnete man eine Fehlerseite auf).
+
+**`tests/fixture_data.py`** laedt sie und behandelt einen fehlenden Namen als
+Fehler statt als leere Struktur — ein Loader, der bei einem Tippfehler `{}`
+zurueckgibt, erzeugt einen Test, der nichts mehr prueft und trotzdem Erfolg
+meldet.
+
+**Gegenprobe gefuehrt:** Mit zurueckgedrehtem Code — feste Dimensionsordnung,
+alter Metadaten-Pfad, `INR100` zurueck in der Tabelle — fallen sechs der neuen
+Tests. Erwartungen werden durchgehend aus der Fixture abgeleitet statt
+danebengeschrieben; eine feste Zahl waere beim naechsten Aufzeichnen falsch,
+ohne dass sich etwas Gepruefte geaendert haette.
+
+Der Rahmen dazu steht im Skill [`mcp-data-fidelity`](https://github.com/malkreide/mcp-data-fidelity-skill)
+unter Regel 5 und im Katalog-Check `OPS-009`.
+
 ### Hinzugefuegt — der naechtliche Live-Lauf wird sichtbar, wenn er faellt
 
 Der `live`-Job faehrt seit jeher jede Nacht `python tests/test_live_scenarios.py`

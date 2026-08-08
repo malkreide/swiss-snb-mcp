@@ -1,0 +1,1044 @@
+{
+  "timeseries": [
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Europe - EUR 1"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{EUR1}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 1.07045
+        },
+        {
+          "date": "2021",
+          "value": 1.08101
+        },
+        {
+          "date": "2022",
+          "value": 1.00482
+        },
+        {
+          "date": "2023",
+          "value": 0.97165
+        },
+        {
+          "date": "2024",
+          "value": 0.95238
+        },
+        {
+          "date": "2025",
+          "value": 0.93703
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Europe - United Kingdom – GBP 1"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{GBP1}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 1.20388
+        },
+        {
+          "date": "2021",
+          "value": 1.25747
+        },
+        {
+          "date": "2022",
+          "value": 1.17911
+        },
+        {
+          "date": "2023",
+          "value": 1.11706
+        },
+        {
+          "date": "2024",
+          "value": 1.1251
+        },
+        {
+          "date": "2025",
+          "value": 1.09382
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Europe - Denmark – DKK 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{DKK100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 14.36083
+        },
+        {
+          "date": "2021",
+          "value": 14.53564
+        },
+        {
+          "date": "2022",
+          "value": 13.50644
+        },
+        {
+          "date": "2023",
+          "value": 13.04068
+        },
+        {
+          "date": "2024",
+          "value": 12.76844
+        },
+        {
+          "date": "2025",
+          "value": 12.55515
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Europe - Norway – NOK 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{NOK100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 9.99513
+        },
+        {
+          "date": "2021",
+          "value": 10.63666
+        },
+        {
+          "date": "2022",
+          "value": 9.95298
+        },
+        {
+          "date": "2023",
+          "value": 8.5143
+        },
+        {
+          "date": "2024",
+          "value": 8.19239
+        },
+        {
+          "date": "2025",
+          "value": 7.99712
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Europe - Czech Republic – CZK 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{CZK100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 4.05022
+        },
+        {
+          "date": "2021",
+          "value": 4.21577
+        },
+        {
+          "date": "2022",
+          "value": 4.09092
+        },
+        {
+          "date": "2023",
+          "value": 4.04869
+        },
+        {
+          "date": "2024",
+          "value": 3.79148
+        },
+        {
+          "date": "2025",
+          "value": 3.79631
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Europe - Hungary – HUF 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{HUF100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 0.30489
+        },
+        {
+          "date": "2021",
+          "value": 0.3016
+        },
+        {
+          "date": "2022",
+          "value": 0.25782
+        },
+        {
+          "date": "2023",
+          "value": 0.25451
+        },
+        {
+          "date": "2024",
+          "value": 0.24099
+        },
+        {
+          "date": "2025",
+          "value": 0.23569
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Europe - Poland – PLN 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{PLN100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 24.09864
+        },
+        {
+          "date": "2021",
+          "value": 23.67546
+        },
+        {
+          "date": "2022",
+          "value": 21.45047
+        },
+        {
+          "date": "2023",
+          "value": 21.3972
+        },
+        {
+          "date": "2024",
+          "value": 22.11495
+        },
+        {
+          "date": "2025",
+          "value": 22.10321
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Europe - Russian Federation – RUB 1"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{RUB1}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 0.01304
+        },
+        {
+          "date": "2021",
+          "value": 0.01242
+        },
+        {
+          "date": "2022",
+          "value": 0.01428
+        },
+        {
+          "date": "2023",
+          "value": 0.01067
+        },
+        {
+          "date": "2024",
+          "value": 0.00951
+        },
+        {
+          "date": "2025",
+          "value": 0.00996
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Europe - Sweden – SEK 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{SEK100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 10.21614
+        },
+        {
+          "date": "2021",
+          "value": 10.65532
+        },
+        {
+          "date": "2022",
+          "value": 9.45928
+        },
+        {
+          "date": "2023",
+          "value": 8.46987
+        },
+        {
+          "date": "2024",
+          "value": 8.33177
+        },
+        {
+          "date": "2025",
+          "value": 8.47059
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Europe - Turkey – TRY 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{TRY100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 13.48994
+        },
+        {
+          "date": "2021",
+          "value": 10.56163
+        },
+        {
+          "date": "2022",
+          "value": 5.82122
+        },
+        {
+          "date": "2023",
+          "value": 3.89861
+        },
+        {
+          "date": "2024",
+          "value": 2.68133
+        },
+        {
+          "date": "2025",
+          "value": 2.11116
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "America - United States – USD 1"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{USD1}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 0.93808
+        },
+        {
+          "date": "2021",
+          "value": 0.91431
+        },
+        {
+          "date": "2022",
+          "value": 0.95497
+        },
+        {
+          "date": "2023",
+          "value": 0.8988
+        },
+        {
+          "date": "2024",
+          "value": 0.88014
+        },
+        {
+          "date": "2025",
+          "value": 0.83065
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "America - Canada – CAD 1"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{CAD1}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 0.70001
+        },
+        {
+          "date": "2021",
+          "value": 0.72927
+        },
+        {
+          "date": "2022",
+          "value": 0.73382
+        },
+        {
+          "date": "2023",
+          "value": 0.66589
+        },
+        {
+          "date": "2024",
+          "value": 0.64271
+        },
+        {
+          "date": "2025",
+          "value": 0.59396
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "America - Argentina – ARS 1"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{ARS1}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 0.01349
+        },
+        {
+          "date": "2021",
+          "value": 0.00963
+        },
+        {
+          "date": "2022",
+          "value": 0.00749
+        },
+        {
+          "date": "2023",
+          "value": 0.00346
+        },
+        {
+          "date": "2024",
+          "value": 0.00097
+        },
+        {
+          "date": "2025",
+          "value": 0.00068
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "America - Brazil – BRL 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{BRL100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 18.38999
+        },
+        {
+          "date": "2021",
+          "value": 16.96969
+        },
+        {
+          "date": "2022",
+          "value": 18.50702
+        },
+        {
+          "date": "2023",
+          "value": 17.99265
+        },
+        {
+          "date": "2024",
+          "value": 16.40548
+        },
+        {
+          "date": "2025",
+          "value": 14.86807
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "America - Mexico – MXN 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{MXN100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 4.39293
+        },
+        {
+          "date": "2021",
+          "value": 4.5068
+        },
+        {
+          "date": "2022",
+          "value": 4.74791
+        },
+        {
+          "date": "2023",
+          "value": 5.06808
+        },
+        {
+          "date": "2024",
+          "value": 4.82911
+        },
+        {
+          "date": "2025",
+          "value": 4.32437
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Africa - South Africa – ZAR 1"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{ZAR1}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 0.05733
+        },
+        {
+          "date": "2021",
+          "value": 0.06188
+        },
+        {
+          "date": "2022",
+          "value": 0.05847
+        },
+        {
+          "date": "2023",
+          "value": 0.04876
+        },
+        {
+          "date": "2024",
+          "value": 0.04807
+        },
+        {
+          "date": "2025",
+          "value": 0.04647
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Asia and Australia - Japan – JPY 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{JPY100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 0.87894
+        },
+        {
+          "date": "2021",
+          "value": 0.83258
+        },
+        {
+          "date": "2022",
+          "value": 0.72949
+        },
+        {
+          "date": "2023",
+          "value": 0.64097
+        },
+        {
+          "date": "2024",
+          "value": 0.5815
+        },
+        {
+          "date": "2025",
+          "value": 0.55532
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Asia and Australia - Australia – AUD 1"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{AUD1}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 0.64756
+        },
+        {
+          "date": "2021",
+          "value": 0.6865
+        },
+        {
+          "date": "2022",
+          "value": 0.66266
+        },
+        {
+          "date": "2023",
+          "value": 0.59709
+        },
+        {
+          "date": "2024",
+          "value": 0.58091
+        },
+        {
+          "date": "2025",
+          "value": 0.53529
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Asia and Australia - China – CNY 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{CNY100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 13.60017
+        },
+        {
+          "date": "2021",
+          "value": 14.17914
+        },
+        {
+          "date": "2022",
+          "value": 14.19463
+        },
+        {
+          "date": "2023",
+          "value": 12.69658
+        },
+        {
+          "date": "2024",
+          "value": 12.22987
+        },
+        {
+          "date": "2025",
+          "value": 11.55382
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Asia and Australia - Hong Kong – HKD 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{HKD100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 12.09484
+        },
+        {
+          "date": "2021",
+          "value": 11.76238
+        },
+        {
+          "date": "2022",
+          "value": 12.19506
+        },
+        {
+          "date": "2023",
+          "value": 11.48032
+        },
+        {
+          "date": "2024",
+          "value": 11.28012
+        },
+        {
+          "date": "2025",
+          "value": 10.65583
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Asia and Australia - Korea, Republic of (South Korea) – KRW 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{KRW100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 0.07959
+        },
+        {
+          "date": "2021",
+          "value": 0.07987
+        },
+        {
+          "date": "2022",
+          "value": 0.07402
+        },
+        {
+          "date": "2023",
+          "value": 0.06885
+        },
+        {
+          "date": "2024",
+          "value": 0.06457
+        },
+        {
+          "date": "2025",
+          "value": 0.05843
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Asia and Australia - Malaysia – MYR 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{MYR100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 22.3337
+        },
+        {
+          "date": "2021",
+          "value": 22.05885
+        },
+        {
+          "date": "2022",
+          "value": 21.70568
+        },
+        {
+          "date": "2023",
+          "value": 19.72388
+        },
+        {
+          "date": "2024",
+          "value": 19.26344
+        },
+        {
+          "date": "2025",
+          "value": 19.38922
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Asia and Australia - New Zealand – NZD 1"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{NZD1}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 0.61001
+        },
+        {
+          "date": "2021",
+          "value": 0.64648
+        },
+        {
+          "date": "2022",
+          "value": 0.60618
+        },
+        {
+          "date": "2023",
+          "value": 0.55178
+        },
+        {
+          "date": "2024",
+          "value": 0.53275
+        },
+        {
+          "date": "2025",
+          "value": 0.48296
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Asia and Australia - Singapore – SGD 1"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{SGD1}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 0.68021
+        },
+        {
+          "date": "2021",
+          "value": 0.6803
+        },
+        {
+          "date": "2022",
+          "value": 0.69234
+        },
+        {
+          "date": "2023",
+          "value": 0.66917
+        },
+        {
+          "date": "2024",
+          "value": 0.65877
+        },
+        {
+          "date": "2025",
+          "value": 0.63529
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "Asia and Australia - Thailand – THB 100"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{THB100}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 2.99917
+        },
+        {
+          "date": "2021",
+          "value": 2.85908
+        },
+        {
+          "date": "2022",
+          "value": 2.72583
+        },
+        {
+          "date": "2023",
+          "value": 2.58355
+        },
+        {
+          "date": "2024",
+          "value": 2.49671
+        },
+        {
+          "date": "2025",
+          "value": 2.52557
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Currency",
+          "dimItem": "SDR - XDR 1"
+        }
+      ],
+      "metadata": {
+        "key": "EPB@SNB.devkua{XDR1}",
+        "frequency": "P1Y",
+        "scale": "",
+        "unit": "Rates at 11 am. in CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 1.30695
+        },
+        {
+          "date": "2021",
+          "value": 1.30201
+        },
+        {
+          "date": "2022",
+          "value": 1.27692
+        },
+        {
+          "date": "2023",
+          "value": 1.19871
+        },
+        {
+          "date": "2024",
+          "value": 1.1687
+        },
+        {
+          "date": "2025",
+          "value": 1.12026
+        }
+      ]
+    }
+  ]
+}

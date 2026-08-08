@@ -1,0 +1,127 @@
+{
+  "cubeId": "BSTA.SNB.MONA_US.BIL.AKT.TOT",
+  "dimensions": [
+    {
+      "id": "KONSOLIDIERUNGSSTUFE",
+      "name": "Konsolidierungsstufe",
+      "dimensionItems": [
+        {
+          "id": "U",
+          "name": "Unternehmung"
+        }
+      ]
+    },
+    {
+      "id": "INLANDAUSLAND",
+      "name": "Inland und Ausland",
+      "dimensionItems": [
+        {
+          "id": "I",
+          "name": "Inland"
+        }
+      ]
+    },
+    {
+      "id": "WAEHRUNG",
+      "name": "Währung",
+      "dimensionItems": [
+        {
+          "id": "T",
+          "name": "Total Währung"
+        },
+        {
+          "id": "CHF",
+          "name": "Schweizer Franken"
+        }
+      ]
+    },
+    {
+      "id": "SEKTORESVG",
+      "name": "Sektorale Gliederung nach ESVG",
+      "dimensionItems": [
+        {
+          "id": "T",
+          "name": "Total Sektorale Gliederung nach ESVG"
+        },
+        {
+          "id": "NFU",
+          "name": "Nichtfinanzielle Unternehmen"
+        },
+        {
+          "id": "FUN",
+          "name": "Finanzielle Unternehmen"
+        },
+        {
+          "id": "SNB",
+          "name": "Nationalbank"
+        },
+        {
+          "id": "BAN",
+          "name": "Banken"
+        },
+        {
+          "id": "FVW",
+          "name": "Finanzierungs- und Vermögensverwaltungsinstitutionen"
+        },
+        {
+          "id": "KAI",
+          "name": "Kollektivanlageinstitutionen gemäss KAG"
+        },
+        {
+          "id": "VPK",
+          "name": "Versicherungen und Pensionskassen"
+        },
+        {
+          "id": "PKA",
+          "name": "Pensionskassen"
+        },
+        {
+          "id": "FVT",
+          "name": "Mit Finanz- und Versicherungsdienstleistungen verbundene Tätigkeiten"
+        },
+        {
+          "id": "OEH",
+          "name": "Öffentliche Hand"
+        },
+        {
+          "id": "BUN",
+          "name": "Bund"
+        },
+        {
+          "id": "KAN",
+          "name": "Kantone"
+        },
+        {
+          "id": "GEM",
+          "name": "Gemeinden"
+        },
+        {
+          "id": "SOZ",
+          "name": "Sozialversicherungen"
+        },
+        {
+          "id": "PHA",
+          "name": "Private Haushalte"
+        },
+        {
+          "id": "POE",
+          "name": "Private Organisationen ohne Erwerbszweck"
+        },
+        {
+          "id": "U",
+          "name": "Keinem Sektor zuordenbare Positionen"
+        }
+      ]
+    },
+    {
+      "id": "BANKENGRUPPE",
+      "name": "Bankengruppe",
+      "dimensionItems": [
+        {
+          "id": "A40",
+          "name": "Alle Banken"
+        }
+      ]
+    }
+  ]
+}

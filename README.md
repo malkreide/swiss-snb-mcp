@@ -26,7 +26,7 @@
 The server covers three tiers of datasets, all confirmed against the live API:
 
 **Phase 1 — Dedicated tools:**
-- **Exchange rates** (monthly averages, month-end rates, annual averages) for 27 currencies against CHF
+- **Exchange rates** (monthly averages, month-end rates, annual averages) for the 28 currency series `devkum` publishes against CHF — including two USD forward rates, which are labelled as such
 - **SNB balance sheet** (Bilanz): gold reserves, foreign exchange investments, banknotes in circulation, sight deposits, and totals
 
 **Phase 2 — Via generic cube tools (`snb_get_cube_data` + `snb_get_cube_metadata`):**
@@ -49,7 +49,7 @@ The server covers three tiers of datasets, all confirmed against the live API:
 
 ## Features
 
-- 💱 **Exchange rates** — monthly CHF rates for EUR, USD, JPY, GBP, CNY and 22 more currencies
+- 💱 **Exchange rates** — monthly CHF rates for EUR, USD, JPY, GBP, CNY and 23 more series
 - 📅 **Annual averages** — year-by-year rates from 1980 onwards
 - 🏛️ **SNB balance sheet** — gold, foreign exchange investments, banknotes, sight deposits (monthly)
 - 🔄 **Currency conversion** — convert any amount to CHF using official SNB rates
@@ -167,7 +167,7 @@ Discovery aids served as MCP resources rather than tools so they don't crowd the
 
 | URI | Description |
 |---|---|
-| `data://snb/currencies` | All 27 currency IDs with labels and units |
+| `data://snb/currencies` | All 28 currency IDs with labels and units |
 | `data://snb/balance-sheet-positions` | Asset and liability position IDs |
 | `data://snb/cubes` | All verified Cube-API IDs (Phase 1–2) + discovery guide |
 | `data://snb/warehouse-cubes` | Available Warehouse cube IDs (BSTA) |
@@ -240,7 +240,11 @@ swiss-snb-mcp/
 │       ├── __init__.py
 │       ├── server.py       # Core tools and FastMCP server (Phase 1–2 + BoP)
 │       └── warehouse.py    # Warehouse API tools (Phase 3: banking statistics)
+├── scripts/
+│   └── record_fixtures.py          # records tests/fixtures/* from data.snb.ch
 ├── tests/
+│   ├── fixtures/                   # recorded responses + PROVENANCE.md (date, rule, SHA-256)
+│   ├── fixture_data.py             # loader — a missing name is an error, not an empty dict
 │   ├── test_unit.py                # respx-mocked unit tests (run in CI)
 │   ├── test_live_scenarios.py      # 20 live scenarios for Phase 1–2 (nightly)
 │   └── test_live_warehouse.py      # 20 live scenarios for Phase 3 (nightly)
@@ -275,7 +279,20 @@ PYTHONPATH=src pytest tests/ -m "not live"
 
 # Integration tests (live SNB API)
 PYTHONPATH=src pytest tests/ -m "live"
+
+# Re-record the fixtures from data.snb.ch (writes tests/fixtures/PROVENANCE.md)
+python scripts/record_fixtures.py
 ```
+
+The unit-test payloads are **recorded, not invented**. Source, retrieval date,
+selection rule and SHA-256 per file are in
+[`tests/fixtures/PROVENANCE.md`](tests/fixtures/PROVENANCE.md). A hand-written
+mock encodes its author's assumption and can therefore never refute it —
+production code and fixture come from the same head, so where both are wrong,
+both are wrong together and the suite stays green. Each file keeps **every
+series** and only shortens the value lists: the code reasons about the
+dimensions and merely displays the values, so cutting "the first N series"
+would have hidden exactly what three of the findings depended on.
 
 ---
 

@@ -1,0 +1,2812 @@
+{
+  "timeseries": [
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,T,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 3780115617.408762
+        },
+        {
+          "date": "2021",
+          "value": 3869060583.5387707
+        },
+        {
+          "date": "2022",
+          "value": 3599265120.301583
+        },
+        {
+          "date": "2023",
+          "value": 3421819660.3680143
+        },
+        {
+          "date": "2024",
+          "value": 3479746765.2859025
+        },
+        {
+          "date": "2025",
+          "value": 3419685828.404002
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Kantonalbanken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,T,G10}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 718663604.9265993
+        },
+        {
+          "date": "2021",
+          "value": 748521839.689094
+        },
+        {
+          "date": "2022",
+          "value": 782367893.698035
+        },
+        {
+          "date": "2023",
+          "value": 780051225.961654
+        },
+        {
+          "date": "2024",
+          "value": 812169760.804854
+        },
+        {
+          "date": "2025",
+          "value": 838980875.2056704
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Grossbanken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,T,G15}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 1802725897.6726696
+        },
+        {
+          "date": "2021",
+          "value": 1774333257.1109154
+        },
+        {
+          "date": "2022",
+          "value": 1552112699.6801095
+        },
+        {
+          "date": "2023",
+          "value": 1445396891.4700212
+        },
+        {
+          "date": "2024",
+          "value": 1421200409.4413228
+        },
+        {
+          "date": "2025",
+          "value": 1282489367.0840676
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Regionalbanken und Sparkassen"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,T,G20}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 111653211.239876
+        },
+        {
+          "date": "2021",
+          "value": 118118180.9527257
+        },
+        {
+          "date": "2022",
+          "value": 120301899.165512
+        },
+        {
+          "date": "2023",
+          "value": 120688686.327882
+        },
+        {
+          "date": "2024",
+          "value": 125705662.81593
+        },
+        {
+          "date": "2025",
+          "value": 130862436.5189419
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Raiffeisenbanken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,T,G25}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 259653251.551639
+        },
+        {
+          "date": "2021",
+          "value": 284489174.000056
+        },
+        {
+          "date": "2022",
+          "value": 280634623.000032
+        },
+        {
+          "date": "2023",
+          "value": 297134947.00000805
+        },
+        {
+          "date": "2024",
+          "value": 305610614.000049
+        },
+        {
+          "date": "2025",
+          "value": 322984014.999994
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Börsenbanken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,T,G35}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 295909018.0127105
+        },
+        {
+          "date": "2021",
+          "value": 312895651.5090611
+        },
+        {
+          "date": "2022",
+          "value": 291515271.033328
+        },
+        {
+          "date": "2023",
+          "value": 266667963.425096
+        },
+        {
+          "date": "2024",
+          "value": 287077450.4290179
+        },
+        {
+          "date": "2025",
+          "value": 302784454.6020393
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Andere Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,T,G45}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 199466801.3182979
+        },
+        {
+          "date": "2021",
+          "value": 210256852.3576815
+        },
+        {
+          "date": "2022",
+          "value": 206746920.49300402
+        },
+        {
+          "date": "2023",
+          "value": 195452819.0099203
+        },
+        {
+          "date": "2024",
+          "value": 202482552.289688
+        },
+        {
+          "date": "2025",
+          "value": 204907461.009735
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Privatbankiers"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,T,A10}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 7157628.652882
+        },
+        {
+          "date": "2021",
+          "value": 7789639.998638981
+        },
+        {
+          "date": "2022",
+          "value": 7790863.901912456
+        },
+        {
+          "date": "2023",
+          "value": 5821114.864763
+        },
+        {
+          "date": "2024",
+          "value": 5721292.435523
+        },
+        {
+          "date": "2025",
+          "value": 6590047.081814
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Ausländische Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,T,A25}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 384886204.0340875
+        },
+        {
+          "date": "2021",
+          "value": 412655987.920599
+        },
+        {
+          "date": "2022",
+          "value": 357794949.329651
+        },
+        {
+          "date": "2023",
+          "value": 310606012.3086693
+        },
+        {
+          "date": "2024",
+          "value": 319779023.0695179
+        },
+        {
+          "date": "2025",
+          "value": 330087171.9017391
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Ausländisch beherrschte Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,T,G65}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 270626215.45968807
+        },
+        {
+          "date": "2021",
+          "value": 291107796.851406
+        },
+        {
+          "date": "2022",
+          "value": 274579674.2225316
+        },
+        {
+          "date": "2023",
+          "value": 252482182.25996783
+        },
+        {
+          "date": "2024",
+          "value": 262075989.325158
+        },
+        {
+          "date": "2025",
+          "value": 249533732.835471
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Filialen ausländischer Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,T,G70}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 114259988.57439949
+        },
+        {
+          "date": "2021",
+          "value": 121548191.06919304
+        },
+        {
+          "date": "2022",
+          "value": 83215275.10711932
+        },
+        {
+          "date": "2023",
+          "value": 58123830.04870164
+        },
+        {
+          "date": "2024",
+          "value": 57703033.74435991
+        },
+        {
+          "date": "2025",
+          "value": 80553439.06626815
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz ohne Privatbankiers und ohne Filialen ausländischer Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,T,S10}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 3658698000.181481
+        },
+        {
+          "date": "2021",
+          "value": 3739722752.470939
+        },
+        {
+          "date": "2022",
+          "value": 3508258981.2925515
+        },
+        {
+          "date": "2023",
+          "value": 3357874715.454549
+        },
+        {
+          "date": "2024",
+          "value": 3416322439.10602
+        },
+        {
+          "date": "2025",
+          "value": 3332542342.255919
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,CHF,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 2135561201.2827399
+        },
+        {
+          "date": "2021",
+          "value": 2196008424.4585333
+        },
+        {
+          "date": "2022",
+          "value": 2167963550.833162
+        },
+        {
+          "date": "2023",
+          "value": 2147133631.9382236
+        },
+        {
+          "date": "2024",
+          "value": 2187273991.7590847
+        },
+        {
+          "date": "2025",
+          "value": 2206886480.523519
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Edelmetalle"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,EM,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 29117603.761244692
+        },
+        {
+          "date": "2021",
+          "value": 25615947.536203194
+        },
+        {
+          "date": "2022",
+          "value": 21492362.61177132
+        },
+        {
+          "date": "2023",
+          "value": 22432356.020210885
+        },
+        {
+          "date": "2024",
+          "value": 25577015.290331163
+        },
+        {
+          "date": "2025",
+          "value": 38036410.787257984
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Euro"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,EUR,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 359008873.6808027
+        },
+        {
+          "date": "2021",
+          "value": 351481629.36357826
+        },
+        {
+          "date": "2022",
+          "value": 289555283.287849
+        },
+        {
+          "date": "2023",
+          "value": 277289897.2738284
+        },
+        {
+          "date": "2024",
+          "value": 267037905.49615628
+        },
+        {
+          "date": "2025",
+          "value": 262879725.8987133
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Yen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,JPY,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 56951155.00078014
+        },
+        {
+          "date": "2021",
+          "value": 38153030.80534668
+        },
+        {
+          "date": "2022",
+          "value": 47372702.54080277
+        },
+        {
+          "date": "2023",
+          "value": 47931204.852867
+        },
+        {
+          "date": "2024",
+          "value": 48999365.31252417
+        },
+        {
+          "date": "2025",
+          "value": 47398335.25108566
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "US-Dollar"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,USD,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 846195368.3383598
+        },
+        {
+          "date": "2021",
+          "value": 924984764.9287393
+        },
+        {
+          "date": "2022",
+          "value": 786942836.1420361
+        },
+        {
+          "date": "2023",
+          "value": 675620600.8717507
+        },
+        {
+          "date": "2024",
+          "value": 695350088.6671822
+        },
+        {
+          "date": "2025",
+          "value": 618282615.453305
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Total Inland und Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Übrige Währungen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,T,U,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 353281414.17422956
+        },
+        {
+          "date": "2021",
+          "value": 332816786.632868
+        },
+        {
+          "date": "2022",
+          "value": 285938384.65217316
+        },
+        {
+          "date": "2023",
+          "value": 251411969.08668754
+        },
+        {
+          "date": "2024",
+          "value": 255508398.31470338
+        },
+        {
+          "date": "2025",
+          "value": 246202259.80998915
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,T,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 2124390889.2150118
+        },
+        {
+          "date": "2021",
+          "value": 2207526178.344737
+        },
+        {
+          "date": "2022",
+          "value": 2143248943.4594946
+        },
+        {
+          "date": "2023",
+          "value": 2120749781.03616
+        },
+        {
+          "date": "2024",
+          "value": 2150593092.223111
+        },
+        {
+          "date": "2025",
+          "value": 2179632513.585817
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Kantonalbanken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,T,G10}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 682151884.1898024
+        },
+        {
+          "date": "2021",
+          "value": 709355024.9975337
+        },
+        {
+          "date": "2022",
+          "value": 744142224.6569932
+        },
+        {
+          "date": "2023",
+          "value": 742404667.061151
+        },
+        {
+          "date": "2024",
+          "value": 763801555.021969
+        },
+        {
+          "date": "2025",
+          "value": 789767606.3348475
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Grossbanken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,T,G15}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 567203616.8301945
+        },
+        {
+          "date": "2021",
+          "value": 569677477.7542022
+        },
+        {
+          "date": "2022",
+          "value": 533340485.129698
+        },
+        {
+          "date": "2023",
+          "value": 544651829.1395857
+        },
+        {
+          "date": "2024",
+          "value": 518706208.78893584
+        },
+        {
+          "date": "2025",
+          "value": 482647933.52320063
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Regionalbanken und Sparkassen"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,T,G20}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 110848018.403146
+        },
+        {
+          "date": "2021",
+          "value": 117310653.299016
+        },
+        {
+          "date": "2022",
+          "value": 119508020.978422
+        },
+        {
+          "date": "2023",
+          "value": 120110838.806662
+        },
+        {
+          "date": "2024",
+          "value": 124638457.85579886
+        },
+        {
+          "date": "2025",
+          "value": 129416341.851433
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Raiffeisenbanken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,T,G25}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 253799044.714178
+        },
+        {
+          "date": "2021",
+          "value": 279524230.76177704
+        },
+        {
+          "date": "2022",
+          "value": 273395191.160676
+        },
+        {
+          "date": "2023",
+          "value": 289940726.55162704
+        },
+        {
+          "date": "2024",
+          "value": 298289373.482071
+        },
+        {
+          "date": "2025",
+          "value": 311089522.13583
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Börsenbanken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,T,G35}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 126990852.22806384
+        },
+        {
+          "date": "2021",
+          "value": 133273764.988429
+        },
+        {
+          "date": "2022",
+          "value": 117002975.589284
+        },
+        {
+          "date": "2023",
+          "value": 105144351.3908738
+        },
+        {
+          "date": "2024",
+          "value": 115960590.90901706
+        },
+        {
+          "date": "2025",
+          "value": 121970884.31387123
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Andere Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,T,G45}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 166099344.1216269
+        },
+        {
+          "date": "2021",
+          "value": 178071147.16254646
+        },
+        {
+          "date": "2022",
+          "value": 175219740.49474004
+        },
+        {
+          "date": "2023",
+          "value": 166299757.8888343
+        },
+        {
+          "date": "2024",
+          "value": 173413379.720434
+        },
+        {
+          "date": "2025",
+          "value": 176451146.152785
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Privatbankiers"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,T,A10}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 5653729.781663
+        },
+        {
+          "date": "2021",
+          "value": 6253887.002839981
+        },
+        {
+          "date": "2022",
+          "value": 6160399.033722456
+        },
+        {
+          "date": "2023",
+          "value": 4704135.617295
+        },
+        {
+          "date": "2024",
+          "value": 4579255.647929
+        },
+        {
+          "date": "2025",
+          "value": 5262572.73834
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Ausländische Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,T,A25}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 211644398.94633678
+        },
+        {
+          "date": "2021",
+          "value": 214059992.37839413
+        },
+        {
+          "date": "2022",
+          "value": 174479906.41595873
+        },
+        {
+          "date": "2023",
+          "value": 147493474.58013067
+        },
+        {
+          "date": "2024",
+          "value": 151204270.79695517
+        },
+        {
+          "date": "2025",
+          "value": 163026506.53551033
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Ausländisch beherrschte Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,T,G65}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 116156149.78398
+        },
+        {
+          "date": "2021",
+          "value": 117770113.11312269
+        },
+        {
+          "date": "2022",
+          "value": 116787470.0136353
+        },
+        {
+          "date": "2023",
+          "value": 111010573.729543
+        },
+        {
+          "date": "2024",
+          "value": 113747565.067954
+        },
+        {
+          "date": "2025",
+          "value": 107068178.647229
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Filialen ausländischer Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,T,G70}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 95488249.16235672
+        },
+        {
+          "date": "2021",
+          "value": 96289879.26527154
+        },
+        {
+          "date": "2022",
+          "value": 57692436.40232344
+        },
+        {
+          "date": "2023",
+          "value": 36482900.85058766
+        },
+        {
+          "date": "2024",
+          "value": 37456705.729001224
+        },
+        {
+          "date": "2025",
+          "value": 55958327.888281256
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz ohne Privatbankiers und ohne Filialen ausländischer Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,T,S10}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 2023248910.270992
+        },
+        {
+          "date": "2021",
+          "value": 2104982412.076627
+        },
+        {
+          "date": "2022",
+          "value": 2079396108.023448
+        },
+        {
+          "date": "2023",
+          "value": 2079562744.5682774
+        },
+        {
+          "date": "2024",
+          "value": 2108557130.84618
+        },
+        {
+          "date": "2025",
+          "value": 2118411612.959196
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,CHF,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 2016128567.632745
+        },
+        {
+          "date": "2021",
+          "value": 2097398994.9949455
+        },
+        {
+          "date": "2022",
+          "value": 2043584109.8451064
+        },
+        {
+          "date": "2023",
+          "value": 2034125605.8788474
+        },
+        {
+          "date": "2024",
+          "value": 2058561251.4412944
+        },
+        {
+          "date": "2025",
+          "value": 2086453882.7493417
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Edelmetalle"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,EM,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 22593381.20725195
+        },
+        {
+          "date": "2021",
+          "value": 20347527.20968858
+        },
+        {
+          "date": "2022",
+          "value": 18251161.872003
+        },
+        {
+          "date": "2023",
+          "value": 18777720.87330464
+        },
+        {
+          "date": "2024",
+          "value": 21726961.71145512
+        },
+        {
+          "date": "2025",
+          "value": 30636634.55807936
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Euro"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,EUR,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 33748614.05168333
+        },
+        {
+          "date": "2021",
+          "value": 28698997.8812114
+        },
+        {
+          "date": "2022",
+          "value": 30004433.69944884
+        },
+        {
+          "date": "2023",
+          "value": 25976855.49259752
+        },
+        {
+          "date": "2024",
+          "value": 23522606.635082174
+        },
+        {
+          "date": "2025",
+          "value": 21209354.916719504
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Yen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,JPY,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 546103.3111605609
+        },
+        {
+          "date": "2021",
+          "value": 514198.3592290796
+        },
+        {
+          "date": "2022",
+          "value": 596099.100742579
+        },
+        {
+          "date": "2023",
+          "value": 947204.350973747
+        },
+        {
+          "date": "2024",
+          "value": 914041.9423316704
+        },
+        {
+          "date": "2025",
+          "value": 536056.6424160964
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "US-Dollar"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,USD,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 43792664.96400418
+        },
+        {
+          "date": "2021",
+          "value": 52579902.20466507
+        },
+        {
+          "date": "2022",
+          "value": 43221086.45440929
+        },
+        {
+          "date": "2023",
+          "value": 34887971.30734046
+        },
+        {
+          "date": "2024",
+          "value": 38279041.331392005
+        },
+        {
+          "date": "2025",
+          "value": 35381476.06016383
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Inland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Übrige Währungen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,I,U,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 7581557.088626636
+        },
+        {
+          "date": "2021",
+          "value": 7986557.671988076
+        },
+        {
+          "date": "2022",
+          "value": 7592051.988235166
+        },
+        {
+          "date": "2023",
+          "value": 6034422.674806308
+        },
+        {
+          "date": "2024",
+          "value": 7589188.586504992
+        },
+        {
+          "date": "2025",
+          "value": 5415108.059097395
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,T,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 1655724727.7234356
+        },
+        {
+          "date": "2021",
+          "value": 1661534404.9509468
+        },
+        {
+          "date": "2022",
+          "value": 1456016177.400131
+        },
+        {
+          "date": "2023",
+          "value": 1301069878.8052278
+        },
+        {
+          "date": "2024",
+          "value": 1329153672.7412813
+        },
+        {
+          "date": "2025",
+          "value": 1240053314.9380622
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Kantonalbanken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,T,G10}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 36511720.33679656
+        },
+        {
+          "date": "2021",
+          "value": 39166814.69081051
+        },
+        {
+          "date": "2022",
+          "value": 38225669.04127147
+        },
+        {
+          "date": "2023",
+          "value": 37646558.90102466
+        },
+        {
+          "date": "2024",
+          "value": 48368205.78288348
+        },
+        {
+          "date": "2025",
+          "value": 49213268.87036053
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Grossbanken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,T,G15}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 1235522280.8424754
+        },
+        {
+          "date": "2021",
+          "value": 1204655779.3567133
+        },
+        {
+          "date": "2022",
+          "value": 1018772214.5504116
+        },
+        {
+          "date": "2023",
+          "value": 900745062.7166376
+        },
+        {
+          "date": "2024",
+          "value": 902494200.652387
+        },
+        {
+          "date": "2025",
+          "value": 799841433.1608669
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Regionalbanken und Sparkassen"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,T,G20}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 805192.9684099999
+        },
+        {
+          "date": "2021",
+          "value": 807527.6537097
+        },
+        {
+          "date": "2022",
+          "value": 793878.18709
+        },
+        {
+          "date": "2023",
+          "value": 577847.11745
+        },
+        {
+          "date": "2024",
+          "value": 1067204.6384711151
+        },
+        {
+          "date": "2025",
+          "value": 1446094.667569998
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Raiffeisenbanken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,T,G25}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 5854206.837461
+        },
+        {
+          "date": "2021",
+          "value": 4964943.238278999
+        },
+        {
+          "date": "2022",
+          "value": 7239431.839356
+        },
+        {
+          "date": "2023",
+          "value": 7194220.448381001
+        },
+        {
+          "date": "2024",
+          "value": 7321240.517978
+        },
+        {
+          "date": "2025",
+          "value": 11894492.864164
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Börsenbanken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,T,G35}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 168918165.5826466
+        },
+        {
+          "date": "2021",
+          "value": 179621886.5353421
+        },
+        {
+          "date": "2022",
+          "value": 174512295.444044
+        },
+        {
+          "date": "2023",
+          "value": 161523612.0344322
+        },
+        {
+          "date": "2024",
+          "value": 171116859.0201508
+        },
+        {
+          "date": "2025",
+          "value": 180813570.2882581
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Andere Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,T,G45}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 33367457.196671
+        },
+        {
+          "date": "2021",
+          "value": 32185705.195135
+        },
+        {
+          "date": "2022",
+          "value": 31527179.998464
+        },
+        {
+          "date": "2023",
+          "value": 29153061.121086
+        },
+        {
+          "date": "2024",
+          "value": 29069172.569254
+        },
+        {
+          "date": "2025",
+          "value": 28456314.85695
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Privatbankiers"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,T,A10}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 1503898.871219
+        },
+        {
+          "date": "2021",
+          "value": 1535752.995799
+        },
+        {
+          "date": "2022",
+          "value": 1630464.86819
+        },
+        {
+          "date": "2023",
+          "value": 1116979.247468
+        },
+        {
+          "date": "2024",
+          "value": 1142036.787594
+        },
+        {
+          "date": "2025",
+          "value": 1327474.343474
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Ausländische Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,T,A25}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 173241805.08775544
+        },
+        {
+          "date": "2021",
+          "value": 198595995.2851569
+        },
+        {
+          "date": "2022",
+          "value": 183315043.47130424
+        },
+        {
+          "date": "2023",
+          "value": 163112537.21874872
+        },
+        {
+          "date": "2024",
+          "value": 168574752.77256262
+        },
+        {
+          "date": "2025",
+          "value": 167060665.88641876
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Ausländisch beherrschte Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,T,G65}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 154470065.67570806
+        },
+        {
+          "date": "2021",
+          "value": 173337683.3653754
+        },
+        {
+          "date": "2022",
+          "value": 157792205.19844836
+        },
+        {
+          "date": "2023",
+          "value": 141471608.02063477
+        },
+        {
+          "date": "2024",
+          "value": 148328424.757204
+        },
+        {
+          "date": "2025",
+          "value": 142465554.708432
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Filialen ausländischer Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,T,G70}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 18771739.412047427
+        },
+        {
+          "date": "2021",
+          "value": 25258311.919781495
+        },
+        {
+          "date": "2022",
+          "value": 25522838.272855893
+        },
+        {
+          "date": "2023",
+          "value": 21640929.19811398
+        },
+        {
+          "date": "2024",
+          "value": 20246328.01535869
+        },
+        {
+          "date": "2025",
+          "value": 24595111.177986857
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Total Währung"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz ohne Privatbankiers und ohne Filialen ausländischer Banken"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,T,S10}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 1635449089.440168
+        },
+        {
+          "date": "2021",
+          "value": 1634740340.035366
+        },
+        {
+          "date": "2022",
+          "value": 1428862874.2590857
+        },
+        {
+          "date": "2023",
+          "value": 1278311970.359646
+        },
+        {
+          "date": "2024",
+          "value": 1307765307.938329
+        },
+        {
+          "date": "2025",
+          "value": 1214130729.416601
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Schweizer Franken"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,CHF,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 119432633.64999494
+        },
+        {
+          "date": "2021",
+          "value": 98609429.46358763
+        },
+        {
+          "date": "2022",
+          "value": 124379440.98805556
+        },
+        {
+          "date": "2023",
+          "value": 113008026.05937617
+        },
+        {
+          "date": "2024",
+          "value": 128712740.31779023
+        },
+        {
+          "date": "2025",
+          "value": 120432597.77417721
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Edelmetalle"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,EM,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 6524222.553992743
+        },
+        {
+          "date": "2021",
+          "value": 5268420.326514615
+        },
+        {
+          "date": "2022",
+          "value": 3241200.73976832
+        },
+        {
+          "date": "2023",
+          "value": 3654635.146906244
+        },
+        {
+          "date": "2024",
+          "value": 3850053.578876042
+        },
+        {
+          "date": "2025",
+          "value": 7399776.229178628
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Euro"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,EUR,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 325260259.6291194
+        },
+        {
+          "date": "2021",
+          "value": 322782631.48236686
+        },
+        {
+          "date": "2022",
+          "value": 259550849.58840016
+        },
+        {
+          "date": "2023",
+          "value": 251313041.78123084
+        },
+        {
+          "date": "2024",
+          "value": 243515298.8610741
+        },
+        {
+          "date": "2025",
+          "value": 241670370.9819938
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Yen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,JPY,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 56405051.68961958
+        },
+        {
+          "date": "2021",
+          "value": 37638832.4461176
+        },
+        {
+          "date": "2022",
+          "value": 46776603.44006019
+        },
+        {
+          "date": "2023",
+          "value": 46984000.50189325
+        },
+        {
+          "date": "2024",
+          "value": 48085323.3701925
+        },
+        {
+          "date": "2025",
+          "value": 46862278.608669564
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "US-Dollar"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,USD,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 802402703.3743556
+        },
+        {
+          "date": "2021",
+          "value": 872404862.7240742
+        },
+        {
+          "date": "2022",
+          "value": 743721749.6876268
+        },
+        {
+          "date": "2023",
+          "value": 640732629.5644102
+        },
+        {
+          "date": "2024",
+          "value": 657071047.3357902
+        },
+        {
+          "date": "2025",
+          "value": 582901139.3931412
+        }
+      ]
+    },
+    {
+      "header": [
+        {
+          "dim": "Konsolidierungsstufe",
+          "dimItem": "Konzern"
+        },
+        {
+          "dim": "Inland und Ausland",
+          "dimItem": "Ausland"
+        },
+        {
+          "dim": "Währung",
+          "dimItem": "Übrige Währungen"
+        },
+        {
+          "dim": "Bankengruppe",
+          "dimItem": "Banken in der Schweiz"
+        }
+      ],
+      "metadata": {
+        "key": "BSTA@SNB.JAHR_K.BIL.AKT.TOT{K,A,U,A30}",
+        "frequency": "P1Y",
+        "scale": "3",
+        "unit": "CHF"
+      },
+      "values": [
+        {
+          "date": "2020",
+          "value": 345699857.0856029
+        },
+        {
+          "date": "2021",
+          "value": 324830228.9608799
+        },
+        {
+          "date": "2022",
+          "value": 278346332.663938
+        },
+        {
+          "date": "2023",
+          "value": 245377546.41188124
+        },
+        {
+          "date": "2024",
+          "value": 247919209.72819838
+        },
+        {
+          "date": "2025",
+          "value": 240787151.75089177
+        }
+      ]
+    }
+  ]
+}

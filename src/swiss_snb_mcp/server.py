@@ -6,6 +6,7 @@ and monetary statistics via the public REST API at data.snb.ch.
 
 import json
 import logging
+import re
 import sys
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
@@ -64,7 +65,15 @@ BOP_CUBES = {
     "iip": ("auvekomq", "Auslandvermögen — Komponenten (Quartalsdaten)"),
 }
 
-# Currency dimension item IDs → human-readable labels
+# Currency dimension item IDs → human-readable labels.
+#
+# Gegen den Cube gehalten am 2026-08-08 (`tests/fixtures/cube_devkum.json`).
+# Bis dahin hatte das niemand getan, und die Tabelle wich in beide Richtungen
+# ab: `INR100` stand hier und gibt es in devkum nicht — `snb_list_currencies`
+# bot eine Waehrung an, die jede Abfrage darauf mit «keine Daten» beantwortet,
+# also mit derselben Meldung wie ein Tippfehler. Umgekehrt fehlten `USD3M` und
+# `USD6M`, die es gibt. Ein Test haelt die Tabelle jetzt in beide Richtungen
+# gegen die aufgezeichnete Antwort.
 CURRENCIES = {
     "EUR1": "Euro (EUR)",
     "USD1": "US-Dollar (USD)",
@@ -91,8 +100,12 @@ CURRENCIES = {
     "BRL100": "Brasilianischer Real – 100 BRL",
     "MXN100": "Mexikanischer Peso – 100 MXN",
     "ARS1": "Argentinischer Peso (ARS)",
-    "INR100": "Indische Rupie – 100 INR",
     "XDR1": "Sonderziehungsrechte IWF (XDR)",
+    # Terminkurse, keine Kassakurse — bewusst mit dem Zusatz im Namen, weil
+    # eine Umrechnung mit einem 3-Monats-Terminkurs sonst wie eine mit dem
+    # Monatsmittel aussieht.
+    "USD3M": "US-Dollar 3-Monats-Terminkurs (USD)",
+    "USD6M": "US-Dollar 6-Monats-Terminkurs (USD)",
 }
 
 # Unit multipliers — how many foreign units correspond to 1 rate value
@@ -123,8 +136,24 @@ CURRENCY_UNITS = {
     "TRY100": 100,
     "BRL100": 100,
     "MXN100": 100,
-    "INR100": 100,
+    "USD3M": 1,
+    "USD6M": 1,
 }
+
+# Der Cube schreibt die Einheit in die Beschriftung der Reihe: «Europa -
+# Dänemark – DKK 100.-», «Europa - EUR 1.-». Die Tabelle oben sagt dasselbe
+# noch einmal, und zwei Stellen fuer dieselbe Angabe sind eine Stelle zu viel.
+# Vor jeder Umrechnung wird deshalb verglichen; bei Widerspruch bricht der
+# Aufruf ab. Ein um Faktor 100 falscher Kurs ist die unangenehmste Sorte
+# falsch: das Ergebnis ist vollstaendig, formatiert und plausibel.
+_UNIT_IN_LABEL = re.compile(r"(\d+)\.-\s*$")
+
+
+def _unit_from_label(label: str) -> int | None:
+    """Die Einheit, die die Quelle in die Reihenbeschriftung schreibt."""
+    m = _UNIT_IN_LABEL.search(label or "")
+    return int(m.group(1)) if m else None
+
 
 # SNB balance sheet position IDs
 BALANCE_SHEET_POSITIONS = {
@@ -264,6 +293,14 @@ def _handle_http_error(e: Exception) -> str:
         return "Error: Request to data.snb.ch timed out. Please try again."
     if isinstance(e, httpx.ConnectError):
         return "Error: Cannot reach data.snb.ch. Check network connectivity."
+    # Eine Formabweichung der Quelle traegt ihre Begruendung im Text — welche
+    # Dimensionswerte es gibt, welcher Pfad kein JSON liefert. Genau das
+    # braucht der Aufrufer, um es beim naechsten Versuch richtig zu machen, und
+    # genau das faellt weg, wenn sie unter der generischen Meldung landet. Der
+    # Text stammt aus diesem Modul, nicht aus der Antwort der Quelle, also
+    # leckt er auch nichts (OBS-002).
+    if type(e).__name__ == "UpstreamShapeError":
+        return f"Error: {e}"
     logger.exception("Unhandled error while calling the SNB API")
     return "Error: Unexpected error processing the request. See server log for details."
 
@@ -953,6 +990,25 @@ async def snb_convert_currency(params: ConvertCurrencyInput) -> str:
         date = latest["date"]
         unit = CURRENCY_UNITS.get(cid, 1)
         currency_label = CURRENCIES.get(cid, cid)
+
+        # Die Quelle schreibt die Einheit in die Beschriftung der Reihe. Wo sie
+        # das tut, entscheidet sie — nicht die Tabelle in diesem Modul.
+        source_label = next(
+            (
+                h.get("dimItem", "")
+                for h in matching_ts.get("header", [])
+                if h.get("dimItem")
+            ),
+            "",
+        )
+        source_unit = _unit_from_label(source_label)
+        if source_unit is not None and source_unit != unit:
+            return (
+                f"Error: Einheit für '{cid}' widerspricht der Quelle — hier "
+                f"{unit}, laut Reihenbeschriftung «{source_label}» aber "
+                f"{source_unit}. Die Umrechnung wird nicht geraten; "
+                "CURRENCY_UNITS prüfen."
+            )
 
         # Calculate CHF amount
         # rate = CHF per `unit` foreign currency units
