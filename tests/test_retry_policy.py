@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import inspect
 from datetime import UTC, datetime, timedelta
 from email.utils import format_datetime
 
@@ -113,7 +114,7 @@ def fake_clock(monkeypatch):
         now["t"] += seconds
 
     monkeypatch.setattr(w.time, "monotonic", lambda: now["t"])
-    monkeypatch.setattr(w.asyncio, "sleep", _sleep)
+    monkeypatch.setattr(w, "_sleep", _sleep)
     return slept
 
 
@@ -192,3 +193,19 @@ def test_default_budget_stays_under_the_mcp_client_default():
     from mcp.shared._httpx_utils import MCP_DEFAULT_TIMEOUT
 
     assert w.TOTAL_BUDGET_S < MCP_DEFAULT_TIMEOUT
+
+
+# --- Die Naht, und warum sie nicht `asyncio.sleep` ist -----------------------
+
+
+def test_der_retry_geht_ueber_den_alias():
+    """Sonst patchen die Tests eine Naht, die der Code gar nicht benutzt.
+
+    Umgeht das Modul den Alias, bleibt der Patch wirkungslos und die Suite
+    wartet die echte Backoff-Leiter ab. Kein Test faellt dabei — sie wird nur
+    um ein Vielfaches langsamer, und eine laengere Laufzeit ist kein Signal,
+    das jemand liest. Diese Zusicherung macht daraus einen Fehlschlag.
+    """
+    quelle = inspect.getsource(w)
+    assert "await _sleep(" in quelle, "der Retry ruft den Modul-Alias nicht mehr auf"
+    assert "await asyncio.sleep(" not in quelle, "der Retry umgeht den Alias"
