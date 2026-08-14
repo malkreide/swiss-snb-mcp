@@ -482,7 +482,7 @@ async def test_423_returns_locked_message(lifespan_started, monkeypatch):
     async def _no_sleep(*_a, **_k):
         return None
 
-    monkeypatch.setattr(wh.asyncio, "sleep", _no_sleep)
+    monkeypatch.setattr(wh, "_sleep", _no_sleep)
     respx.get(f"{WAREHOUSE}/{BIL_JAHR}/data/json/de").mock(
         return_value=httpx.Response(423, text="locked")
     )
@@ -502,7 +502,7 @@ async def test_banking_income_all_locked_surfaces_error(lifespan_started, monkey
     async def _no_sleep(*_a, **_k):
         return None
 
-    monkeypatch.setattr(wh.asyncio, "sleep", _no_sleep)
+    monkeypatch.setattr(wh, "_sleep", _no_sleep)
     respx.get(url__regex=r".*/warehouse/cube/BSTA\.SNB\.JAHR_K\.EFR\..*").mock(
         return_value=httpx.Response(423, text="locked")
     )

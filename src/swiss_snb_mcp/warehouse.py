@@ -23,6 +23,12 @@ from swiss_snb_mcp.server import (
     mcp,
 )
 
+# Eigener Alias, damit Tests die Wartezeit nullen koennen, ohne `asyncio.sleep`
+# prozessweit zu entschaerfen. `monkeypatch.setattr(<modul>.asyncio, "sleep", ...)`
+# sieht lokal aus, ersetzt `sleep` aber auf dem geteilten Modulobjekt — fuer
+# httpx, respx, pytest-asyncio und jeden anderen Importeur im Prozess.
+_sleep = asyncio.sleep
+
 # ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
@@ -289,7 +295,7 @@ async def _fetch_warehouse(
         # given up by the time it ends.
         if delay >= deadline - time.monotonic():
             return False
-        await asyncio.sleep(delay)
+        await _sleep(delay)
         return True
 
     for attempt in range(MAX_RETRIES):
