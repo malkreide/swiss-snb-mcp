@@ -112,7 +112,7 @@ jobs:
       # nach der einen und dieser Job prüft nach der anderen Version — der
       # Hook meldet grün und die CI wird rot. Ein Kommentar an beiden Stellen
       # bittet darum, sie zusammen zu bumpen; das hier prüft es.
-      - name: Ruff-Pin-Sync (ci.yml ↔ .pre-commit-config.yaml)
+      - name: Ruff-Pin-Sync (pyproject.toml ↔ .pre-commit-config.yaml)
         run: python scripts/check_ruff_pin.py
 
   live:
