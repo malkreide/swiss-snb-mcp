@@ -97,6 +97,20 @@ geprüft, weil dieses Repo mit 88 die schmalste Breite im Portfolio fährt. Kein
 `include` unter `[tool.ruff]` setzen — der Umfang stimmt (13 Dateien über alle
 drei Verzeichnisse, nachgemessen).
 
+`ruff format` sieht 14 statt 13 — 0.16 formatiert auch Markdown. Zwei Zahlen,
+kein Fehler.
+
+**Die zwei Jobs sind ungleich breit.** `test` fährt die Matrix 3.11/3.12/3.13,
+`lint` läuft ohne Matrix auf 3.11. Die vier Gates ab `ruff check` laufen also
+einmal, nicht dreimal — ein grünes 3.12/3.13 sagt über sie nichts aus. `test`
+setzt kein `fail-fast: false`.
+
 **Live-Tests:** eigener Job in `ci.yml`, nächtlich per Cron (`17 3 * * *`) plus
-`workflow_dispatch`. Ein roter Lauf legt ein Issue an oder schliesst es wieder;
-dafür braucht der Job `issues: write`. DRIFT-005 ist erfüllt.
+`workflow_dispatch`; auf PRs übersprungen (`if: github.event_name ==
+'schedule' || … 'workflow_dispatch'`). Ein roter Lauf legt ein Issue an oder
+schliesst es wieder; dafür braucht er `issues: write`. DRIFT-005 ist erfüllt.
+
+Dieses `issues: write` steht allerdings **auf Workflow-Ebene**, nicht am
+`live`-Job. Es gilt damit auch für `test` und `lint`, also für den
+`GITHUB_TOKEN` jedes PR-Laufs. Gewollt ist es nur für `live`; wer es enger
+zieht, gehört an den Job, nicht an die Datei.
