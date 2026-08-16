@@ -94,8 +94,11 @@ python scripts/check_ruff_pin.py
 Dazu ein Schritt „Format-Stabilität der Portfolio-Skripte": die zwischen den
 Repos kopierten `scripts/check_*.py` werden gegen mehrere `line-length`-Werte
 geprüft, weil dieses Repo mit 88 die schmalste Breite im Portfolio fährt. Kein
-`include` unter `[tool.ruff]` setzen — der Umfang stimmt (13 Dateien über alle
-drei Verzeichnisse, nachgemessen).
+`include` unter `[tool.ruff]` setzen — der Umfang sind die drei Pfade im
+Gate-Befehl selbst. Wer ihn prüfen will, zählt nach statt hier abzulesen:
+`ruff check src/ tests/ scripts/ --show-files | wc -l`. `ruff format` meldet
+dabei eine Datei mehr als `ruff check`, weil 0.16 auch Markdown formatiert
+und damit `tests/fixtures/PROVENANCE.md` mitnimmt — zwei Zahlen, kein Fehler.
 
 **Live-Tests:** eigener Job in `ci.yml`, nächtlich per Cron (`17 3 * * *`) plus
 `workflow_dispatch`. Ein roter Lauf legt ein Issue an oder schliesst es wieder;
