@@ -3,8 +3,13 @@ Ruff-Pins auf Gleichlauf prüfen.
 
 Ruff ist an zwei Stellen gepinnt, und beide müssen dieselbe Version nennen:
 
-  - `.github/workflows/ci.yml`: `pip install ruff==X.Y.Z` im lint-Job
+  - `pyproject.toml`: `ruff==X.Y.Z` im `dev`-Extra
   - `.pre-commit-config.yaml`: `rev: vX.Y.Z` beim ruff-pre-commit-Repo
+
+Eine dritte Stelle gab es bis vor Kurzem: `pip install ruff==X.Y.Z` im
+lint-Job. Sie ist weg, und ihr Fehlen wird hier geprüft — sie lief nach dem
+Install des `dev`-Extras und überschrieb es, sodass eine Abweichung dort in
+der CI gar nicht auffallen konnte, sondern nur lokal.
 
 Hintergrund: der Pre-Commit-Hook existiert, um genau die Formatierung lokal zu
 erzwingen, die der lint-Job prüft. Läuft der eine Pin dem anderen davon,
@@ -20,6 +25,11 @@ wird vor dem Vergleich abgeschnitten.
 Fehlt einer der beiden Pins, ist das ebenfalls ein Fehler: dann prüft dieses
 Skript stillschweigend nichts mehr, und der Zustand, den es absichern soll,
 wäre wieder unbeobachtet.
+
+Aus demselben Grund genügt der Gleichlauf der beiden nicht: Ein wieder
+eingefügter CI-Pin würde beide aushebeln, ohne dass einer von ihnen sich
+ändert — der Vergleich bliebe grün, und die CI liefe trotzdem auf einer
+anderen Version.
 
 Verwendung:
     python scripts/check_ruff_pin.py     # exit 1 bei Abweichung
@@ -47,6 +57,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CI = ROOT / ".github" / "workflows" / "ci.yml"
+PYPROJECT = ROOT / "pyproject.toml"
 PRECOMMIT = ROOT / ".pre-commit-config.yaml"
 
 # `pip install ruff==0.15.8` — auch mit Leerzeichen um `==` und selbst dann,
@@ -63,8 +74,13 @@ _RUFF_REPO_BLOCK = re.compile(
 _REV = re.compile(r"^\s*rev:\s*['\"]?(\S+?)['\"]?\s*$", re.MULTILINE)
 
 
+def pyproject_pins() -> list[str]:
+    """Alle in pyproject.toml exakt gepinnten Ruff-Versionen."""
+    return _PIP_PIN.findall(PYPROJECT.read_text(encoding="utf-8"))
+
+
 def ci_pins() -> list[str]:
-    """Alle in ci.yml gepinnten Ruff-Versionen."""
+    """Eigene Ruff-Pins in ci.yml — hier soll keiner mehr stehen."""
     return _PIP_PIN.findall(CI.read_text(encoding="utf-8"))
 
 
@@ -82,32 +98,38 @@ def precommit_pin() -> str | None:
 def fail(message: str) -> None:
     print(message, file=sys.stderr)
     print(
-        "\nBeide Stellen im selben Commit bumpen: `rev:` in "
-        ".pre-commit-config.yaml und `pip install ruff==…` im lint-Job von "
-        ".github/workflows/ci.yml. Sonst formatiert der Hook nach der einen "
-        "und die CI prüft nach der anderen Version.",
+        "\nBeide Stellen im selben Commit bumpen: `ruff==…` im dev-Extra von "
+        "pyproject.toml und `rev:` in .pre-commit-config.yaml. Sonst "
+        "formatiert der Hook nach der einen und die CI prüft nach der "
+        "anderen Version.",
         file=sys.stderr,
     )
     sys.exit(1)
 
 
 def main() -> None:
-    ci = ci_pins()
+    stray = ci_pins()
+    if stray:
+        others = ", ".join(repr(v) for v in sorted(set(stray)))
+        head = "EIGENER CI-PIN: .github/workflows/ci.yml installiert Ruff"
+        fail(f"{head} selbst ({others}). Ruff kommt aus dem dev-Extra.")
+
+    declared = pyproject_pins()
     hook = precommit_pin()
 
-    if not ci:
-        fail("KEIN PIN: in .github/workflows/ci.yml steht kein `ruff==<version>`.")
+    if not declared:
+        fail("KEIN PIN: in pyproject.toml steht kein exaktes `ruff==<version>`.")
     if hook is None:
         missing = "fehlt das ruff-pre-commit-Repo oder dessen `rev:`."
         fail(f"KEIN PIN: in .pre-commit-config.yaml {missing}")
 
-    divergent = sorted({v for v in ci if v != hook})
+    divergent = sorted({v for v in declared if v != hook})
     if divergent:
         others = ", ".join(repr(v) for v in divergent)
         head = f"DRIFT: .pre-commit-config.yaml pinnt Ruff auf {hook!r},"
-        fail(f"{head} .github/workflows/ci.yml auf {others}.")
+        fail(f"{head} pyproject.toml auf {others}.")
 
-    checked = ".pre-commit-config.yaml → rev, .github/workflows/ci.yml → ruff=="
+    checked = ".pre-commit-config.yaml → rev, pyproject.toml → ruff=="
     print(f"Ruff-Pin OK ({hook}; geprüft: {checked})")
 
 

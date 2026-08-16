@@ -45,15 +45,19 @@ Ein Codex-Review auf einem PR wird beantwortet oder behoben, nie ignoriert.
 
 ## Teil 2 — dieses Repo
 
-**ruff: drei Angaben, und das ist Absicht.** `.pre-commit-config.yaml`
-(`rev: v0.16.1`) und `ci.yml` (`pip install ruff==0.16.1`) müssen dieselbe
-Version nennen — `scripts/check_ruff_pin.py` erzwingt das, als pre-commit-Hook
-*und* als CI-Schritt. Die dritte Angabe, `ruff>=0.5` im `[dev]`-Extra, ist
-bewusst eine Spanne: pre-commit installiert ruff in einer eigenen, isolierten
-Umgebung, dort entscheidet die `rev`. **Lokal deshalb über pre-commit prüfen,
-nicht über ein `ruff` aus dem venv** — sonst läuft man in genau die Drift, die
-diesen Aufbau ausgelöst hat (ein `ruff format --check`, das lokal grün war und
-in der CI fiel). Beim Anheben: `rev` und CI-Pin zusammen, der Guard fällt sonst.
+**ruff: eine Quelle.** Der Pin `0.16.1` steht in `pyproject.toml` und `.pre-
+commit-config.yaml` — und **nicht** mehr als eigener Install-Schritt in der
+CI.
+
+Der CI-Schritt lief nach dem Install der Abhängigkeiten und überschrieb sie.
+Eine Abweichung im Pin konnte deshalb in der CI gar nicht auffallen, sondern
+nur lokal — wo niemand sie erwartet. Ein manuelles Nachinstallieren von ruff
+vor den Gates ist damit nicht mehr nötig und wäre schädlich: Es würde eine
+spätere Anhebung hier stillschweigend überstimmen.
+
+`scripts/check_ruff_pin.py` erzwingt das — als pre-commit-Hook *und* als
+CI-Schritt. Er prüft beide verbleibenden Stellen auf Gleichstand und
+zusätzlich, dass `ci.yml` keinen eigenen Pin zurückbekommt.
 
 **Gates, wörtlich aus der CI** (Jobs `test` und `lint`):
 
