@@ -60,9 +60,11 @@ jobs:
         with:
           python-version: "3.11"
 
-      # Pin ruff so an upstream release cannot change the default rule set or
-      # formatter and break CI on unrelated, untouched code. Bump deliberately.
-      - run: pip install ruff==0.16.1
+      # ruff kommt aus dem dev-Extra. Dieser Job hatte vorher nur den
+      # separaten Pin-Schritt als ruff-Quelle; mit dessen Wegfall stand er
+      # ohne Werkzeug da (`ruff: command not found`).
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
 
       - run: ruff check src/ tests/ scripts/
 
