@@ -39,10 +39,13 @@ repos:
         always_run: true
 
       # Vierter Schritt des lint-Jobs. Prüft, dass die `rev` oben und der
-      # `ruff==`-Pin in ci.yml dieselbe Version nennen — die Bitte im
-      # Kommentar allein hat noch nie eine Drift verhindert.
+      # `ruff==`-Pin im `dev`-Extra von pyproject.toml dieselbe Version nennen
+      # — die Bitte im Kommentar allein hat noch nie eine Drift verhindert.
+      #
+      # Frueher stand hier «der `ruff==`-Pin in ci.yml». Den Schritt gibt es
+      # dort nicht mehr; das Skript vergleicht laengst gegen pyproject.
       - id: ruff-pin-sync
-        name: Ruff-Pin-Sync (ci.yml ↔ .pre-commit-config.yaml)
+        name: Ruff-Pin-Sync (pyproject.toml ↔ .pre-commit-config.yaml)
         entry: python3 scripts/check_ruff_pin.py
         language: system
         pass_filenames: false

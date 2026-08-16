@@ -27,10 +27,14 @@ dev = [
     "respx>=0.21",
     # Exakt gepinnt, nicht `>=`: ruff ist ein Gate, kein Hilfsmittel. Eine
     # neuere Version meldet Abweichungen an Code, den niemand angefasst hat.
-    # Der Pin steht hier und nur hier — die CI installiert ihn ueber das
-    # `dev`-Extra mit und hat keinen eigenen Pin-Schritt mehr. Beim Anheben:
-    # Version aendern, `ruff format` einmal ueber die gelinteten Pfade laufen
-    # lassen und das Ergebnis mit committen.
+    #
+    # Die Version steht an ZWEI Stellen: hier und als `rev:` in
+    # .pre-commit-config.yaml. Die CI hat keinen eigenen Pin-Schritt mehr, sie
+    # installiert ueber das `dev`-Extra mit. Beide Stellen im selben Commit
+    # bumpen — `scripts/check_ruff_pin.py` wird rot, wenn eine zurueckbleibt.
+    #
+    # Beim Anheben: beide Versionen aendern, `ruff format` einmal ueber die
+    # gelinteten Pfade laufen lassen und das Ergebnis mit committen.
     "ruff==0.16.1",
     # Fährt die Hooks aus .pre-commit-config.yaml, die den lint-Job der CI
     # spiegeln. Ruff selbst zieht pre-commit dabei in der dort gepinnten
