@@ -49,11 +49,17 @@ Ein Codex-Review auf einem PR wird beantwortet oder behoben, nie ignoriert.
 commit-config.yaml` — und **nicht** mehr als eigener Install-Schritt in der
 CI.
 
-Der CI-Schritt lief nach dem Install der Abhängigkeiten und überschrieb sie.
-Eine Abweichung im Pin konnte deshalb in der CI gar nicht auffallen, sondern
-nur lokal — wo niemand sie erwartet. Ein manuelles Nachinstallieren von ruff
-vor den Gates ist damit nicht mehr nötig und wäre schädlich: Es würde eine
-spätere Anhebung hier stillschweigend überstimmen.
+Im `test`-Job lief der entfernte CI-Schritt nach dem Install der
+Abhängigkeiten und überschrieb sie. Eine Abweichung im Pin konnte deshalb in
+der CI gar nicht auffallen, sondern nur lokal — wo niemand sie erwartet. Ein
+manuelles Nachinstallieren von ruff vor den Gates ist damit nicht mehr nötig
+und wäre schädlich: Es würde eine spätere Anhebung hier stillschweigend
+überstimmen.
+
+Im `lint`-Job lag der Fall anders: Dort war der ruff-Pin die **einzige**
+Installation. An seiner Stelle steht jetzt `pip install -e ".[dev]"`, und
+dieser Schritt ist nicht redundant — ohne ihn hat der Job überhaupt kein ruff
+(`ruff: command not found`). Er sieht nur so aus wie der Install im `test`-Job.
 
 `scripts/check_ruff_pin.py` erzwingt das — als pre-commit-Hook *und* als
 CI-Schritt. Er prüft beide verbleibenden Stellen auf Gleichstand und
