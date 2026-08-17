@@ -52,6 +52,8 @@ anderen nicht, und `ruff format --check` fiele beim Kopieren um:
 """
 
 import re
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -107,6 +109,38 @@ def fail(message: str) -> None:
     sys.exit(1)
 
 
+# Aus `ruff 0.16.1` bzw. `ruff 0.16.1 (abc1234 2026-01-01)`.
+_REPORTED = re.compile(r"([0-9]+\.[0-9]+\.[0-9]+)")
+
+
+def _ask(call: list[str]) -> str | None:
+    """Version, die dieser Aufruf meldet - oder None, wenn es ihn nicht gibt."""
+    try:
+        done = subprocess.run(call, capture_output=True, text=True, check=True)
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    match = _REPORTED.search(done.stdout)
+    return match.group(1) if match else None
+
+
+def reachable() -> list[tuple[str, str]]:
+    """Jedes ruff, das ein Gate treffen kann: (Aufruf, gemeldete Version).
+
+    Die Deklarationen oben koennen uebereinstimmen und trotzdem wirkungslos
+    sein: Aufgerufen wird, was im PATH liegt bzw. als Modul installiert ist.
+    """
+    found = []
+    binary = shutil.which("ruff")
+    if binary is not None:
+        version = _ask([binary, "--version"])
+        if version is not None:
+            found.append((binary, version))
+    module = _ask([sys.executable, "-m", "ruff", "--version"])
+    if module is not None:
+        found.append((f"{sys.executable} -m ruff", module))
+    return found
+
+
 def main() -> None:
     stray = ci_pins()
     if stray:
@@ -129,8 +163,20 @@ def main() -> None:
         head = f"DRIFT: .pre-commit-config.yaml pinnt Ruff auf {hook!r},"
         fail(f"{head} pyproject.toml auf {others}.")
 
+    found = reachable()
+    if not found:
+        kein = "KEIN RUFF: weder im PATH noch als Modul erreichbar."
+        raise SystemExit(f'{kein}\nAngleichen mit: pip install -e ".[dev]"')
+    wrong = [(call, have) for call, have in found if have != hook]
+    if wrong:
+        stellen = "; ".join(f"{call} meldet {have}" for call, have in wrong)
+        head = f"AUFRUF WEICHT AB: gepinnt ist {hook!r}, aber {stellen}."
+        rat = "Nicht die Pins bumpen - die stimmen. Angleichen mit:"
+        raise SystemExit(f'{head}\n{rat}\n    pip install -e ".[dev]"')
+
     checked = ".pre-commit-config.yaml → rev, pyproject.toml → ruff=="
-    print(f"Ruff-Pin OK ({hook}; geprüft: {checked})")
+    wege = f"{len(found)} Aufrufweg(e)"
+    print(f"Ruff-Pin OK ({hook}; geprüft: {checked}, {wege})")
 
 
 if __name__ == "__main__":
