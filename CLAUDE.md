@@ -82,6 +82,11 @@ zusätzlich, dass `ci.yml` keinen eigenen Pin zurückbekommt.
 Vor dem Lauf `ruff --version` prüfen: ein älteres ruff früher im `PATH`
 schlägt den Pin, ohne dass der Install etwas meldet.
 
+Auf `python -m ruff` auszuweichen hilft nicht: `check_ruff_pin.py` prüft beide
+Aufrufwege (`shutil.which("ruff")` *und* `python -m ruff`). Ist einer veraltet,
+sind die ruff-Gates grün und dieses hier rot. Den `PATH` richten, nicht den
+Aufruf.
+
 **Gates, wörtlich aus der CI** (Jobs `test` und `lint`):
 
 ```bash
@@ -101,10 +106,11 @@ geprüft, weil dieses Repo mit 88 die schmalste Breite im Portfolio fährt. Kein
 Gate-Befehl selbst. Wer ihn prüfen will, zählt nach statt hier abzulesen:
 `ruff check src/ tests/ scripts/ --show-files | wc -l`. `ruff format` meldet
 dabei eine Datei mehr als `ruff check`, weil 0.16 auch Markdown formatiert
-und damit `tests/fixtures/PROVENANCE.md` mitnimmt — zwei Zahlen, kein Fehler.
+und damit `tests/fixtures/PROVENANCE.md` mitnimmt — 13 und 14, kein Fehler.
 
-`ruff format` sieht 14 statt 13 — 0.16 formatiert auch Markdown. Zwei Zahlen,
-kein Fehler.
+Die Skript-Liste dieses Schritts ist handgepflegt: in `ci.yml` stehen zwei
+Dateinamen, kein Glob. Ein weiteres portfolioweit kopiertes Skript wird dort
+nicht von selbst mitgeprüft.
 
 **Die zwei Jobs sind ungleich breit.** `test` fährt die Matrix 3.11/3.12/3.13,
 `lint` läuft ohne Matrix auf 3.11. Die vier Gates ab `ruff check` laufen also
