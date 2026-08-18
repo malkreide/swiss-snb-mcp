@@ -9,6 +9,14 @@ on:
                       # des ausgewählten Branches. skip-existing schützt vor
                       # Doppel-Uploads.
 
+# Default fuer alle Jobs: nur lesen. Der Block fehlte hier ganz — beide Jobs
+# unten setzen zwar eigene Rechte, aber ein spaeter ergaenzter Job ohne eigenen
+# Block haette den Repo-Default geerbt, und der ist je nach Einstellung
+# `write-all`. Ein Publish-Workflow ist der schlechteste Ort fuer diese
+# Ueberraschung: Er laeuft auf Tags, also genau dann, wenn niemand zusieht.
+permissions:
+  contents: read
+
 jobs:
   build-and-publish:
     name: Build and publish to PyPI
@@ -18,7 +26,15 @@ jobs:
       name: pypi
       url: https://pypi.org/p/swiss-snb-mcp
 
+    # `contents: read` steht hier trotz des Defaults oben: Ein
+    # `permissions`-Block am Job ERSETZT den auf Workflow-Ebene, er ergaenzt
+    # ihn nicht. Ohne die Zeile stuende `contents` auf `none`.
+    #
+    # Das ging bisher nur gut, weil das Repo oeffentlich ist und
+    # `actions/checkout` es dann auch ohne Leserecht klont. Bei einer
+    # Umstellung auf privat waere der erste Schritt jedes Releases gebrochen.
     permissions:
+      contents: read
       id-token: write   # Pflicht für Trusted Publisher (OIDC)
 
     steps:
