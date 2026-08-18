@@ -122,7 +122,10 @@ setzt kein `fail-fast: false`.
 'schedule' || … 'workflow_dispatch'`). Ein roter Lauf legt ein Issue an oder
 schliesst es wieder; dafür braucht er `issues: write`. DRIFT-005 ist erfüllt.
 
-Dieses `issues: write` steht allerdings **auf Workflow-Ebene**, nicht am
-`live`-Job. Es gilt damit auch für `test` und `lint`, also für den
-`GITHUB_TOKEN` jedes PR-Laufs. Gewollt ist es nur für `live`; wer es enger
-zieht, gehört an den Job, nicht an die Datei.
+Dieses `issues: write` steht **am `live`-Job**, nicht auf Workflow-Ebene: Dort
+hätte es auch der `GITHUB_TOKEN` jedes PR-Laufs bekommen. Auf Workflow-Ebene
+steht nur `contents: read`.
+
+Der `live`-Job wiederholt `contents: read` deshalb, weil ein
+`permissions`-Block am Job den auf Workflow-Ebene **ersetzt** statt ihn zu
+ergänzen. Die Zeile sieht redundant aus; ohne sie fällt `actions/checkout` um.
