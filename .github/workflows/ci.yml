@@ -10,12 +10,12 @@ on:
     - cron: "17 3 * * *"
   workflow_dispatch:
 
-# Der `live`-Job legt bei einem roten Lauf ein Issue an oder schliesst es
-# wieder. Ohne `issues: write` scheitert genau der Schritt, der den Lauf
-# ueberhaupt sichtbar macht.
+# Default fuer alle Jobs: nur lesen. `issues: write` braucht allein der
+# `live`-Job und steht deshalb dort, nicht hier — auf Workflow-Ebene haette es
+# auch der GITHUB_TOKEN jedes PR-Laufs bekommen, also `test` und `lint`, die
+# kein Issue anfassen.
 permissions:
   contents: read
-  issues: write
 
 jobs:
   test:
@@ -120,6 +120,19 @@ jobs:
     # mainline build is not held hostage to data.snb.ch availability or quota.
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+
+    # Der einzige Job, der schreibt: Er legt bei einem roten Lauf ein Issue an
+    # oder schliesst es wieder. Ohne `issues: write` scheitert genau der
+    # Schritt, der den Lauf ueberhaupt sichtbar macht.
+    #
+    # `contents: read` steht hier nochmal, obwohl es oben schon steht: Ein
+    # `permissions`-Block am Job ERSETZT den auf Workflow-Ebene, er ergaenzt
+    # ihn nicht. Wer die Zeile fuer redundant haelt und streicht, nimmt dem
+    # Job das Lesen — und `actions/checkout` faellt als Erstes um.
+    permissions:
+      contents: read
+      issues: write
+
     steps:
       - uses: actions/checkout@v6
 
