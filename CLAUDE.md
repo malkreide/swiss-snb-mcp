@@ -23,6 +23,12 @@ Ein veralteter Klon erzeugt eine rote CI, deren Ursache nicht im Diff steht.
 Am 3.8.2026 zweimal passiert — beide Male fehlten genau die Commits, die
 das Gate einführten, an dem der Branch scheiterte.
 
+Seit `.claude/settings.json` läuft diese Prüfung beim Sessionstart von selbst
+(`.claude/hooks/session-start.sh`, Begründung und Testlage in
+`.claude/hooks/README.md`). Sie meldet nur, wenn Commits fehlen, und blockiert
+nie — ohne Netz oder ohne Remote geht sie still durch. Der Hook ersetzt den
+Befehl oben also nicht, er erinnert bloss zuverlässiger als ein Absatz.
+
 Gates lokal fahren, mit der GEPINNTEN ruff-Version aus der CI. Eine andere
 Version meldet Abweichungen, die niemand verursacht hat.
 
