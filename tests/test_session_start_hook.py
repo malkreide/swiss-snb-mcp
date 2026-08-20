@@ -145,14 +145,28 @@ class TestStandardBranchWirdErmittelt:
         assert got.returncode == 0
         assert "2 Commits hinter origin/master" in got.stdout
 
-    def test_flacher_klon_ohne_origin_head_ref(self, clone: Path, upstream: Path):
+    def test_ohne_lokalen_origin_head_ref(
+        self, clone: Path, upstream: Path, tmp_path: Path
+    ):
         """In einem flachen Klon ist refs/remotes/origin/HEAD nicht gesetzt —
-        genau so checkt Claude Code on the web aus. Der Remote muss also
-        gefragt werden, ein rein lokaler Ansatz waere dort wirkungslos."""
-        _git(clone, "update-ref", "-d", "refs/remotes/origin/HEAD")
-        assert "main" not in _git(clone, "branch", "-r")  # nur origin/main bleibt
+        genau so checkt Claude Code on the web dieses Repo aus. Der Remote muss
+        also gefragt werden; ein rein lokaler Ansatz waere dort wirkungslos.
+
+        `symbolic-ref --delete`, NICHT `update-ref -d`: letzteres dereferenziert
+        den Symref und wuerde refs/remotes/origin/main gleich mit loeschen. Der
+        nachgestellte Zustand waere dann ein anderer als der gemeinte, und die
+        Vorbedingung unten wuerde ihn nicht mehr von ihm unterscheiden.
+        """
+        _advance(upstream, tmp_path, 2)
+        _git(clone, "symbolic-ref", "--delete", "refs/remotes/origin/HEAD")
+
+        refs = _git(clone, "for-each-ref", "--format=%(refname)", "refs/remotes")
+        assert "refs/remotes/origin/HEAD" not in refs, "Vorbedingung: kein origin/HEAD"
+        assert "refs/remotes/origin/main" in refs, "Vorbedingung: origin/main bleibt"
+
         got = _run(clone)
         assert got.returncode == 0
+        assert "2 Commits hinter origin/main" in got.stdout
 
 
 class TestBlockiertNie:
