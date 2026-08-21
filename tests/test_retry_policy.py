@@ -355,12 +355,32 @@ def test_beide_haelften_teilen_eine_quelle():
 # Deshalb echte, aber winzige Werte.
 
 
+async def _warmlaufen():
+    """Bezahlt die Kosten des ersten Aufrufs, bevor die Uhr laeuft."""
+    client = httpx.AsyncClient(transport=httpx.MockTransport(_sofort_ok))
+    await r.request_with_retry(client, URL)
+
+
+# Wanduhr-Zahlen fuer die Tests unten, weit genug auseinander, dass
+# Scheduler-Jitter das Ergebnis nicht kippt. Hier gemessen: 0.17s flach ueber
+# fuenf Laeufe. CI-Jitter ist ABSOLUT, nicht proportional — in swiss-efv-mcp
+# machte ein ausgelasteter Runner am 21.8.2026 aus 0.105s eben 0.55s. Ein
+# Stall dieser Groesse raeumte den vorherigen Spielraum von 0.63s ab.
+#
+# Ein groesserer Deckel verkleinert den Stall nicht, er macht ihn klein
+# gegenueber dem Gemessenen. Deshalb 0.2s statt 0.05s pro Versuch: der Lauf
+# misst dann rund 0.6s, und die Schranken liegen Sekunden davon entfernt.
+_DECKEL = 0.2
+_WEIT_GENUG = 5.0  # Budget, das absichtlich NICHT bindet
+_KNAPP = 0.5  # Budget, das absichtlich bindet
+
+
 @pytest.fixture
 def winzige_politik(monkeypatch):
-    """Dieselbe Mechanik, in Millisekunden statt Sekunden."""
-    monkeypatch.setattr(r, "PER_ATTEMPT_TIMEOUT_S", 0.05)
-    monkeypatch.setattr(r, "RETRY_DELAYS", [0.01, 0.01, 0.01])
-    monkeypatch.setattr(r, "MAX_DELAY_S", 0.02)
+    """Dieselbe Mechanik, nur in Bruchteilen einer Sekunde."""
+    monkeypatch.setattr(r, "PER_ATTEMPT_TIMEOUT_S", _DECKEL)
+    monkeypatch.setattr(r, "RETRY_DELAYS", [0.05, 0.05, 0.05])
+    monkeypatch.setattr(r, "MAX_DELAY_S", 0.1)
 
 
 def _zaehlender_client(handler):
@@ -379,24 +399,38 @@ async def _haengt(request):
     raise AssertionError("unerreichbar")
 
 
+async def _sofort_ok(request):
+    return httpx.Response(200, json={})
+
+
 class TestDeckelProVersuch:
     async def test_haengender_server_bekommt_mehrere_versuche(self, winzige_politik):
         client, zaehler = _zaehlender_client(_haengt)
         with pytest.raises(TimeoutError):
-            await r.request_with_retry(client, URL, total_budget=0.5)
+            await r.request_with_retry(client, URL, total_budget=_KNAPP)
         assert zaehler["n"] > 1, (
             "nur ein Versuch — der erste Versuch hat das ganze Budget verbraucht"
         )
         assert zaehler["n"] <= r.MAX_RETRIES
 
     async def test_budget_bleibt_die_obergrenze(self, winzige_politik):
-        """Der Deckel darf das Gesamtbudget nicht aushebeln."""
+        """Der Deckel darf das Gesamtbudget nicht aushebeln.
+
+        Zweiseitig: Die Obergrenze ist die Zusicherung, die Untergrenze sagt,
+        dass der Schnitt vom Budget kam und nicht davon, dass sofort etwas
+        scheiterte — eine falsch gerechnete Deadline segelt unter einer
+        blossen Obergrenze durch.
+        """
         client, _ = _zaehlender_client(_haengt)
+        await _warmlaufen()
         start = time.monotonic()
         with pytest.raises(TimeoutError):
-            await r.request_with_retry(client, URL, total_budget=0.3)
+            await r.request_with_retry(client, URL, total_budget=_KNAPP)
         dauer = time.monotonic() - start
-        assert dauer < 2.0, f"Budget 0.3s, aber {dauer:.2f}s gelaufen"
+        assert dauer >= _KNAPP / 2, (
+            f"zu frueh geschnitten fuer das Budget: {dauer:.3f}s"
+        )
+        assert dauer < _KNAPP + 3.0, f"Budget {_KNAPP}s, aber {dauer:.2f}s gelaufen"
 
     async def test_budget_kleiner_als_deckel_ergibt_einen_versuch(self):
         """Kein kuenstliches Zerstueckeln: Reicht das Budget nur fuer einen
@@ -406,16 +440,25 @@ class TestDeckelProVersuch:
             await r.request_with_retry(client, URL, total_budget=0.05)
         assert zaehler["n"] == 1
 
-    async def test_einzelner_versuch_dauert_hoechstens_den_deckel(
-        self, winzige_politik
-    ):
-        """Sonst ist der Deckel keiner."""
+    async def test_der_deckel_beendet_den_lauf_nicht_das_budget(self, winzige_politik):
+        """Bei einem Budget, das absichtlich NICHT bindet, endet der Lauf
+        trotzdem — naemlich am Deckel mal MAX_RETRIES.
+
+        Das ist die eigentliche Aussage des Deckels und der Test, der ohne ihn
+        faellt: ohne Deckel verbraucht der erste Versuch die vollen 5s.
+        """
         client, zaehler = _zaehlender_client(_haengt)
+        await _warmlaufen()
         start = time.monotonic()
         with pytest.raises(TimeoutError):
-            await r.request_with_retry(client, URL, total_budget=0.5)
+            await r.request_with_retry(client, URL, total_budget=_WEIT_GENUG)
         dauer = time.monotonic() - start
-        # Jeder Versuch <= 0.05s; die Gesamtdauer darf nicht wie ein einziger
-        # langer Versuch ueber das Budget aussehen.
-        assert dauer <= 0.5 + 0.3, f"{dauer:.2f}s"
-        assert zaehler["n"] >= 2
+
+        assert zaehler["n"] == r.MAX_RETRIES
+        # Untergrenze: die Versuche liefen wirklich bis an den Deckel.
+        assert dauer >= 2 * _DECKEL, f"zu schnell fuer echte Versuche: {dauer:.3f}s"
+        # Obergrenze: beendet hat der Deckel, nicht das Budget. Weit gefasst,
+        # damit ein Runner-Stall das Ergebnis nicht kippt.
+        assert dauer < _WEIT_GENUG / 2, (
+            f"der Lauf lief ins Budget statt in den Deckel: {dauer:.2f}s"
+        )
