@@ -19,6 +19,7 @@ from mcp.server.mcpserver import MCPServer
 from pydantic import BaseModel, ConfigDict, Field
 
 from . import __version__
+from .retry import request_with_retry
 
 # Wer fragt hier an? Ohne eigenen User-Agent geht der httpx-Default
 # hinaus und der Betreiber der Datenquelle sieht bloss eine Bibliothek.
@@ -254,11 +255,18 @@ mcp = MCPServer(
 
 
 async def _fetch_snb(path: str, params: dict | None = None) -> dict:
-    """Fetch data from the SNB REST API and return parsed JSON."""
+    """Fetch data from the SNB REST API and return parsed JSON.
+
+    Faehrt dieselbe Retry-Politik wie der Warehouse-Pfad (ARCH-014): Budget,
+    `Retry-After`, gejitterter Backoff. Vorher stand hier ein blosses
+    `client.get()` ohne jede Wiederholung — und genau das kostete am 19.8.2026
+    fuenf Live-Szenarien, alle mit «Request to data.snb.ch timed out», waehrend
+    die Warehouse-Seite denselben Wackler der Quelle uebersprang. Zwei Haelften
+    desselben Servers, zwei Verhalten gegenueber derselben Stoerung.
+    """
     url = f"{SNB_BASE_URL}/{path}"
     _assert_host_allowed(url)
-    response = await _http().get(url, params=params)
-    response.raise_for_status()
+    response = await request_with_retry(_http(), url, params)
     return response.json()
 
 
