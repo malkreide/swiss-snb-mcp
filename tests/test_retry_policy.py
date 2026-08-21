@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import asyncio
 import inspect
+import time
 from datetime import UTC, datetime, timedelta
 from email.utils import format_datetime
 
@@ -310,3 +312,82 @@ def test_beide_haelften_teilen_eine_quelle():
         assert schleife not in inspect.getsource(modul), (
             f"{modul.__name__} hat wieder eine eigene Retry-Schleife"
         )
+
+
+# --- Der Deckel pro Versuch --------------------------------------------------
+#
+# Ohne ihn bekam der erste Versuch das ganze Restbudget als Timeout. Lief es
+# ab, war das Budget weg und ein zweiter Versuch fand nie statt — der Retry
+# half also ausgerechnet bei dem Fehler nicht, der die roten Live-Laeufe vom
+# 19. und 21.8.2026 verursachte.
+#
+# Echte Zeit, keine Fake-Uhr: `asyncio.timeout` haengt an der Uhr der
+# Event-Loop, die `monkeypatch.setattr(r.time, ...)` nicht erreicht. Eine
+# gefaelschte `time.monotonic` koennte diese Zusicherung nicht widerlegen.
+# Deshalb echte, aber winzige Werte.
+
+
+@pytest.fixture
+def winzige_politik(monkeypatch):
+    """Dieselbe Mechanik, in Millisekunden statt Sekunden."""
+    monkeypatch.setattr(r, "PER_ATTEMPT_TIMEOUT_S", 0.05)
+    monkeypatch.setattr(r, "RETRY_DELAYS", [0.01, 0.01, 0.01])
+    monkeypatch.setattr(r, "MAX_DELAY_S", 0.02)
+
+
+def _zaehlender_client(handler):
+    zaehler = {"n": 0}
+
+    async def _wrapped(request):
+        zaehler["n"] += 1
+        return await handler(request)
+
+    client = httpx.AsyncClient(transport=httpx.MockTransport(_wrapped))
+    return client, zaehler
+
+
+async def _haengt(request):
+    await asyncio.sleep(3600)
+    raise AssertionError("unerreichbar")
+
+
+class TestDeckelProVersuch:
+    async def test_haengender_server_bekommt_mehrere_versuche(self, winzige_politik):
+        client, zaehler = _zaehlender_client(_haengt)
+        with pytest.raises(TimeoutError):
+            await r.request_with_retry(client, URL, total_budget=0.5)
+        assert zaehler["n"] > 1, (
+            "nur ein Versuch — der erste Versuch hat das ganze Budget verbraucht"
+        )
+        assert zaehler["n"] <= r.MAX_RETRIES
+
+    async def test_budget_bleibt_die_obergrenze(self, winzige_politik):
+        """Der Deckel darf das Gesamtbudget nicht aushebeln."""
+        client, _ = _zaehlender_client(_haengt)
+        start = time.monotonic()
+        with pytest.raises(TimeoutError):
+            await r.request_with_retry(client, URL, total_budget=0.3)
+        dauer = time.monotonic() - start
+        assert dauer < 2.0, f"Budget 0.3s, aber {dauer:.2f}s gelaufen"
+
+    async def test_budget_kleiner_als_deckel_ergibt_einen_versuch(self):
+        """Kein kuenstliches Zerstueckeln: Reicht das Budget nur fuer einen
+        Versuch, wird auch nur einer gemacht."""
+        client, zaehler = _zaehlender_client(_haengt)
+        with pytest.raises(TimeoutError):
+            await r.request_with_retry(client, URL, total_budget=0.05)
+        assert zaehler["n"] == 1
+
+    async def test_einzelner_versuch_dauert_hoechstens_den_deckel(
+        self, winzige_politik
+    ):
+        """Sonst ist der Deckel keiner."""
+        client, zaehler = _zaehlender_client(_haengt)
+        start = time.monotonic()
+        with pytest.raises(TimeoutError):
+            await r.request_with_retry(client, URL, total_budget=0.5)
+        dauer = time.monotonic() - start
+        # Jeder Versuch <= 0.05s; die Gesamtdauer darf nicht wie ein einziger
+        # langer Versuch ueber das Budget aussehen.
+        assert dauer <= 0.5 + 0.3, f"{dauer:.2f}s"
+        assert zaehler["n"] >= 2
