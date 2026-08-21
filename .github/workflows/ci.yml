@@ -199,11 +199,17 @@ jobs:
           LIVE_STATE: ${{ steps.verdict.outputs.state }}
           LIVE_REASON: ${{ steps.verdict.outputs.reason }}
           LIVE_TAIL: ${{ steps.verdict.outputs.tail }}
+          # Die FAIL-Gruende der gefallenen Szenarien. `tail` zeigt nur den
+          # Punktestand — bei einem Timeout sieht der aus wie bei einem
+          # Vertragsbruch. Extrahiert wird in classify_live_scenarios.py, wo
+          # es getestet ist, nicht hier in YAML.
+          LIVE_DETAILS: ${{ steps.verdict.outputs.details }}
         with:
           script: |
             const state = process.env.LIVE_STATE;
             const reason = process.env.LIVE_REASON || '';
             const tail = process.env.LIVE_TAIL || '(keine Ausgabe)';
+            const details = (process.env.LIVE_DETAILS || '').trim();
             // Stabiles Praefix: Damit eine zweite rote Nacht den bestehenden
             // Thread verlaengert statt einen zweiten aufzumachen. Bei einem
             // TAEGLICHEN Cron ist das keine Feinheit, sondern der Unterschied
@@ -241,6 +247,9 @@ jobs:
                 `Lauf: ${run}`,
                 `Einordnung: ${reason}`,
                 '',
+                ...(details
+                  ? ['**Warum sie gefallen sind**', '', '```', details, '```', '']
+                  : []),
                 '**Rot heisst hier nicht zwingend «unser Fehler».** Es heisst: Der Vertrag',
                 'mit der Quelle hat sich geaendert, oder die Quelle ist gerade aus. Beides',
                 'gehoert gesehen, nur das Erste gehoert gefixt — und genau das Erste sehen',

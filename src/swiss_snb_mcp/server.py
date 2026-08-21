@@ -289,7 +289,17 @@ def _handle_http_error(e: Exception) -> str:
                 "The cube is being re-published by the SNB; please retry in a few minutes."
             )
         return f"Error: SNB API returned HTTP {code}."
-    if isinstance(e, httpx.TimeoutException):
+    # Zwei Timeout-Typen, die nichts miteinander zu tun haben. httpx wirft
+    # `httpx.TimeoutException` (Basis: httpx.HTTPError). Das Wall-Clock-Budget
+    # aus warehouse.py (ARCH-014) laeuft ueber `asyncio.timeout` ab und wirft
+    # den EINGEBAUTEN `TimeoutError` — kein Untertyp des ersten.
+    #
+    # Ohne den zweiten Namen hier fiel ausgerechnet der Ablauf des Budgets, das
+    # warehouse.py als Kernversprechen fuehrt, in die generische Meldung unten:
+    # «Unexpected error … See server log for details», wo eine zutreffende und
+    # handlungsleitende Meldung schon bereitstand. Genau so sahen die roten
+    # Live-Laeufe vom 20.8.2026 aus (Szenarien 07 und 08).
+    if isinstance(e, httpx.TimeoutException | TimeoutError):
         return "Error: Request to data.snb.ch timed out. Please try again."
     if isinstance(e, httpx.ConnectError):
         return "Error: Cannot reach data.snb.ch. Check network connectivity."
