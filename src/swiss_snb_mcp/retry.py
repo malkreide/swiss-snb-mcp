@@ -71,6 +71,18 @@ RETRY_STATUS_CODES = {423, 503}
 # long-query case to protect as there is for the SPARQL servers.
 TOTAL_BUDGET_S = 25.0
 
+# Deckel fuer EINEN Versuch. Ohne ihn bekam der erste Versuch das ganze
+# Restbudget als Timeout — und wenn es ablief, war das Budget weg und ein
+# zweiter Versuch fand nie statt. Gemessen an einem haengenden Server:
+# 1 Versuch bei Timeout, 3 bei einem schnellen 503. Der Retry half also
+# ausgerechnet bei dem Fehler nicht, der die roten Live-Laeufe vom 19. und
+# 21.8.2026 verursachte: «Request to data.snb.ch timed out».
+#
+# 8s ist grosszuegig fuer eine Quelle, die im gesunden Zustand in deutlich
+# unter einer Sekunde antwortet. Es laesst zwei bis drei Versuche samt
+# Wartezeiten in die 25s Budget passen, statt einen einzigen langen.
+PER_ATTEMPT_TIMEOUT_S = 8.0
+
 
 def parse_retry_after(resp: httpx.Response | None) -> float | None:
     """Seconds to wait per the response's ``Retry-After``, or None.
@@ -153,17 +165,28 @@ async def request_with_retry(
         remaining = deadline - time.monotonic()
         if remaining <= 0:
             break
+        # Der kleinere der beiden Deckel: was vom Budget bleibt, hoechstens
+        # aber ein Versuch. Frueher stand hier `remaining` allein — siehe die
+        # Begruendung bei PER_ATTEMPT_TIMEOUT_S.
+        attempt_timeout = min(remaining, PER_ATTEMPT_TIMEOUT_S)
         try:
             # httpx applies its timeout per operation (connect/read/write/pool)
             # and the read timeout restarts with every chunk — that bounds each
             # step, not the call. `asyncio.timeout` is the wall-clock deadline
             # the budget actually promises.
-            async with asyncio.timeout(remaining):
-                response = await client.get(url, params=params, timeout=remaining)
+            async with asyncio.timeout(attempt_timeout):
+                response = await client.get(url, params=params, timeout=attempt_timeout)
                 response.raise_for_status()
                 return response
-        except TimeoutError as e:  # budget gone, not just this attempt
+        except TimeoutError as e:
+            # Seit dem Deckel heisst das nicht mehr «Budget weg», sondern nur
+            # «dieser Versuch war zu langsam». Ob noch einer folgt, entscheidet
+            # `_wait` am Budget — nicht dieser except-Zweig.
             last_exc = e
+            if attempt < MAX_RETRIES - 1:
+                if not await _wait(attempt, e):
+                    break
+                continue
             break
         except httpx.HTTPStatusError as e:
             if (
