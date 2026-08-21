@@ -477,12 +477,13 @@ async def test_500_does_not_leak_response_body(lifespan_started):
 async def test_423_returns_locked_message(lifespan_started, monkeypatch):
     # A 423 should produce a clear, identifiable "temporarily locked" message
     # (HTTP 423 is what the SNB warehouse returns while re-publishing a cube).
-    import swiss_snb_mcp.warehouse as wh
+    # Auf `retry`, nicht auf `warehouse`: Dort liegt die Backoff-Schleife.
+    import swiss_snb_mcp.retry as rt
 
     async def _no_sleep(*_a, **_k):
         return None
 
-    monkeypatch.setattr(wh, "_sleep", _no_sleep)
+    monkeypatch.setattr(rt, "_sleep", _no_sleep)
     respx.get(f"{WAREHOUSE}/{BIL_JAHR}/data/json/de").mock(
         return_value=httpx.Response(423, text="locked")
     )
@@ -497,12 +498,13 @@ async def test_423_returns_locked_message(lifespan_started, monkeypatch):
 async def test_banking_income_all_locked_surfaces_error(lifespan_started, monkeypatch):
     # When every EFR cube is locked, the income tool must surface the error
     # instead of returning a misleading empty "success" response.
-    import swiss_snb_mcp.warehouse as wh
+    # Auf `retry`, nicht auf `warehouse`: Dort liegt die Backoff-Schleife.
+    import swiss_snb_mcp.retry as rt
 
     async def _no_sleep(*_a, **_k):
         return None
 
-    monkeypatch.setattr(wh, "_sleep", _no_sleep)
+    monkeypatch.setattr(rt, "_sleep", _no_sleep)
     respx.get(url__regex=r".*/warehouse/cube/BSTA\.SNB\.JAHR_K\.EFR\..*").mock(
         return_value=httpx.Response(423, text="locked")
     )

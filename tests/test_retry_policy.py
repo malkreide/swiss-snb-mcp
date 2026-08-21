@@ -10,6 +10,8 @@ import httpx
 import pytest
 import respx
 
+from swiss_snb_mcp import retry as r
+from swiss_snb_mcp import server as srv
 from swiss_snb_mcp import warehouse as w
 
 URL = f"{w.WAREHOUSE_BASE_URL}/BSTA/data/de"
@@ -22,66 +24,66 @@ def _resp(status: int, retry_after: str | None = None) -> httpx.Response:
 
 class TestParseRetryAfter:
     def test_delta_seconds(self):
-        assert w.parse_retry_after(_resp(429, "120")) == 120.0
+        assert r.parse_retry_after(_resp(429, "120")) == 120.0
 
     def test_http_date_in_the_future(self):
         when = datetime.now(UTC) + timedelta(seconds=90)
-        got = w.parse_retry_after(_resp(503, format_datetime(when, usegmt=True)))
+        got = r.parse_retry_after(_resp(503, format_datetime(when, usegmt=True)))
         assert got is not None
         assert 80 <= got <= 95
 
     def test_http_date_in_the_past_means_now(self):
         when = datetime.now(UTC) - timedelta(hours=1)
         assert (
-            w.parse_retry_after(_resp(503, format_datetime(when, usegmt=True))) == 0.0
+            r.parse_retry_after(_resp(503, format_datetime(when, usegmt=True))) == 0.0
         )
 
     def test_absent_header(self):
-        assert w.parse_retry_after(_resp(429)) is None
+        assert r.parse_retry_after(_resp(429)) is None
 
     def test_malformed_header_does_not_raise(self):
-        assert w.parse_retry_after(_resp(429, "next Tuesday")) is None
-        assert w.parse_retry_after(_resp(429, "")) is None
-        assert w.parse_retry_after(_resp(429, "-5")) is None
+        assert r.parse_retry_after(_resp(429, "next Tuesday")) is None
+        assert r.parse_retry_after(_resp(429, "")) is None
+        assert r.parse_retry_after(_resp(429, "-5")) is None
 
     def test_ignored_on_other_statuses(self):
-        assert w.parse_retry_after(_resp(500, "30")) is None
+        assert r.parse_retry_after(_resp(500, "30")) is None
 
     def test_no_response_at_all(self):
-        assert w.parse_retry_after(None) is None
+        assert r.parse_retry_after(None) is None
 
 
 class TestRetryDelay:
     def test_retry_after_beats_the_table(self):
         # RETRY_DELAYS[0] = 2 spans [1, 3]s — 9 can only come from the header.
         exc = httpx.HTTPStatusError("429", request=None, response=_resp(429, "9"))
-        assert 9.0 <= w.retry_delay(0, exc) <= 9.0 * (1 + w.RETRY_AFTER_JITTER)
+        assert 9.0 <= r.retry_delay(0, exc) <= 9.0 * (1 + r.RETRY_AFTER_JITTER)
 
     def test_retry_after_is_never_undercut(self):
         exc = httpx.HTTPStatusError("429", request=None, response=_resp(429, "5"))
         for _ in range(50):
-            assert w.retry_delay(0, exc) >= 5.0
+            assert r.retry_delay(0, exc) >= 5.0
 
     def test_absurd_retry_after_is_capped(self):
         # Exactly the cap: capping happens after jitter. Equality still
         # discriminates — the bare table would give 2s here.
         exc = httpx.HTTPStatusError("503", request=None, response=_resp(503, "86400"))
-        assert w.retry_delay(0, exc) == w.MAX_DELAY_S
+        assert r.retry_delay(0, exc) == r.MAX_DELAY_S
 
     def test_the_cap_is_a_real_bound_not_a_midpoint(self):
         """MAX_DELAY_S must hold even when jitter swings up (Codex review, parlament#35)."""
         exc = httpx.HTTPStatusError("429", request=None, response=_resp(429, "86400"))
-        for attempt in range(len(w.RETRY_DELAYS)):
+        for attempt in range(len(r.RETRY_DELAYS)):
             for _ in range(20):
-                assert w.retry_delay(attempt, None) <= w.MAX_DELAY_S
-                assert w.retry_delay(attempt, exc) <= w.MAX_DELAY_S
+                assert r.retry_delay(attempt, None) <= r.MAX_DELAY_S
+                assert r.retry_delay(attempt, exc) <= r.MAX_DELAY_S
 
     def test_delay_is_spread(self):
-        draws = {w.retry_delay(2, None) for _ in range(30)}
+        draws = {r.retry_delay(2, None) for _ in range(30)}
         assert len(draws) > 1, "delay is deterministic — jitter is not applied"
-        base = w.RETRY_DELAYS[2]
+        base = r.RETRY_DELAYS[2]
         assert all(
-            base * (1 - w.JITTER_SPREAD) <= d <= base * (1 + w.JITTER_SPREAD)
+            base * (1 - r.JITTER_SPREAD) <= d <= base * (1 + r.JITTER_SPREAD)
             for d in draws
         )
 
@@ -113,8 +115,11 @@ def fake_clock(monkeypatch):
         slept.append(seconds)
         now["t"] += seconds
 
-    monkeypatch.setattr(w.time, "monotonic", lambda: now["t"])
-    monkeypatch.setattr(w, "_sleep", _sleep)
+    # Auf `retry`, nicht auf `warehouse`: Dort liegt die Schleife seit dem
+    # Umzug. Ein Patch auf das alte Modul waere wirkungslos, und die Suite
+    # wuerde die echte Backoff-Leiter abwarten statt etwas zu pruefen.
+    monkeypatch.setattr(r.time, "monotonic", lambda: now["t"])
+    monkeypatch.setattr(r, "_sleep", _sleep)
     return slept
 
 
@@ -123,7 +128,7 @@ async def test_retry_after_reaches_the_sleep(fake_clock):
     respx.get(URL).mock(side_effect=[_resp(503, "7"), httpx.Response(200, json={})])
     await w._fetch_warehouse("BSTA", "data")
     assert len(fake_clock) == 1
-    assert 7.0 <= fake_clock[0] <= 7.0 * (1 + w.RETRY_AFTER_JITTER)
+    assert 7.0 <= fake_clock[0] <= 7.0 * (1 + r.RETRY_AFTER_JITTER)
 
 
 @respx.mock
@@ -141,7 +146,7 @@ async def test_budget_cuts_the_ladder_short(fake_clock):
     route = respx.get(URL).mock(side_effect=httpx.ConnectError(""))
     with pytest.raises((httpx.ConnectError, TimeoutError)):
         await w._fetch_warehouse("BSTA", "data", total_budget=1.0)
-    assert route.call_count < w.MAX_RETRIES, "budget did not bound the ladder"
+    assert route.call_count < r.MAX_RETRIES, "budget did not bound the ladder"
     assert route.call_count >= 1, "the first attempt must always go out"
 
 
@@ -151,7 +156,7 @@ async def test_full_ladder_runs_when_the_budget_allows(fake_clock):
     route = respx.get(URL).mock(side_effect=httpx.ConnectError(""))
     with pytest.raises(httpx.ConnectError):
         await w._fetch_warehouse("BSTA", "data", total_budget=600.0)
-    assert route.call_count == w.MAX_RETRIES
+    assert route.call_count == r.MAX_RETRIES
 
 
 @respx.mock
@@ -192,7 +197,7 @@ def test_default_budget_stays_under_the_mcp_client_default():
     """The warehouse serves prepared cubes — no long-query case to protect."""
     from mcp.shared._httpx_utils import MCP_DEFAULT_TIMEOUT
 
-    assert w.TOTAL_BUDGET_S < MCP_DEFAULT_TIMEOUT
+    assert r.TOTAL_BUDGET_S < MCP_DEFAULT_TIMEOUT
 
 
 # --- Die Naht, und warum sie nicht `asyncio.sleep` ist -----------------------
@@ -206,6 +211,102 @@ def test_der_retry_geht_ueber_den_alias():
     um ein Vielfaches langsamer, und eine laengere Laufzeit ist kein Signal,
     das jemand liest. Diese Zusicherung macht daraus einen Fehlschlag.
     """
-    quelle = inspect.getsource(w)
+    quelle = inspect.getsource(r)
     assert "await _sleep(" in quelle, "der Retry ruft den Modul-Alias nicht mehr auf"
     assert "await asyncio.sleep(" not in quelle, "der Retry umgeht den Alias"
+    # Und die Schleife liegt wirklich dort, wo die Fixture patcht: Waere sie
+    # zurueck in warehouse.py, zeigte die Fake-Uhr wieder ins Leere.
+    assert "await _sleep(" not in inspect.getsource(w), (
+        "der Retry ist zurueck in warehouse.py — die Fake-Uhr patcht dann das "
+        "falsche Modul"
+    )
+
+
+# --- Der server.py-Pfad faehrt dieselbe Politik ------------------------------
+#
+# Am 19.8.2026 fielen fuenf Live-Szenarien mit «Request to data.snb.ch timed
+# out» — alle im Pfad von `server.py`, der als einziger gar keinen Retry hatte,
+# waehrend `warehouse.py` denselben Wackler der Quelle uebersprang. Diese
+# Zusicherungen halten fest, dass beide Haelften jetzt gleich reagieren.
+
+SNB_URL = f"{srv.SNB_BASE_URL}/devkum/data/de"
+
+
+@pytest.fixture
+def server_client(monkeypatch):
+    """`_fetch_snb` holt seinen Client aus dem Lifespan, den kein Test faehrt.
+
+    Eigener Patch und nicht der von `warehouse`: `warehouse` bindet `_http`
+    beim Import in den eigenen Namensraum, ein Patch dort erreicht `server`
+    nicht — und umgekehrt.
+    """
+    client = httpx.AsyncClient()
+    monkeypatch.setattr(srv, "_http", lambda: client)
+    return client
+
+
+@respx.mock
+async def test_server_pfad_wiederholt_nach_503(server_client, fake_clock):
+    route = respx.get(SNB_URL).mock(
+        side_effect=[_resp(503), httpx.Response(200, json={"ok": True})]
+    )
+    got = await srv._fetch_snb("devkum/data/de")
+    assert got == {"ok": True}
+    assert route.call_count == 2
+    assert len(fake_clock) == 1, "ohne Wartezeit ist es kein Backoff"
+
+
+@respx.mock
+async def test_server_pfad_wiederholt_nach_timeout(server_client, fake_clock):
+    """Der Fall vom 19.8.2026, in klein."""
+    route = respx.get(SNB_URL).mock(
+        side_effect=[httpx.ReadTimeout("x"), httpx.Response(200, json={"ok": True})]
+    )
+    got = await srv._fetch_snb("devkum/data/de")
+    assert got == {"ok": True}
+    assert route.call_count == 2
+
+
+@respx.mock
+async def test_server_pfad_achtet_den_retry_after(server_client, fake_clock):
+    respx.get(SNB_URL).mock(side_effect=[_resp(503, "7"), httpx.Response(200, json={})])
+    await srv._fetch_snb("devkum/data/de")
+    assert 7.0 <= fake_clock[0] <= 7.0 * (1 + r.RETRY_AFTER_JITTER)
+
+
+@respx.mock
+async def test_server_pfad_gibt_bei_404_sofort_auf(server_client, fake_clock):
+    """Ein 404 wird nicht besser, wenn man dreimal fragt."""
+    route = respx.get(SNB_URL).mock(return_value=httpx.Response(404))
+    with pytest.raises(httpx.HTTPStatusError):
+        await srv._fetch_snb("devkum/data/de")
+    assert route.call_count == 1
+    assert fake_clock == [], "auf einen 404 darf nicht gewartet werden"
+
+
+@respx.mock
+async def test_server_pfad_bleibt_im_budget(server_client, fake_clock):
+    respx.get(SNB_URL).mock(return_value=_resp(503))
+    with pytest.raises(httpx.HTTPStatusError):
+        await srv._fetch_snb("devkum/data/de")
+    assert sum(fake_clock) <= r.TOTAL_BUDGET_S
+
+
+def test_beide_haelften_teilen_eine_quelle():
+    """Zwei Kopien derselben Politik driften; genau das war der Ausgangspunkt.
+
+    Geprueft wird die Abwesenheit einer zweiten Schleife, nicht ihre
+    Anwesenheit an einer Stelle: Ein `import` allein sagt noch nicht, dass
+    daneben nicht doch wieder von Hand wiederholt wird.
+    """
+    schleife = "for attempt in range("
+    # Vorbedingung: Die gesuchte Zeichenkette existiert ueberhaupt. Ohne sie
+    # waere die Suche unten immer erfolglos und der Test immer gruen — er
+    # pruefte dann die Schreibweise meines Musters, nicht den Code.
+    assert schleife in inspect.getsource(r), (
+        "die Schleife sieht anders aus als gesucht — das Muster ist veraltet"
+    )
+    for modul in (srv, w):
+        assert schleife not in inspect.getsource(modul), (
+            f"{modul.__name__} hat wieder eine eigene Retry-Schleife"
+        )

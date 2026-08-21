@@ -452,10 +452,16 @@ async def scenario_20_retry_logic():
         mock_client = MagicMock()
         mock_client.get = mock_get
 
-        # Patch asyncio.sleep too, so the retry backoff does not actually wait.
+        # Die Wartezeit nullen — aber ueber den Modul-Alias `retry._sleep`,
+        # nicht ueber `<modul>.asyncio.sleep`. Letzteres sah lokal aus, griff
+        # aber ins geteilte `asyncio`-Modulobjekt und entschaerfte `sleep` fuer
+        # httpx, respx und jeden anderen Importeur im selben Prozess.
+        #
+        # `_http` bleibt bei `warehouse`: Den Client holt weiterhin
+        # `_fetch_warehouse` und reicht ihn an die Schleife weiter.
         with (
             patch("swiss_snb_mcp.warehouse._http", return_value=mock_client),
-            patch("swiss_snb_mcp.warehouse.asyncio.sleep", new_callable=AsyncMock),
+            patch("swiss_snb_mcp.retry._sleep", new_callable=AsyncMock),
         ):
             result = await _fetch_warehouse(
                 "BSTA.SNB.JAHR_K.BIL.AKT.TOT", "data/json", "de"

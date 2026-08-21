@@ -110,6 +110,69 @@ def classify_one(log: Path, exit_code: int) -> tuple[str, str]:
     return CLEAR, f"{label}: {passed} von {total} Szenarien bestanden"
 
 
+# Ein Issue, das nur «3 von 20 gefallen» sagt, sieht bei einem Timeout genauso
+# aus wie bei einem Vertragsbruch der Quelle. Genau diese Unterscheidung
+# verlangt CLAUDE.md aber, bevor jemand anfaengt zu suchen — und sie stand
+# bisher nur im Roh-Log des Laufs, das nach 90 Tagen weg ist.
+TEST_HEADER = re.compile(r"^TEST:\s*(\S.*?)\s*$")
+FAIL_LINE = re.compile(r"^\s*FAIL:\s*(\S.*?)\s*$")
+
+# Nur die Verdikt-Zeile eines Blocks zaehlt («→ FAILED ✗»), nicht jedes
+# Vorkommen des Wortes. Die Zusammenfassung am Dateiende listet jedes Szenario
+# noch einmal mit «: FAILED ✗» — und sie faellt in den letzten TEST-Block.
+# Gegen echte CI-Logs geprueft: mit blossem `"FAILED" in zeile` meldete der
+# Extraktor das jeweils letzte Szenario faelschlich als gefallen.
+VERDICT = re.compile(r"^\s*→\s*(PASSED|FAILED)\b")
+
+# Issue-Koerper sind begrenzt, und ein Log kann beliebig lang werden. Gekappt
+# wird sichtbar, nie still.
+MAX_DETAIL_CHARS = 4000
+
+
+def _blocks(text: str) -> list[tuple[str, list[str]]]:
+    """(Titel, Zeilen) je Szenario, in Reihenfolge des Logs."""
+    out: list[tuple[str, list[str]]] = []
+    for line in text.splitlines():
+        header = TEST_HEADER.match(line)
+        if header:
+            out.append((header.group(1), []))
+        elif out:
+            out[-1][1].append(line)
+    return out
+
+
+def failure_details(log: Path, max_chars: int = MAX_DETAIL_CHARS) -> str:
+    """Die FAIL-Gruende der gefallenen Szenarien, als Klartext.
+
+    Leer, wenn die Datei fehlt, unlesbar ist oder nichts gefallen ist — der
+    Aufrufer haengt dann schlicht nichts an.
+    """
+    if not log.is_file():
+        return ""
+    try:
+        text = log.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return ""
+
+    lines: list[str] = []
+    for title, body in _blocks(text):
+        verdicts = [m.group(1) for ln in body if (m := VERDICT.match(ln))]
+        if not verdicts or verdicts[0] != "FAILED":
+            continue
+        reasons = [m.group(1) for ln in body if (m := FAIL_LINE.match(ln))]
+        lines.append(f"- {title}")
+        lines.extend(f"    {r}" for r in reasons)
+    if not lines:
+        return ""
+
+    rendered = "\n".join(lines)
+    if len(rendered) > max_chars:
+        kept = rendered[:max_chars].rsplit("\n", 1)[0]
+        dropped = rendered.count("\n") - kept.count("\n")
+        rendered = f"{kept}\n… {dropped} weitere Zeile(n) gekappt (Limit {max_chars})"
+    return rendered
+
+
 def classify(pairs: list[tuple[Path, int]]) -> tuple[str, str]:
     """Ueber alle Szenariendateien zusammengefasst.
 
@@ -139,6 +202,24 @@ def _pair(raw: str) -> tuple[Path, int]:
     return Path(log), int(code)
 
 
+# `key=wert` traegt nur eine Zeile. Mehrzeiliges muss in die Heredoc-Form,
+# sonst endet der Wert an der ersten Zeilenschaltung.
+DELIM = "LIVE_DETAILS_EOF"
+
+
+def _fenced(name: str, value: str) -> str:
+    """Mehrzeiliger GITHUB_OUTPUT-Eintrag, gegen Ausbruch gesichert.
+
+    Der Inhalt stammt aus einem Log, in dem auch Antworten der Quelle stehen.
+    Eine Zeile, die genau dem Delimiter entspricht, wuerde den Block vorzeitig
+    schliessen und alles Weitere als eigene Outputs einschleusen — also fliegt
+    so eine Zeile raus. Die Heredoc-Form selbst macht `key=wert`-Zeilen im
+    Inhalt harmlos; nur der Delimiter ist gefaehrlich.
+    """
+    safe = "\n".join(ln for ln in value.splitlines() if ln.strip() != DELIM)
+    return f"{name}<<{DELIM}\n{safe}\n{DELIM}\n"
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="classify_live_scenarios")
     ap.add_argument("pairs", nargs="+", type=_pair, metavar="LOG:EXIT")
@@ -148,11 +229,21 @@ def main(argv: list[str] | None = None) -> int:
     print(f"state={state}")
     print(f"reason={reason}")
 
+    chunks = [
+        f"{log.name}:\n{detail}"
+        for log, _ in args.pairs
+        if (detail := failure_details(log))
+    ]
+    details = "\n\n".join(chunks)
+    if details:
+        print(details)
+
     out = os.environ.get("GITHUB_OUTPUT")
     if out:
         with open(out, "a", encoding="utf-8") as fh:
             fh.write(f"state={state}\n")
             fh.write(f"reason={reason}\n")
+            fh.write(_fenced("details", details))
     # Immer 0: Ueber rot oder gruen entscheidet der Workflow.
     return 0
 
