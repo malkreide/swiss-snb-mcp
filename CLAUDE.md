@@ -144,7 +144,7 @@ wie der Code: Nichts ist rot, weil nichts geprüft wird, worauf es ankommt.
 
 ## Teil 2 — dieses Repo
 
-**ruff: eine Quelle.** Der Pin `0.16.1` steht in `pyproject.toml` und `.pre-
+**ruff: eine Quelle.** Der Pin `0.16.3` steht in `pyproject.toml` und `.pre-
 commit-config.yaml` — und **nicht** mehr als eigener Install-Schritt in der
 CI.
 
