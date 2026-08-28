@@ -306,7 +306,14 @@ jobs:
       # sind beide rot, aber nur `finding` hat oben ein Issue erzeugt.
       - name: Ergebnis durchreichen
         if: steps.verdict.outputs.state != 'clear'
+        # Ueber `env`, nicht ueber `${{ }}`: Der Grund enthaelt Dateinamen und
+        # Text aus dem Szenarien-Log, und `${{ }}` setzt ihn vor dem Start
+        # woertlich in die Shell ein — ein `$(...)` oder ein Anfuehrungszeichen
+        # darin liefe mit. Der github-script-Schritt macht es schon so.
+        env:
+          LIVE_STATE: ${{ steps.verdict.outputs.state }}
+          LIVE_REASON: ${{ steps.verdict.outputs.reason }}
         run: |
-          echo "Live-Lauf: ${{ steps.verdict.outputs.state }}"
-          echo "${{ steps.verdict.outputs.reason }}"
+          echo "Live-Lauf: $LIVE_STATE"
+          echo "$LIVE_REASON"
           exit 1
