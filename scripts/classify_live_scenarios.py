@@ -240,9 +240,14 @@ def main(argv: list[str] | None = None) -> int:
 
     out = os.environ.get("GITHUB_OUTPUT")
     if out:
+        # Zeilenumbruch raus, bevor der Grund in `$GITHUB_OUTPUT` geht: Die
+        # `key=value`-Form endet an der ersten neuen Zeile, und was danach
+        # steht, liest der Runner als naechstes Output. `details` faehrt schon
+        # die Heredoc-Form; `reason` hatte diesen Schutz nicht.
+        flat = " ".join(reason.split())
         with open(out, "a", encoding="utf-8") as fh:
             fh.write(f"state={state}\n")
-            fh.write(f"reason={reason}\n")
+            fh.write(f"reason={flat}\n")
             fh.write(_fenced("details", details))
     # Immer 0: Ueber rot oder gruen entscheidet der Workflow.
     return 0

@@ -363,5 +363,30 @@ class MainDetailsTest(unittest.TestCase):
         self.assertIn(f"details<<{cls.DELIM}\n\n{cls.DELIM}", written)
 
 
+class GithubOutputZeilenTest(unittest.TestCase):
+    """Ein Grund mit Zeilenumbruch darf kein zweites Output nachschieben.
+
+    `details` faehrt laengst die Heredoc-Form, `reason` nicht: Dort endet
+    `key=value` an der ersten neuen Zeile, und was danach steht, liest der
+    Runner als eigenen Output. Der Dateiname kommt vom Aufrufer und steht als
+    `label` woertlich im Grund — ein Umbruch darin schoebe sonst ein
+    `state=clear` nach und faerbte den roten Lauf gruen.
+    """
+
+    def test_umbruch_im_grund_schiebt_kein_zweites_output_nach(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fehlend = Path(tmp) / "scenarios.log\nstate=clear"
+            out = Path(tmp) / "gh-output"
+            out.write_text("", encoding="utf-8")
+            os.environ["GITHUB_OUTPUT"] = str(out)
+            try:
+                cls.main([f"{fehlend}:1"])
+            finally:
+                del os.environ["GITHUB_OUTPUT"]
+            written = out.read_text(encoding="utf-8")
+        zustaende = [z for z in written.splitlines() if z.startswith("state=")]
+        self.assertEqual(zustaende, ["state=unknown"])
+
+
 if __name__ == "__main__":
     unittest.main()
