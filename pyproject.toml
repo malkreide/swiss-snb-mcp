@@ -35,7 +35,7 @@ dev = [
     #
     # Beim Anheben: beide Versionen aendern, `ruff format` einmal ueber die
     # gelinteten Pfade laufen lassen und das Ergebnis mit committen.
-    "ruff==0.16.3",
+    "ruff==0.16.4",
     # Fährt die Hooks aus .pre-commit-config.yaml, die den lint-Job der CI
     # spiegeln. Ruff selbst zieht pre-commit dabei in der dort gepinnten
     # Version — die Zeile darüber gilt nur für ein manuelles `ruff …`.
