@@ -381,9 +381,12 @@ wie der Code: Nichts ist rot, weil nichts geprüft wird, worauf es ankommt.
 
 ## Teil 2 — dieses Repo
 
-**ruff: eine Quelle.** Der Pin `0.16.3` steht in `pyproject.toml` und `.pre-
-commit-config.yaml` — und **nicht** mehr als eigener Install-Schritt in der
-CI.
+**ruff: eine Quelle.** Der Pin steht in `pyproject.toml` und `.pre-commit-
+config.yaml` — und **nicht** mehr als eigener Install-Schritt in der CI. Die
+Version hier nicht wiederholen: Eine dritte Nennung veraltet beim nächsten
+Bump und widerspricht dann den zwei Stellen, die zählen. Nachsehen statt
+ablesen: `grep -n 'ruff==' pyproject.toml` und `grep -n 'rev:'
+.pre-commit-config.yaml`.
 
 Im `test`-Job lief der entfernte CI-Schritt nach dem Install der
 Abhängigkeiten und überschrieb sie. Eine Abweichung im Pin konnte deshalb in
@@ -400,6 +403,17 @@ dieser Schritt ist nicht redundant — ohne ihn hat der Job überhaupt kein ruff
 `scripts/check_ruff_pin.py` erzwingt das — als pre-commit-Hook *und* als
 CI-Schritt. Er prüft beide verbleibenden Stellen auf Gleichstand und
 zusätzlich, dass `ci.yml` keinen eigenen Pin zurückbekommt.
+
+**Dependabot bumpt nur `pyproject.toml`.** Der `rev:` in
+`.pre-commit-config.yaml` ist für den `pip`-Ökosystem-Eintrag unsichtbar, also
+kommt jeder ruff-Bump von dort halbseitig und legt genau die Drift an, die das
+Skript fängt. Die zweite Stelle im selben PR nachziehen, bevor er gemergt wird.
+
+Und das Gate nicht überstimmen: Am 28.8.2026 lief PR #73 («Bump ruff from
+0.16.3 to 0.16.4») mit rotem `lint` und wurde am 30.8. trotzdem gemergt — die
+drei grünen `test`-Jobs sagen über die vier Gates ab `ruff check` nichts, die
+laufen nur im `lint`-Job. Ein roter Dependabot-PR ist kein Rauschen: Das Gate
+hat gemeldet, was es melden soll, und `main` war danach rot.
 
 Vor dem Lauf `ruff --version` prüfen: ein älteres ruff früher im `PATH`
 schlägt den Pin, ohne dass der Install etwas meldet.
