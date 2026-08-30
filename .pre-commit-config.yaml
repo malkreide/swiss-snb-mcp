@@ -9,12 +9,18 @@
 # gepinnte `rev` entscheidet, nicht das lokal installierte Ruff; damit ist die
 # Versions-Drift, die den Fehler verursacht hat, konstruktionsbedingt weg.
 #
-# ACHTUNG: `rev` unten und `pip install ruff==…` im lint-Job von ci.yml müssen
-# dieselbe Version nennen. Beim Anheben beide Stellen ändern.
+# ACHTUNG: `rev` unten und der `ruff==`-Pin im dev-Extra von pyproject.toml
+# müssen dieselbe Version nennen. Beim Anheben beide Stellen ändern — in
+# einem Commit; `scripts/check_ruff_pin.py` wird sonst rot. Frueher stand hier
+# «`pip install ruff==…` im lint-Job von ci.yml»; den Schritt gibt es dort
+# nicht mehr, ruff kommt im lint-Job aus dem dev-Extra.
+#
+# Dependabot sieht diese Datei nicht: Sein `pip`-Eintrag bumpt nur
+# pyproject.toml, also kommt jeder ruff-Bump von dort halbseitig.
 
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.3
+    rev: v0.16.4
     hooks:
       # Ohne `files`-Filter: jede Python-Datei im Repo. `tests/` und `scripts/`
       # waren anfangs ausgenommen, weil sie nicht ruff-sauber waren; seit sie
