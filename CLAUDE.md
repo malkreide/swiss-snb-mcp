@@ -302,12 +302,55 @@ alles andere; wer nur eine nimmt, übersieht den Rest. Genau so ist die
 Limit-Meldung zuerst durchgerutscht.
 
 Der Kommentarzähler allein reicht ohnehin nicht: `comments: 1` kann die
-Befundlos-, die Kontingent- **oder** die Environment-Meldung sein — drei
-gegensätzliche Bedeutungen unter derselben Zahl. Den Text lesen, nicht die Zahl.
+Befundlos-, die Kontingent-, die Environment-Meldung **oder** die
+Summary-Tabelle unten sein — vier gegensätzliche Bedeutungen unter derselben
+Zahl. Den Text lesen, nicht die Zahl.
 Und einen unbekannten vierten Text wörtlich zitieren, statt ihn in eine der
 bekannten Schubladen zu zwingen: Dieser Abschnitt musste schon einmal von drei
 auf vier Gründe wachsen, und die 👍-Reaktion stand hier zwei Fassungen lang als
 Tatsache.
+
+**Genau so kam am 30.8.2026 ein vierter Text.** Auf PR #78 dieses Repos war der
+einzige Kommentar eine Tabelle:
+
+```
+## Codex Review Summary
+
+This comment shows the latest Codex review activity on this pull request.
+
+| Review | Status | Commit | Review trigger |
+| 📝 Code Review | ✅ Completed 2026-08-30T11:39:36.390381Z | b58b77f | Draft marked ready |
+```
+
+`get_reviews` lieferte `[]`, ein Befund-Kommentar kam nicht. «Completed» ist
+eine Aussage über den *Lauf*, nicht über sein Ergebnis: Die Tabelle nennt
+Zeitpunkt, Commit und Auslöser und sagt über Befunde nichts. Ob sie die
+Befundlos-Meldung ersetzt oder auch neben einem Befund erscheint, ist an einem
+einzigen PR nicht zu entscheiden — deshalb steht sie hier als eigener Fall und
+nicht in einer der Schubladen oben. Dass er befundlos war, ist damit ebenfalls
+nicht belegt — nur, dass kein Befund-Kommentar kam.
+
+**Und dieser Kommentar ändert sich unter der Hand.** Er entstand um 11:38:38
+und wurde um 11:39:37 aktualisiert. In dieser Minute stimmte `comments: 1`
+bereits, und die Tabelle sagte etwas anderes als am Ende; was dort
+zwischendurch stand, ist ungemessen — belegt ist nur, dass `created_at` und
+`updated_at` auseinanderliegen. Den Text zu lesen genügt hier also nicht, man
+muss auch wissen, wann man ihn gelesen hat. Das ist ein Statusobjekt, keine
+Meldung.
+
+**Der Infokasten hat einen neuen Wortlaut**, und er nennt jetzt drei Zustände
+statt zwei:
+
+```
+Codex reacts with 👀 while any review is running, comments if it has
+suggestions, and reacts with 👍 once all reviews finish with no findings.
+```
+
+Auf #78 trug der PR tatsächlich eine 👍-Reaktion (`reactions.total_count: 1`),
+der Codex-Kommentar dagegen keine. Wer sie gesetzt hat, ist **ungemessen**: Die
+Reaktions-Zähler nennen keinen Urheber, und der Repo-Eigner war in derselben
+Minute auf dem PR aktiv. Eine Reaktion am richtigen Ort ist damit noch kein
+Beleg, dass der Kasten diesmal recht hat — er bleibt, was er war: keine Quelle.
 
 Und ein befundloser Lauf ist kein Freispruch. Am 23.8. lief derselbe Text durch
 42 Reviews: 36 meldeten denselben P2-Befund, 6 die Befundlos-Meldung — gleiche
@@ -329,6 +372,28 @@ mergen. Am 21./22.8. lagen zwischen «ready for review» und Merge mehrfach drei
 bis fünf Sekunden. Codex wird beim Umschalten von Draft auf ready ausgelöst und
 braucht danach Zeit; wer sofort mergt, hat das Häkchen gesetzt und den Review
 nicht abgewartet.
+
+Am 30.8.2026 liess sich das an einem einzigen PR durchmessen, mit Zeiten aus
+der API statt aus dem Gefühl. #78 ging um 11:38:32 als Merge-Commit ein und war
+um 11:38:33 geschlossen. Der Codex-Kommentar entstand um 11:38:38 und stand
+erst um 11:39:37 fertig da. Der Prüfer gab sein erstes Lebenszeichen also
+**sechs Sekunden nach dem Merge** und war **65 Sekunden danach** durch. Wer
+beim Merge nachsah, fand keinen Kommentar — nicht weil keiner kam, sondern weil
+noch keiner da sein konnte. «Kein Kommentar» und «zu früh geschaut» sehen
+identisch aus, und nur die Uhr trennt sie.
+
+Zwei Beobachtungen daraus, die man sonst vermuten müsste: Codex läuft auf einem
+**bereits gemergten** PR weiter und trägt sein Ergebnis nachträglich ein — der
+Kommentar erschien, als der PR bereits `closed` war. Und das Häkchen «kein
+offener Codex-Befund beim Merge» aus dem PR-Template war zum Merge-Zeitpunkt
+gar nicht prüfbar, sondern erst eine Minute später. Ein Häkchen, das man vor
+der Messung setzt, misst nichts.
+
+Wann das Umschalten auf ready genau lag, ist hier **nicht** gemessen: Die
+Tabelle nennt «Draft marked ready» als Auslöser, die Ereignismeldung wurde um
+11:38:30 eingereiht, aber eine GitHub-Zeit dafür wurde nie abgefragt. Der
+Abstand ready→Merge ist damit unbekannt; belegt ist allein der Abstand
+Merge→Review.
 
 Das Kontingent hängt am Konto, nicht am Repo, und Code-Reviews haben einen
 eigenen Topf — nur GitHub-getriggerte Reviews zählen hinein. ChatGPT-Pläne
