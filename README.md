@@ -285,9 +285,22 @@ other era is refused.
 Both revisions are pinned in
 [`tests/test_protocol_version.py`](tests/test_protocol_version.py) and asserted
 against the installed SDK, so a Dependabot bump of `mcp` cannot move either one
-silently. This server builds no ASGI app to send an `initialize` through, so
-the gate asserts the SDK constants rather than a measured response — the
-weaker form, named rather than left unsaid.
+silently.
+
+The table above is **measured, not inferred**. The same gate drives the
+server's real serving loop over an in-memory stream pair — the loop stdio runs
+in production — and sends actual JSON-RPC frames through it: an enveloped
+request is served at `2026-07-28`, an `initialize` asking for `2026-07-28` is
+answered `2025-11-25`, and a claim from the other era is refused on an
+already-decided connection (`-32022` one way, `-32600` the other). An earlier
+revision of this section claimed the measurement needed an ASGI app; it does
+not — the modern era has no `initialize`, and the handshake never rode on HTTP
+to begin with.
+
+What the server reports about itself is measured the same way, in
+[`tests/test_server_identity.py`](tests/test_server_identity.py): the package
+version and the project URL are read back off the wire, not off the
+constructor.
 
 Note that the SDK's `LATEST_PROTOCOL_VERSION` is an alias for the **modern**
 era, not for the handshake era — pinning against it alone would leave the era
