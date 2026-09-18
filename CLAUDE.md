@@ -507,7 +507,10 @@ geprüft, weil dieses Repo mit 88 die schmalste Breite im Portfolio fährt. Kein
 Gate-Befehl selbst. Wer ihn prüfen will, zählt nach statt hier abzulesen:
 `ruff check src/ tests/ scripts/ --show-files | wc -l`. `ruff format` meldet
 dabei eine Datei mehr als `ruff check`, weil 0.16 auch Markdown formatiert
-und damit `tests/fixtures/PROVENANCE.md` mitnimmt — 13 und 14, kein Fehler.
+und damit `tests/fixtures/PROVENANCE.md` mitnimmt — am 18.9.2026 19 und 20,
+kein Fehler. Die Zahlen standen hier zwei Fassungen lang als 13 und 14 und
+waren schon vor dem Nachzaehlen falsch; belastbar ist der Abstand von eins,
+nicht der Absolutwert.
 
 Die Skript-Liste dieses Schritts ist handgepflegt: in `ci.yml` stehen zwei
 Dateinamen, kein Glob. Ein weiteres portfolioweit kopiertes Skript wird dort

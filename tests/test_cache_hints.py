@@ -42,6 +42,30 @@ async def test_die_ressourcenliste_traegt_die_ttl() -> None:
     assert result.cache_scope == "public"
 
 
+async def test_die_promptliste_traegt_die_ttl() -> None:
+    """Auch das leere Verzeichnis ist eines.
+
+    Dieser Server registriert keine Prompts, und es kann zur Laufzeit des
+    Prozesses keiner dazukommen — `prompts/list` antwortet auf jede Anfrage
+    identisch. Ohne Hinweis fragt trotzdem jeder Client bei jeder Verbindung
+    neu. Die drei Listen darueber waren gehinweist und diese nicht; das war
+    eine Luecke im Satz, keine Entscheidung ueber die Methode.
+
+    Gegen die Antwort geprueft, nicht gegen `CACHE_HINTS`: bei einer leeren
+    Liste ist die Konfiguration die einzige Stelle, an der sich ein Fehler
+    verstecken koennte, ohne dass ein Inhalt ihn sichtbar macht.
+    """
+    async with Client(mcp) as client:
+        result = await client.list_prompts()
+
+    assert result.prompts == [], (
+        "dieser Server registriert Prompts — dann haengt die Liste womoeglich "
+        "am Aufrufer und `scope` gehoert auf `private`"
+    )
+    assert result.ttl_ms == LIST_CACHE_TTL_MS
+    assert result.cache_scope == "public"
+
+
 async def test_der_inhalt_einer_ressource_traegt_keinen_frischehinweis() -> None:
     """Die einzige negative Zusicherung hier, und die wichtigste.
 

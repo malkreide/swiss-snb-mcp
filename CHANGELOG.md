@@ -28,13 +28,58 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   aushandeln. Beide sind jetzt einzeln gepinnt, ein Dependabot-Bump von
   `mcp` kann keine davon still verschieben.
 
-  Ohne gemessenen Teil: dieser Server baut keine ASGI-App, durch die sich ein
-  `initialize` schicken liesse. Das Gate haengt deshalb an den SDK-Konstanten —
-  die schwaechere Form, im Docstring benannt statt verschwiegen.
-
   Beide READMEs beschreiben die Aeren; ein Test haelt jede Sprache einzeln
   dagegen — im Portfolio sind EN und DE desselben Repos schon dreimal
   auseinandergelaufen, weil nur eine Fassung nachgezogen wurde.
+
+- **Die Aushandlung wird jetzt gemessen, nicht mehr nur gepinnt.** Das Gate
+  faehrt die echte Serving-Schleife (`serve_dual_era_loop` — dieselbe, die
+  stdio im Betrieb faehrt) ueber ein Speicher-Stream-Paar und schickt echte
+  JSON-RPC-Rahmen hinein: eine Anfrage mit Envelope wird unter `2026-07-28`
+  bedient, ein `initialize` mit Wunsch `2026-07-28` bekommt `2025-11-25`
+  zurueck, und der Anspruch aus der jeweils anderen Aera wird auf einer
+  bereits entschiedenen Verbindung abgewiesen — `-32022` in die eine,
+  `-32600` in die andere Richtung. Beide Richtungen stehen einzeln da: ein
+  Server, der schlicht jede zweite Anfrage ablehnte, bestuende jede fuer sich.
+
+  Die bisherige Begruendung fuer die fehlende Messung war falsch. Sie lautete,
+  dieser Server baue keine ASGI-App, durch die sich ein `initialize` schicken
+  liesse — aber die moderne Aera kennt gar kein `initialize`, und der Handshake
+  laeuft ohnehin nicht ueber HTTP, sondern ueber denselben Duplex-Stream, den
+  stdio fuettert. Gefehlt hat kein Transport, sondern ein Stream-Paar.
+
+  Die Konstanten-Pins bleiben daneben stehen: sie sagen, WELCHE Revision
+  dokumentiert ist, und brechen bei einem SDK-Bump auch dann, wenn die
+  Aushandlung als solche weiter funktioniert.
+
+- **`websiteUrl` am Server** (Spec `2026-07-28`, `server/discover`).
+  `server.json` nannte die Projekt-URL fuer die Registry, der Server selbst
+  sagte dazu nichts — wer nur ihn fragte, bekam kein Ziel. Die URL steht jetzt
+  einmal im Modul (`REPOSITORY_URL`) und speist User-Agent und `websiteUrl`;
+  ein Test haelt sie gegen `server.json`.
+
+- **Frischehinweis auch auf `prompts/list`.** Vier der fuenf auflistenden
+  Methoden waren gehinweist, diese nicht. Dieser Server registriert keine
+  Prompts, und es kann zur Laufzeit des Prozesses keiner dazukommen — die
+  Antwort ist auf jede Anfrage dieselbe leere Liste, und ohne Hinweis fragt
+  sie trotzdem jeder Client bei jeder Verbindung neu ab.
+
+### Behoben — die leere Versionsangabe
+
+- **Der Server meldete eine leere Version.** `MCPServer` bekam kein `version=`,
+  und das SDK laesst das Feld dann nicht aus, sondern schickt es LEER hinaus —
+  in beiden Aeren: `serverInfo: {"name": "swiss_snb_mcp", "version": ""}`, im
+  `_meta` jeder modernen Antwort wie in der `initialize`-Antwort. Ein leerer
+  String ist keine fehlende Angabe, sondern eine falsche.
+
+  Kein Test hatte das gesehen, weil keiner in die Antwort geschaut hatte:
+  `pyproject.toml`, `server.json` und die README-Badges waren untereinander
+  sauber synchron, und `check_version_sync.py` verbietet in `src/` ohnehin
+  jede Versionsnummer. Die Kette war an jeder geprueften Stelle heil und endete
+  trotzdem im Nichts. Der Wert kommt jetzt aus den Paket-Metadaten
+  (`__version__`), und die Zusicherungen haengen an der Drahtform statt am
+  Attribut — ein Blick auf `mcp.version` waere auch dann gruen, wenn das
+  Argument auf dem Weg zum `serverInfo` verlorenginge.
 
 ### Changed
 

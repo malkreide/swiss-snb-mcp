@@ -22,12 +22,16 @@ from pydantic import BaseModel, ConfigDict, Field
 from . import __version__
 from .retry import request_with_retry
 
+# Eine Stelle fuer die Projekt-URL: sie geht sowohl im User-Agent an die
+# Datenquelle als auch als `websiteUrl` an jeden Aufrufer (Spec 2026-07-28,
+# `server/discover`). Zwei Literale waeren zwei Wahrheiten. `server.json`
+# fuehrt dieselbe URL fuer die Registry — ein Test haelt beide dagegen.
+REPOSITORY_URL = "https://github.com/malkreide/swiss-snb-mcp"
+
 # Wer fragt hier an? Ohne eigenen User-Agent geht der httpx-Default
 # hinaus und der Betreiber der Datenquelle sieht bloss eine Bibliothek.
 # Die Version stammt aus den Paket-Metadaten und kann nicht driften.
-USER_AGENT = (
-    f"swiss-snb-mcp/{__version__} (+https://github.com/malkreide/swiss-snb-mcp)"
-)
+USER_AGENT = f"swiss-snb-mcp/{__version__} (+{REPOSITORY_URL})"
 
 # stdio-transport MCP servers must keep stdout reserved for the JSON-RPC
 # stream — every log line goes to stderr.
@@ -259,11 +263,26 @@ CACHE_HINTS: dict[CacheableMethod, CacheHint] = {
     "tools/list": CacheHint(ttl_ms=LIST_CACHE_TTL_MS, scope="public"),
     "resources/list": CacheHint(ttl_ms=LIST_CACHE_TTL_MS, scope="public"),
     "resources/templates/list": CacheHint(ttl_ms=LIST_CACHE_TTL_MS, scope="public"),
+    # Leer, aber ein Verzeichnis: dieser Server registriert keine Prompts, und
+    # `prompts/list` kann zur Laufzeit des Prozesses nicht anfangen, welche zu
+    # melden. Ohne Hinweis fragt jeder Client dieselbe leere Liste bei jeder
+    # Verbindung neu ab. Die vier oben waren gesetzt und diese nicht — eine
+    # Luecke im Satz, kein Urteil ueber die Methode.
+    "prompts/list": CacheHint(ttl_ms=LIST_CACHE_TTL_MS, scope="public"),
     "server/discover": CacheHint(ttl_ms=LIST_CACHE_TTL_MS, scope="public"),
 }
 
 mcp = MCPServer(
     "swiss_snb_mcp",
+    # Ohne das Argument meldet das SDK `serverInfo.version: ""` — an jeden
+    # Aufrufer, in beiden Aeren. Gemessen am 18.9.2026 ueber `server/discover`
+    # und ueber die `initialize`-Antwort; ein Test haelt beide Wege dagegen.
+    # Der Wert kommt aus den Paket-Metadaten, nicht aus einem Literal.
+    version=__version__,
+    # Spec 2026-07-28: `server/discover` traegt `websiteUrl`. `server.json`
+    # meldet dieselbe URL an die Registry, der Server selbst sagte bisher
+    # nichts — wer nur den Server fragt, bekam kein Ziel.
+    website_url=REPOSITORY_URL,
     cache_hints=CACHE_HINTS,
     instructions=(
         "MCP server for the Swiss National Bank (SNB) data portal at data.snb.ch. "

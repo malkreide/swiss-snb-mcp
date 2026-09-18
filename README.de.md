@@ -287,9 +287,22 @@ aus der jeweils anderen Aera wird abgewiesen.
 Beide Revisionen sind in
 [`tests/test_protocol_version.py`](tests/test_protocol_version.py) gepinnt und
 werden gegen das installierte SDK geprueft; ein Dependabot-Bump von `mcp` kann
-also keine der beiden still verschieben. Dieser Server baut keine ASGI-App, durch die sich ein `initialize`
-schicken liesse; das Gate sichert deshalb die SDK-Konstanten statt einer
-gemessenen Antwort — die schwaechere Form, benannt statt verschwiegen.
+also keine der beiden still verschieben.
+
+Die Tabelle oben ist **gemessen, nicht geschlossen**. Dasselbe Gate faehrt die
+echte Serving-Schleife des Servers ueber ein Speicher-Stream-Paar — dieselbe
+Schleife, die stdio im Betrieb faehrt — und schickt echte JSON-RPC-Rahmen
+hinein: eine Anfrage mit Envelope wird unter `2026-07-28` bedient, ein
+`initialize` mit Wunsch `2026-07-28` bekommt `2025-11-25` zurueck, und ein
+Anspruch aus der anderen Aera wird auf einer bereits entschiedenen Verbindung
+abgewiesen (`-32022` in die eine, `-32600` in die andere Richtung). Eine
+fruehere Fassung dieses Abschnitts behauptete, die Messung brauche eine
+ASGI-App; sie braucht keine — die moderne Aera kennt kein `initialize`, und der
+Handshake lief nie ueber HTTP.
+
+Was der Server ueber sich selbst meldet, ist genauso gemessen, in
+[`tests/test_server_identity.py`](tests/test_server_identity.py): Paketversion
+und Projekt-URL werden von der Leitung zurueckgelesen, nicht vom Konstruktor.
 
 Zu beachten: `LATEST_PROTOCOL_VERSION` im SDK ist ein Alias auf die **moderne**
 Aera, nicht auf die Handshake-Aera — wer nur dagegen pinnt, laesst genau die
