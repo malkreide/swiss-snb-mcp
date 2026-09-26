@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-09-26
+
+Erster Release seit `0.4.5` vom 31.7.2026. Dazwischen lagen rund 120 Commits,
+und die ausgelieferte Version trug die vier Befunde unten die ganze Zeit mit —
+`pyproject.toml` stand unveraendert auf `0.4.5`, PyPI lieferte also den Stand
+des Tags.
+
+**Was sich fuer Aufrufende aendert** — die Einzelheiten stehen in den
+Abschnitten darunter:
+
+- **Vier ausgelieferte Fehler behoben** (Abschnitt «vier Befunde, die aus dem
+  Aufzeichnen der Fixtures kamen»): `frequency="monthly"` lieferte immer eine
+  leere Tabelle; `snb_get_warehouse_metadata` war kaputt, seit es existiert;
+  drei Aggregate standen unter derselben Beschriftung, sodass eine Summe die
+  Bilanz verdoppelte; `INR100` wurde angeboten und existiert nicht, `USD3M`
+  und `USD6M` fehlten.
+- **Retry-Politik gegenueber `data.snb.ch`** (ARCH-014): `Retry-After`,
+  gejitterter Backoff und ein Gesamtbudget, in beiden Haelften des Servers.
+- **Spec `2026-07-28` nativ bedient und gemessen**: Frischehinweise (SEP-2549)
+  auf den auflistenden Methoden, `version` und `websiteUrl` in
+  `server/discover`. `serverInfo.version` war bis hierher der leere String.
+- Minor statt Patch, weil nicht nur korrigiert wurde: Retry-Politik,
+  Frischehinweise und die `server/discover`-Felder sind neues Verhalten, und
+  die Warehouse-Ausgabe traegt eine zusaetzliche Spalte («Gliederung»).
+
 ### Hinzugefuegt
 
 - **Frischehinweise auf den auflistenden Methoden** (SEP-2549, Spec
