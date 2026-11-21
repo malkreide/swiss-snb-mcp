@@ -149,14 +149,14 @@ def collect_declared(expected: str) -> list[tuple[str, str]]:
 
     if SERVER_JSON.exists():
         server = json.loads(SERVER_JSON.read_text(encoding="utf-8"))
-        found.append(("server.json → version", server.get("version", "")))
+        found.append(("server.json -> version", server.get("version", "")))
         for i, pkg in enumerate(server.get("packages", [])):
-            label = f"server.json → packages[{i}].version"
+            label = f"server.json -> packages[{i}].version"
             found.append((label, pkg.get("version", "")))
 
     for readme in sorted(ROOT.glob("README*.md")):
         for match in _BADGE.finditer(readme.read_text(encoding="utf-8")):
-            found.append((f"{readme.name} → Versions-Badge", match.group(1)))
+            found.append((f"{readme.name} -> Versions-Badge", match.group(1)))
 
     return found
 

@@ -174,7 +174,7 @@ def main() -> None:
         rat = "Nicht die Pins bumpen - die stimmen. Angleichen mit:"
         raise SystemExit(f'{head}\n{rat}\n    pip install -e ".[dev]"')
 
-    checked = ".pre-commit-config.yaml → rev, pyproject.toml → ruff=="
+    checked = ".pre-commit-config.yaml -> rev, pyproject.toml -> ruff=="
     wege = f"{len(found)} Aufrufweg(e)"
     print(f"Ruff-Pin OK ({hook}; geprüft: {checked}, {wege})")
 

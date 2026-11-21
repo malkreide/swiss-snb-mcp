@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Behoben — die Gates brachen unter cp1252 an der eigenen Erfolgsmeldung ab
+
+`scripts/check_ruff_pin.py` und `scripts/check_version_sync.py` endeten auf
+Windows mit Exit 1, sobald die Ausgabe umgeleitet war (Pipe, pre-commit,
+Claude Code) und cp1252 galt — obwohl die Prüfung bestanden war. Ursache war
+das `→` (U+2192) in den Meldungen, das cp1252 nicht kennt: auf stdout ein
+`UnicodeEncodeError`, auf stderr statt des Pfeils die Escape-Folge `\u2192`
+(`backslashreplace`). Die Meldungen tragen
+jetzt `->`. `scripts/classify_live_scenarios.py` behält sein `→`; dort ist es
+Eingabe (die Verdikt-Zeile in CI-Logs), keine Ausgabe.
+`tests/test_gates_cp1252.py` erzwingt cp1252 per `PYTHONIOENCODING` und fällt
+deshalb auch auf den UTF-8-Runnern der CI, wenn der Pfeil zurückkehrt.
+
 ## [0.5.0] - 2026-09-26
 
 Erster Release seit `0.4.5` vom 31.7.2026. Dazwischen lagen rund 120 Commits,
